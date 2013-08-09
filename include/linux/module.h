@@ -512,6 +512,8 @@ int unregister_module_notifier(struct notifier_block * nb);
 
 extern void print_modules(void);
 
+extern bool secure_modules(void);
+
 #else /* !CONFIG_MODULES... */
 
 /* Given an address, look for it in the exception tables. */
@@ -621,6 +623,11 @@ static inline int unregister_module_notifier(struct notifier_block * nb)
 
 static inline void print_modules(void)
 {
+}
+
+static inline bool secure_modules(void)
+{
+	return false;
 }
 #endif /* CONFIG_MODULES */
 
