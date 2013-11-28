@@ -34,3 +34,5 @@ nwfpe/
 	- NWFPE floating point emulator documentation
 swp_emulation
 	- SWP/SWPB emulation handler/logging description
+uefi.txt
+	- [U]EFI configuration and runtime services documentation
