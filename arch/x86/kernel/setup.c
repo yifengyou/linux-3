@@ -1232,8 +1232,14 @@ void __init setup_arch(char **cmdline_p)
 	register_refined_jiffies(CLOCK_TICK_RATE);
 
 #ifdef CONFIG_EFI
-	if (efi_enabled(EFI_BOOT))
-		efi_apply_memmap_quirks();
+	/* Once setup is done above, unmap the EFI memory map on
+	 * mismatched firmware/kernel archtectures since there is no
+	 * support for runtime services.
+	 */
+	if (efi_enabled(EFI_BOOT) && !efi_runtime_supported()) {
+		pr_info("efi: Setup done, disabling due to 32/64-bit mismatch\n");
+		efi_unmap_memmap();
+	}
 #endif
 }
 
