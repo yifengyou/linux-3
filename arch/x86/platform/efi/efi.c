@@ -453,9 +453,6 @@ void __init efi_free_boot_services(void)
 {
 	void *p;
 
-	if (!efi_is_native())
-		return;
-
 	for (p = memmap.map; p < memmap.map_end; p += memmap.desc_size) {
 		efi_memory_desc_t *md = p;
 		unsigned long long start = md->phys_addr;
@@ -1070,15 +1067,6 @@ static void __init __efi_enter_virtual_mode(void)
 	efi_status_t status;
 
 	efi.systab = NULL;
-
-	/*
-	 * We don't do virtual mode, since we don't do runtime services, on
-	 * non-native EFI
-	 */
-	if (!efi_is_native()) {
-		efi_unmap_memmap();
-		return;
-	}
 
 	efi_merge_regions();
 	new_memmap = efi_map_regions(&count, &pg_shift);
