@@ -1316,8 +1316,10 @@ be_complete_io(struct beiscsi_conn *beiscsi_conn,
 	resid = csol_cqe->res_cnt;
 
 	if (!task->sc) {
-		if (io_task->scsi_cmnd)
+		if (io_task->scsi_cmnd) {
 			scsi_dma_unmap(io_task->scsi_cmnd);
+			io_task->scsi_cmnd = NULL;
+		}
 
 		return;
 	}
@@ -1354,6 +1356,7 @@ be_complete_io(struct beiscsi_conn *beiscsi_conn,
 		conn->rxdata_octets += resid;
 unmap:
 	scsi_dma_unmap(io_task->scsi_cmnd);
+	io_task->scsi_cmnd = NULL;
 	iscsi_complete_scsi_task(task, exp_cmdsn, max_cmdsn);
 }
 
@@ -4602,6 +4605,11 @@ static void beiscsi_cleanup_task(struct iscsi_task *task)
 			free_io_sgl_handle(phba, io_task->psgl_handle);
 			spin_unlock(&phba->io_sgl_lock);
 			io_task->psgl_handle = NULL;
+		}
+
+		if (io_task->scsi_cmnd) {
+			scsi_dma_unmap(io_task->scsi_cmnd);
+			io_task->scsi_cmnd = NULL;
 		}
 	} else {
 		if (!beiscsi_conn->login_in_progress)
