@@ -165,6 +165,7 @@ int snd_rawmidi_drop_output(struct snd_rawmidi_substream *substream)
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_drop_output);
 
 int snd_rawmidi_drain_output(struct snd_rawmidi_substream *substream)
 {
@@ -194,6 +195,7 @@ int snd_rawmidi_drain_output(struct snd_rawmidi_substream *substream)
 	}
 	return err;
 }
+EXPORT_SYMBOL(snd_rawmidi_drain_output);
 
 int snd_rawmidi_drain_input(struct snd_rawmidi_substream *substream)
 {
@@ -208,6 +210,7 @@ int snd_rawmidi_drain_input(struct snd_rawmidi_substream *substream)
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_drain_input);
 
 /* look for an available substream for the given stream direction;
  * if a specific subdevice is given, try to assign it
@@ -345,6 +348,7 @@ int snd_rawmidi_kernel_open(struct snd_card *card, int device, int subdevice,
 		module_put(rmidi->card->module);
 	return err;
 }
+EXPORT_SYMBOL(snd_rawmidi_kernel_open);
 
 static int snd_rawmidi_open(struct inode *inode, struct file *file)
 {
@@ -523,6 +527,7 @@ int snd_rawmidi_kernel_release(struct snd_rawmidi_file *rfile)
 	module_put(rmidi->card->module);
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_kernel_release);
 
 static int snd_rawmidi_release(struct inode *inode, struct file *file)
 {
@@ -599,6 +604,7 @@ int snd_rawmidi_info_select(struct snd_card *card, struct snd_rawmidi_info *info
 	}
 	return -ENXIO;
 }
+EXPORT_SYMBOL(snd_rawmidi_info_select);
 
 static int snd_rawmidi_info_select_user(struct snd_card *card,
 					struct snd_rawmidi_info __user *_info)
@@ -646,6 +652,7 @@ int snd_rawmidi_output_params(struct snd_rawmidi_substream *substream,
 	substream->active_sensing = !params->no_active_sensing;
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_output_params);
 
 int snd_rawmidi_input_params(struct snd_rawmidi_substream *substream,
 			     struct snd_rawmidi_params * params)
@@ -671,6 +678,7 @@ int snd_rawmidi_input_params(struct snd_rawmidi_substream *substream,
 	runtime->avail_min = params->avail_min;
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_input_params);
 
 static int snd_rawmidi_output_status(struct snd_rawmidi_substream *substream,
 				     struct snd_rawmidi_status * status)
@@ -926,6 +934,7 @@ int snd_rawmidi_receive(struct snd_rawmidi_substream *substream,
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return result;
 }
+EXPORT_SYMBOL(snd_rawmidi_receive);
 
 static long snd_rawmidi_kernel_read1(struct snd_rawmidi_substream *substream,
 				     unsigned char __user *userbuf,
@@ -968,6 +977,7 @@ long snd_rawmidi_kernel_read(struct snd_rawmidi_substream *substream,
 	snd_rawmidi_input_trigger(substream, 1);
 	return snd_rawmidi_kernel_read1(substream, NULL/*userbuf*/, buf, count);
 }
+EXPORT_SYMBOL(snd_rawmidi_kernel_read);
 
 static ssize_t snd_rawmidi_read(struct file *file, char __user *buf, size_t count,
 				loff_t *offset)
@@ -1042,6 +1052,7 @@ int snd_rawmidi_transmit_empty(struct snd_rawmidi_substream *substream)
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return result;		
 }
+EXPORT_SYMBOL(snd_rawmidi_transmit_empty);
 
 /**
  * snd_rawmidi_transmit_peek - copy data from the internal buffer
@@ -1097,6 +1108,7 @@ int snd_rawmidi_transmit_peek(struct snd_rawmidi_substream *substream,
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return result;
 }
+EXPORT_SYMBOL(snd_rawmidi_transmit_peek);
 
 /**
  * snd_rawmidi_transmit_ack - acknowledge the transmission
@@ -1131,6 +1143,7 @@ int snd_rawmidi_transmit_ack(struct snd_rawmidi_substream *substream, int count)
 	spin_unlock_irqrestore(&runtime->lock, flags);
 	return count;
 }
+EXPORT_SYMBOL(snd_rawmidi_transmit_ack);
 
 /**
  * snd_rawmidi_transmit - copy from the buffer to the device
@@ -1152,6 +1165,7 @@ int snd_rawmidi_transmit(struct snd_rawmidi_substream *substream,
 		return count;
 	return snd_rawmidi_transmit_ack(substream, count);
 }
+EXPORT_SYMBOL(snd_rawmidi_transmit);
 
 static long snd_rawmidi_kernel_write1(struct snd_rawmidi_substream *substream,
 				      const unsigned char __user *userbuf,
@@ -1213,6 +1227,7 @@ long snd_rawmidi_kernel_write(struct snd_rawmidi_substream *substream,
 {
 	return snd_rawmidi_kernel_write1(substream, NULL, buf, count);
 }
+EXPORT_SYMBOL(snd_rawmidi_kernel_write);
 
 static ssize_t snd_rawmidi_write(struct file *file, const char __user *buf,
 				 size_t count, loff_t *offset)
@@ -1492,6 +1507,7 @@ int snd_rawmidi_new(struct snd_card *card, char *id, int device,
 		*rrawmidi = rmidi;
 	return 0;
 }
+EXPORT_SYMBOL(snd_rawmidi_new);
 
 static void snd_rawmidi_free_substreams(struct snd_rawmidi_str *stream)
 {
@@ -1670,6 +1686,7 @@ void snd_rawmidi_set_ops(struct snd_rawmidi *rmidi, int stream,
 	list_for_each_entry(substream, &rmidi->streams[stream].substreams, list)
 		substream->ops = ops;
 }
+EXPORT_SYMBOL(snd_rawmidi_set_ops);
 
 /*
  *  ENTRY functions
@@ -1706,21 +1723,3 @@ static void __exit alsa_rawmidi_exit(void)
 
 module_init(alsa_rawmidi_init)
 module_exit(alsa_rawmidi_exit)
-
-EXPORT_SYMBOL(snd_rawmidi_output_params);
-EXPORT_SYMBOL(snd_rawmidi_input_params);
-EXPORT_SYMBOL(snd_rawmidi_drop_output);
-EXPORT_SYMBOL(snd_rawmidi_drain_output);
-EXPORT_SYMBOL(snd_rawmidi_drain_input);
-EXPORT_SYMBOL(snd_rawmidi_receive);
-EXPORT_SYMBOL(snd_rawmidi_transmit_empty);
-EXPORT_SYMBOL(snd_rawmidi_transmit_peek);
-EXPORT_SYMBOL(snd_rawmidi_transmit_ack);
-EXPORT_SYMBOL(snd_rawmidi_transmit);
-EXPORT_SYMBOL(snd_rawmidi_new);
-EXPORT_SYMBOL(snd_rawmidi_set_ops);
-EXPORT_SYMBOL(snd_rawmidi_info_select);
-EXPORT_SYMBOL(snd_rawmidi_kernel_open);
-EXPORT_SYMBOL(snd_rawmidi_kernel_release);
-EXPORT_SYMBOL(snd_rawmidi_kernel_read);
-EXPORT_SYMBOL(snd_rawmidi_kernel_write);
