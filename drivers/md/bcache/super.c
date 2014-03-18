@@ -1850,7 +1850,10 @@ static void register_cache(struct cache_sb *sb, struct page *sb_page,
 	if (kobject_add(&ca->kobj, &part_to_dev(bdev->bd_part)->kobj, "bcache"))
 		goto err;
 
+	mutex_lock(&bch_register_lock);
 	err = register_cache_set(ca);
+	mutex_unlock(&bch_register_lock);
+
 	if (err)
 		goto err;
 
@@ -1912,8 +1915,6 @@ static ssize_t register_bcache(struct kobject *k, struct kobj_attribute *attr,
 	if (!try_module_get(THIS_MODULE))
 		return -EBUSY;
 
-	mutex_lock(&bch_register_lock);
-
 	if (!(path = kstrndup(buffer, size, GFP_KERNEL)) ||
 	    !(sb = kmalloc(sizeof(struct cache_sb), GFP_KERNEL)))
 		goto err;
@@ -1950,7 +1951,9 @@ static ssize_t register_bcache(struct kobject *k, struct kobj_attribute *attr,
 		if (!dc)
 			goto err_close;
 
+		mutex_lock(&bch_register_lock);
 		register_bdev(sb, sb_page, bdev, dc);
+		mutex_unlock(&bch_register_lock);
 	} else {
 		struct cache *ca = kzalloc(sizeof(*ca), GFP_KERNEL);
 		if (!ca)
@@ -1963,7 +1966,6 @@ out:
 		put_page(sb_page);
 	kfree(sb);
 	kfree(path);
-	mutex_unlock(&bch_register_lock);
 	module_put(THIS_MODULE);
 	return ret;
 
