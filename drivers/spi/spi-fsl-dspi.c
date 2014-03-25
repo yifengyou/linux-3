@@ -336,7 +336,8 @@ static int dspi_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 	/* Only alloc on first setup */
 	chip = spi_get_ctldata(spi);
 	if (chip == NULL) {
-		chip = kcalloc(1, sizeof(struct chip_data), GFP_KERNEL);
+		chip = devm_kzalloc(&spi->dev, sizeof(struct chip_data),
+				    GFP_KERNEL);
 		if (!chip)
 			return -ENOMEM;
 	}
@@ -347,7 +348,6 @@ static int dspi_setup_transfer(struct spi_device *spi, struct spi_transfer *t)
 		fmsz = spi->bits_per_word - 1;
 	} else {
 		pr_err("Invalid wordsize\n");
-		kfree(chip);
 		return -ENODEV;
 	}
 
