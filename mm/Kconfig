@@ -555,3 +555,6 @@ config MEM_SOFT_DIRTY
 	  it can be cleared by hands.
 
 	  See Documentation/vm/soft-dirty.txt for more details.
+
+config GENERIC_EARLY_IOREMAP
+	bool
