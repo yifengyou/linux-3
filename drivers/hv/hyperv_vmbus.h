@@ -525,6 +525,11 @@ struct hv_context {
 	 * buffer to post messages to the host.
 	 */
 	void *post_msg_page[NR_CPUS];
+	/*
+	 * To optimize the mapping of relid to channel, maintain
+	 * per-cpu list of the channels based on their CPU affinity.
+	 */
+	struct list_head percpu_list[NR_CPUS];
 };
 
 extern struct hv_context hv_context;

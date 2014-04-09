@@ -742,6 +742,11 @@ struct vmbus_channel {
 	 * This will be NULL for the primary channel.
 	 */
 	struct vmbus_channel *primary_channel;
+	/*
+	 * To support per-cpu lookup mapping of relid to channel,
+	 * link up channels based on their CPU affinity.
+	 */
+	struct list_head percpu_list;
 };
 
 static inline void set_channel_read_state(struct vmbus_channel *c, bool state)
