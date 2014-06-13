@@ -582,12 +582,8 @@ static void native_machine_emergency_restart(void)
 			break;
 
 		case BOOT_EFI:
-			if (efi_enabled(EFI_RUNTIME_SERVICES))
-				efi.reset_system(reboot_mode == REBOOT_WARM ?
-						 EFI_RESET_WARM :
-						 EFI_RESET_COLD,
-						 EFI_SUCCESS, 0, NULL);
-			reboot_type = BOOT_KBD;
+			efi_reboot(reboot_mode, NULL);
+			reboot_type = BOOT_BIOS;
 			break;
 
 		case BOOT_CF9:
