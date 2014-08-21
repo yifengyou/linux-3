@@ -1017,6 +1017,10 @@ void kvm_arch_vcpu_uninit(struct kvm_vcpu *vcpu)
 	return;
 }
 
+void kvm_arch_sched_in(struct kvm_vcpu *vcpu, int cpu)
+{
+}
+
 int
 kvm_arch_vcpu_ioctl_translate(struct kvm_vcpu *vcpu, struct kvm_translation *tr)
 {
