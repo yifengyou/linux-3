@@ -198,7 +198,12 @@ static inline struct device_node *of_find_matching_node(
 #define for_each_matching_node_and_match(dn, matches, match) \
 	for (dn = of_find_matching_node_and_match(NULL, matches, match); \
 	     dn; dn = of_find_matching_node_and_match(dn, matches, match))
-extern struct device_node *of_find_node_by_path(const char *path);
+extern struct device_node *of_find_node_opts_by_path(const char *path,
+	const char **opts);
+static inline struct device_node *of_find_node_by_path(const char *path)
+{
+	return of_find_node_opts_by_path(path, NULL);
+}
 extern struct device_node *of_find_node_by_phandle(phandle handle);
 extern struct device_node *of_get_parent(const struct device_node *node);
 extern struct device_node *of_get_next_parent(struct device_node *node);
