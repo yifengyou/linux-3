@@ -731,6 +731,8 @@ void cik_sdma_vm_set_page(struct radeon_device *rdev,
  */
 void cik_dma_vm_flush(struct radeon_device *rdev, int ridx, struct radeon_vm *vm)
 {
+	u32 extra_bits = (SDMA_POLL_REG_MEM_EXTRA_OP(0) |
+			  SDMA_POLL_REG_MEM_EXTRA_FUNC(0)); /* always */
 	struct radeon_ring *ring = &rdev->ring[ridx];
 
 	if (vm == NULL)
@@ -776,5 +778,12 @@ void cik_dma_vm_flush(struct radeon_device *rdev, int ridx, struct radeon_vm *vm
 	radeon_ring_write(ring, SDMA_PACKET(SDMA_OPCODE_SRBM_WRITE, 0, 0xf000));
 	radeon_ring_write(ring, VM_INVALIDATE_REQUEST >> 2);
 	radeon_ring_write(ring, 1 << vm->id);
+
+	radeon_ring_write(ring, SDMA_PACKET(SDMA_OPCODE_POLL_REG_MEM, 0, extra_bits));
+	radeon_ring_write(ring, VM_INVALIDATE_REQUEST >> 2);
+	radeon_ring_write(ring, 0);
+	radeon_ring_write(ring, 0); /* reference */
+	radeon_ring_write(ring, 0); /* mask */
+	radeon_ring_write(ring, (0xfff << 16) | 10); /* retry count, poll interval */
 }
 
