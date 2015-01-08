@@ -26,6 +26,7 @@
 #include <linux/of_platform.h>
 #include <linux/of_net.h>
 #include <linux/of_mdio.h>
+#include <linux/io.h>
 #include <linux/module.h>
 #include <net/ip.h>
 #include <linux/prefetch.h>
