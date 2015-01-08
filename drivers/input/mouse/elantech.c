@@ -1396,6 +1396,9 @@ static int elantech_set_properties(struct elantech_data *etd)
 		case 6:
 		case 7:
 		case 8:
+		case 9:
+		case 10:
+		case 13:
 			etd->hw_version = 4;
 			break;
 		default:
