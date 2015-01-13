@@ -43,8 +43,6 @@
 #include <linux/binfmts.h>
 #include "smack.h"
 
-#define task_security(task)	(task_cred_xxx((task), security))
-
 #define TRANS_TRUE	"TRUE"
 #define TRANS_TRUE_SIZE	4
 
@@ -181,7 +179,7 @@ static int smack_ptrace_access_check(struct task_struct *ctp, unsigned int mode)
 	if (rc != 0)
 		return rc;
 
-	skp = smk_of_task(task_security(ctp));
+	skp = smk_of_task_struct(ctp);
 	smk_ad_init(&ad, __func__, LSM_AUDIT_DATA_TASK);
 	smk_ad_setfield_u_tsk(&ad, ctp);
 
@@ -207,7 +205,7 @@ static int smack_ptrace_traceme(struct task_struct *ptp)
 	if (rc != 0)
 		return rc;
 
-	skp = smk_of_task(task_security(ptp));
+	skp = smk_of_task_struct(ptp);
 	smk_ad_init(&ad, __func__, LSM_AUDIT_DATA_TASK);
 	smk_ad_setfield_u_tsk(&ad, ptp);
 
@@ -1544,7 +1542,7 @@ static int smk_curacc_on_task(struct task_struct *p, int access,
 				const char *caller)
 {
 	struct smk_audit_info ad;
-	struct smack_known *skp = smk_of_task(task_security(p));
+	struct smack_known *skp = smk_of_task_struct(p);
 
 	smk_ad_init(&ad, caller, LSM_AUDIT_DATA_TASK);
 	smk_ad_setfield_u_tsk(&ad, p);
@@ -1594,7 +1592,7 @@ static int smack_task_getsid(struct task_struct *p)
  */
 static void smack_task_getsecid(struct task_struct *p, u32 *secid)
 {
-	struct smack_known *skp = smk_of_task(task_security(p));
+	struct smack_known *skp = smk_of_task_struct(p);
 
 	*secid = skp->smk_secid;
 }
@@ -1701,7 +1699,7 @@ static int smack_task_kill(struct task_struct *p, struct siginfo *info,
 {
 	struct smk_audit_info ad;
 	struct smack_known *skp;
-	struct smack_known *tkp = smk_of_task(task_security(p));
+	struct smack_known *tkp = smk_of_task_struct(p);
 
 	smk_ad_init(&ad, __func__, LSM_AUDIT_DATA_TASK);
 	smk_ad_setfield_u_tsk(&ad, p);
@@ -1749,7 +1747,7 @@ static int smack_task_wait(struct task_struct *p)
 static void smack_task_to_inode(struct task_struct *p, struct inode *inode)
 {
 	struct inode_smack *isp = inode->i_security;
-	struct smack_known *skp = smk_of_task(task_security(p));
+	struct smack_known *skp = smk_of_task_struct(p);
 
 	isp->smk_inode = skp->smk_known;
 }
@@ -2878,7 +2876,7 @@ unlockandout:
  */
 static int smack_getprocattr(struct task_struct *p, char *name, char **value)
 {
-	struct smack_known *skp = smk_of_task(task_security(p));
+	struct smack_known *skp = smk_of_task_struct(p);
 	char *cp;
 	int slen;
 
