@@ -379,11 +379,11 @@ static int sdhci_pxav3_runtime_suspend(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-	unsigned long flags;
+	int ret;
 
-	spin_lock_irqsave(&host->lock, flags);
-	host->runtime_suspended = true;
-	spin_unlock_irqrestore(&host->lock, flags);
+	ret = sdhci_runtime_suspend_host(host);
+	if (ret)
+		return ret;
 
 	clk_disable_unprepare(pltfm_host->clk);
 
@@ -394,15 +394,10 @@ static int sdhci_pxav3_runtime_resume(struct device *dev)
 {
 	struct sdhci_host *host = dev_get_drvdata(dev);
 	struct sdhci_pltfm_host *pltfm_host = sdhci_priv(host);
-	unsigned long flags;
 
 	clk_prepare_enable(pltfm_host->clk);
 
-	spin_lock_irqsave(&host->lock, flags);
-	host->runtime_suspended = false;
-	spin_unlock_irqrestore(&host->lock, flags);
-
-	return 0;
+	return sdhci_runtime_resume_host(host);
 }
 #endif
 
