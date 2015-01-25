@@ -271,6 +271,7 @@ static int mei_me_hw_ready_wait(struct mei_device *dev)
 		return err;
 	}
 
+	mei_me_hw_reset_release(dev);
 	dev->recvd_hw_ready = false;
 	return 0;
 }
