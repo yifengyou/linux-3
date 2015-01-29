@@ -24,6 +24,13 @@
 #include "xgene_enet_sgmac.h"
 #include "xgene_enet_xgmac.h"
 
+#ifdef CONFIG_ARM64
+#define dmb(opt)       asm volatile("dmb " #opt : : : "memory")
+#define	dma_rmb()	dmb(oshld)
+#else
+#define	dma_rmb()	do {} while(0)
+#endif
+
 static void xgene_enet_init_bufpool(struct xgene_enet_desc_ring *buf_pool)
 {
 	struct xgene_enet_raw_desc16 *raw_desc;
@@ -369,6 +376,8 @@ static int xgene_enet_process_ring(struct xgene_enet_desc_ring *ring,
 		if (unlikely(xgene_enet_is_desc_slot_empty(raw_desc)))
 			break;
 
+		/* read fpqnum field after dataaddr field */
+		dma_rmb();
 		if (is_rx_desc(raw_desc))
 			ret = xgene_enet_rx_frame(ring, raw_desc);
 		else
