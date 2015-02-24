@@ -852,10 +852,12 @@ static int ovs_flow_cmd_new_or_set(struct sk_buff *skb, struct genl_info *info)
 			goto err_unlock_ovs;
 
 		/* The unmasked key has to be the same for flow updates. */
-		error = -EINVAL;
 		if (!ovs_flow_cmp_unmasked_key(flow, &match)) {
-			OVS_NLERR("Flow modification message rejected, unmasked key does not match.\n");
-			goto err_unlock_ovs;
+			flow = ovs_flow_tbl_lookup_exact(&dp->table, &match);
+			if (!flow) {
+				error = -ENOENT;
+				goto err_unlock_ovs;
+			}
 		}
 
 		/* Update actions. */
@@ -873,6 +875,7 @@ static int ovs_flow_cmd_new_or_set(struct sk_buff *skb, struct genl_info *info)
 			spin_unlock_bh(&flow->lock);
 		}
 	}
+
 	ovs_unlock();
 
 	if (!IS_ERR(reply))
@@ -920,8 +923,8 @@ static int ovs_flow_cmd_get(struct sk_buff *skb, struct genl_info *info)
 		goto unlock;
 	}
 
-	flow = __ovs_flow_tbl_lookup(&dp->table, &key);
-	if (!flow || !ovs_flow_cmp_unmasked_key(flow, &match)) {
+	flow = ovs_flow_tbl_lookup_exact(&dp->table, &match);
+	if (!flow) {
 		err = -ENOENT;
 		goto unlock;
 	}
@@ -968,8 +971,8 @@ static int ovs_flow_cmd_del(struct sk_buff *skb, struct genl_info *info)
 	if (err)
 		goto unlock;
 
-	flow = __ovs_flow_tbl_lookup(&dp->table, &key);
-	if (!flow || !ovs_flow_cmp_unmasked_key(flow, &match)) {
+	flow = ovs_flow_tbl_lookup_exact(&dp->table, &match);
+	if (unlikely(!flow)) {
 		err = -ENOENT;
 		goto unlock;
 	}
