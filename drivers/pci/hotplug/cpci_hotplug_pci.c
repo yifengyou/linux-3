@@ -282,12 +282,13 @@ int __ref cpci_configure_slot(struct slot *slot)
 	}
 	parent = slot->dev->bus;
 
-	list_for_each_entry(dev, &parent->devices, bus_list)
+	list_for_each_entry(dev, &parent->devices, bus_list) {
 		if (PCI_SLOT(dev->devfn) != PCI_SLOT(slot->devfn))
 			continue;
 		if ((dev->hdr_type == PCI_HEADER_TYPE_BRIDGE) ||
 		    (dev->hdr_type == PCI_HEADER_TYPE_CARDBUS))
 			pci_hp_add_bridge(dev);
+	}
 
 
 	pci_assign_unassigned_bridge_resources(parent->self);
