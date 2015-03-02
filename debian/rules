@@ -108,6 +108,9 @@ clean: debian/control
 	# Install the retpoline extractor.
 	cp $(DROOT)/scripts/retpoline-extract-one scripts/ubuntu-retpoline-extract-one
 
+	# If we have a reconstruct script use it.
+	[ -f $(DEBIAN)/reconstruct ] && bash $(DEBIAN)/reconstruct
+
 	# Remove generated intermediate files
 	rm -f $(DROOT)/control.stub $(DEBIAN)/control.stub \
 		$(DEBIAN)/d-i/kernel-versions
