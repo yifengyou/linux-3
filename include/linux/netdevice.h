@@ -2937,6 +2937,7 @@ int netdev_master_upper_dev_link_private(struct net_device *dev,
 					 void *private);
 void netdev_upper_dev_unlink(struct net_device *dev,
 			     struct net_device *upper_dev);
+void netdev_adjacent_rename_links(struct net_device *dev, char *oldname);
 void *netdev_lower_dev_get_private_rcu(struct net_device *dev,
 				       struct net_device *lower_dev);
 void *netdev_lower_dev_get_private(struct net_device *dev,
