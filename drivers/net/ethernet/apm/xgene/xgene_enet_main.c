@@ -979,6 +979,8 @@ static int xgene_enet_remove(struct platform_device *pdev)
 
 static struct of_device_id xgene_enet_match[] = {
 	{.compatible = "apm,xgene-enet",},
+	{.compatible = "apm,xgene1-sgenet",},
+	{.compatible = "apm,xgene1-xgenet",},
 	{},
 };
 
