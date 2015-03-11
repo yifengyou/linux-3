@@ -244,6 +244,16 @@ linux (3.13.0-47.78) trusty; urgency=low
 
  -- Seth Forshee <seth.forshee@canonical.com>  Tue, 03 Mar 2015 09:33:08 -0600
 
+linux (3.13.0-46.79) trusty; urgency=low
+
+  [ Upstream Kernel Changes ]
+
+  * IB/core: Prevent integer overflow in ib_umem_get address arithmetic
+    - LP: #1413741
+    - CVE-2015-8159
+
+ -- Luis Henriques <luis.henriques@canonical.com>  Mon, 09 Mar 2015 17:42:23 +0000
+
 linux (3.13.0-46.77) trusty; urgency=low
 
   [ Seth Forshee ]
