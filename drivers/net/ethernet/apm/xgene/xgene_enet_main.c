@@ -630,9 +630,11 @@ static int xgene_enet_create_desc_rings(struct net_device *ndev)
 	struct device *dev = ndev_to_dev(ndev);
 	struct xgene_enet_desc_ring *rx_ring, *tx_ring, *cp_ring;
 	struct xgene_enet_desc_ring *buf_pool = NULL;
-	u8 cpu_bufnum = 0, eth_bufnum = START_ETH_BUFNUM;
-	u8 bp_bufnum = START_BP_BUFNUM;
-	u16 ring_id, ring_num = START_RING_NUM;
+	u8 cpu_bufnum = pdata->cpu_bufnum;
+	u8 eth_bufnum = pdata->eth_bufnum;
+	u8 bp_bufnum = pdata->bp_bufnum;
+	u16 ring_num = pdata->ring_num;
+	u16 ring_id;
 	int ret;
 
 	/* allocate rx descriptor ring */
@@ -737,6 +739,57 @@ static const struct net_device_ops xgene_ndev_ops = {
 	.ndo_set_mac_address = xgene_enet_set_mac_address,
 };
 
+static int xgene_get_port_id(struct device *dev, struct xgene_enet_pdata *pdata)
+{
+	u32 id = 0;
+	int ret;
+
+	ret = of_property_read_u32(dev->of_node, "port-id", &id);
+	if (!ret && id > 1) {
+		dev_err(dev, "Incorrect port-id specified\n");
+		return -ENODEV;
+	}
+
+	pdata->port_id = id;
+
+	return 0;
+}
+
+static int xgene_get_mac_address(struct device *dev,
+				 unsigned char *addr)
+{
+	int ret;
+
+	ret = of_property_read_u8_array(dev->of_node, "local-mac-address", addr, 6);
+	if (ret)
+		ret = of_property_read_u8_array(dev->of_node, "mac-address",
+						    addr, 6);
+	if (ret)
+		return -ENODEV;
+
+	return ETH_ALEN;
+}
+
+static int xgene_get_phy_mode(struct device *dev)
+{
+	int i, ret;
+	char *modestr;
+
+	ret = of_property_read_string(dev->of_node, "phy-connection-type",
+					  (const char **)&modestr);
+	if (ret)
+		ret = of_property_read_string(dev->of_node, "phy-mode",
+						  (const char **)&modestr);
+	if (ret)
+		return -ENODEV;
+
+	for (i = 0; i < PHY_INTERFACE_MODE_MAX; i++) {
+		if (!strcasecmp(modestr, phy_modes(i)))
+			return i;
+	}
+	return -ENODEV;
+}
+
 static int xgene_enet_get_resources(struct xgene_enet_pdata *pdata)
 {
 	struct platform_device *pdev;
@@ -794,10 +847,11 @@ static int xgene_enet_get_resources(struct xgene_enet_pdata *pdata)
 	}
 	pdata->rx_irq = ret;
 
-	mac = of_get_mac_address(dev->of_node);
-	if (mac)
-		memcpy(ndev->dev_addr, mac, ndev->addr_len);
-	else
+	ret = xgene_get_port_id(dev, pdata);
+	if (ret)
+		return ret;
+
+	if (xgene_get_mac_address(dev, ndev->dev_addr) != ETH_ALEN)
 		eth_hw_addr_random(ndev);
 	memcpy(ndev->perm_addr, ndev->dev_addr, ndev->addr_len);
 
@@ -821,13 +875,13 @@ static int xgene_enet_get_resources(struct xgene_enet_pdata *pdata)
 		return ret;
 	}
 
-	base_addr = pdata->base_addr;
+	base_addr = pdata->base_addr - (pdata->port_id * MAC_OFFSET);
 	pdata->eth_csr_addr = base_addr + BLOCK_ETH_CSR_OFFSET;
 	pdata->eth_ring_if_addr = base_addr + BLOCK_ETH_RING_IF_OFFSET;
 	pdata->eth_diag_csr_addr = base_addr + BLOCK_ETH_DIAG_CSR_OFFSET;
 	if (pdata->phy_mode == PHY_INTERFACE_MODE_RGMII ||
 	    pdata->phy_mode == PHY_INTERFACE_MODE_SGMII) {
-		pdata->mcx_mac_addr = base_addr + BLOCK_ETH_MAC_OFFSET;
+		pdata->mcx_mac_addr = pdata->base_addr + BLOCK_ETH_MAC_OFFSET;
 		pdata->mcx_mac_csr_addr = base_addr + BLOCK_ETH_MAC_CSR_OFFSET;
 	} else {
 		pdata->mcx_mac_addr = base_addr + BLOCK_AXG_MAC_OFFSET;
@@ -890,6 +944,24 @@ static void xgene_enet_setup_ops(struct xgene_enet_pdata *pdata)
 		pdata->rm = RM0;
 		break;
 	}
+
+	switch (pdata->port_id) {
+	case 0:
+		pdata->cpu_bufnum = START_CPU_BUFNUM_0;
+		pdata->eth_bufnum = START_ETH_BUFNUM_0;
+		pdata->bp_bufnum = START_BP_BUFNUM_0;
+		pdata->ring_num = START_RING_NUM_0;
+		break;
+	case 1:
+		pdata->cpu_bufnum = START_CPU_BUFNUM_1;
+		pdata->eth_bufnum = START_ETH_BUFNUM_1;
+		pdata->bp_bufnum = START_BP_BUFNUM_1;
+		pdata->ring_num = START_RING_NUM_1;
+		break;
+	default:
+		break;
+	}
+
 }
 
 static int xgene_enet_probe(struct platform_device *pdev)
