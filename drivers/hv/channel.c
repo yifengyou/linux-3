@@ -695,6 +695,7 @@ int vmbus_sendpacket_pagebuffer_ctl(struct vmbus_channel *channel,
 
 	return ret;
 }
+EXPORT_SYMBOL_GPL(vmbus_sendpacket_pagebuffer_ctl);
 
 /*
  * vmbus_sendpacket_pagebuffer - Send a range of single-page buffer
