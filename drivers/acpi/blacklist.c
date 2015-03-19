@@ -363,7 +363,6 @@ static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 		    DMI_MATCH(DMI_PRODUCT_NAME, "Vostro 3546"),
 		},
 	},
-
 	/*
 	 * The following Lenovo models have a broken workaround in the
 	 * acpi_video backlight implementation to meet the Windows 8
@@ -440,6 +439,18 @@ static struct dmi_system_id acpi_osi_dmi_table[] __initdata = {
 	.matches = {
 		     DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
 		     DMI_MATCH(DMI_PRODUCT_NAME, "Inspiron 5537"),
+		},
+	},
+	/*
+	 * The brightness hotkeys do not work on those machines when
+	 * returning true for _OSI("Windows 2012")
+	 */
+	{
+	.callback = dmi_disable_osi_win8,
+	.ident = "HP Pavilion dv6",
+	.matches = {
+		    DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+		    DMI_MATCH(DMI_PRODUCT_NAME, "HP Pavilion dv6 Notebook PC"),
 		},
 	},
 
