@@ -475,6 +475,13 @@ int btrfs_parse_options(struct btrfs_root *root, char *options)
 			} else if (btrfs_test_opt(root, COMPRESS)) {
 				pr_info("btrfs: use %s compression\n",
 					compress_type);
+				/*
+				 * If we remount from compress-force=xxx to
+				 * compress=xxx, we need clear FORCE_COMPRESS
+				 * flag, otherwise, there is no way for users
+				 * to disable forcible compression separately.
+				 */
+				btrfs_clear_opt(info->mount_opt, FORCE_COMPRESS);
 			}
 			break;
 		case Opt_ssd:
