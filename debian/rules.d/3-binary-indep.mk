@@ -132,12 +132,6 @@ install-tools: install-source $(stampdir)/stamp-build-perarch
 	install -d $(cloudman)/man8
 	install -m644 $(CURDIR)/tools/hv/*.8 $(cloudman)/man8
 
-	dh_installinit -p$(cloudpkg) --name hv-kvp-daemon
-	dh_installinit -p$(cloudpkg) --name hv-vss-daemon
-	dh_installinit -p$(cloudpkg) --name hv-fcopy-daemon
-
-
-
 install-indep: install-tools
 	@echo Debug: $@
 
@@ -154,6 +148,7 @@ binary-headers: install-headers
 	dh_md5sums -p$(indep_hdrpkg)
 	dh_builddeb -p$(indep_hdrpkg)
 
+binary-indep: cloudpkg = $(cloud_common_pkg_name)
 binary-indep: install-indep
 	@echo Debug: $@
 
@@ -161,6 +156,11 @@ binary-indep: install-indep
 	dh_installdocs -i
 	dh_compress -i
 	dh_fixperms -i
+ifeq ($(do_tools_common),true)
+	dh_installinit -p$(cloudpkg) --name hv-kvp-daemon
+	dh_installinit -p$(cloudpkg) --name hv-vss-daemon
+	dh_installinit -p$(cloudpkg) --name hv-fcopy-daemon
+endif
 	dh_installdeb -i
 	$(lockme) dh_gencontrol -i
 	dh_md5sums -i
