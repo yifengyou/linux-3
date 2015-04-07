@@ -1664,7 +1664,6 @@ ENTRY(nmi)
 	/* If it is below the NMI stack, it is a normal NMI */
 	jb	first_nmi
 	/* Ah, it is within the NMI stack, treat it as nested */
-	jmp	nested_nmi
 
 	CFI_REMEMBER_STATE
 
