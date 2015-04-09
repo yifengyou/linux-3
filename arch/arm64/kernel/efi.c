@@ -334,6 +334,12 @@ void __init efi_init(void)
 	reserve_regions();
 }
 
+int efi_enabled(int facility)
+{
+	return test_bit(facility, &arm64_efi_facility) != 0;
+}
+EXPORT_SYMBOL(efi_enabled);
+
 void __init efi_idmap_init(void)
 {
 	/* boot time idmap_pg_dir is incomplete, so fill in missing parts */
