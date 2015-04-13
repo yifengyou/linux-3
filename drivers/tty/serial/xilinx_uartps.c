@@ -1340,9 +1340,9 @@ static SIMPLE_DEV_PM_OPS(xuartps_dev_pm_ops, xuartps_suspend, xuartps_resume);
  **/
 static int xuartps_probe(struct platform_device *pdev)
 {
-	int rc;
+	int rc, irq;
 	struct uart_port *port;
-	struct resource *res, *res2;
+	struct resource *res;
 	struct xuartps *xuartps_data;
 
 	xuartps_data = devm_kzalloc(&pdev->dev, sizeof(*xuartps_data),
@@ -1378,9 +1378,9 @@ static int xuartps_probe(struct platform_device *pdev)
 		goto err_out_clk_disable;
 	}
 
-	res2 = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
-	if (!res2) {
-		rc = -ENODEV;
+	irq = platform_get_irq(pdev, 0);
+	if (irq <= 0) {
+		rc = -ENXIO;
 		goto err_out_clk_disable;
 	}
 
@@ -1405,7 +1405,7 @@ static int xuartps_probe(struct platform_device *pdev)
 		 * and triggers invocation of the config_port() entry point.
 		 */
 		port->mapbase = res->start;
-		port->irq = res2->start;
+		port->irq = irq;
 		port->dev = &pdev->dev;
 		port->uartclk = clk_get_rate(xuartps_data->refclk);
 		port->private_data = xuartps_data;
