@@ -368,6 +368,15 @@ linux (3.13.0-50.82) trusty; urgency=low
 
  -- Brad Figg <brad.figg@canonical.com>  Thu, 09 Apr 2015 10:06:28 -0700
 
+linux (3.13.0-49.83) trusty; urgency=low
+
+  [ Upstream Kernel Changes ]
+
+  * powerpc/perf: Cap 64bit userspace backtraces to PERF_MAX_STACK_DEPTH
+    - LP: #1442180
+
+ -- Luis Henriques <luis.henriques@canonical.com>  Fri, 10 Apr 2015 18:46:02 +0100
+
 linux (3.13.0-49.81) trusty; urgency=low
 
   [ Kamal Mostafa ]
