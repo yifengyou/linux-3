@@ -113,6 +113,8 @@ static inline bool is_write_protection(struct kvm_vcpu *vcpu)
 static inline bool permission_fault(struct kvm_mmu *mmu, unsigned pte_access,
 				    unsigned pfec)
 {
+	WARN_ON(pfec & PFERR_RSVD_MASK);
+
 	return (mmu->permissions[pfec >> 1] >> pte_access) & 1;
 }
 
