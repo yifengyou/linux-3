@@ -2193,10 +2193,6 @@ static int cpsw_probe(struct platform_device *pdev)
 		goto clean_ale_ret;
 	}
 
-	if (cpts_register(&pdev->dev, priv->cpts,
-			  data->cpts_clock_mult, data->cpts_clock_shift))
-		dev_err(priv->dev, "error registering cpts device\n");
-
 	cpsw_notice(priv, probe, "initialized device (regs %x, irq %d)\n",
 		    ss_res->start, ndev->irq);
 
