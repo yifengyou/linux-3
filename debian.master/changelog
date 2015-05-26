@@ -1,3 +1,18 @@
+linux (3.13.0-54.91) trusty; urgency=medium
+
+  [ Luis Henriques ]
+
+  * Release Tracking Bug
+    - LP: #1458618
+
+  [ Upstream Kernel Changes ]
+
+  * [3.13-stable only] Revert "gianfar: Carefully free skbs in functions
+    called by netpoll."
+    - LP: #1454746
+
+ -- Luis Henriques <luis.henriques@canonical.com>  Tue, 26 May 2015 17:19:30 +0100
+
 linux (3.13.0-54.90) trusty; urgency=low
 
   [ Luis Henriques ]
