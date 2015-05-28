@@ -39,6 +39,7 @@ struct ovl_fs {
 	long lower_namelen;
 	/* pathnames of lower and upper dirs, for show_options */
 	struct ovl_config config;
+	struct cred *mounter_creds;
 };
 
 /* private information held for every overlayfs dentry */
@@ -393,6 +394,8 @@ static void ovl_put_super(struct super_block *sb)
 	if (!(sb->s_flags & MS_RDONLY))
 		mnt_drop_write(ufs->upper_mnt);
 
+	put_cred(ufs->mounter_creds);
+
 	mntput(ufs->upper_mnt);
 	mntput(ufs->lower_mnt);
 
@@ -518,6 +521,22 @@ static int ovl_parse_opt(char *opt, struct ovl_config *config)
 	return 0;
 }
 
+int ovl_dentry_root_may(struct dentry *dentry, struct path *realpath, int mode)
+{
+	const struct cred *old_cred;
+	int err = 0;
+        struct ovl_fs *ofs = dentry->d_sb->s_fs_info;
+
+	old_cred = override_creds(ofs->mounter_creds);
+
+	if (inode_permission(realpath->dentry->d_inode, mode))
+		err = -EACCES;
+
+	revert_creds(old_cred);
+
+	return err;
+}
+
 static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 {
 	struct path lowerpath;
@@ -617,6 +636,11 @@ static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 	if (!root_dentry)
 		goto out_drop_write;
 
+	/* Record the mounter. */
+	ufs->mounter_creds = prepare_creds();
+	if (!ufs->mounter_creds)
+		goto out_put_root;
+
 	mntput(upperpath.mnt);
 	mntput(lowerpath.mnt);
 
@@ -633,6 +657,8 @@ static int ovl_fill_super(struct super_block *sb, void *data, int silent)
 
 	return 0;
 
+out_put_root:
+	dput(root_dentry);
 out_drop_write:
 	if (!(sb->s_flags & MS_RDONLY))
 		mnt_drop_write(ufs->upper_mnt);
