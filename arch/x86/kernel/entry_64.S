@@ -994,8 +994,6 @@ retint_restore_args:	/* return to kernel space */
 restore_args:
 	RESTORE_C_REGS
 	REMOVE_PT_GPREGS_FROM_STACK 8
-
-irq_return:
 	INTERRUPT_RETURN
 
 ENTRY(native_iret)
@@ -1841,7 +1839,7 @@ nmi_restore:
 
 	/* Clear the NMI executing stack variable */
 	movq $0, 5*8(%rsp)
-	jmp irq_return
+	INTERRUPT_RETURN
 	CFI_ENDPROC
 END(nmi)
 
