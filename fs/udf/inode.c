@@ -1286,6 +1286,7 @@ static void __udf_read_inode(struct inode *inode)
 	struct udf_sb_info *sbi = UDF_SB(inode->i_sb);
 	unsigned int link_count;
 	unsigned int indirections = 0;
+	int bs = inode->i_sb->s_blocksize;
 
 reread:
 	/*
@@ -1371,41 +1372,38 @@ reread:
 	if (fe->descTag.tagIdent == cpu_to_le16(TAG_IDENT_EFE)) {
 		iinfo->i_efe = 1;
 		iinfo->i_use = 0;
-		if (udf_alloc_i_data(inode, inode->i_sb->s_blocksize -
+		if (udf_alloc_i_data(inode, bs -
 					sizeof(struct extendedFileEntry))) {
 			make_bad_inode(inode);
 			return;
 		}
 		memcpy(iinfo->i_ext.i_data,
 		       bh->b_data + sizeof(struct extendedFileEntry),
-		       inode->i_sb->s_blocksize -
-					sizeof(struct extendedFileEntry));
+		       bs - sizeof(struct extendedFileEntry));
 	} else if (fe->descTag.tagIdent == cpu_to_le16(TAG_IDENT_FE)) {
 		iinfo->i_efe = 0;
 		iinfo->i_use = 0;
-		if (udf_alloc_i_data(inode, inode->i_sb->s_blocksize -
-						sizeof(struct fileEntry))) {
+		if (udf_alloc_i_data(inode, bs - sizeof(struct fileEntry))) {
 			make_bad_inode(inode);
 			return;
 		}
 		memcpy(iinfo->i_ext.i_data,
 		       bh->b_data + sizeof(struct fileEntry),
-		       inode->i_sb->s_blocksize - sizeof(struct fileEntry));
+		       bs - sizeof(struct fileEntry));
 	} else if (fe->descTag.tagIdent == cpu_to_le16(TAG_IDENT_USE)) {
 		iinfo->i_efe = 0;
 		iinfo->i_use = 1;
 		iinfo->i_lenAlloc = le32_to_cpu(
 				((struct unallocSpaceEntry *)bh->b_data)->
 				 lengthAllocDescs);
-		if (udf_alloc_i_data(inode, inode->i_sb->s_blocksize -
+		if (udf_alloc_i_data(inode, bs -
 					sizeof(struct unallocSpaceEntry))) {
 			make_bad_inode(inode);
 			return;
 		}
 		memcpy(iinfo->i_ext.i_data,
 		       bh->b_data + sizeof(struct unallocSpaceEntry),
-		       inode->i_sb->s_blocksize -
-					sizeof(struct unallocSpaceEntry));
+		       bs - sizeof(struct unallocSpaceEntry));
 		return;
 	}
 
@@ -1493,8 +1491,7 @@ reread:
 			return;
 		}
 		/* File in ICB has to fit in there... */
-		if (inode->i_size > inode->i_sb->s_blocksize -
-					udf_file_entry_alloc_offset(inode)) {
+		if (inode->i_size > bs - udf_file_entry_alloc_offset(inode)) {
 			make_bad_inode(inode);
 			return;
 		}
