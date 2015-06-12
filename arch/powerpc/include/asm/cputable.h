@@ -237,11 +237,13 @@ extern const char *powerpc_base_platform;
 
 /* We only set the TM feature if the kernel was compiled with TM supprt */
 #ifdef CONFIG_PPC_TRANSACTIONAL_MEM
-#define CPU_FTR_TM_COMP		CPU_FTR_TM
-#define PPC_FEATURE2_HTM_COMP	PPC_FEATURE2_HTM
+#define CPU_FTR_TM_COMP			CPU_FTR_TM
+#define PPC_FEATURE2_HTM_COMP		PPC_FEATURE2_HTM
+#define PPC_FEATURE2_HTM_NOSC_COMP	PPC_FEATURE2_HTM_NOSC
 #else
-#define CPU_FTR_TM_COMP		0
-#define PPC_FEATURE2_HTM_COMP	0
+#define CPU_FTR_TM_COMP			0
+#define PPC_FEATURE2_HTM_COMP		0
+#define PPC_FEATURE2_HTM_NOSC_COMP	0
 #endif
 
 /* We need to mark all pages as being coherent if we're SMP or we have a
