@@ -259,7 +259,7 @@ struct batadv_orig_node {
  */
 enum batadv_orig_capabilities {
 	BATADV_ORIG_CAPA_HAS_DAT,
-	BATADV_ORIG_CAPA_HAS_NC = BIT(1),
+	BATADV_ORIG_CAPA_HAS_NC,
 };
 
 /**
