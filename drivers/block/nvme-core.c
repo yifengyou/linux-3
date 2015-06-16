@@ -47,6 +47,11 @@
 #define SQ_SIZE(depth)		(depth * sizeof(struct nvme_command))
 #define CQ_SIZE(depth)		(depth * sizeof(struct nvme_completion))
 #define ADMIN_TIMEOUT	(60 * HZ)
+#define SHUTDOWN_TIMEOUT	(shutdown_timeout * HZ)
+
+static unsigned char shutdown_timeout = 5;
+module_param(shutdown_timeout, byte, 0644);
+MODULE_PARM_DESC(shutdown_timeout, "timeout in seconds for controller shutdown");
 
 static int nvme_major;
 module_param(nvme_major, int, 0);
@@ -1366,7 +1371,7 @@ static int nvme_shutdown_ctrl(struct nvme_dev *dev)
 	cc = (readl(&dev->bar->cc) & ~NVME_CC_SHN_MASK) | NVME_CC_SHN_NORMAL;
 	writel(cc, &dev->bar->cc);
 
-	timeout = 2 * HZ + jiffies;
+	timeout = SHUTDOWN_TIMEOUT + jiffies;
 	while ((readl(&dev->bar->csts) & NVME_CSTS_SHST_MASK) !=
 							NVME_CSTS_SHST_CMPLT) {
 		msleep(100);
