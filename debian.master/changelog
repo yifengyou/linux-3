@@ -1,3 +1,16 @@
+linux (3.13.0-57.95) trusty; urgency=low
+
+  [ Luis Henriques ]
+
+  * Release Tracking Bug
+    - LP: #1466592
+
+  [ Brad Figg ]
+
+  * Merged back Ubuntu-3.13.0-55.94 regression fix for security release
+
+ -- Luis Henriques <luis.henriques@canonical.com>  Thu, 18 Jun 2015 18:19:14 +0100
+
 linux (3.13.0-56.93) trusty; urgency=low
 
   [ Brad Figg ]
