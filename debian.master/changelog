@@ -252,6 +252,21 @@ linux (3.13.0-56.93) trusty; urgency=low
 
  -- Brad Figg <brad.figg@canonical.com>  Tue, 16 Jun 2015 10:52:43 -0700
 
+linux (3.13.0-55.94) trusty; urgency=low
+
+  [ Brad Figg ]
+
+  * Release Tracking Bug
+    - LP: #1466237
+
+  [ Andy Whitcroft ]
+
+  * SAUCE: ensure that upper/lower layers are valid before checking
+    permissions
+    - LP: #1465998
+
+ -- Brad Figg <brad.figg@canonical.com>  Wed, 17 Jun 2015 14:58:16 -0700
+
 linux (3.13.0-55.92) trusty; urgency=low
 
   [ Andy Whitcroft ]
