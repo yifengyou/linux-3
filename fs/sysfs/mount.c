@@ -139,6 +139,9 @@ static struct dentry *sysfs_mount(struct file_system_type *fs_type,
 		}
 		sb->s_flags |= MS_ACTIVE;
 	}
+	if (sb->s_root)
+		/* Userspace would break if executables appear on sysfs */
+		sb->s_root->d_sb->s_iflags |= SB_I_NOEXEC;
 
 	return dget(sb->s_root);
 }
