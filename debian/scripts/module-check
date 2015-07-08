@@ -6,6 +6,7 @@ $abidir = shift;
 $skipmodule = shift;
 
 print "II: Checking modules for $flavour...";
+print "     prev_abidir : $prev_abidir";
 
 if (-f "$prev_abidir/ignore.modules"
     or -f "$prev_abidir/$flavour.ignore.modules") {
