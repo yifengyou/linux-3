@@ -7,19 +7,16 @@
 
 	#include <linux/linkage.h>
 
+#ifdef CONFIG_TRACE_IRQFLAGS
 	/* put return address in eax (arg1) */
-	.macro THUNK name, func, put_ret_addr_in_eax=0
+	.macro thunk_ra name,func
 	.globl \name
 \name:
 	pushl %eax
 	pushl %ecx
 	pushl %edx
-
-	.if \put_ret_addr_in_eax
 	/* Place EIP in the arg1 */
 	movl 3*4(%esp), %eax
-	.endif
-
 	call \func
 	popl %edx
 	popl %ecx
@@ -27,15 +24,6 @@
 	ret
 	.endm
 
-#ifdef CONFIG_TRACE_IRQFLAGS
-	THUNK trace_hardirqs_on_thunk,trace_hardirqs_on_caller,1
-	THUNK trace_hardirqs_off_thunk,trace_hardirqs_off_caller,1
+	thunk_ra trace_hardirqs_on_thunk,trace_hardirqs_on_caller
+	thunk_ra trace_hardirqs_off_thunk,trace_hardirqs_off_caller
 #endif
-
-#ifdef CONFIG_PREEMPT
-	THUNK ___preempt_schedule, preempt_schedule
-#ifdef CONFIG_CONTEXT_TRACKING
-	THUNK ___preempt_schedule_context, preempt_schedule_context
-#endif
-#endif
-

@@ -431,6 +431,55 @@ linux (3.13.0-60.99) trusty; urgency=low
 
  -- Kamal Mostafa <kamal@canonical.com>  Tue, 28 Jul 2015 12:19:56 -0700
 
+linux (3.13.0-61.100) trusty; urgency=low
+
+  [ Luis Henriques]
+
+  * Re-work previous CVE backports to fix regression
+    - LP: #1479093
+
+  [ Upstream Kernel Changes ]
+
+  * Revert "x86/nmi/64: Use DF to avoid userspace RSP confusing nested NMI
+    detection"
+  * Revert "x86/nmi/64: Reorder nested NMI checks"
+  * Revert "x86/nmi/64: Improve nested NMI comments"
+  * Revert "x86/nmi/64: Switch stacks on userspace NMI entry"
+  * Revert "x86/nmi/64: Remove asm code that saves cr2"
+  * Revert "x86/nmi: Enable nested do_nmi handling for 64-bit kernels"
+  * Revert "x86/asm/entry/64: Remove pointless jump to irq_return"
+  * Revert "x86/asm/entry/64: Remove a redundant jump"
+  * Revert "x86/asm/entry/64: Fold the 'test_in_nmi' macro into its only
+    user"
+  * Revert "x86/asm/entry/64: Always allocate a complete "struct pt_regs"
+    on the kernel stack"
+  * Revert "x86/asm/64: Open-code register save/restore in
+    trace_hardirqs*() thunks"
+  * Revert "x86: entry_64.S: fold SAVE_ARGS_IRQ macro into its sole user"
+  * Revert "x86: ia32entry.S: fix wrong symbolic constant usage:
+    R11->ARGOFFSET"
+  * Revert "x86: entry_64.S: delete unused code"
+  * Revert "x86, entry: Switch stacks on a paranoid entry from userspace"
+  * Revert "x86: Speed up ___preempt_schedule*() by using THUNK helpers"
+  * Revert "x86_64, entry: Treat regs->ax the same in fastpath and slowpath
+    syscalls"
+  * Revert "x86, entry: Only call user_exit if TIF_NOHZ"
+  * Revert "x86/debug: Drop several unnecessary CFI annotations"
+  * Revert "x86_64, entry: Add missing 'DEFAULT_FRAME 0' entry annotations"
+  * x86/asm/entry/64: Fold the 'test_in_nmi' macro into its only user
+  * x86/asm/entry/64: Remove a redundant jump
+  * x86/nmi: Enable nested do_nmi handling for 64-bit kernels
+  * x86/nmi/64: Remove asm code that saves cr2
+  * x86/nmi/64: Switch stacks on userspace NMI entry
+    - CVE-2015-3290, CVE-2015-5157
+  * x86/nmi/64: Improve nested NMI comments
+  * x86/nmi/64: Reorder nested NMI checks
+  * x86/nmi/64: Use DF to avoid userspace RSP confusing nested NMI
+    detection
+    - CVE-2015-3291
+
+ -- Luis Henriques <luis.henriques@canonical.com>  Wed, 29 Jul 2015 10:58:25 +0100
+
 linux (3.13.0-59.98) trusty; urgency=low
 
   [ Colin Ian King ]

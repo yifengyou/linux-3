@@ -1458,12 +1458,7 @@ long syscall_trace_enter(struct pt_regs *regs)
 {
 	long ret = 0;
 
-	/*
-	 * If TIF_NOHZ is set, we are required to call user_exit() before
-	 * doing anything that could touch RCU.
-	 */
-	if (test_thread_flag(TIF_NOHZ))
-		user_exit();
+	user_exit();
 
 	/*
 	 * If we stepped into a sysenter/syscall insn, it trapped in
