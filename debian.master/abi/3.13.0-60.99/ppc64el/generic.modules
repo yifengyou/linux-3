@@ -2662,6 +2662,7 @@ ufshcd-pci
 ufshcd-pltfrm
 uhid
 uio
+uio_pci_generic
 umc
 umem
 unix_diag
