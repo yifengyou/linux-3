@@ -1765,14 +1765,7 @@ ENTRY(nmi)
 	/*
 	 * Now test if the previous stack was an NMI stack.  This covers
 	 * the case where we interrupt an outer NMI after it clears
-	 * "NMI executing" but before IRET.  We need to be careful, though:
-	 * there is one case in which RSP could point to the NMI stack
-	 * despite there being no NMI active: naughty userspace controls
-	 * RSP at the very beginning of the SYSCALL targets.  We can
-	 * pull a fast one on naughty userspace, though: we program
-	 * SYSCALL to mask DF, so userspace cannot cause DF to be set
-	 * if it controls the kernel's RSP.  We set DF before we clear
-	 * "NMI executing".
+	 * "NMI executing" but before IRET.
 	 */
 	lea	6*8(%rsp), %rdx
 	/* Compare the NMI stack (rdx) with the stack we came from (4*8(%rsp)) */
@@ -1783,15 +1776,9 @@ ENTRY(nmi)
 	cmpq	%rdx, 4*8(%rsp)
 	/* If it is below the NMI stack, it is a normal NMI */
 	jb	first_nmi
-
-	/* Ah, it is within the NMI stack. */
-
-	testb	$(X86_EFLAGS_DF >> 8), (3*8 + 1)(%rsp)
-	jz	first_nmi	/* RSP was user controlled. */
+	/* Ah, it is within the NMI stack, treat it as nested */
 
 	CFI_REMEMBER_STATE
-
-	/* This is a nested NMI. */
 
 nested_nmi:
 	/*
@@ -1907,16 +1894,8 @@ nmi_restore:
 	/* Point RSP at the "iret" frame. */
 	REMOVE_PT_GPREGS_FROM_STACK 6*8
 
-	/*
-	 * Clear "NMI executing".  Set DF first so that we can easily
-	 * distinguish the remaining code between here and IRET from
-	 * the SYSCALL entry and exit paths.  On a native kernel, we
-	 * could just inspect RIP, but, on paravirt kernels,
-	 * INTERRUPT_RETURN can translate into a jump into a
-	 * hypercall page.
-	 */
-	std
-	movq	$0, 5*8(%rsp)		/* clear "NMI executing" */
+	/* Clear "NMI executing". */
+	movq $0, 5*8(%rsp)
 
 	/*
 	 * INTERRUPT_RETURN reads the "iret" frame and exits the NMI
