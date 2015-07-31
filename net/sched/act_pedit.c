@@ -83,13 +83,12 @@ static int tcf_pedit_init(struct net *net, struct nlattr *nla,
 		}
 		ret = ACT_P_CREATED;
 	} else {
-		p = to_pedit(pc);
-		tcf_hash_release(pc, bind, &pedit_hash_info);
 		if (bind)
 			return 0;
+		tcf_hash_release(pc, bind, &pedit_hash_info);
 		if (!ovr)
 			return -EEXIST;
-
+		p = to_pedit(pc);
 		if (p->tcfp_nkeys && p->tcfp_nkeys != parm->nkeys) {
 			keys = kmalloc(ksize, GFP_KERNEL);
 			if (keys == NULL)
