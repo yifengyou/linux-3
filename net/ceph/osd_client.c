@@ -1258,6 +1258,22 @@ static bool __req_should_be_paused(struct ceph_osd_client *osdc,
 		(req->r_flags & CEPH_OSD_FLAG_WRITE && pausewr);
 }
 
+static void __enqueue_request(struct ceph_osd_request *req)
+{
+	struct ceph_osd_client *osdc = req->r_osdc;
+
+	dout("%s %p tid %llu to osd%d\n", __func__, req, req->r_tid,
+	     req->r_osd ? req->r_osd->o_osd : -1);
+
+	if (req->r_osd) {
+		__remove_osd_from_lru(req->r_osd);
+		list_add_tail(&req->r_osd_item, &req->r_osd->o_requests);
+		list_move_tail(&req->r_req_lru_item, &osdc->req_unsent);
+	} else {
+		list_move_tail(&req->r_req_lru_item, &osdc->req_notarget);
+	}
+}
+
 /*
  * Pick an osd (the first 'up' osd in the pg), allocate the osd struct
  * (as needed), and set the request r_osd appropriately.  If there is
@@ -1337,13 +1353,7 @@ static int __map_request(struct ceph_osd_client *osdc,
 			      &osdc->osdmap->osd_addr[o]);
 	}
 
-	if (req->r_osd) {
-		__remove_osd_from_lru(req->r_osd);
-		list_add_tail(&req->r_osd_item, &req->r_osd->o_requests);
-		list_move_tail(&req->r_req_lru_item, &osdc->req_unsent);
-	} else {
-		list_move_tail(&req->r_req_lru_item, &osdc->req_notarget);
-	}
+	__enqueue_request(req);
 	err = 1;   /* osd or pg changed */
 
 out:
