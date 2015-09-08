@@ -15538,7 +15538,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x687934e9	gpiod_set_raw_value
 EXPORT_SYMBOL_GPL vmlinux 0x68956406	static_key_slow_dec
 EXPORT_SYMBOL_GPL vmlinux 0x68bca37b	crypto_unregister_shash
 EXPORT_SYMBOL_GPL vmlinux 0x68c3136c	tty_init_termios
-EXPORT_SYMBOL_GPL vmlinux 0x68c5b6c8	acpi_reserve_region
 EXPORT_SYMBOL_GPL vmlinux 0x68da632c	class_destroy
 EXPORT_SYMBOL_GPL vmlinux 0x68dfc1d4	devm_kmalloc
 EXPORT_SYMBOL_GPL vmlinux 0x691b9aec	da9052_regmap_config

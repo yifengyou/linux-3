@@ -15572,7 +15572,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x6865448b	regulator_is_enabled
 EXPORT_SYMBOL_GPL vmlinux 0x687934e9	gpiod_set_raw_value
 EXPORT_SYMBOL_GPL vmlinux 0x6890dfe6	sdio_memcpy_fromio
 EXPORT_SYMBOL_GPL vmlinux 0x68956406	static_key_slow_dec
-EXPORT_SYMBOL_GPL vmlinux 0x68c5b6c8	acpi_reserve_region
 EXPORT_SYMBOL_GPL vmlinux 0x68c96d8c	usb_autopm_put_interface_no_suspend
 EXPORT_SYMBOL_GPL vmlinux 0x68cc3753	devm_usb_get_phy
 EXPORT_SYMBOL_GPL vmlinux 0x68da632c	class_destroy

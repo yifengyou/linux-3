@@ -15508,7 +15508,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x688f4da0	usb_hub_find_child
 EXPORT_SYMBOL_GPL vmlinux 0x689bcfe5	crypto_register_pcomp
 EXPORT_SYMBOL_GPL vmlinux 0x689bf932	ata_sas_port_async_resume
 EXPORT_SYMBOL_GPL vmlinux 0x68b5247f	set_cpus_allowed_ptr
-EXPORT_SYMBOL_GPL vmlinux 0x68c5b6c8	acpi_reserve_region
 EXPORT_SYMBOL_GPL vmlinux 0x68d6924f	usb_wakeup_notification
 EXPORT_SYMBOL_GPL vmlinux 0x68ed9a29	securityfs_create_file
 EXPORT_SYMBOL_GPL vmlinux 0x68f460dc	virtqueue_notify
