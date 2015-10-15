@@ -3578,14 +3578,17 @@ int dmar_find_matched_atsr_unit(struct pci_dev *dev)
 	dev = pci_physfn(dev);
 	for (bus = dev->bus; bus; bus = bus->parent) {
 		bridge = bus->self;
-		if (!bridge || !pci_is_pcie(bridge) ||
+		/* If it's an integrated device, allow ATS */
+		if (!bridge)
+			return 1;
+		/* Connected via non-PCIe: no ATS */
+		if (!pci_is_pcie(bridge) ||
 		    pci_pcie_type(bridge) == PCI_EXP_TYPE_PCI_BRIDGE)
 			return 0;
+		/* If we found the root port, look it up in the ATSR */
 		if (pci_pcie_type(bridge) == PCI_EXP_TYPE_ROOT_PORT)
 			break;
 	}
-	if (!bridge)
-		return 0;
 
 	list_for_each_entry_rcu(atsru, &dmar_atsr_units, list) {
 		atsr = container_of(atsru->hdr, struct acpi_dmar_atsr, header);
