@@ -6480,7 +6480,6 @@ EXPORT_SYMBOL vmlinux 0x2b945772	read_cache_page_async
 EXPORT_SYMBOL vmlinux 0x2b9b1a45	__dst_destroy_metrics_generic
 EXPORT_SYMBOL vmlinux 0x2b9da7a4	genl_lock
 EXPORT_SYMBOL vmlinux 0x2ba707a8	sysctl_tcp_low_latency
-EXPORT_SYMBOL vmlinux 0x2bac84cc	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x2bb89fe1	dm_kobject_release
 EXPORT_SYMBOL vmlinux 0x2bdd6e28	node_states
 EXPORT_SYMBOL vmlinux 0x2bde9b04	blk_peek_request
@@ -6847,6 +6846,7 @@ EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
 EXPORT_SYMBOL vmlinux 0x4189c8c2	add_disk
 EXPORT_SYMBOL vmlinux 0x41aab384	input_mt_destroy_slots
 EXPORT_SYMBOL vmlinux 0x41b3eb7f	phy_ethtool_get_eee
+EXPORT_SYMBOL vmlinux 0x420a3150	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x4211c3c1	zlib_inflateInit2
 EXPORT_SYMBOL vmlinux 0x4211df42	__skb_checksum
 EXPORT_SYMBOL vmlinux 0x423b776a	ipmi_create_user
@@ -14699,7 +14699,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x5b38bb78	devm_kmalloc
 EXPORT_SYMBOL_GPL vmlinux 0x5b4e379c	of_prop_next_u32
 EXPORT_SYMBOL_GPL vmlinux 0x5b562d64	tty_perform_flush
 EXPORT_SYMBOL_GPL vmlinux 0x5bc5e183	sysfs_create_group
-EXPORT_SYMBOL_GPL vmlinux 0x5be9df97	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x5bf1e638	rio_request_outb_dbell
 EXPORT_SYMBOL_GPL vmlinux 0x5c28784a	pci_store_saved_state
 EXPORT_SYMBOL_GPL vmlinux 0x5c294e5e	ata_pci_sff_activate_host
@@ -15530,6 +15529,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xa48a177e	ata_qc_complete_multiple
 EXPORT_SYMBOL_GPL vmlinux 0xa48e1335	tun_get_socket
 EXPORT_SYMBOL_GPL vmlinux 0xa498660a	pcibios_finish_adding_to_bus
 EXPORT_SYMBOL_GPL vmlinux 0xa4d9244f	ata_bmdma_status
+EXPORT_SYMBOL_GPL vmlinux 0xa4da39ae	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xa4e49eb3	replace_page_cache_page
 EXPORT_SYMBOL_GPL vmlinux 0xa4ea04ee	of_property_read_u64
 EXPORT_SYMBOL_GPL vmlinux 0xa4ee3f22	unix_peer_get

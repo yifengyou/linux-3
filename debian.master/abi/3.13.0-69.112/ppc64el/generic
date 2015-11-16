@@ -3802,6 +3802,7 @@ EXPORT_SYMBOL vmlinux 0x0da10ec3	security_sock_graft
 EXPORT_SYMBOL vmlinux 0x0dd80419	agp_generic_enable
 EXPORT_SYMBOL vmlinux 0x0e04bd82	softnet_data
 EXPORT_SYMBOL vmlinux 0x0e1a3124	fsl_lbc_ctrl_dev
+EXPORT_SYMBOL vmlinux 0x0e5dd39a	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x0e6da44a	set_normalized_timespec
 EXPORT_SYMBOL vmlinux 0x0e7c7b96	kernel_write
 EXPORT_SYMBOL vmlinux 0x0e8f30f6	_raw_write_lock_irq
@@ -5593,7 +5594,6 @@ EXPORT_SYMBOL vmlinux 0x7f6818a1	unregister_filesystem
 EXPORT_SYMBOL vmlinux 0x7f6a291b	unlock_page
 EXPORT_SYMBOL vmlinux 0x7f704105	dquot_mark_dquot_dirty
 EXPORT_SYMBOL vmlinux 0x7f90c090	vfs_unlink
-EXPORT_SYMBOL vmlinux 0x7fa60a29	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x7fa63c0e	iget_failed
 EXPORT_SYMBOL vmlinux 0x7fc13aa7	gen10g_config_advert
 EXPORT_SYMBOL vmlinux 0x7fce10da	cdrom_mode_sense
@@ -11135,7 +11135,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x2a2831fd	clockevent_delta2ns
 EXPORT_SYMBOL_GPL vmlinux 0x2a334890	inet_unhash
 EXPORT_SYMBOL_GPL vmlinux 0x2a3f0319	mnt_clone_write
 EXPORT_SYMBOL_GPL vmlinux 0x2a527c9a	fib_rules_unregister
-EXPORT_SYMBOL_GPL vmlinux 0x2a5b8d8d	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x2a678a13	__suspend_report_result
 EXPORT_SYMBOL_GPL vmlinux 0x2a67f7da	stop_machine
 EXPORT_SYMBOL_GPL vmlinux 0x2a8081c1	device_show_int
@@ -11999,6 +11998,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x72fb6c46	put_device
 EXPORT_SYMBOL_GPL vmlinux 0x730b0429	regulator_set_voltage_sel_regmap
 EXPORT_SYMBOL_GPL vmlinux 0x7324f5ed	thermal_zone_unbind_cooling_device
 EXPORT_SYMBOL_GPL vmlinux 0x7328496a	ping_get_port
+EXPORT_SYMBOL_GPL vmlinux 0x7370226b	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x737bf222	regulator_get_bypass_regmap
 EXPORT_SYMBOL_GPL vmlinux 0x739b8c2e	pci_scan_child_bus
 EXPORT_SYMBOL_GPL vmlinux 0x73a48b4a	ata_sff_std_ports

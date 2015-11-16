@@ -8857,6 +8857,7 @@ EXPORT_SYMBOL vmlinux 0xaeb59703	arp_create
 EXPORT_SYMBOL vmlinux 0xaebcc8a2	security_inode_init_security
 EXPORT_SYMBOL vmlinux 0xaebfa2e2	tcp_prequeue
 EXPORT_SYMBOL vmlinux 0xaec655c7	alloc_pages_exact
+EXPORT_SYMBOL vmlinux 0xaed4c689	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xaed984f2	neigh_table_clear
 EXPORT_SYMBOL vmlinux 0xaf2058ed	kill_bdev
 EXPORT_SYMBOL vmlinux 0xaf2397fb	neigh_sysctl_unregister
@@ -9651,7 +9652,6 @@ EXPORT_SYMBOL vmlinux 0xe1246f1c	neigh_parms_alloc
 EXPORT_SYMBOL vmlinux 0xe13cd8a7	dmi_name_in_vendors
 EXPORT_SYMBOL vmlinux 0xe1761617	security_inet_conn_request
 EXPORT_SYMBOL vmlinux 0xe1770869	serial8250_register_8250_port
-EXPORT_SYMBOL vmlinux 0xe18329cc	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xe1974ab2	ipv4_specific
 EXPORT_SYMBOL vmlinux 0xe197528f	__generic_block_fiemap
 EXPORT_SYMBOL vmlinux 0xe1a99d02	bh_submit_read
@@ -14758,6 +14758,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x2b57f884	usb_unanchor_urb
 EXPORT_SYMBOL_GPL vmlinux 0x2b67f096	speedstep_get_frequency
 EXPORT_SYMBOL_GPL vmlinux 0x2b77ff4b	ohci_setup
 EXPORT_SYMBOL_GPL vmlinux 0x2b7a6de8	syscon_regmap_lookup_by_phandle
+EXPORT_SYMBOL_GPL vmlinux 0x2b886ea7	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x2bba6240	thermal_notify_framework
 EXPORT_SYMBOL_GPL vmlinux 0x2bbaaf68	each_symbol_section
 EXPORT_SYMBOL_GPL vmlinux 0x2be75cb7	skcipher_geniv_exit
@@ -17034,7 +17035,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xda751cb6	edac_get_sysfs_subsys
 EXPORT_SYMBOL_GPL vmlinux 0xda7edb75	max8997_bulk_read
 EXPORT_SYMBOL_GPL vmlinux 0xda979530	page_cache_sync_readahead
 EXPORT_SYMBOL_GPL vmlinux 0xdadd0403	__fsnotify_parent
-EXPORT_SYMBOL_GPL vmlinux 0xdae9f794	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xdaf4dfb3	fb_mode_option
 EXPORT_SYMBOL_GPL vmlinux 0xdb04cacc	tracepoint_probe_unregister_noupdate
 EXPORT_SYMBOL_GPL vmlinux 0xdb05eb13	raw_unhash_sk

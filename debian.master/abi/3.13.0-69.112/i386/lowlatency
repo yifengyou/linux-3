@@ -7446,7 +7446,6 @@ EXPORT_SYMBOL vmlinux 0x5d925acf	clear_bdi_congested
 EXPORT_SYMBOL vmlinux 0x5daf6b40	backlight_force_update
 EXPORT_SYMBOL vmlinux 0x5dcc97dd	generic_file_splice_read
 EXPORT_SYMBOL vmlinux 0x5dce6b75	complete_and_exit
-EXPORT_SYMBOL vmlinux 0x5df5a582	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x5e1963d0	inet_shutdown
 EXPORT_SYMBOL vmlinux 0x5e1a804d	__dev_get_by_index
 EXPORT_SYMBOL vmlinux 0x5e1d1967	napi_gro_flush
@@ -7742,6 +7741,7 @@ EXPORT_SYMBOL vmlinux 0x6d334118	__get_user_8
 EXPORT_SYMBOL vmlinux 0x6d340f64	tty_termios_input_baud_rate
 EXPORT_SYMBOL vmlinux 0x6d544715	sock_sendmsg
 EXPORT_SYMBOL vmlinux 0x6d6f7d98	pci_restore_state
+EXPORT_SYMBOL vmlinux 0x6d800832	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x6d864f7f	pm8606_osc_disable
 EXPORT_SYMBOL vmlinux 0x6da340c7	key_type_keyring
 EXPORT_SYMBOL vmlinux 0x6dbb37e2	mmc_power_restore_host
@@ -16567,6 +16567,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xb4da1608	sdev_evt_send
 EXPORT_SYMBOL_GPL vmlinux 0xb4e14553	gnttab_query_foreign_access
 EXPORT_SYMBOL_GPL vmlinux 0xb4ea7cf7	kgdb_connected
 EXPORT_SYMBOL_GPL vmlinux 0xb4f247e5	perf_event_read_value
+EXPORT_SYMBOL_GPL vmlinux 0xb50c5646	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xb51fbd64	edac_op_state
 EXPORT_SYMBOL_GPL vmlinux 0xb5284994	__udp6_lib_lookup
 EXPORT_SYMBOL_GPL vmlinux 0xb53620d1	pci_vpd_find_info_keyword
@@ -17418,7 +17419,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xf4a8f33a	regulator_bulk_disable
 EXPORT_SYMBOL_GPL vmlinux 0xf4d719fb	input_ff_upload
 EXPORT_SYMBOL_GPL vmlinux 0xf4e10b8f	power_supply_get_by_name
 EXPORT_SYMBOL_GPL vmlinux 0xf4e88ed6	__srcu_read_lock
-EXPORT_SYMBOL_GPL vmlinux 0xf4f4042a	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xf4fc2d6c	__ring_buffer_alloc
 EXPORT_SYMBOL_GPL vmlinux 0xf532491e	rio_mport_write_config_16
 EXPORT_SYMBOL_GPL vmlinux 0xf54bd49b	lcm

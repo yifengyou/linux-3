@@ -6999,6 +6999,7 @@ EXPORT_SYMBOL vmlinux 0x4b5fd49e	dm_kcopyd_do_callback
 EXPORT_SYMBOL vmlinux 0x4b6fb539	bio_put
 EXPORT_SYMBOL vmlinux 0x4b6fcddc	_lv1_set_spe_interrupt_mask
 EXPORT_SYMBOL vmlinux 0x4b7ed27b	sleep_on
+EXPORT_SYMBOL vmlinux 0x4b9ba1d0	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x4bae1882	lock_may_read
 EXPORT_SYMBOL vmlinux 0x4bba4b9d	ip_mc_inc_group
 EXPORT_SYMBOL vmlinux 0x4bce64e0	sk_dst_check
@@ -8675,7 +8676,6 @@ EXPORT_SYMBOL vmlinux 0xad1b18a0	of_phy_connect_fixed_link
 EXPORT_SYMBOL vmlinux 0xad352035	input_get_keycode
 EXPORT_SYMBOL vmlinux 0xad3eb19f	sg_alloc_table_from_pages
 EXPORT_SYMBOL vmlinux 0xad46dec2	of_count_phandle_with_args
-EXPORT_SYMBOL vmlinux 0xad4e252d	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xad50cebb	i8253_lock
 EXPORT_SYMBOL vmlinux 0xad79e712	pci_disable_msi
 EXPORT_SYMBOL vmlinux 0xad84bef8	dm_table_event
@@ -16247,6 +16247,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xc68aa252	__atomic_notifier_call_chain
 EXPORT_SYMBOL_GPL vmlinux 0xc690866c	irq_work_queue
 EXPORT_SYMBOL_GPL vmlinux 0xc69b7ee5	zs_destroy_pool
 EXPORT_SYMBOL_GPL vmlinux 0xc6a8a231	pci_intx_mask_supported
+EXPORT_SYMBOL_GPL vmlinux 0xc6b50c28	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xc6b98213	iommu_domain_has_cap
 EXPORT_SYMBOL_GPL vmlinux 0xc6bb2587	ipv4_redirect
 EXPORT_SYMBOL_GPL vmlinux 0xc6e25e99	tracepoint_iter_start
@@ -16383,7 +16384,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xd20bf6ba	dcookie_unregister
 EXPORT_SYMBOL_GPL vmlinux 0xd217e9e6	trace_set_clr_event
 EXPORT_SYMBOL_GPL vmlinux 0xd22831b4	serial8250_modem_status
 EXPORT_SYMBOL_GPL vmlinux 0xd238e2b2	pci_disable_ats
-EXPORT_SYMBOL_GPL vmlinux 0xd2562e91	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xd26ba880	fb_sys_read
 EXPORT_SYMBOL_GPL vmlinux 0xd273a9a9	driver_find_device
 EXPORT_SYMBOL_GPL vmlinux 0xd273b1b1	__round_jiffies_up_relative

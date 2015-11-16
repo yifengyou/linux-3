@@ -6598,7 +6598,6 @@ EXPORT_SYMBOL vmlinux 0x2e4d03ae	pci_get_class
 EXPORT_SYMBOL vmlinux 0x2e528935	register_cdrom
 EXPORT_SYMBOL vmlinux 0x2e5a704c	udp_table
 EXPORT_SYMBOL vmlinux 0x2e9405c2	devm_input_allocate_device
-EXPORT_SYMBOL vmlinux 0x2e97cc9e	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x2e9bf148	mmc_release_host
 EXPORT_SYMBOL vmlinux 0x2ebfdd94	mb_cache_entry_release
 EXPORT_SYMBOL vmlinux 0x2ece032c	sk_alloc
@@ -7072,6 +7071,7 @@ EXPORT_SYMBOL vmlinux 0x49f937aa	posix_acl_to_xattr
 EXPORT_SYMBOL vmlinux 0x4a03e7bb	textsearch_unregister
 EXPORT_SYMBOL vmlinux 0x4a09eeb1	scsi_device_put
 EXPORT_SYMBOL vmlinux 0x4a15cd35	dm_get_device
+EXPORT_SYMBOL vmlinux 0x4a2e366f	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x4a358252	__bitmap_subset
 EXPORT_SYMBOL vmlinux 0x4a373100	dev_set_group
 EXPORT_SYMBOL vmlinux 0x4a4161bf	pcix_set_mmrbc
@@ -14650,6 +14650,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x27ea090d	subsys_virtual_register
 EXPORT_SYMBOL_GPL vmlinux 0x27f4f029	ftrace_set_global_filter
 EXPORT_SYMBOL_GPL vmlinux 0x27fa66e1	nr_free_buffer_pages
 EXPORT_SYMBOL_GPL vmlinux 0x2814ec43	ip6_sk_redirect
+EXPORT_SYMBOL_GPL vmlinux 0x284009d3	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x2869646c	shash_attr_alg
 EXPORT_SYMBOL_GPL vmlinux 0x2872a2aa	use_mm
 EXPORT_SYMBOL_GPL vmlinux 0x287d871b	sdio_writeb_readb
@@ -17399,7 +17400,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xf9598fc3	devres_release
 EXPORT_SYMBOL_GPL vmlinux 0xf9765833	dmi_match
 EXPORT_SYMBOL_GPL vmlinux 0xf97666a0	set_memory_rw
 EXPORT_SYMBOL_GPL vmlinux 0xf97edff1	hwmon_device_unregister
-EXPORT_SYMBOL_GPL vmlinux 0xf981d8fe	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xf9924426	arch_add_memory
 EXPORT_SYMBOL_GPL vmlinux 0xf99fe6bb	dma_buf_put
 EXPORT_SYMBOL_GPL vmlinux 0xf9a054b5	__round_jiffies

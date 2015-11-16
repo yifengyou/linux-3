@@ -7066,7 +7066,6 @@ EXPORT_SYMBOL vmlinux 0x515e24a7	flush_instruction_cache
 EXPORT_SYMBOL vmlinux 0x518b2eb3	__ww_mutex_lock_interruptible
 EXPORT_SYMBOL vmlinux 0x519b0da3	finish_wait
 EXPORT_SYMBOL vmlinux 0x51a8b40c	try_to_writeback_inodes_sb_nr
-EXPORT_SYMBOL vmlinux 0x51b0a9d8	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x51dce73b	xfrm_state_walk_init
 EXPORT_SYMBOL vmlinux 0x51dea7e0	blkdev_fsync
 EXPORT_SYMBOL vmlinux 0x51e95181	xfrm_state_delete_tunnel
@@ -8358,6 +8357,7 @@ EXPORT_SYMBOL vmlinux 0xa095a32c	twl6040_set_pll
 EXPORT_SYMBOL vmlinux 0xa0966e4b	unregister_shrinker
 EXPORT_SYMBOL vmlinux 0xa0ae8838	gnet_stats_copy_app
 EXPORT_SYMBOL vmlinux 0xa0b04675	vmalloc_32
+EXPORT_SYMBOL vmlinux 0xa0b59fc9	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xa0cd93a2	elv_add_request
 EXPORT_SYMBOL vmlinux 0xa0ceef51	out_of_line_wait_on_bit
 EXPORT_SYMBOL vmlinux 0xa0d2d447	pci_release_selected_regions
@@ -13771,6 +13771,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x0f17bb7a	tpm_pm_resume
 EXPORT_SYMBOL_GPL vmlinux 0x0f1afc6e	sec_reg_update
 EXPORT_SYMBOL_GPL vmlinux 0x0f1c3baf	unregister_pernet_device
 EXPORT_SYMBOL_GPL vmlinux 0x0f304532	rtc_update_irq_enable
+EXPORT_SYMBOL_GPL vmlinux 0x0f4ee4d8	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x0f5ffbde	crypto_alloc_base
 EXPORT_SYMBOL_GPL vmlinux 0x0f63a457	pwmchip_add
 EXPORT_SYMBOL_GPL vmlinux 0x0f751aea	input_event_from_user
@@ -15168,7 +15169,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x8a3b2123	find_module
 EXPORT_SYMBOL_GPL vmlinux 0x8a784bec	tps65912_reg_write
 EXPORT_SYMBOL_GPL vmlinux 0x8a7a7ad2	devm_regulator_register
 EXPORT_SYMBOL_GPL vmlinux 0x8a7ff085	fuse_request_send
-EXPORT_SYMBOL_GPL vmlinux 0x8a9824d2	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x8abacc47	get_max_files
 EXPORT_SYMBOL_GPL vmlinux 0x8ae152b5	of_get_nand_bus_width
 EXPORT_SYMBOL_GPL vmlinux 0x8ae7b891	of_rescan_bus

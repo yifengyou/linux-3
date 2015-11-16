@@ -5219,6 +5219,7 @@ EXPORT_SYMBOL vmlinux 0x0c58a8cd	netdev_increment_features
 EXPORT_SYMBOL vmlinux 0x0c65e73c	scsi_normalize_sense
 EXPORT_SYMBOL vmlinux 0x0c6f97b4	get_task_io_context
 EXPORT_SYMBOL vmlinux 0x0c772f67	phys_mem_access_prot
+EXPORT_SYMBOL vmlinux 0x0c7a012a	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x0c8c9e99	scsi_show_extd_sense
 EXPORT_SYMBOL vmlinux 0x0c9a792d	pci_bus_assign_resources
 EXPORT_SYMBOL vmlinux 0x0cae232b	utf16s_to_utf8s
@@ -7033,7 +7034,6 @@ EXPORT_SYMBOL vmlinux 0x8412a125	tcp_disconnect
 EXPORT_SYMBOL vmlinux 0x841962f8	param_get_ushort
 EXPORT_SYMBOL vmlinux 0x844e1c74	wait_iff_congested
 EXPORT_SYMBOL vmlinux 0x846eb481	netdev_state_change
-EXPORT_SYMBOL vmlinux 0x847a9359	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x84996ea4	netlink_kernel_release
 EXPORT_SYMBOL vmlinux 0x84b19a82	gen10g_restart_aneg
 EXPORT_SYMBOL vmlinux 0x84ffea8b	idr_preload

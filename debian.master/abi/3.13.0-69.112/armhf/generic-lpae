@@ -5442,7 +5442,6 @@ EXPORT_SYMBOL vmlinux 0x4d84eeda	inet_csk_clear_xmit_timers
 EXPORT_SYMBOL vmlinux 0x4d974b9c	register_sysrq_key
 EXPORT_SYMBOL vmlinux 0x4d9b652b	rb_erase
 EXPORT_SYMBOL vmlinux 0x4d9b6d35	snd_pcm_format_size
-EXPORT_SYMBOL vmlinux 0x4da3e853	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x4db11d44	gen10g_restart_aneg
 EXPORT_SYMBOL vmlinux 0x4dd81644	security_inode_getsecctx
 EXPORT_SYMBOL vmlinux 0x4de1ec87	bprm_change_interp
@@ -7775,6 +7774,7 @@ EXPORT_SYMBOL vmlinux 0xe66452ab	dql_init
 EXPORT_SYMBOL vmlinux 0xe697d108	__blk_iopoll_complete
 EXPORT_SYMBOL vmlinux 0xe6ab72a6	ipmi_set_my_LUN
 EXPORT_SYMBOL vmlinux 0xe6b6c0da	xfrm_state_delete
+EXPORT_SYMBOL vmlinux 0xe6c1a84e	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xe6c3ebb0	__raw_writesw
 EXPORT_SYMBOL vmlinux 0xe6d7d38d	udp_prot
 EXPORT_SYMBOL vmlinux 0xe6da5914	dcache_dir_open
@@ -11899,7 +11899,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x4e109192	ring_buffer_entries
 EXPORT_SYMBOL_GPL vmlinux 0x4e242f5f	pstore_cannot_block_path
 EXPORT_SYMBOL_GPL vmlinux 0x4e2ca07f	sec_reg_write
 EXPORT_SYMBOL_GPL vmlinux 0x4e442bb5	css_next_descendant_pre
-EXPORT_SYMBOL_GPL vmlinux 0x4e59bae1	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x4e6bec9f	snd_soc_register_component
 EXPORT_SYMBOL_GPL vmlinux 0x4e75ed25	__get_mtd_device
 EXPORT_SYMBOL_GPL vmlinux 0x4e9e067a	regulator_set_voltage_time
@@ -13976,6 +13975,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xf7186883	regulator_get_voltage_sel_regmap
 EXPORT_SYMBOL_GPL vmlinux 0xf72afad6	mtd_get_fact_prot_info
 EXPORT_SYMBOL_GPL vmlinux 0xf738a0c7	simple_attr_read
 EXPORT_SYMBOL_GPL vmlinux 0xf74dae0f	idr_alloc
+EXPORT_SYMBOL_GPL vmlinux 0xf75d9170	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0xf764c527	gpiochip_add_pingroup_range
 EXPORT_SYMBOL_GPL vmlinux 0xf76b0a59	read_current_timer
 EXPORT_SYMBOL_GPL vmlinux 0xf7714159	transport_remove_device

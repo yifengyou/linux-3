@@ -6167,7 +6167,6 @@ EXPORT_SYMBOL vmlinux 0x14e4ba61	ndo_dflt_fdb_del
 EXPORT_SYMBOL vmlinux 0x14e61bca	sock_tx_timestamp
 EXPORT_SYMBOL vmlinux 0x14ec5cc2	nf_reinject
 EXPORT_SYMBOL vmlinux 0x150389d6	acpi_processor_power_init_bm_check
-EXPORT_SYMBOL vmlinux 0x15058ead	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x15114a01	blk_queue_update_dma_pad
 EXPORT_SYMBOL vmlinux 0x1537eae3	phy_ethtool_get_eee
 EXPORT_SYMBOL vmlinux 0x1547b883	serial8250_set_isa_configurator
@@ -9335,6 +9334,7 @@ EXPORT_SYMBOL vmlinux 0xd52bf1ce	_raw_spin_lock
 EXPORT_SYMBOL vmlinux 0xd54121cf	mmc_erase
 EXPORT_SYMBOL vmlinux 0xd541bae2	sock_i_uid
 EXPORT_SYMBOL vmlinux 0xd56b6230	agp_generic_alloc_by_type
+EXPORT_SYMBOL vmlinux 0xd5846b1b	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0xd586be4c	mmc_power_save_host
 EXPORT_SYMBOL vmlinux 0xd58a8028	invalidate_partition
 EXPORT_SYMBOL vmlinux 0xd5b45fb6	xfrm_alloc_spi
@@ -14808,7 +14808,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x3494d7a9	zap_vma_ptes
 EXPORT_SYMBOL_GPL vmlinux 0x349c9c6f	cpuidle_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x34b95ade	adp5520_register_notifier
 EXPORT_SYMBOL_GPL vmlinux 0x34d77b1d	regmap_multi_reg_write
-EXPORT_SYMBOL_GPL vmlinux 0x34f02225	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x352650ee	gnttab_batch_map
 EXPORT_SYMBOL_GPL vmlinux 0x35427e9c	register_kretprobes
 EXPORT_SYMBOL_GPL vmlinux 0x3556ec18	sis_info133_for_sata
@@ -14839,6 +14838,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x37316d21	sdio_claim_host
 EXPORT_SYMBOL_GPL vmlinux 0x37338d02	task_current_syscall
 EXPORT_SYMBOL_GPL vmlinux 0x37664021	wm831x_bulk_read
 EXPORT_SYMBOL_GPL vmlinux 0x37f1ffbf	gdt_page
+EXPORT_SYMBOL_GPL vmlinux 0x38145634	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x38620e38	gnttab_grant_foreign_access_trans_ref
 EXPORT_SYMBOL_GPL vmlinux 0x38b8af7d	regulator_bulk_free
 EXPORT_SYMBOL_GPL vmlinux 0x38edc10e	__sock_recv_wifi_status

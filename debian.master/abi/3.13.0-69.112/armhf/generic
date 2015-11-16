@@ -6765,6 +6765,7 @@ EXPORT_SYMBOL vmlinux 0x467bb2f3	kset_unregister
 EXPORT_SYMBOL vmlinux 0x46b99267	tcp_md5_do_add
 EXPORT_SYMBOL vmlinux 0x46c35b14	gen10g_resume
 EXPORT_SYMBOL vmlinux 0x46d3b28c	__div0
+EXPORT_SYMBOL vmlinux 0x46e39fa9	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x46e3a308	skb_dequeue_tail
 EXPORT_SYMBOL vmlinux 0x46feb099	dm_read_arg
 EXPORT_SYMBOL vmlinux 0x470edb70	ppp_register_compressor
@@ -7223,7 +7224,6 @@ EXPORT_SYMBOL vmlinux 0x6203bd7f	pci_request_selected_regions
 EXPORT_SYMBOL vmlinux 0x6214aef2	cpufreq_unregister_notifier
 EXPORT_SYMBOL vmlinux 0x6217ae6d	devm_ioremap_nocache
 EXPORT_SYMBOL vmlinux 0x62194024	omapdss_find_mgr_from_display
-EXPORT_SYMBOL vmlinux 0x621b5782	skb_copy_and_csum_datagram_iovec
 EXPORT_SYMBOL vmlinux 0x6225637e	md5_transform
 EXPORT_SYMBOL vmlinux 0x6228c21f	smp_call_function_single
 EXPORT_SYMBOL vmlinux 0x624227d9	of_match_device
@@ -14023,7 +14023,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x38097e79	devm_snd_soc_register_component
 EXPORT_SYMBOL_GPL vmlinux 0x383ea860	snd_dmaengine_pcm_close_release_chan
 EXPORT_SYMBOL_GPL vmlinux 0x385dc017	usb_lock_device_for_reset
 EXPORT_SYMBOL_GPL vmlinux 0x38623d81	virtqueue_enable_cb
-EXPORT_SYMBOL_GPL vmlinux 0x387d54e6	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x38a9c2c7	input_ff_effect_from_user
 EXPORT_SYMBOL_GPL vmlinux 0x38c08a9b	rtc_irq_register
 EXPORT_SYMBOL_GPL vmlinux 0x38c56387	crypto_register_shashes
@@ -14185,6 +14184,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x44200b6b	class_create_file_ns
 EXPORT_SYMBOL_GPL vmlinux 0x44404f11	kdb_register_repeat
 EXPORT_SYMBOL_GPL vmlinux 0x44483c2d	srcu_notifier_call_chain
 EXPORT_SYMBOL_GPL vmlinux 0x444f1735	cpu_pm_register_notifier
+EXPORT_SYMBOL_GPL vmlinux 0x446316a6	ehci_handshake
 EXPORT_SYMBOL_GPL vmlinux 0x4475e427	power_supply_register
 EXPORT_SYMBOL_GPL vmlinux 0x44811061	i2c_add_numbered_adapter
 EXPORT_SYMBOL_GPL vmlinux 0x4484a5a4	wait_for_device_probe
