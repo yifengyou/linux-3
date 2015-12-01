@@ -193,7 +193,12 @@ int __init fpga_irq_of_init(struct device_node *node,
 	if (of_property_read_u32(node, "valid-mask", &valid_mask))
 		valid_mask = 0;
 
+#ifdef CONFIG_ARCH_VERSATILE
+	fpga_irq_init(base, node->name, IRQ_SIC_START, -1, valid_mask,
+				  node);
+#else
 	fpga_irq_init(base, node->name, 0, -1, valid_mask, node);
+#endif
 
 	writel(clear_mask, base + IRQ_ENABLE_CLEAR);
 	writel(clear_mask, base + FIQ_ENABLE_CLEAR);
