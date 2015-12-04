@@ -14050,6 +14050,7 @@ EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x4d20ceb7	snd_soc_of_parse_audio_routi
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x4eeeeb71	snd_soc_dapm_get_value_enum_double
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x4febad31	snd_soc_get_value_enum_double
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x515c7d26	snd_soc_put_strobe
+EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x523dcb78	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x588cf843	dpcm_be_dai_trigger
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x589f0034	snd_soc_jack_get_type
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x5eb2066a	snd_soc_dapm_put_value_enum_double

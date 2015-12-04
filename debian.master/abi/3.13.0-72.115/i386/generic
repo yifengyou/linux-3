@@ -14195,6 +14195,7 @@ EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xd76d7332	dapm_mark_dirty
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xdbe7602e	snd_soc_dapm_put_volsw
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xddca2d5e	snd_soc_platform_read
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xe01731b4	snd_soc_register_codec
+EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xe1b74a29	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xe273c9b5	snd_soc_unregister_platform
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xe28e69cc	snd_soc_add_platform_controls
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xe2c14ca1	snd_soc_dpcm_get_substream

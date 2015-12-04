@@ -13838,6 +13838,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x2a3ffa97	srcu_init_notifier_head
 EXPORT_SYMBOL_GPL vmlinux 0x2a504ad2	init_srcu_struct
 EXPORT_SYMBOL_GPL vmlinux 0x2a5a8176	snd_soc_dapm_ignore_suspend
 EXPORT_SYMBOL_GPL vmlinux 0x2a678a13	__suspend_report_result
+EXPORT_SYMBOL_GPL vmlinux 0x2a6eb8f5	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL vmlinux 0x2a7a05b6	ahci_error_handler
 EXPORT_SYMBOL_GPL vmlinux 0x2a87c201	usb_find_alt_setting
 EXPORT_SYMBOL_GPL vmlinux 0x2a8aed7e	input_ff_event

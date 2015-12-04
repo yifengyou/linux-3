@@ -13517,6 +13517,7 @@ EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x285b5519	snd_soc_info_volsw
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x2dd1db28	snd_soc_get_volsw_sx
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x2f989964	snd_soc_dapm_get_volsw
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x301f8390	snd_soc_new_ac97_codec
+EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x31c5bce3	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x34d797f9	snd_soc_set_ac97_ops_of_reset
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x351f2446	snd_soc_dapm_enable_pin
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0x3668d9b7	snd_soc_remove_platform

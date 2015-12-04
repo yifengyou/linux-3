@@ -13846,6 +13846,7 @@ EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xb3dd4bc7	snd_soc_dapm_kcontrol_codec
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xb49986bd	snd_soc_dapm_put_pin_switch
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xb8c44732	snd_soc_dai_set_pll
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xbac8e4ca	snd_soc_dapm_disable_pin
+EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xbbdc234f	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xbcea2e04	snd_soc_put_enum_double
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xbe49c565	snd_soc_dpcm_be_get_state
 EXPORT_SYMBOL_GPL sound/soc/snd-soc-core 0xc0501de1	snd_soc_jack_notifier_register

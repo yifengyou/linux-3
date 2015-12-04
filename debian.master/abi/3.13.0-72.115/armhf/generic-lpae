@@ -12880,6 +12880,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xa08a0fdb	vfs_removexattr
 EXPORT_SYMBOL_GPL vmlinux 0xa0aa3174	md_new_event
 EXPORT_SYMBOL_GPL vmlinux 0xa0bef273	skcipher_geniv_free
 EXPORT_SYMBOL_GPL vmlinux 0xa0d48e29	ata_sff_hsm_move
+EXPORT_SYMBOL_GPL vmlinux 0xa0d80f92	snd_soc_info_volsw_sx
 EXPORT_SYMBOL_GPL vmlinux 0xa0e01a46	balloon_page_enqueue
 EXPORT_SYMBOL_GPL vmlinux 0xa1030a57	ata_slave_link_init
 EXPORT_SYMBOL_GPL vmlinux 0xa10f8ef8	snd_soc_unregister_card
