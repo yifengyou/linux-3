@@ -130,3 +130,4 @@ struct acm {
 #define NO_DATA_INTERFACE		16
 #define IGNORE_DEVICE			32
 #define CLEAR_HALT_CONDITIONS		128
+#define SEND_ZERO_PACKET		256
