@@ -1291,6 +1291,8 @@ static int __init setup_vmstat(void)
 #ifdef CONFIG_SMP
 	int cpu;
 
+	vmstat_wq = alloc_workqueue("vmstat", WQ_FREEZABLE|WQ_MEM_RECLAIM, 0);
+
 	register_cpu_notifier(&vmstat_notifier);
 
 	get_online_cpus();
@@ -1299,7 +1301,6 @@ static int __init setup_vmstat(void)
 		node_set_state(cpu_to_node(cpu), N_CPU);
 	}
 	put_online_cpus();
-	vmstat_wq = alloc_workqueue("vmstat", WQ_FREEZABLE|WQ_MEM_RECLAIM, 0);
 #endif
 #ifdef CONFIG_PROC_FS
 	proc_create("buddyinfo", S_IRUGO, NULL, &fragmentation_file_operations);
