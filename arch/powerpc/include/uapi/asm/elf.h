@@ -292,8 +292,10 @@ do {									\
 #define R_PPC64_DTPREL16_HIGHEST 105 /* half16	(sym+add)@dtprel@highest */
 #define R_PPC64_DTPREL16_HIGHESTA 106 /* half16	(sym+add)@dtprel@highesta */
 
+#define R_PPC64_ENTRY		118
+
 /* Keep this the last entry.  */
-#define R_PPC64_NUM		107
+#define R_PPC64_NUM		119
 
 /* There's actually a third entry here, but it's unused */
 struct ppc64_opd_entry
