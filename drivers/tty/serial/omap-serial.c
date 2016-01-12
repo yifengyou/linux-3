@@ -1365,7 +1365,7 @@ static inline void serial_omap_add_console_port(struct uart_omap_port *up)
 
 /* Enable or disable the rs485 support */
 static void
-serial_omap_config_rs485(struct uart_port *port, struct serial_rs485 *rs485conf)
+serial_omap_config_rs485(struct uart_port *port, struct serial_rs485 *rs485)
 {
 	struct uart_omap_port *up = to_uart_omap_port(port);
 	unsigned long flags;
@@ -1380,8 +1380,12 @@ serial_omap_config_rs485(struct uart_port *port, struct serial_rs485 *rs485conf)
 	up->ier = 0;
 	serial_out(up, UART_IER, 0);
 
+	/* Clamp the delays to [0, 100ms] */
+	rs485->delay_rts_before_send = min(rs485->delay_rts_before_send, 100U);
+	rs485->delay_rts_after_send  = min(rs485->delay_rts_after_send, 100U);
+
 	/* store new config */
-	up->rs485 = *rs485conf;
+	up->rs485 = *rs485;
 
 	/*
 	 * Just as a precaution, only allow rs485
