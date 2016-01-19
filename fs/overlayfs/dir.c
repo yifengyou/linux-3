@@ -54,7 +54,7 @@ static int ovl_whiteout(struct dentry *upperdir, struct dentry *dentry)
 
 	ovl_dentry_version_inc(dentry->d_parent);
 
-	err = vfs_setxattr(newdentry, ovl_whiteout_xattr, "y", 1, 0);
+	err = ovl_do_setxattr(newdentry, ovl_whiteout_xattr, "y", 1, 0);
 	if (err)
 		vfs_unlink(upperdir->d_inode, newdentry, NULL);
 
@@ -192,38 +192,12 @@ out:
 
 static int ovl_set_opaque(struct super_block *sb, struct dentry *upperdentry)
 {
-	int err;
-	const struct cred *old_cred;
-	struct cred *override_cred;
-
-	override_cred = ovl_prepare_creds(sb);
-	if (!override_cred)
-		return -ENOMEM;
-
-	old_cred = override_creds(override_cred);
-	err = vfs_setxattr(upperdentry, ovl_opaque_xattr, "y", 1, 0);
-	revert_creds(old_cred);
-	put_cred(override_cred);
-
-	return err;
+	return ovl_do_setxattr(upperdentry, ovl_opaque_xattr, "y", 1, 0);
 }
 
 static int ovl_remove_opaque(struct super_block *sb, struct dentry *upperdentry)
 {
-	int err;
-	const struct cred *old_cred;
-	struct cred *override_cred;
-
-	override_cred = ovl_prepare_creds(sb);
-	if (!override_cred)
-		return -ENOMEM;
-
-	old_cred = override_creds(override_cred);
-	err = vfs_removexattr(upperdentry, ovl_opaque_xattr);
-	revert_creds(old_cred);
-	put_cred(override_cred);
-
-	return err;
+	return ovl_do_removexattr(upperdentry, ovl_opaque_xattr);
 }
 
 static int ovl_dir_getattr(struct vfsmount *mnt, struct dentry *dentry,

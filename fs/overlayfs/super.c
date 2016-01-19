@@ -225,8 +225,10 @@ bool ovl_is_whiteout(struct dentry *dentry)
 		return false;
 	if (!S_ISLNK(dentry->d_inode->i_mode))
 		return false;
+	if (!dentry->d_inode->i_op->getxattr)
+		return false;
 
-	res = vfs_getxattr(dentry, ovl_whiteout_xattr, &val, 1);
+	res = dentry->d_inode->i_op->getxattr(dentry, ovl_whiteout_xattr, &val, 1);
 	if (res == 1 && val == 'y')
 		return true;
 
@@ -237,11 +239,12 @@ static bool ovl_is_opaquedir(struct dentry *dentry)
 {
 	int res;
 	char val;
+	struct inode *inode = dentry->d_inode;
 
-	if (!S_ISDIR(dentry->d_inode->i_mode))
+	if (!S_ISDIR(dentry->d_inode->i_mode) || !inode->i_op->getxattr)
 		return false;
 
-	res = vfs_getxattr(dentry, ovl_opaque_xattr, &val, 1);
+	res = inode->i_op->getxattr(dentry, ovl_opaque_xattr, &val, 1);
 	if (res == 1 && val == 'y')
 		return true;
 

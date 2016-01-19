@@ -42,6 +42,33 @@ struct dentry *ovl_upper_create(struct dentry *upperdir, struct dentry *dentry,
 				struct kstat *stat, const char *link);
 int ovl_dentry_root_may(struct dentry *dentry, struct path *realpath, int mode);
 
+static inline int ovl_do_setxattr(struct dentry *dentry, const char *name,
+				  const void *value, size_t size, int flags)
+{
+	struct inode *inode = dentry->d_inode;
+	int err = -EOPNOTSUPP;
+
+	mutex_lock(&inode->i_mutex);
+	if (inode->i_op->setxattr)
+		err = inode->i_op->setxattr(dentry, name, value, size, flags);
+	mutex_unlock(&inode->i_mutex);
+
+	return err;
+}
+
+static inline int ovl_do_removexattr(struct dentry *dentry, const char *name)
+{
+	struct inode *inode = dentry->d_inode;
+	int err = -EOPNOTSUPP;
+
+	mutex_lock(&inode->i_mutex);
+	if (inode->i_op->removexattr)
+		err = inode->i_op->removexattr(dentry, name);
+	mutex_unlock(&inode->i_mutex);
+
+	return err;
+}
+
 /* readdir.c */
 extern const struct file_operations ovl_dir_operations;
 int ovl_check_empty_and_clear(struct dentry *dentry, enum ovl_path_type type);

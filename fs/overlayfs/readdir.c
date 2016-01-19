@@ -533,7 +533,7 @@ static int ovl_remove_whiteouts(struct dentry *dir, struct list_head *list)
 
 	old_cred = override_creds(override_cred);
 
-	err = vfs_setxattr(upperdir, ovl_opaque_xattr, "y", 1, 0);
+	err = ovl_do_setxattr(upperdir, ovl_opaque_xattr, "y", 1, 0);
 	if (err)
 		goto out_revert_creds;
 
