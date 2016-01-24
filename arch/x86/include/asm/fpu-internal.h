@@ -374,7 +374,7 @@ static inline void drop_fpu(struct task_struct *tsk)
 
 static inline void drop_init_fpu(struct task_struct *tsk)
 {
-	if (!use_eager_fpu())
+	if (!use_eager_fpu() || !static_cpu_has(X86_FEATURE_FPU))
 		drop_fpu(tsk);
 	else {
 		if (use_xsave())
@@ -424,8 +424,9 @@ static inline fpu_switch_t switch_fpu_prepare(struct task_struct *old, struct ta
 	 * If the task has used the math, pre-load the FPU on xsave processors
 	 * or if the past 5 consecutive context-switches used math.
 	 */
-	fpu.preload = tsk_used_math(new) && (use_eager_fpu() ||
-					     new->thread.fpu_counter > 5);
+	fpu.preload = static_cpu_has(X86_FEATURE_FPU) &&
+		      tsk_used_math(new) &&
+		      (use_eager_fpu() || new->thread.fpu_counter > 5);
 	if (__thread_has_fpu(old)) {
 		if (!__save_init_fpu(old))
 			cpu = ~0;

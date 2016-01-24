@@ -695,7 +695,6 @@ do_device_not_available(struct pt_regs *regs, long error_code)
 	enum ctx_state prev_state;
 
 	prev_state = exception_enter();
-	BUG_ON(use_eager_fpu());
 
 #ifdef CONFIG_MATH_EMULATION
 	if (read_cr0() & X86_CR0_EM) {
