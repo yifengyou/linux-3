@@ -206,7 +206,7 @@ snd_seq_oss_open(struct file *file, int level)
 
 	dp->index = i;
 	if (i >= SNDRV_SEQ_OSS_MAX_CLIENTS) {
-		snd_printk(KERN_ERR "too many applications\n");
+		snd_printk(KERN_DEBUG "too many applications\n");
 		rc = -ENOMEM;
 		goto _error;
 	}
