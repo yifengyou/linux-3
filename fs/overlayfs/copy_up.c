@@ -167,14 +167,29 @@ static int ovl_set_timestamps(struct dentry *upperdentry, struct kstat *stat)
 	return notify_change(upperdentry, &attr, NULL);
 }
 
-static int ovl_set_mode(struct dentry *upperdentry, umode_t mode)
+static int ovl_set_attr(struct dentry *upperdentry, struct kstat *stat)
 {
-	struct iattr attr = {
-		.ia_valid = ATTR_MODE,
-		.ia_mode = mode,
-	};
+	int err = 0;
 
-	return notify_change(upperdentry, &attr, NULL);
+	if (!S_ISLNK(stat->mode)) {
+		struct iattr attr = {
+			.ia_valid = ATTR_MODE,
+			.ia_mode = stat->mode,
+		};
+		err = notify_change(upperdentry, &attr, NULL);
+	}
+	if (!err) {
+		struct iattr attr = {
+			.ia_valid = ATTR_UID | ATTR_GID,
+			.ia_uid = stat->uid,
+			.ia_gid = stat->gid,
+		};
+		err = notify_change(upperdentry, &attr, NULL);
+	}
+	if (!err)
+		ovl_set_timestamps(upperdentry, stat);
+
+	return err;
 }
 
 static int ovl_copy_up_locked(struct dentry *upperdir, struct dentry *dentry,
@@ -191,6 +206,7 @@ static int ovl_copy_up_locked(struct dentry *upperdir, struct dentry *dentry,
 	ovl_path_upper(dentry, &newpath);
 	WARN_ON(newpath.dentry);
 	newpath.dentry = ovl_upper_create(upperdir, dentry, stat, link);
+	stat->mode = mode;
 	if (IS_ERR(newpath.dentry))
 		return PTR_ERR(newpath.dentry);
 
@@ -206,9 +222,7 @@ static int ovl_copy_up_locked(struct dentry *upperdir, struct dentry *dentry,
 
 	mutex_lock(&newpath.dentry->d_inode->i_mutex);
 	if (!S_ISLNK(stat->mode))
-		err = ovl_set_mode(newpath.dentry, mode);
-	if (!err)
-		err = ovl_set_timestamps(newpath.dentry, stat);
+		err = ovl_set_attr(newpath.dentry, stat);
 	mutex_unlock(&newpath.dentry->d_inode->i_mutex);
 	if (err)
 		goto err_remove;
@@ -284,12 +298,9 @@ static int ovl_copy_up_one(struct dentry *parent, struct dentry *dentry,
 	}
 
 	err = -ENOMEM;
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(dentry->d_sb);
 	if (!override_cred)
 		goto out_free_link;
-
-	override_cred->fsuid = stat->uid;
-	override_cred->fsgid = stat->gid;
 	old_cred = override_creds(override_cred);
 
 	mutex_lock_nested(&upperdir->d_inode->i_mutex, I_MUTEX_PARENT);

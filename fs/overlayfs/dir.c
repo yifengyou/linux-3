@@ -27,14 +27,14 @@ static int ovl_whiteout(struct dentry *upperdir, struct dentry *dentry)
 	/* FIXME: recheck lower dentry to see if whiteout is really needed */
 
 	err = -ENOMEM;
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(dentry->d_sb);
 	if (!override_cred)
 		goto out;
 
-	override_cred->fsuid = make_kuid(current_user_ns(), 0);
+	override_cred->fsuid = make_kuid(override_cred->user_ns, 0);
 	if (!uid_valid(override_cred->fsuid))
 		override_cred->fsuid = GLOBAL_ROOT_UID;
-	override_cred->fsgid = make_kgid(current_user_ns(), 0);
+	override_cred->fsgid = make_kgid(override_cred->user_ns, 0);
 	if (!gid_valid(override_cred->fsgid))
 		override_cred->fsgid = GLOBAL_ROOT_GID;
 	old_cred = override_creds(override_cred);
@@ -100,7 +100,7 @@ static struct dentry *ovl_lookup_create(struct dentry *upperdir,
 			goto out_dput;
 
 		err = -ENOMEM;
-		override_cred = prepare_kernel_cred(NULL);
+		override_cred = ovl_prepare_creds(template->d_sb);
 		if (!override_cred)
 			goto out_dput;
 
@@ -190,13 +190,13 @@ out:
 
 }
 
-static int ovl_set_opaque(struct dentry *upperdentry)
+static int ovl_set_opaque(struct super_block *sb, struct dentry *upperdentry)
 {
 	int err;
 	const struct cred *old_cred;
 	struct cred *override_cred;
 
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(sb);
 	if (!override_cred)
 		return -ENOMEM;
 
@@ -208,13 +208,13 @@ static int ovl_set_opaque(struct dentry *upperdentry)
 	return err;
 }
 
-static int ovl_remove_opaque(struct dentry *upperdentry)
+static int ovl_remove_opaque(struct super_block *sb, struct dentry *upperdentry)
 {
 	int err;
 	const struct cred *old_cred;
 	struct cred *override_cred;
 
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(sb);
 	if (!override_cred)
 		return -ENOMEM;
 
@@ -283,7 +283,7 @@ static int ovl_create_object(struct dentry *dentry, int mode, dev_t rdev,
 
 	ovl_dentry_version_inc(dentry->d_parent);
 	if (ovl_dentry_is_opaque(dentry) && S_ISDIR(mode)) {
-		err = ovl_set_opaque(newdentry);
+		err = ovl_set_opaque(dentry->d_sb, newdentry);
 		if (err) {
 			vfs_rmdir(upperdir->d_inode, newdentry);
 			ovl_whiteout(upperdir, dentry);
@@ -538,7 +538,7 @@ static int ovl_rename(struct inode *olddir, struct dentry *old,
 	new_opaque = ovl_dentry_is_opaque(new) || new_type != OVL_PATH_UPPER;
 
 	if (is_dir && !old_opaque && new_opaque) {
-		err = ovl_set_opaque(olddentry);
+		err = ovl_set_opaque(old->d_sb, olddentry);
 		if (err)
 			goto out_dput;
 	}
@@ -550,14 +550,14 @@ static int ovl_rename(struct inode *olddir, struct dentry *old,
 		if (new_create && ovl_dentry_is_opaque(new))
 			ovl_whiteout(new_upperdir, new);
 		if (is_dir && !old_opaque && new_opaque)
-			ovl_remove_opaque(olddentry);
+			ovl_remove_opaque(old->d_sb, olddentry);
 		goto out_dput;
 	}
 
 	if (old_type != OVL_PATH_UPPER || old_opaque)
 		err = ovl_whiteout(old_upperdir, old);
 	if (is_dir && old_opaque && !new_opaque)
-		ovl_remove_opaque(olddentry);
+		ovl_remove_opaque(old->d_sb, olddentry);
 
 	if (old_opaque != new_opaque)
 		ovl_dentry_set_opaque(old, new_opaque);

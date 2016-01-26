@@ -30,6 +30,7 @@ struct ovl_cache_entry {
 
 struct ovl_readdir_data {
 	struct dir_context ctx;
+	struct dentry *dentry;
 	bool is_merge;
 	struct rb_root *root;
 	struct list_head *list;
@@ -219,7 +220,7 @@ static int ovl_dir_mark_whiteouts(struct ovl_readdir_data *rdd)
 	const struct cred *old_cred;
 	struct cred *override_cred;
 
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(rdd->dentry->d_sb);
 	if (!override_cred) {
 		ovl_cache_free(rdd->list);
 		return -ENOMEM;
@@ -247,7 +248,8 @@ static int ovl_dir_mark_whiteouts(struct ovl_readdir_data *rdd)
 	return 0;
 }
 
-static inline int ovl_dir_read_merged(struct path *upperpath,
+static inline int ovl_dir_read_merged(struct dentry *dentry,
+				      struct path *upperpath,
 				      struct path *lowerpath,
 				      struct list_head *list)
 {
@@ -256,6 +258,7 @@ static inline int ovl_dir_read_merged(struct path *upperpath,
 	struct list_head middle;
 	struct ovl_readdir_data rdd = {
 		.ctx.actor = ovl_fill_merge,
+		.dentry = dentry,
 		.list = list,
 		.root = &root,
 		.is_merge = false,
@@ -334,7 +337,8 @@ static int ovl_iterate(struct file *file, struct dir_context *ctx)
 			if (res)
 				return res;
 		}
-		res = ovl_dir_read_merged(&upperpath, &lowerpath, &od->cache);
+		res = ovl_dir_read_merged(file->f_path.dentry, &upperpath,
+					  &lowerpath, &od->cache);
 		if (res) {
 			ovl_cache_free(&od->cache);
 			return res;
@@ -488,7 +492,7 @@ static int ovl_check_empty_dir(struct dentry *dentry, struct list_head *list)
 		if (err)
 			return err;
 	}
-	err = ovl_dir_read_merged(&upperpath, &lowerpath, list);
+	err = ovl_dir_read_merged(dentry, &upperpath, &lowerpath, list);
 	if (err)
 		return err;
 
@@ -523,7 +527,7 @@ static int ovl_remove_whiteouts(struct dentry *dir, struct list_head *list)
 	ovl_path_upper(dir, &upperpath);
 	upperdir = upperpath.dentry;
 
-	override_cred = prepare_kernel_cred(NULL);
+	override_cred = ovl_prepare_creds(dir->d_sb);
 	if (!override_cred)
 		return -ENOMEM;
 

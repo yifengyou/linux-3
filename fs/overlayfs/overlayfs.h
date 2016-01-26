@@ -19,6 +19,7 @@ extern const char *ovl_opaque_xattr;
 extern const char *ovl_whiteout_xattr;
 extern const struct dentry_operations ovl_dentry_operations;
 
+struct cred *ovl_prepare_creds(struct super_block *sb);
 enum ovl_path_type ovl_path_type(struct dentry *dentry);
 u64 ovl_dentry_version_get(struct dentry *dentry);
 void ovl_dentry_version_inc(struct dentry *dentry);
