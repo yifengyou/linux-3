@@ -2142,7 +2142,7 @@ static int selinux_bprm_set_creds(struct linux_binprm *bprm)
 	ad.type = LSM_AUDIT_DATA_PATH;
 	ad.u.path = bprm->file->f_path;
 
-	if ((bprm->file->f_path.mnt->mnt_flags & MNT_NOSUID) ||
+	if (path_nosuid(&bprm->file->f_path) ||
 	    (bprm->unsafe & LSM_UNSAFE_NO_NEW_PRIVS))
 		new_tsec->sid = old_tsec->sid;
 

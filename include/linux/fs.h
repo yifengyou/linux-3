@@ -1220,6 +1220,9 @@ struct mm_struct;
 extern struct list_head super_blocks;
 extern spinlock_t sb_lock;
 
+/* sb->s_iflags */
+#define SB_I_NOSUID	0x00000004	/* Ignore suid on this fs */
+
 /* Possible states of 'frozen' field */
 enum {
 	SB_UNFROZEN = 0,		/* FS is unfrozen */
@@ -1257,6 +1260,7 @@ struct super_block {
 	const struct quotactl_ops	*s_qcop;
 	const struct export_operations *s_export_op;
 	unsigned long		s_flags;
+	unsigned long		s_iflags;	/* internal SB_I_* flags */
 	unsigned long		s_magic;
 	struct dentry		*s_root;
 	struct rw_semaphore	s_umount;
@@ -2825,5 +2829,7 @@ static inline bool dir_relax(struct inode *inode)
 	mutex_lock(&inode->i_mutex);
 	return !IS_DEADDIR(inode);
 }
+
+extern bool path_nosuid(const struct path *path);
 
 #endif /* _LINUX_FS_H */
