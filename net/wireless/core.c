@@ -973,6 +973,8 @@ static int cfg80211_netdev_notifier_call(struct notifier_block *nb,
 		break;
 	}
 
+	wireless_nlevent_flush();
+
 	return NOTIFY_DONE;
 }
 
