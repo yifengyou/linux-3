@@ -119,6 +119,7 @@ struct nf_conntrack {
 struct nf_bridge_info {
 	atomic_t		use;
 	unsigned int		mask;
+	__u16			frag_max_size;
 	struct net_device	*physindev;
 	struct net_device	*physoutdev;
 	unsigned long		data[32 / sizeof(unsigned long)];
