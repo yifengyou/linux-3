@@ -1150,6 +1150,8 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE(QUALCOMM_VENDOR_ID, 0x9000)}, /* SIMCom SIM5218 */
 	{ USB_DEVICE_INTERFACE_CLASS(SIERRA_VENDOR_ID, 0x68c0, 0xff),
 	  .driver_info = (kernel_ulong_t)&sierra_mc73xx_blacklist }, /* MC73xx */
+	{ USB_DEVICE(QUALCOMM_VENDOR_ID, 0x9003), /* Quectel UC20 */
+	  .driver_info = (kernel_ulong_t)&net_intf4_blacklist },
 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_6001) },
 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_CMU_300) },
 	{ USB_DEVICE(CMOTECH_VENDOR_ID, CMOTECH_PRODUCT_6003),
