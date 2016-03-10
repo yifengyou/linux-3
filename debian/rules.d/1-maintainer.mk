@@ -106,7 +106,7 @@ printchanges:
 	git log "$$baseCommit"..HEAD | \
 	$(DROOT)/scripts/misc/git-ubuntu-log $(ubuntu_log_opts)
 
-insertchanges: finalchecks
+insertchanges: autoreconstruct finalchecks
 	@perl -w -f $(DROOT)/scripts/misc/insert-changes.pl $(DROOT) $(DEBIAN) 
 
 autoreconstruct:
