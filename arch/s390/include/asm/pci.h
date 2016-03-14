@@ -48,7 +48,7 @@ struct zpci_fmb {
 	atomic64_t allocated_pages;
 	atomic64_t mapped_pages;
 	atomic64_t unmapped_pages;
-} __packed __aligned(16);
+} __packed __aligned(64);
 
 #define ZPCI_MSI_VEC_BITS	11
 #define ZPCI_MSI_VEC_MAX	(1 << ZPCI_MSI_VEC_BITS)
