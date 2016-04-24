@@ -110,7 +110,7 @@ insertchanges: finalchecks
 	@perl -w -f $(DROOT)/scripts/misc/insert-changes.pl $(DROOT) $(DEBIAN) 
 
 autoreconstruct:
-	$(DROOT)/scripts/misc/gen-auto-reconstruct $(release) >$(DEBIAN)/reconstruct
+	$(DROOT)/scripts/misc/gen-auto-reconstruct $(release) $(DEBIAN)/reconstruct $(DROOT)/source/options
 
 finalchecks:
 	$(DROOT)/scripts/misc/final-checks "$(DEBIAN)" "$(prev_fullver)"
