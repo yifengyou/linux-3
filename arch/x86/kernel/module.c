@@ -29,6 +29,7 @@
 #include <linux/gfp.h>
 #include <linux/jump_label.h>
 
+#include <asm/text-patching.h>
 #include <asm/page.h>
 #include <asm/pgtable.h>
 

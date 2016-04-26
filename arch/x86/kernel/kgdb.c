@@ -46,6 +46,7 @@
 #include <linux/uaccess.h>
 #include <linux/memory.h>
 
+#include <asm/text-patching.h>
 #include <asm/debugreg.h>
 #include <asm/apicdef.h>
 #include <asm/apic.h>
