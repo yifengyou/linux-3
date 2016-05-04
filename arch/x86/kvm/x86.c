@@ -7076,6 +7076,9 @@ int kvm_arch_init_vm(struct kvm *kvm, unsigned long type)
 
 	pvclock_update_vm_gtod_copy(kvm);
 
+	if (kvm_x86_ops->vm_init)
+		return kvm_x86_ops->vm_init(kvm);
+
 	return 0;
 }
 
@@ -7136,6 +7139,8 @@ void kvm_arch_destroy_vm(struct kvm *kvm)
 		mem.slot = TSS_PRIVATE_MEMSLOT;
 		kvm_set_memory_region(kvm, &mem);
 	}
+	if (kvm_x86_ops->vm_destroy)
+		kvm_x86_ops->vm_destroy(kvm);
 	kvm_iommu_unmap_guest(kvm);
 	kfree(kvm->arch.vpic);
 	kfree(kvm->arch.vioapic);
