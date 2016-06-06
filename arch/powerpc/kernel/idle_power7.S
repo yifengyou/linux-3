@@ -99,7 +99,8 @@ _GLOBAL(power7_nap)
 	mtspr   SPRN_SRR1, r5
 	rfid
 
-_GLOBAL(power7_enter_nap_mode)
+	.globl	power7_enter_nap_mode
+power7_enter_nap_mode:
 #ifdef CONFIG_KVM_BOOK3S_HV_POSSIBLE
 	/* Tell KVM we're napping */
 	li	r4,KVM_HWTHREAD_IN_NAP
