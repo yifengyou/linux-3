@@ -374,6 +374,19 @@ static bool next_offset_ok(const struct xt_table_info *t, unsigned int newpos)
 	return true;
 }
 
+static bool find_jump_target(const struct xt_table_info *t,
+			     const void *entry0,
+			     const struct arpt_entry *target)
+{
+	struct arpt_entry *iter;
+
+	xt_entry_foreach(iter, entry0, t->size) {
+		 if (iter == target)
+			return true;
+	}
+	return false;
+}
+
 /* Figures out from what hook each rule can be called: returns 0 if
  * there are loops.  Puts hook bitmask in comefrom.
  */
@@ -461,6 +474,10 @@ static int mark_source_chains(const struct xt_table_info *newinfo,
 					/* This a jump; chase it. */
 					duprintf("Jump rule %u -> %u\n",
 						 pos, newpos);
+					e = (struct arpt_entry *)
+						(entry0 + newpos);
+					if (!find_jump_target(newinfo, entry0, e))
+						return 0;
 				} else {
 					/* ... this is a fallthru */
 					newpos = pos + e->next_offset;
