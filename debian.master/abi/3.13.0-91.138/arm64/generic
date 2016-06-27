@@ -5113,8 +5113,10 @@ EXPORT_SYMBOL net/netfilter/x_tables 0x4dd8e689	xt_unregister_target
 EXPORT_SYMBOL net/netfilter/x_tables 0x899c932c	xt_unregister_matches
 EXPORT_SYMBOL net/netfilter/x_tables 0x8d99ef74	xt_register_matches
 EXPORT_SYMBOL net/netfilter/x_tables 0x9bf6e944	xt_find_match
+EXPORT_SYMBOL net/netfilter/x_tables 0xa25fc115	xt_compat_check_entry_offsets
 EXPORT_SYMBOL net/netfilter/x_tables 0xb28f5ef1	xt_free_table_info
 EXPORT_SYMBOL net/netfilter/x_tables 0xd5309877	xt_find_target
+EXPORT_SYMBOL net/netfilter/x_tables 0xd87ae60d	xt_check_entry_offsets
 EXPORT_SYMBOL net/netfilter/x_tables 0xfcada68e	xt_unregister_match
 EXPORT_SYMBOL net/nfc/hci/hci 0x0fdde909	nfc_hci_target_discovered
 EXPORT_SYMBOL net/nfc/hci/hci 0x11c13162	nfc_hci_register_device
@@ -12120,6 +12122,7 @@ EXPORT_SYMBOL_GPL net/netfilter/nfnetlink_log 0xb29aa8e3	nfulnl_log_packet
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x0e83bb32	xt_request_find_target
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x10541f0e	xt_request_find_match
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x161d1417	xt_compat_unlock
+EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x24c8e482	xt_copy_counters_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x29408107	xt_compat_target_to_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x31e902eb	xt_hook_unlink
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x3d9eb75e	xt_compat_match_to_user
@@ -12136,10 +12139,10 @@ EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x9983248f	xt_register_table
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x9a21a6a7	xt_unregister_table
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x9cc85e1e	xt_compat_match_offset
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xab7022de	xt_check_target
-EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xb3b3dede	xt_compat_match_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xc4c1a778	xt_compat_target_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xc878ab0b	xt_table_unlock
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xdaea5300	xt_hook_link
+EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xe0696f25	xt_compat_match_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xe0b4971b	xt_compat_lock
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xec24fd82	xt_compat_add_offset
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xfd48e3c6	xt_proto_init

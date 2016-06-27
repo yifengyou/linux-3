@@ -3393,11 +3393,13 @@ EXPORT_SYMBOL net/netfilter/x_tables 0x2fd4c3ed	xt_unregister_targets
 EXPORT_SYMBOL net/netfilter/x_tables 0x3fd6bc5c	xt_unregister_target
 EXPORT_SYMBOL net/netfilter/x_tables 0x6b07db15	xt_unregister_match
 EXPORT_SYMBOL net/netfilter/x_tables 0x8e1fd66a	xt_register_matches
+EXPORT_SYMBOL net/netfilter/x_tables 0xa25fc115	xt_compat_check_entry_offsets
 EXPORT_SYMBOL net/netfilter/x_tables 0xb22ffcfa	xt_find_target
 EXPORT_SYMBOL net/netfilter/x_tables 0xb28f5ef1	xt_free_table_info
 EXPORT_SYMBOL net/netfilter/x_tables 0xb9858544	xt_register_targets
 EXPORT_SYMBOL net/netfilter/x_tables 0xba2a92e3	xt_find_match
 EXPORT_SYMBOL net/netfilter/x_tables 0xd6f1f120	xt_unregister_matches
+EXPORT_SYMBOL net/netfilter/x_tables 0xd87ae60d	xt_check_entry_offsets
 EXPORT_SYMBOL net/nfc/hci/hci 0x08606721	nfc_hci_send_cmd
 EXPORT_SYMBOL net/nfc/hci/hci 0x148f4a90	nfc_hci_disconnect_gate
 EXPORT_SYMBOL net/nfc/hci/hci 0x149d9159	nfc_hci_unregister_device
@@ -10328,6 +10330,7 @@ EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x0eb12b9e	xt_compat_match_offset
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x13734072	xt_replace_table
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x161d1417	xt_compat_unlock
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x2140c664	xt_check_target
+EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x24c8e482	xt_copy_counters_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x27600ad5	xt_compat_target_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x3169adeb	xt_table_unlock
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x40728a63	xt_find_revision
@@ -10341,9 +10344,9 @@ EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x691a6d69	xt_compat_calc_jump
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x6cd9e16d	xt_proto_fini
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x79f20a39	xt_check_match
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x807d2b2c	xt_recseq
-EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x899efd95	xt_compat_match_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0x914d7065	xt_register_table
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xa43ed03c	xt_hook_unlink
+EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xaafcdc6a	xt_compat_match_from_user
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xb03af895	xt_unregister_table
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xb53d16a0	xt_hook_link
 EXPORT_SYMBOL_GPL net/netfilter/x_tables 0xc7eeafaa	xt_request_find_match
