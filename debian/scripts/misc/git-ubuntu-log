@@ -194,7 +194,7 @@ sub changelog_input {
 						$bugz{$k} = 1 if (($k ne '') and ($k =~ /[0-9]+/));
 					}
 				}
-				elsif (/^ *BugLink: *.*launchpad\.net\/.*\/([0-9]+)/i) {
+				elsif (/^ *BugLink: *http.*:\/\/.*\/([0-9]+)/i) {
 					$bugz{$1} = 1;
 				}
 				elsif (/^ *(CVE-.*)/) {
