@@ -807,7 +807,6 @@ eeprom
 eeprom_93cx6
 eeprom_93xx46
 eeti_ts
-efi-pstore
 efs
 egalax_ts
 ehci-platform

@@ -5969,6 +5969,7 @@ EXPORT_SYMBOL vmlinux 0x00801678	flush_scheduled_work
 EXPORT_SYMBOL vmlinux 0x00826636	dev_get_drvdata
 EXPORT_SYMBOL vmlinux 0x009057a2	__elv_add_request
 EXPORT_SYMBOL vmlinux 0x0096486a	mdiobus_write
+EXPORT_SYMBOL vmlinux 0x00abda07	migrate_page
 EXPORT_SYMBOL vmlinux 0x00bf9f91	efi
 EXPORT_SYMBOL vmlinux 0x00c0f654	default_llseek
 EXPORT_SYMBOL vmlinux 0x00c52430	ida_simple_get
@@ -6281,6 +6282,7 @@ EXPORT_SYMBOL vmlinux 0x12b2c51d	i2c_smbus_write_i2c_block_data
 EXPORT_SYMBOL vmlinux 0x12d45460	__xfrm_policy_check
 EXPORT_SYMBOL vmlinux 0x12da5bb2	__kmalloc
 EXPORT_SYMBOL vmlinux 0x12dc8dbb	dev_mc_del_global
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x131c5f6e	filemap_write_and_wait
 EXPORT_SYMBOL vmlinux 0x132174e0	gen10g_config_aneg
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
@@ -7214,6 +7216,7 @@ EXPORT_SYMBOL vmlinux 0x4acd93d3	release_resource
 EXPORT_SYMBOL vmlinux 0x4af67b66	arp_tbl
 EXPORT_SYMBOL vmlinux 0x4afe9a77	scsi_partsize
 EXPORT_SYMBOL vmlinux 0x4b085dbf	agp3_generic_configure
+EXPORT_SYMBOL vmlinux 0x4b137725	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0x4b1baf68	acpi_unlock_ac_dir
 EXPORT_SYMBOL vmlinux 0x4b1c6b9d	mmc_stop_bkops
 EXPORT_SYMBOL vmlinux 0x4b1ec3e2	kstrtoul_from_user
@@ -7560,7 +7563,6 @@ EXPORT_SYMBOL vmlinux 0x60352082	register_inet6addr_notifier
 EXPORT_SYMBOL vmlinux 0x6048b96e	i8042_check_port_owner
 EXPORT_SYMBOL vmlinux 0x604bd9f7	input_set_keycode
 EXPORT_SYMBOL vmlinux 0x606d0b09	secure_tcpv6_sequence_number
-EXPORT_SYMBOL vmlinux 0x606ddfcb	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0x607ff749	pnp_request_card_device
 EXPORT_SYMBOL vmlinux 0x60825933	i2c_smbus_write_byte_data
 EXPORT_SYMBOL vmlinux 0x6091a43d	generic_file_llseek_size
@@ -7618,6 +7620,7 @@ EXPORT_SYMBOL vmlinux 0x62b2bebc	copy_strings_kernel
 EXPORT_SYMBOL vmlinux 0x62c31249	sock_init_data
 EXPORT_SYMBOL vmlinux 0x62cb4cee	interruptible_sleep_on
 EXPORT_SYMBOL vmlinux 0x62da03d8	agp_bridge
+EXPORT_SYMBOL vmlinux 0x62fa57d6	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0x62fc128d	tty_throttle
 EXPORT_SYMBOL vmlinux 0x63187451	pcie_aspm_support_enabled
 EXPORT_SYMBOL vmlinux 0x63192d41	elv_unregister_queue
@@ -9163,7 +9166,6 @@ EXPORT_SYMBOL vmlinux 0xc18391c0	pcie_capability_read_word
 EXPORT_SYMBOL vmlinux 0xc186f617	from_kgid
 EXPORT_SYMBOL vmlinux 0xc191cd47	pci_dev_driver
 EXPORT_SYMBOL vmlinux 0xc1a4025a	blk_delay_queue
-EXPORT_SYMBOL vmlinux 0xc1b31d1d	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0xc1b82d22	register_shrinker
 EXPORT_SYMBOL vmlinux 0xc1c250ca	phy_attach
 EXPORT_SYMBOL vmlinux 0xc1c2dd09	__hw_addr_flush
@@ -9231,7 +9233,6 @@ EXPORT_SYMBOL vmlinux 0xc59bc43f	tcp_shutdown
 EXPORT_SYMBOL vmlinux 0xc5d9c46c	agp_try_unsupported_boot
 EXPORT_SYMBOL vmlinux 0xc5fdef94	call_usermodehelper
 EXPORT_SYMBOL vmlinux 0xc6028381	tcp_sendpage
-EXPORT_SYMBOL vmlinux 0xc612ee87	migrate_page
 EXPORT_SYMBOL vmlinux 0xc6285db5	task_tgid_nr_ns
 EXPORT_SYMBOL vmlinux 0xc631580a	console_unlock
 EXPORT_SYMBOL vmlinux 0xc63cc125	prepare_to_wait_exclusive

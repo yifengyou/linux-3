@@ -5962,6 +5962,7 @@ EXPORT_SYMBOL vmlinux 0x0acb1a3c	__bitmap_shift_right
 EXPORT_SYMBOL vmlinux 0x0acbe84b	done_path_create
 EXPORT_SYMBOL vmlinux 0x0acf7679	dma_issue_pending_all
 EXPORT_SYMBOL vmlinux 0x0ad0b9a7	new_inode
+EXPORT_SYMBOL vmlinux 0x0ae370bb	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0x0afc4f59	qman_enqueue_orp
 EXPORT_SYMBOL vmlinux 0x0b0d888b	icmpv6_err_convert
 EXPORT_SYMBOL vmlinux 0x0b0fcda0	dcbnl_cee_notify
@@ -6064,6 +6065,7 @@ EXPORT_SYMBOL vmlinux 0x12d6c748	mb_cache_entry_alloc
 EXPORT_SYMBOL vmlinux 0x12dfeb12	vprintk_emit
 EXPORT_SYMBOL vmlinux 0x12fd52f0	truncate_inode_pages
 EXPORT_SYMBOL vmlinux 0x13092c40	phy_print_status
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x1321744d	of_find_i2c_adapter_by_node
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x133c221a	uart_add_one_port
@@ -7501,7 +7503,6 @@ EXPORT_SYMBOL vmlinux 0x6b14e1e8	agp_enable
 EXPORT_SYMBOL vmlinux 0x6b188d8b	input_mt_destroy_slots
 EXPORT_SYMBOL vmlinux 0x6b1b67d3	__bdevname
 EXPORT_SYMBOL vmlinux 0x6b2dc060	dump_stack
-EXPORT_SYMBOL vmlinux 0x6b4e7c1c	migrate_page
 EXPORT_SYMBOL vmlinux 0x6b5dfe73	__debugger_bpt
 EXPORT_SYMBOL vmlinux 0x6b640864	nla_strlcpy
 EXPORT_SYMBOL vmlinux 0x6b7f1917	idr_find_slowpath
@@ -8010,7 +8011,6 @@ EXPORT_SYMBOL vmlinux 0x8a1615c8	fb_set_cmap
 EXPORT_SYMBOL vmlinux 0x8a1ab4ee	timeval_to_jiffies
 EXPORT_SYMBOL vmlinux 0x8a2fb922	kobject_init
 EXPORT_SYMBOL vmlinux 0x8a3fe340	audit_log
-EXPORT_SYMBOL vmlinux 0x8a471f36	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0x8a490c90	rfkill_set_sw_state
 EXPORT_SYMBOL vmlinux 0x8a51d565	quota_send_warning
 EXPORT_SYMBOL vmlinux 0x8a5493bb	qman_recovery_cleanup_fq
@@ -8025,6 +8025,7 @@ EXPORT_SYMBOL vmlinux 0x8a876f54	ida_init
 EXPORT_SYMBOL vmlinux 0x8a8a621d	of_phy_attach
 EXPORT_SYMBOL vmlinux 0x8a99339d	__skb_recv_datagram
 EXPORT_SYMBOL vmlinux 0x8a99a016	mempool_free_slab
+EXPORT_SYMBOL vmlinux 0x8a9fc631	migrate_page
 EXPORT_SYMBOL vmlinux 0x8ab27f0e	scsi_unregister
 EXPORT_SYMBOL vmlinux 0x8ac8251a	scsi_free_command
 EXPORT_SYMBOL vmlinux 0x8ad8a148	mmc_can_sanitize
@@ -8321,7 +8322,6 @@ EXPORT_SYMBOL vmlinux 0x9c491f60	sg_alloc_table
 EXPORT_SYMBOL vmlinux 0x9c4def48	pme_fd_cmd_scan
 EXPORT_SYMBOL vmlinux 0x9c595c35	blk_end_request
 EXPORT_SYMBOL vmlinux 0x9c844d58	md_wakeup_thread
-EXPORT_SYMBOL vmlinux 0x9c9b91e5	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0x9ca4b223	tcp_proto_cgroup
 EXPORT_SYMBOL vmlinux 0x9cab34a6	rfkill_set_led_trigger_name
 EXPORT_SYMBOL vmlinux 0x9cac1d8f	elv_rq_merge_ok
@@ -9446,6 +9446,7 @@ EXPORT_SYMBOL vmlinux 0xe3bce086	scsi_is_host_device
 EXPORT_SYMBOL vmlinux 0xe3d38063	blk_peek_request
 EXPORT_SYMBOL vmlinux 0xe3d6f284	fb_find_mode_cvt
 EXPORT_SYMBOL vmlinux 0xe453d3d0	__blk_end_request_cur
+EXPORT_SYMBOL vmlinux 0xe47a5461	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0xe484e35f	ioread32
 EXPORT_SYMBOL vmlinux 0xe49808b4	qman_poll
 EXPORT_SYMBOL vmlinux 0xe4a895fa	up_write

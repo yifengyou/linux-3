@@ -3870,6 +3870,7 @@ EXPORT_SYMBOL vmlinux 0x12dfeb12	vprintk_emit
 EXPORT_SYMBOL vmlinux 0x12e5ef0c	rtas_set_power_level
 EXPORT_SYMBOL vmlinux 0x130e4055	inet_frags_exit_net
 EXPORT_SYMBOL vmlinux 0x13120940	ipv6_setsockopt
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x1334d20e	deactivate_super
 EXPORT_SYMBOL vmlinux 0x133e77bc	__starget_for_each_device
@@ -4124,7 +4125,6 @@ EXPORT_SYMBOL vmlinux 0x235d0e14	__scm_destroy
 EXPORT_SYMBOL vmlinux 0x235e90f3	__wake_up_bit
 EXPORT_SYMBOL vmlinux 0x23a574fd	security_secmark_relabel_packet
 EXPORT_SYMBOL vmlinux 0x23b9d6e2	mangle_path
-EXPORT_SYMBOL vmlinux 0x23c09373	migrate_page
 EXPORT_SYMBOL vmlinux 0x23c8f257	slhc_uncompress
 EXPORT_SYMBOL vmlinux 0x23c9891c	kstrtoint_from_user
 EXPORT_SYMBOL vmlinux 0x23f2243d	mempool_free
@@ -4335,7 +4335,6 @@ EXPORT_SYMBOL vmlinux 0x30226ddf	agp_device_command
 EXPORT_SYMBOL vmlinux 0x303b2e43	scsi_prep_fn
 EXPORT_SYMBOL vmlinux 0x30446da9	send_sig
 EXPORT_SYMBOL vmlinux 0x304f3430	blk_rq_count_integrity_sg
-EXPORT_SYMBOL vmlinux 0x3073e2c8	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0x307c2fd0	generic_check_addressable
 EXPORT_SYMBOL vmlinux 0x30905a6a	__page_cache_alloc
 EXPORT_SYMBOL vmlinux 0x309cf57c	dqput
@@ -4872,6 +4871,7 @@ EXPORT_SYMBOL vmlinux 0x519b0da3	finish_wait
 EXPORT_SYMBOL vmlinux 0x519e9a5a	unregister_key_type
 EXPORT_SYMBOL vmlinux 0x51ace0c4	scsi_prep_return
 EXPORT_SYMBOL vmlinux 0x51b33b75	jbd2_journal_forget
+EXPORT_SYMBOL vmlinux 0x51bd7faa	fail_migrate_page
 EXPORT_SYMBOL vmlinux 0x51bed8dc	con_is_bound
 EXPORT_SYMBOL vmlinux 0x51c18978	kernel_sendmsg
 EXPORT_SYMBOL vmlinux 0x51c85f82	compat_sock_common_setsockopt
@@ -5597,6 +5597,7 @@ EXPORT_SYMBOL vmlinux 0x7dc97879	rtas_get_error_log_max
 EXPORT_SYMBOL vmlinux 0x7dd05752	datagram_poll
 EXPORT_SYMBOL vmlinux 0x7de3f705	udp_lib_get_port
 EXPORT_SYMBOL vmlinux 0x7de4c6ff	get_write_access
+EXPORT_SYMBOL vmlinux 0x7de88df4	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0x7de9785e	blk_mq_alloc_single_hw_queue
 EXPORT_SYMBOL vmlinux 0x7debed40	skb_dequeue_tail
 EXPORT_SYMBOL vmlinux 0x7deff673	dm_consume_args
@@ -5770,6 +5771,7 @@ EXPORT_SYMBOL vmlinux 0x89cea762	blk_rq_map_kern
 EXPORT_SYMBOL vmlinux 0x89d5538d	fb_pad_aligned_buffer
 EXPORT_SYMBOL vmlinux 0x89d923b3	inet_ioctl
 EXPORT_SYMBOL vmlinux 0x89f51f1c	tcp_gso_segment
+EXPORT_SYMBOL vmlinux 0x8a009693	migrate_page
 EXPORT_SYMBOL vmlinux 0x8a08e708	ipv6_dev_get_saddr
 EXPORT_SYMBOL vmlinux 0x8a0b6dc4	seq_open
 EXPORT_SYMBOL vmlinux 0x8a1ab4ee	timeval_to_jiffies
@@ -6281,7 +6283,6 @@ EXPORT_SYMBOL vmlinux 0xa987a7c1	netdev_lower_get_next_private
 EXPORT_SYMBOL vmlinux 0xa9a46cd7	ip6_xmit
 EXPORT_SYMBOL vmlinux 0xa9b29859	blk_queue_end_tag
 EXPORT_SYMBOL vmlinux 0xa9b63345	of_parse_phandle_with_fixed_args
-EXPORT_SYMBOL vmlinux 0xa9bb0c36	buffer_migrate_page
 EXPORT_SYMBOL vmlinux 0xa9ca5069	blkdev_get
 EXPORT_SYMBOL vmlinux 0xa9ca776c	mod_zone_page_state
 EXPORT_SYMBOL vmlinux 0xa9e6a74c	security_inode_readlink
