@@ -101,9 +101,7 @@ struct page *balloon_page_dequeue(struct balloon_dev_info *b_dev_info)
 				continue;
 			}
 #endif
-			spin_lock_irqsave(&b_dev_info->pages_lock, flags);
 			balloon_page_delete(page);
-			spin_unlock_irqrestore(&b_dev_info->pages_lock, flags);
 			unlock_page(page);
 			dequeued_page = true;
 			break;
