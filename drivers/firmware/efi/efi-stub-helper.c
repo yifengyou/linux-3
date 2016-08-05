@@ -140,11 +140,11 @@ again:
 		start = desc->phys_addr;
 		end = start + desc->num_pages * (1UL << EFI_PAGE_SHIFT);
 
-		if (end > max)
-			end = max;
-
-		if ((start + size) > end)
+		if ((start + size) > end || (start + size) > max)
 			continue;
+
+		if (end - size > max)
+			end = max;
 
 		if (round_down(end - size, align) < start)
 			continue;
