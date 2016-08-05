@@ -5,7 +5,6 @@
 
 #include <linux/pci.h>
 #include <linux/init.h>
-#include <linux/screen_info.h>
 
 #include <asm/machvec.h>
 
