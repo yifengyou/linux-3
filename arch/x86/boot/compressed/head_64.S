@@ -207,55 +207,26 @@ ENTRY(startup_64)
 	jmp	preferred_addr
 
 ENTRY(efi_pe_entry)
-	movq	%rcx, efi64_config(%rip)	/* Handle */
-	movq	%rdx, efi64_config+8(%rip) /* EFI System table pointer */
-
-	leaq	efi64_config(%rip), %rax
-	movq	%rax, efi_config(%rip)
-
-	call	1f
-1:	popq	%rbp
-	subq	$1b, %rbp
-
-	/*
-	 * Relocate efi_config->call().
-	 */
-	addq	%rbp, efi64_config+88(%rip)
-
-	movq	%rax, %rdi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	pushq	%rdi
+	pushq	%rsi
 	call	make_boot_params
 	cmpq	$0,%rax
-	je	fail
-	mov	%rax, %rsi
-	jmp	2f		/* Skip the relocation */
+	je	1f
+	mov	%rax, %rdx
+	popq	%rsi
+	popq	%rdi
 
 ENTRY(efi_stub_entry)
-	movq	%rdi, efi64_config(%rip)	/* Handle */
-	movq	%rsi, efi64_config+8(%rip) /* EFI System table pointer */
-
-	leaq	efi64_config(%rip), %rax
-	movq	%rax, efi_config(%rip)
-
-	call	1f
-1:	popq	%rbp
-	subq	$1b, %rbp
-
-	/*
-	 * Relocate efi_config->call().
-	 */
-	movq	efi_config(%rip), %rax
-	addq	%rbp, 88(%rax)
-	movq	%rdx, %rsi
-2:
-	movq	efi_config(%rip), %rdi
 	call	efi_main
 	movq	%rax,%rsi
 	cmpq	$0,%rax
 	jne	2f
-fail:
+1:
 	/* EFI init failed, so hang. */
 	hlt
-	jmp	fail
+	jmp	1b
 2:
 	call	3f
 3:
@@ -397,14 +368,6 @@ gdt:
 	.quad   0x0000000000000000	/* TS continued */
 gdt_end:
 
-efi_config:
-	.quad	0
-
-	.global efi64_config
-efi64_config:
-	.fill	11,8,0
-	.quad	efi_call6
-	.byte	1
 /*
  * Stack and heap for uncompression
  */
