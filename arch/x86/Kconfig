@@ -1626,8 +1626,7 @@ config EFI_STUB
 	  See Documentation/efi-stub.txt for more information.
 
 config EFI_SECURE_BOOT_SIG_ENFORCE
-	def_bool n
-	depends on EFI
+        def_bool n
 	prompt "Force module signing when UEFI Secure Boot is enabled"
 	---help---
 	  UEFI Secure Boot provides a mechanism for ensuring that the
