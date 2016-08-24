@@ -1106,7 +1106,9 @@ static void storvsc_command_completion(struct storvsc_cmd_request *cmd_request)
 
 	if (scmnd->result) {
 		if (scsi_normalize_sense(scmnd->sense_buffer,
-				SCSI_SENSE_BUFFERSIZE, &sense_hdr))
+				SCSI_SENSE_BUFFERSIZE, &sense_hdr) &&
+		    !(sense_hdr.sense_key == NOT_READY &&
+				 sense_hdr.asc == 0x03A))
 			scsi_print_sense_hdr("storvsc", &sense_hdr);
 	}
 
