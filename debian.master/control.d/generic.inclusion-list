@@ -57,6 +57,7 @@ drivers/net/eql.ko
 drivers/net/ifb.ko
 drivers/net/ethernet/intel/igbvf/igbvf.ko
 drivers/net/ethernet/intel/ixgbevf/ixgbevf.ko
+drivers/net/ethernet/amazon/ena/ena.ko
 drivers/net/macvlan.ko
 drivers/net/macvtap.ko
 drivers/net/ethernet/8390/ne2k-pci.ko
