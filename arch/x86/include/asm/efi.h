@@ -2,6 +2,7 @@
 #define _ASM_X86_EFI_H
 
 #include <asm/i387.h>
+
 /*
  * We map the EFI regions needed for runtime services non-contiguously,
  * with preserved alignment on virtual addresses starting from -4G down
@@ -68,9 +69,7 @@ extern u64 asmlinkage efi_call(void *fp, ...);
 									\
 	efi_sync_low_kernel_mappings();					\
 	preempt_disable();						\
-	__kernel_fpu_begin();						\
 	__s = efi_call((void *)efi.systab->runtime->f, __VA_ARGS__);	\
-	__kernel_fpu_end();						\
 	preempt_enable();						\
 	__s;								\
 })
