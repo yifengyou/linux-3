@@ -270,7 +270,7 @@ static struct sk_buff **ipv6_gro_receive(struct sk_buff **head,
 	csum = skb->csum;
 	skb_postpull_rcsum(skb, iph, skb_network_header_len(skb));
 
-	pp = ops->callbacks.gro_receive(head, skb);
+	pp = call_gro_receive(ops->callbacks.gro_receive, head, skb);
 
 	skb->csum = csum;
 
