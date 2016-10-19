@@ -380,20 +380,19 @@ int aa_bind_mount(struct aa_label *label, struct path *path,
 
 	flags &= MS_REC | MS_BIND;
 
+	error = kern_path(dev_name, LOOKUP_FOLLOW|LOOKUP_AUTOMOUNT, &old_path);
+	if (error)
+		return error;
+
 	get_buffers(buffer, old_buffer);
 	error = aa_path_name(path, path_flags(labels_profile(label), path), buffer, &name,
 			     &info);
 	if (error)
 		goto error;
 
-	error = kern_path(dev_name, LOOKUP_FOLLOW|LOOKUP_AUTOMOUNT, &old_path);
-	if (error)
-		goto error;
-
 	error = aa_path_name(&old_path, path_flags(labels_profile(label),
 						   &old_path),
 			     old_buffer, &old_name, &info);
-	path_put(&old_path);
 	if (error)
 		goto error;
 
@@ -403,6 +402,7 @@ int aa_bind_mount(struct aa_label *label, struct path *path,
 
 out:
 	put_buffers(buffer, old_buffer);
+	path_put(&old_path);
 
 	return error;
 
@@ -460,20 +460,19 @@ int aa_move_mount(struct aa_label *label, struct path *path,
 	if (!orig_name || !*orig_name)
 		return -EINVAL;
 
+	error = kern_path(orig_name, LOOKUP_FOLLOW, &old_path);
+	if (error)
+		return error;
+
 	get_buffers(buffer, old_buffer);
 	error = aa_path_name(path, path_flags(labels_profile(label), path),
 			     buffer, &name, &info);
 	if (error)
 		goto error;
 
-	error = kern_path(orig_name, LOOKUP_FOLLOW, &old_path);
-	if (error)
-		goto error;
-
 	error = aa_path_name(&old_path, path_flags(labels_profile(label),
 						   &old_path),
 			     old_buffer, &old_name, &info);
-	path_put(&old_path);
 	if (error)
 		goto error;
 
@@ -483,6 +482,7 @@ int aa_move_mount(struct aa_label *label, struct path *path,
 
 out:
 	put_buffers(buffer, old_buffer);
+	path_put(&old_path);
 
 	return error;
 
@@ -503,11 +503,11 @@ int aa_new_mount(struct aa_label *label, const char *orig_dev_name,
 	const char *name = NULL, *dev_name = NULL, *info = NULL;
 	bool binary = true;
 	int error;
+	int requires_dev = 0;
+	struct path dev_path;
 
 	dev_name = orig_dev_name;
-	get_buffers(buffer, dev_buffer);
 	if (type) {
-		int requires_dev;
 		struct file_system_type *fstype = get_fs_type(type);
 		if (!fstype)
 			return -ENODEV;
@@ -527,15 +527,16 @@ int aa_new_mount(struct aa_label *label, const char *orig_dev_name,
 			error = kern_path(dev_name, LOOKUP_FOLLOW, &dev_path);
 			if (error)
 				goto error;
-
-			error = aa_path_name(&dev_path,
-					     path_flags(labels_profile(label),
-							&dev_path),
-					     dev_buffer, &dev_name, &info);
-			path_put(&dev_path);
-			if (error)
-				goto error;
 		}
+	}
+	get_buffers(buffer, dev_buffer);
+	if (requires_dev) {
+		error = aa_path_name(&dev_path,
+				     path_flags(labels_profile(label),
+						&dev_path),
+				     dev_buffer, &dev_name, &info);
+		if (error)
+			goto error;
 	}
 
 	error = aa_path_name(path, path_flags(labels_profile(label), path),
@@ -549,6 +550,8 @@ int aa_new_mount(struct aa_label *label, const char *orig_dev_name,
 
 cleanup:
 	put_buffers(buffer, dev_buffer);
+	if (requires_dev)
+		path_put(&dev_path);
 
 out:
 	return error;
