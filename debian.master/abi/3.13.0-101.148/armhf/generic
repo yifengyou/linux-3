@@ -5890,6 +5890,7 @@ EXPORT_SYMBOL vmlinux 0x12cda90a	dev_alloc_name
 EXPORT_SYMBOL vmlinux 0x12da5bb2	__kmalloc
 EXPORT_SYMBOL vmlinux 0x12f76893	clear_inode
 EXPORT_SYMBOL vmlinux 0x130b52e8	blk_mq_end_io
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x131f43fa	twl6030_mmc_card_detect
 EXPORT_SYMBOL vmlinux 0x13219d10	vfs_statfs
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf

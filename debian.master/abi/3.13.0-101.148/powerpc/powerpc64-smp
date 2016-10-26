@@ -6103,6 +6103,7 @@ EXPORT_SYMBOL vmlinux 0x12dfeb12	vprintk_emit
 EXPORT_SYMBOL vmlinux 0x12e5ef0c	rtas_set_power_level
 EXPORT_SYMBOL vmlinux 0x12f2b3b7	tcp_md5_do_del
 EXPORT_SYMBOL vmlinux 0x13123456	single_release
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x133e29ed	proc_remove
 EXPORT_SYMBOL vmlinux 0x134709a3	no_llseek

@@ -6078,6 +6078,7 @@ EXPORT_SYMBOL vmlinux 0x12d76f5e	sock_common_setsockopt
 EXPORT_SYMBOL vmlinux 0x12dfeb12	vprintk_emit
 EXPORT_SYMBOL vmlinux 0x12fd52f0	truncate_inode_pages
 EXPORT_SYMBOL vmlinux 0x13092c40	phy_print_status
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x131f67eb	fib_default_rule_add
 EXPORT_SYMBOL vmlinux 0x1321744d	of_find_i2c_adapter_by_node
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf

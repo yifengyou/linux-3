@@ -4515,6 +4515,7 @@ EXPORT_SYMBOL vmlinux 0x12de2206	kmem_cache_create
 EXPORT_SYMBOL vmlinux 0x12e03d1d	cdev_add
 EXPORT_SYMBOL vmlinux 0x12eb8bdd	jbd2_journal_invalidatepage
 EXPORT_SYMBOL vmlinux 0x130039d4	init_special_inode
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x1348760d	ipmi_request_settime
 EXPORT_SYMBOL vmlinux 0x1362e2f8	sock_no_sendpage

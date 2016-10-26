@@ -3861,6 +3861,7 @@ EXPORT_SYMBOL vmlinux 0x12c8381b	scsi_command_normalize_sense
 EXPORT_SYMBOL vmlinux 0x12d90bec	gnet_stats_finish_copy
 EXPORT_SYMBOL vmlinux 0x12dfeb12	vprintk_emit
 EXPORT_SYMBOL vmlinux 0x12e5ef0c	rtas_set_power_level
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x132515be	xfrm_state_alloc
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x1334d20e	deactivate_super

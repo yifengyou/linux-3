@@ -6094,6 +6094,7 @@ EXPORT_SYMBOL vmlinux 0x12ebfb17	eth_header_cache_update
 EXPORT_SYMBOL vmlinux 0x12f35d17	call_usermodehelper_setup
 EXPORT_SYMBOL vmlinux 0x13166e6e	twl6030_mmc_card_detect
 EXPORT_SYMBOL vmlinux 0x1316d0a4	mdio_bus_type
+EXPORT_SYMBOL vmlinux 0x1319449d	secure_modules
 EXPORT_SYMBOL vmlinux 0x13211fd5	pcie_get_mps
 EXPORT_SYMBOL vmlinux 0x13307fde	vsscanf
 EXPORT_SYMBOL vmlinux 0x1348760d	ipmi_request_settime
