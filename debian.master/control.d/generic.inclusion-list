@@ -12,6 +12,7 @@ drivers/block/nbd.ko
 drivers/block/floppy.ko
 drivers/block/cryptoloop.ko
 drivers/block/rbd.ko
+drivers/block/nvme.ko
 drivers/char/hangcheck-timer.ko
 drivers/char/hw_random/virtio-rng.ko
 drivers/char/ipmi/ipmi_msghandler.ko
