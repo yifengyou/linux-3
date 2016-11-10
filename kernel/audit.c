@@ -729,6 +729,16 @@ static int audit_set_feature(struct sk_buff *skb)
 	return 0;
 }
 
+static int audit_replace(pid_t pid)
+{
+	struct sk_buff *skb = audit_make_reply(0, 0, AUDIT_REPLACE, 0, 0,
+					       &pid, sizeof(pid));
+
+	if (!skb)
+		return -ENOMEM;
+	return netlink_unicast(audit_sock, skb, audit_nlk_portid, 0);
+}
+
 static int audit_receive_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 {
 	u32			seq;
@@ -787,7 +797,13 @@ static int audit_receive_msg(struct sk_buff *skb, struct nlmsghdr *nlh)
 		}
 		if (status_get->mask & AUDIT_STATUS_PID) {
 			int new_pid = status_get->pid;
+			pid_t requesting_pid = task_tgid_vnr(current);
 
+			if ((!new_pid) && (requesting_pid != audit_pid))
+				return -EACCES;
+			if (audit_pid && new_pid &&
+			    audit_replace(requesting_pid) != -ECONNREFUSED)
+				return -EEXIST;
 			if (audit_enabled != AUDIT_OFF)
 				audit_log_config_change("audit_pid", new_pid, audit_pid, 1);
 			audit_pid = new_pid;
