@@ -517,8 +517,6 @@ int aa_new_mount(struct aa_label *label, const char *orig_dev_name,
 		put_filesystem(fstype);
 
 		if (requires_dev) {
-			struct path dev_path;
-
 			if (!dev_name || !*dev_name) {
 				error = -ENOENT;
 				goto out;
