@@ -143,6 +143,19 @@ static unsigned nvme_queue_extra(int depth)
 	return DIV_ROUND_UP(depth, 8) + (depth * sizeof(struct nvme_cmd_info));
 }
 
+#define nvme_show_function(field)						\
+static ssize_t  field##_show(struct device *dev,				\
+			     struct device_attribute *attr, char *buf)		\
+{										\
+	struct nvme_dev *ndev = pci_get_drvdata(to_pci_dev(dev));		\
+	return sprintf(buf, "%.*s\n", (int)sizeof(ndev->field),	ndev->field);	\
+}										\
+static DEVICE_ATTR(field, S_IRUGO, field##_show, NULL);
+
+nvme_show_function(model);
+nvme_show_function(serial);
+nvme_show_function(firmware_rev);
+
 /**
  * alloc_cmdid() - Allocate a Command ID
  * @nvmeq: The queue that will be used for this command
@@ -2573,9 +2586,22 @@ static int nvme_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	if (result)
 		goto remove;
 
+	if (device_create_file(&pdev->dev, &dev_attr_model))
+		goto deregister;
+	if (device_create_file(&pdev->dev, &dev_attr_serial))
+		goto remove_model;
+	if (device_create_file(&pdev->dev, &dev_attr_firmware_rev))
+		goto remove_serial;
+
 	dev->initialized = 1;
 	return 0;
 
+ remove_serial:
+	device_remove_file(&pdev->dev, &dev_attr_serial);
+ remove_model:
+	device_remove_file(&pdev->dev, &dev_attr_model);
+ deregister:
+	misc_deregister(&dev->miscdev);
  remove:
 	nvme_dev_remove(dev);
 	nvme_free_namespaces(dev);
@@ -2607,6 +2633,9 @@ static void nvme_remove(struct pci_dev *pdev)
 	list_del_init(&dev->node);
 	spin_unlock(&dev_list_lock);
 
+	device_remove_file(&pdev->dev, &dev_attr_model);
+	device_remove_file(&pdev->dev, &dev_attr_serial);
+	device_remove_file(&pdev->dev, &dev_attr_firmware_rev);
 	pci_set_drvdata(pdev, NULL);
 	flush_work(&dev->reset_work);
 	misc_deregister(&dev->miscdev);
