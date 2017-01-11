@@ -97,6 +97,9 @@ static int gre_rcv(struct sk_buff *skb,
 	struct vport *vport;
 	__be64 key;
 
+	if (tpi->proto != htons(ETH_P_TEB))
+		return PACKET_REJECT;
+
 	ovs_net = net_generic(dev_net(skb->dev), ovs_net_id);
 	vport = rcu_dereference(ovs_net->vport_net.gre_vport);
 	if (unlikely(!vport))
