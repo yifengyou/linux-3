@@ -1778,7 +1778,7 @@ CONFIG_IP_VS_NFCT				y
 # Menu: Networking options >> Network packet filtering framework (Netfilter) >> IPv6: Netfilter Configuration
 
 # Menu: Networking options >> Network testing
-CONFIG_NET_DROP_MONITOR				n
+CONFIG_NET_DROP_MONITOR				m note<LP #1660634>
 
 # Menu: Networking options >> QoS and/or fair queueing
 CONFIG_NET_SCHED				y mark<Subsystem>
