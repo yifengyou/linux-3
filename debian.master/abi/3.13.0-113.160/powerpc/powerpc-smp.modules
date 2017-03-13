@@ -724,6 +724,7 @@ drbd
 drm
 drm_kms_helper
 drm_usb
+drop_monitor
 drxd
 drxk
 ds1621
