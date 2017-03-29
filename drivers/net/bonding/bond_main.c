@@ -1338,16 +1338,27 @@ int bond_enslave(struct net_device *bond_dev, struct net_device *slave_dev)
 		goto err_undo_flags;
 	}
 
-	if (slave_ops->ndo_set_mac_address == NULL) {
-		if (!bond_has_slaves(bond)) {
-			pr_warning("%s: Warning: The first slave device specified does not support setting the MAC address. Setting fail_over_mac to active.",
-				   bond_dev->name);
-			bond->params.fail_over_mac = BOND_FOM_ACTIVE;
-		} else if (bond->params.fail_over_mac != BOND_FOM_ACTIVE) {
-			pr_err("%s: Error: The slave device specified does not support setting the MAC address, but fail_over_mac is not set to active.\n",
-			       bond_dev->name);
-			res = -EOPNOTSUPP;
-			goto err_undo_flags;
+	if (slave_dev->type == ARPHRD_INFINIBAND &&
+	    bond->params.mode != BOND_MODE_ACTIVEBACKUP) {
+		netdev_warn(bond_dev, "Type (%d) supports only active-backup mode\n",
+			    slave_dev->type);
+		res = -EOPNOTSUPP;
+		goto err_undo_flags;
+	}
+
+	if (!slave_ops->ndo_set_mac_address ||
+	    slave_dev->type == ARPHRD_INFINIBAND) {
+		netdev_warn(bond_dev, "The slave device specified does not support setting the MAC address\n");
+		if (bond->params.mode == BOND_MODE_ACTIVEBACKUP &&
+		    bond->params.fail_over_mac != BOND_FOM_ACTIVE) {
+			if (!bond_has_slaves(bond)) {
+				bond->params.fail_over_mac = BOND_FOM_ACTIVE;
+				netdev_warn(bond_dev, "Setting fail_over_mac to active for active-backup mode\n");
+			} else {
+				netdev_err(bond_dev, "The slave device specified does not support setting the MAC address, but fail_over_mac is not set to active\n");
+				res = -EOPNOTSUPP;
+				goto err_undo_flags;
+			}
 		}
 	}
 
