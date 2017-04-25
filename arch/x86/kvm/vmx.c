@@ -6386,6 +6386,8 @@ static int handle_invept(struct kvm_vcpu *vcpu)
 
 	switch (type) {
 	case VMX_EPT_EXTENT_CONTEXT:
+		if (to_vmx(vcpu)->nested.current_vmptr == -1ull)
+			break;
 		if ((operand.eptp & eptp_mask) !=
 				(nested_ept_get_cr3(vcpu) & eptp_mask))
 			break;
