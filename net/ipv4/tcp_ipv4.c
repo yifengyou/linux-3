@@ -1621,6 +1621,21 @@ drop:
 EXPORT_SYMBOL(tcp_v4_conn_request);
 
 
+int tcp_filter(struct sock *sk, struct sk_buff *skb)
+{
+	struct tcphdr *th = (struct tcphdr *)skb->data;
+	unsigned int eaten = skb->len;
+	int err;
+
+	err = sk_filter_trim_cap(sk, skb, th->doff * 4);
+	if (!err) {
+		eaten -= skb->len;
+		TCP_SKB_CB(skb)->end_seq -= eaten;
+	}
+	return err;
+}
+EXPORT_SYMBOL(tcp_filter);
+
 /*
  * The three way handshake has completed - we got a valid synack -
  * now create the new socket.
@@ -1997,8 +2012,10 @@ process:
 		goto discard_and_relse;
 	nf_reset(skb);
 
-	if (sk_filter(sk, skb))
+	if (tcp_filter(sk, skb))
 		goto discard_and_relse;
+	th = (const struct tcphdr *)skb->data;
+	iph = ip_hdr(skb);
 
 	sk_mark_napi_id(sk, skb);
 	skb->dev = NULL;
