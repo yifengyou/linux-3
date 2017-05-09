@@ -93,6 +93,12 @@ install-tools: cloudman = $(CURDIR)/debian/$(cloudpkg)/usr/share/man
 install-tools: install-source $(stampdir)/stamp-build-perarch
 	@echo Debug: $@
 
+ifeq ($(do_tools_common),true)
+ifneq ($(DEBIAN),debian.master)
+	echo "non-master branch building linux-tools-common, aborting"
+	exit 1
+endif
+
 	rm -rf $(builddir)/tools
 	install -d $(builddir)/tools
 	for i in *; do $(LN) $(CURDIR)/$$i $(builddir)/tools/; done
@@ -132,6 +138,8 @@ install-tools: install-source $(stampdir)/stamp-build-perarch
 	install -d $(cloudman)/man8
 	install -m644 $(CURDIR)/tools/hv/*.8 $(cloudman)/man8
 
+endif
+
 install-indep: install-tools
 	@echo Debug: $@
 
@@ -157,6 +165,10 @@ binary-indep: install-indep
 	dh_compress -i
 	dh_fixperms -i
 ifeq ($(do_tools_common),true)
+ifneq ($(DEBIAN),debian.master)
+	echo "non-master branch building linux-cloud-tools-common, aborting"
+	exit 1
+endif
 	dh_installinit -p$(cloudpkg) --name hv-kvp-daemon
 	dh_installinit -p$(cloudpkg) --name hv-vss-daemon
 	dh_installinit -p$(cloudpkg) --name hv-fcopy-daemon
