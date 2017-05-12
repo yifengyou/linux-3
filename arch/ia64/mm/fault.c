@@ -224,7 +224,7 @@ retry:
 		 */
 		if (address > vma->vm_end + PAGE_SIZE - sizeof(long))
 			goto bad_area;
-		if (expand_upwards(vma, address))
+		if (expand_upwards(vma, address, 0))
 			goto bad_area;
 	}
 	goto good_area;
