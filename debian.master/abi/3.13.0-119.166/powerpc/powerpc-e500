@@ -5813,6 +5813,7 @@ EXPORT_SYMBOL vmlinux 0x00ecf5ac	devm_gpio_free
 EXPORT_SYMBOL vmlinux 0x00f7466b	bio_integrity_clone
 EXPORT_SYMBOL vmlinux 0x00feb31d	inet_frag_maybe_warn_overflow
 EXPORT_SYMBOL vmlinux 0x01000e51	schedule
+EXPORT_SYMBOL vmlinux 0x01009766	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0x0101d5b1	ip_idents_reserve
 EXPORT_SYMBOL vmlinux 0x01051cfa	single_open
 EXPORT_SYMBOL vmlinux 0x010c026c	mmc_fixup_device
@@ -6690,7 +6691,6 @@ EXPORT_SYMBOL vmlinux 0x38a71b7e	pci_free_resource_list
 EXPORT_SYMBOL vmlinux 0x38a75ae8	fb_validate_mode
 EXPORT_SYMBOL vmlinux 0x38a9f7c5	in6addr_loopback
 EXPORT_SYMBOL vmlinux 0x38ae6b50	padata_free
-EXPORT_SYMBOL vmlinux 0x38b96003	sk_filter
 EXPORT_SYMBOL vmlinux 0x38b9cbbb	migrate_page
 EXPORT_SYMBOL vmlinux 0x38c6d83f	xfrm_state_lookup_byaddr
 EXPORT_SYMBOL vmlinux 0x38d46104	pneigh_lookup
@@ -7977,6 +7977,7 @@ EXPORT_SYMBOL vmlinux 0x86629a28	textsearch_find_continuous
 EXPORT_SYMBOL vmlinux 0x8664f62e	cpufreq_update_policy
 EXPORT_SYMBOL vmlinux 0x866ef659	path_nosuid
 EXPORT_SYMBOL vmlinux 0x868acba5	get_options
+EXPORT_SYMBOL vmlinux 0x86959260	tcp_filter
 EXPORT_SYMBOL vmlinux 0x86a4889a	kmalloc_order_trace
 EXPORT_SYMBOL vmlinux 0x86ae0107	path_put
 EXPORT_SYMBOL vmlinux 0x86aed893	set_security_override_from_ctx

@@ -8351,6 +8351,7 @@ EXPORT_SYMBOL vmlinux 0x8daf8c42	dql_init
 EXPORT_SYMBOL vmlinux 0x8dc6e564	restore_processor_state
 EXPORT_SYMBOL vmlinux 0x8dd737e9	security_inode_notifysecctx
 EXPORT_SYMBOL vmlinux 0x8e002cda	acpi_remove_gpe_block
+EXPORT_SYMBOL vmlinux 0x8e005286	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0x8e0d66f4	__tracepoint_kmalloc
 EXPORT_SYMBOL vmlinux 0x8e3eae9d	dev_remove_offload
 EXPORT_SYMBOL vmlinux 0x8e516d1a	dev_remove_pack
@@ -8801,6 +8802,7 @@ EXPORT_SYMBOL vmlinux 0xa9a8e17f	arch_phys_wc_add
 EXPORT_SYMBOL vmlinux 0xa9c4b013	qdisc_warn_nonwc
 EXPORT_SYMBOL vmlinux 0xa9d5f0de	dump_emit
 EXPORT_SYMBOL vmlinux 0xa9e363ac	pci_request_selected_regions_exclusive
+EXPORT_SYMBOL vmlinux 0xa9e87a1b	tcp_filter
 EXPORT_SYMBOL vmlinux 0xa9f76d64	handle_edge_irq
 EXPORT_SYMBOL vmlinux 0xa9fc2e1a	nf_ip6_checksum
 EXPORT_SYMBOL vmlinux 0xaa07807c	dmam_free_coherent
@@ -9121,7 +9123,6 @@ EXPORT_SYMBOL vmlinux 0xbcc308bb	strnlen_user
 EXPORT_SYMBOL vmlinux 0xbcdafd3b	__skb_checksum
 EXPORT_SYMBOL vmlinux 0xbcf1eb68	twl6040_get_sysclk
 EXPORT_SYMBOL vmlinux 0xbd08b212	elv_rb_find
-EXPORT_SYMBOL vmlinux 0xbd0c0cb7	sk_filter
 EXPORT_SYMBOL vmlinux 0xbd46d1cf	jbd2_journal_set_triggers
 EXPORT_SYMBOL vmlinux 0xbd507405	mmc_hw_reset
 EXPORT_SYMBOL vmlinux 0xbd535dbe	block_write_end

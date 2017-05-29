@@ -8426,6 +8426,7 @@ EXPORT_SYMBOL vmlinux 0x99eb75a7	skb_page_frag_refill
 EXPORT_SYMBOL vmlinux 0x99f068d5	x86_cpu_to_node_map
 EXPORT_SYMBOL vmlinux 0x99fb1538	simple_link
 EXPORT_SYMBOL vmlinux 0x9a1dfd65	strpbrk
+EXPORT_SYMBOL vmlinux 0x9a1e51df	tcp_filter
 EXPORT_SYMBOL vmlinux 0x9a1fc4b4	jiffies_to_timeval
 EXPORT_SYMBOL vmlinux 0x9a2f27ec	tcp_poll
 EXPORT_SYMBOL vmlinux 0x9a40e48a	nf_reinject
@@ -8857,6 +8858,7 @@ EXPORT_SYMBOL vmlinux 0xb3d13390	padata_do_serial
 EXPORT_SYMBOL vmlinux 0xb3f7646e	kthread_should_stop
 EXPORT_SYMBOL vmlinux 0xb3fb0c3c	tcp_timewait_state_process
 EXPORT_SYMBOL vmlinux 0xb3fefeb4	blk_queue_max_hw_sectors
+EXPORT_SYMBOL vmlinux 0xb4152952	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xb423dba1	console_blanked
 EXPORT_SYMBOL vmlinux 0xb431abc5	ip_generic_getfrag
 EXPORT_SYMBOL vmlinux 0xb434a944	vlan_vid_add
@@ -9232,7 +9234,6 @@ EXPORT_SYMBOL vmlinux 0xce4904a4	acpi_leave_sleep_state
 EXPORT_SYMBOL vmlinux 0xce4e47b6	__kfifo_skip_r
 EXPORT_SYMBOL vmlinux 0xce585701	__invalidate_device
 EXPORT_SYMBOL vmlinux 0xce5ac24f	zlib_inflate_workspacesize
-EXPORT_SYMBOL vmlinux 0xce652f68	sk_filter
 EXPORT_SYMBOL vmlinux 0xce82477a	blk_put_request
 EXPORT_SYMBOL vmlinux 0xce9753b9	bd_set_size
 EXPORT_SYMBOL vmlinux 0xceab0311	strchrnul

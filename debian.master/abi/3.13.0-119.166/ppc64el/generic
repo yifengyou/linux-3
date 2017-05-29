@@ -5550,7 +5550,6 @@ EXPORT_SYMBOL vmlinux 0x7e9881f3	dev_warn
 EXPORT_SYMBOL vmlinux 0x7eb703bb	mddev_congested
 EXPORT_SYMBOL vmlinux 0x7eb8c6c8	agp_generic_alloc_page
 EXPORT_SYMBOL vmlinux 0x7eca8ed6	scsi_scan_host
-EXPORT_SYMBOL vmlinux 0x7ed35107	sk_filter
 EXPORT_SYMBOL vmlinux 0x7ed8ae3e	qdisc_watchdog_init
 EXPORT_SYMBOL vmlinux 0x7f24c876	pci_disable_device
 EXPORT_SYMBOL vmlinux 0x7f24de73	jiffies_to_usecs
@@ -6171,6 +6170,7 @@ EXPORT_SYMBOL vmlinux 0xa484c58a	tty_register_driver
 EXPORT_SYMBOL vmlinux 0xa4b79104	input_mt_report_slot_state
 EXPORT_SYMBOL vmlinux 0xa4b94fea	iowrite8_rep
 EXPORT_SYMBOL vmlinux 0xa4bdd447	__cputime_clockt_factor
+EXPORT_SYMBOL vmlinux 0xa4c53ffd	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xa4d4f0e6	global_cache_flush
 EXPORT_SYMBOL vmlinux 0xa4e192d1	scsi_is_host_device
 EXPORT_SYMBOL vmlinux 0xa4e3bc94	set_security_override_from_ctx
@@ -7370,6 +7370,7 @@ EXPORT_SYMBOL vmlinux 0xf0fdc7de	vlan_dev_vlan_id
 EXPORT_SYMBOL vmlinux 0xf100416a	remove_conflicting_framebuffers
 EXPORT_SYMBOL vmlinux 0xf10ca3e7	lockref_get_or_lock
 EXPORT_SYMBOL vmlinux 0xf10de535	ioread8
+EXPORT_SYMBOL vmlinux 0xf1165949	tcp_filter
 EXPORT_SYMBOL vmlinux 0xf11cd6ce	down_interruptible
 EXPORT_SYMBOL vmlinux 0xf1212dcf	nla_reserve_nohdr
 EXPORT_SYMBOL vmlinux 0xf121d246	arp_invalidate

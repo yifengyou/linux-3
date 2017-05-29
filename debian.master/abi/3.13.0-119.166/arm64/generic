@@ -6739,6 +6739,7 @@ EXPORT_SYMBOL vmlinux 0x5d1e7d79	n_tty_compat_ioctl_helper
 EXPORT_SYMBOL vmlinux 0x5d41c87c	param_ops_charp
 EXPORT_SYMBOL vmlinux 0x5d46dadd	security_dentry_init_security
 EXPORT_SYMBOL vmlinux 0x5d550c4d	scsi_sd_probe_domain
+EXPORT_SYMBOL vmlinux 0x5d5a5025	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0x5d5b5a16	radix_tree_delete
 EXPORT_SYMBOL vmlinux 0x5d5ca88a	bd_set_size
 EXPORT_SYMBOL vmlinux 0x5d67dce1	bio_integrity_tag_size
@@ -7629,6 +7630,7 @@ EXPORT_SYMBOL vmlinux 0x9809bea2	bio_copy_kern
 EXPORT_SYMBOL vmlinux 0x9810968b	__lock_buffer
 EXPORT_SYMBOL vmlinux 0x9820b644	warn_slowpath_fmt_taint
 EXPORT_SYMBOL vmlinux 0x9829fc11	__kfifo_out_peek_r
+EXPORT_SYMBOL vmlinux 0x982d4dcf	tcp_filter
 EXPORT_SYMBOL vmlinux 0x983f2269	inet_del_protocol
 EXPORT_SYMBOL vmlinux 0x98410ff1	tty_port_close_end
 EXPORT_SYMBOL vmlinux 0x98462f1f	release_sock
@@ -8070,7 +8072,6 @@ EXPORT_SYMBOL vmlinux 0xb5cd1691	vexpress_config_complete
 EXPORT_SYMBOL vmlinux 0xb5cd2c4e	i2c_master_recv
 EXPORT_SYMBOL vmlinux 0xb5d6fbac	unregister_framebuffer
 EXPORT_SYMBOL vmlinux 0xb5e5f46f	xfrm_unregister_km
-EXPORT_SYMBOL vmlinux 0xb5f3401a	sk_filter
 EXPORT_SYMBOL vmlinux 0xb61770db	__brelse
 EXPORT_SYMBOL vmlinux 0xb6244511	sg_init_one
 EXPORT_SYMBOL vmlinux 0xb6394d4b	param_set_bint

@@ -5818,7 +5818,6 @@ EXPORT_SYMBOL vmlinux 0x01d5dde4	da903x_query_status
 EXPORT_SYMBOL vmlinux 0x01d9f6b9	elv_rq_merge_ok
 EXPORT_SYMBOL vmlinux 0x01de0928	netdev_rx_csum_fault
 EXPORT_SYMBOL vmlinux 0x01e81c91	__cleancache_put_page
-EXPORT_SYMBOL vmlinux 0x02122ae7	sk_filter
 EXPORT_SYMBOL vmlinux 0x02144874	dcache_dir_open
 EXPORT_SYMBOL vmlinux 0x023c2b66	__xfrm_init_state
 EXPORT_SYMBOL vmlinux 0x02445772	phy_device_create
@@ -5924,6 +5923,7 @@ EXPORT_SYMBOL vmlinux 0x081499f1	dmam_free_coherent
 EXPORT_SYMBOL vmlinux 0x0826984e	devm_ioremap_resource
 EXPORT_SYMBOL vmlinux 0x082921b6	dev_graft_qdisc
 EXPORT_SYMBOL vmlinux 0x082c3213	pci_root_buses
+EXPORT_SYMBOL vmlinux 0x0836bb84	tcp_filter
 EXPORT_SYMBOL vmlinux 0x083c2cbe	of_get_next_parent
 EXPORT_SYMBOL vmlinux 0x083eb21c	rfkill_unregister
 EXPORT_SYMBOL vmlinux 0x08442ab6	phy_driver_unregister
@@ -9502,6 +9502,7 @@ EXPORT_SYMBOL vmlinux 0xe69a9df4	hdmi_spd_infoframe_pack
 EXPORT_SYMBOL vmlinux 0xe6ab72a6	ipmi_set_my_LUN
 EXPORT_SYMBOL vmlinux 0xe6b15fdc	md_flush_request
 EXPORT_SYMBOL vmlinux 0xe6bc9e4a	kset_register
+EXPORT_SYMBOL vmlinux 0xe6cb8884	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xe6d37779	dquot_destroy
 EXPORT_SYMBOL vmlinux 0xe6ebc2a5	neigh_sysctl_register
 EXPORT_SYMBOL vmlinux 0xe6fbe430	can_do_mlock

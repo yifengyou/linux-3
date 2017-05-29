@@ -6681,6 +6681,7 @@ EXPORT_SYMBOL vmlinux 0x328a1717	vga_switcheroo_get_client_state
 EXPORT_SYMBOL vmlinux 0x329b886e	ppp_output_wakeup
 EXPORT_SYMBOL vmlinux 0x32a8aea6	pskb_expand_head
 EXPORT_SYMBOL vmlinux 0x32b3f317	sock_recv_errqueue
+EXPORT_SYMBOL vmlinux 0x32bb67d2	tcp_filter
 EXPORT_SYMBOL vmlinux 0x32debb16	cpumask_next_and
 EXPORT_SYMBOL vmlinux 0x32eeaded	_raw_write_lock_bh
 EXPORT_SYMBOL vmlinux 0x331a2814	get_fs_type
@@ -7387,6 +7388,7 @@ EXPORT_SYMBOL vmlinux 0x5bc8d583	copy_from_user_overflow
 EXPORT_SYMBOL vmlinux 0x5bda76b6	skb_flow_get_ports
 EXPORT_SYMBOL vmlinux 0x5bdf8577	blk_queue_stack_limits
 EXPORT_SYMBOL vmlinux 0x5bef98d8	xfrm_input
+EXPORT_SYMBOL vmlinux 0x5bf2200d	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0x5bfb2f65	dentry_path_raw
 EXPORT_SYMBOL vmlinux 0x5bfcc153	agp_backend_release
 EXPORT_SYMBOL vmlinux 0x5c086eb1	rtnl_set_sk_err
@@ -8948,7 +8950,6 @@ EXPORT_SYMBOL vmlinux 0xb7645932	fsnotify_destroy_mark
 EXPORT_SYMBOL vmlinux 0xb76b95bf	nla_put_nohdr
 EXPORT_SYMBOL vmlinux 0xb76dc78e	devfreq_remove_governor
 EXPORT_SYMBOL vmlinux 0xb77131b1	psched_ratecfg_precompute
-EXPORT_SYMBOL vmlinux 0xb77454f9	sk_filter
 EXPORT_SYMBOL vmlinux 0xb77f37e1	__invalidate_device
 EXPORT_SYMBOL vmlinux 0xb78e38c0	pcix_set_mmrbc
 EXPORT_SYMBOL vmlinux 0xb79ab77a	splice_from_pipe_begin

@@ -5789,7 +5789,6 @@ EXPORT_SYMBOL vmlinux 0x002ee5fc	scsi_unblock_requests
 EXPORT_SYMBOL vmlinux 0x003ed69a	__kfifo_dma_in_prepare
 EXPORT_SYMBOL vmlinux 0x004e8a10	simple_rmdir
 EXPORT_SYMBOL vmlinux 0x005391b0	remap_vmalloc_range
-EXPORT_SYMBOL vmlinux 0x007acc64	sk_filter
 EXPORT_SYMBOL vmlinux 0x00801678	flush_scheduled_work
 EXPORT_SYMBOL vmlinux 0x00a04484	vfs_link
 EXPORT_SYMBOL vmlinux 0x00cf4a7f	of_get_parent
@@ -5904,6 +5903,7 @@ EXPORT_SYMBOL vmlinux 0x087543f8	tty_driver_kref_put
 EXPORT_SYMBOL vmlinux 0x087697b0	tty_unthrottle
 EXPORT_SYMBOL vmlinux 0x089559f2	blk_rq_map_kern
 EXPORT_SYMBOL vmlinux 0x089a1eee	tcf_action_dump_1
+EXPORT_SYMBOL vmlinux 0x08d6ad4d	tcp_filter
 EXPORT_SYMBOL vmlinux 0x08df9457	neigh_proc_dointvec_ms_jiffies
 EXPORT_SYMBOL vmlinux 0x0931d02a	fib_default_rule_pref
 EXPORT_SYMBOL vmlinux 0x09393fb4	phy_device_register
@@ -9512,6 +9512,7 @@ EXPORT_SYMBOL vmlinux 0xeb2710d1	tty_write_room
 EXPORT_SYMBOL vmlinux 0xeb37101c	audit_log_end
 EXPORT_SYMBOL vmlinux 0xeb3fce8d	adjust_managed_page_count
 EXPORT_SYMBOL vmlinux 0xeb4590b6	__blk_run_queue
+EXPORT_SYMBOL vmlinux 0xeb4a194d	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xeb4cec5a	skb_store_bits
 EXPORT_SYMBOL vmlinux 0xeb53173d	blk_mq_alloc_reserved_request
 EXPORT_SYMBOL vmlinux 0xeb532039	agp_generic_alloc_by_type

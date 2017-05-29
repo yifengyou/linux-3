@@ -8762,6 +8762,7 @@ EXPORT_SYMBOL vmlinux 0xa94dcc43	bdi_init
 EXPORT_SYMBOL vmlinux 0xa952f493	grab_cache_page_nowait
 EXPORT_SYMBOL vmlinux 0xa95c0260	__lock_page
 EXPORT_SYMBOL vmlinux 0xa95c0567	pci_find_capability
+EXPORT_SYMBOL vmlinux 0xa9723fbb	tcp_filter
 EXPORT_SYMBOL vmlinux 0xa9a8e17f	arch_phys_wc_add
 EXPORT_SYMBOL vmlinux 0xa9c46725	kthread_create_on_node
 EXPORT_SYMBOL vmlinux 0xa9d0f987	agp_alloc_page_array
@@ -8927,7 +8928,6 @@ EXPORT_SYMBOL vmlinux 0xb1db9e4e	param_get_invbool
 EXPORT_SYMBOL vmlinux 0xb1f5947f	iget5_locked
 EXPORT_SYMBOL vmlinux 0xb2013664	unmap_underlying_metadata
 EXPORT_SYMBOL vmlinux 0xb219d56c	wbinvd_on_cpu
-EXPORT_SYMBOL vmlinux 0xb21f5c9a	sk_filter
 EXPORT_SYMBOL vmlinux 0xb25631c5	__block_write_begin
 EXPORT_SYMBOL vmlinux 0xb2682405	utf8_to_utf32
 EXPORT_SYMBOL vmlinux 0xb2744b36	down_write_trylock
@@ -9066,6 +9066,7 @@ EXPORT_SYMBOL vmlinux 0xbb0fb971	jbd2_journal_init_inode
 EXPORT_SYMBOL vmlinux 0xbb126956	xfrm_policy_unregister_afinfo
 EXPORT_SYMBOL vmlinux 0xbb132ec3	dcache_dir_close
 EXPORT_SYMBOL vmlinux 0xbb189cad	disallow_signal
+EXPORT_SYMBOL vmlinux 0xbb41754b	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xbb5d343d	xfrm_get_acqseq
 EXPORT_SYMBOL vmlinux 0xbb713e6d	sk_filter_release_rcu
 EXPORT_SYMBOL vmlinux 0xbb86dc89	__ethtool_get_settings

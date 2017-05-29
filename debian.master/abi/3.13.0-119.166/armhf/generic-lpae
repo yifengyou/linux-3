@@ -4938,7 +4938,6 @@ EXPORT_SYMBOL vmlinux 0x2deda4a1	security_sk_classify_flow
 EXPORT_SYMBOL vmlinux 0x2deeb34f	blk_queue_end_tag
 EXPORT_SYMBOL vmlinux 0x2e1ca751	clk_put
 EXPORT_SYMBOL vmlinux 0x2e2ce9e0	sysctl_tcp_syncookies
-EXPORT_SYMBOL vmlinux 0x2e2e19a7	sk_filter
 EXPORT_SYMBOL vmlinux 0x2e31cdd8	map_destroy
 EXPORT_SYMBOL vmlinux 0x2e36723b	snd_pcm_hw_param_last
 EXPORT_SYMBOL vmlinux 0x2e55330f	__netlink_dump_start
@@ -6263,6 +6262,7 @@ EXPORT_SYMBOL vmlinux 0x81db6ebb	xz_dec_reset
 EXPORT_SYMBOL vmlinux 0x81e29d1f	xfrm_cfg_mutex
 EXPORT_SYMBOL vmlinux 0x81eeb273	key_invalidate
 EXPORT_SYMBOL vmlinux 0x82072614	tasklet_kill
+EXPORT_SYMBOL vmlinux 0x820989ba	tcp_filter
 EXPORT_SYMBOL vmlinux 0x823b908f	__frontswap_load
 EXPORT_SYMBOL vmlinux 0x824a4367	tmio_core_mmc_pwr
 EXPORT_SYMBOL vmlinux 0x8251bcc3	bitmap_release_region
@@ -7003,6 +7003,7 @@ EXPORT_SYMBOL vmlinux 0xb0637994	dump_emit
 EXPORT_SYMBOL vmlinux 0xb086f42c	security_path_symlink
 EXPORT_SYMBOL vmlinux 0xb092c6f0	dev_add_pack
 EXPORT_SYMBOL vmlinux 0xb0a0da0c	rational_best_approximation
+EXPORT_SYMBOL vmlinux 0xb0a18995	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xb0b847ac	__bitmap_full
 EXPORT_SYMBOL vmlinux 0xb0bb59f9	elevator_change
 EXPORT_SYMBOL vmlinux 0xb0bcead8	dm_register_target

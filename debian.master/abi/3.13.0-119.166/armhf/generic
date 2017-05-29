@@ -8200,6 +8200,7 @@ EXPORT_SYMBOL vmlinux 0x9ac5f67b	xfrm6_prepare_output
 EXPORT_SYMBOL vmlinux 0x9ac957bd	dev_set_promiscuity
 EXPORT_SYMBOL vmlinux 0x9adef7b2	kernel_getsockname
 EXPORT_SYMBOL vmlinux 0x9aedfad2	xfrm_unregister_type
+EXPORT_SYMBOL vmlinux 0x9b0f7084	tcp_filter
 EXPORT_SYMBOL vmlinux 0x9b104671	netif_set_real_num_tx_queues
 EXPORT_SYMBOL vmlinux 0x9b22911b	filp_open
 EXPORT_SYMBOL vmlinux 0x9b33e0d7	unregister_dcbevent_notifier
@@ -8979,7 +8980,6 @@ EXPORT_SYMBOL vmlinux 0xca4faa77	make_kgid
 EXPORT_SYMBOL vmlinux 0xca5dbc50	scsi_print_sense_hdr
 EXPORT_SYMBOL vmlinux 0xca6ce8ba	omap_dss_ntsc_timings
 EXPORT_SYMBOL vmlinux 0xca7072cc	blk_queue_max_write_same_sectors
-EXPORT_SYMBOL vmlinux 0xca8a9f03	sk_filter
 EXPORT_SYMBOL vmlinux 0xca9360b5	rb_next
 EXPORT_SYMBOL vmlinux 0xcab41a2d	pcie_capability_read_word
 EXPORT_SYMBOL vmlinux 0xcaddbd7e	edma_set_dest_index
@@ -9673,6 +9673,7 @@ EXPORT_SYMBOL vmlinux 0xf32280cc	path_put
 EXPORT_SYMBOL vmlinux 0xf3341268	__clear_user
 EXPORT_SYMBOL vmlinux 0xf346231f	seq_list_start_head
 EXPORT_SYMBOL vmlinux 0xf3487786	phy_ethtool_set_eee
+EXPORT_SYMBOL vmlinux 0xf352faf5	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0xf353a698	register_module_notifier
 EXPORT_SYMBOL vmlinux 0xf369be4b	inet_frags_exit_net
 EXPORT_SYMBOL vmlinux 0xf3797152	snd_interval_ratnum

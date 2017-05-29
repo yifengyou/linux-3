@@ -6559,7 +6559,6 @@ EXPORT_SYMBOL vmlinux 0x2e21ff67	keyring_alloc
 EXPORT_SYMBOL vmlinux 0x2e277f03	vlan_ioctl_set
 EXPORT_SYMBOL vmlinux 0x2e2b40d2	strncat
 EXPORT_SYMBOL vmlinux 0x2e2ce9e0	sysctl_tcp_syncookies
-EXPORT_SYMBOL vmlinux 0x2e349fc5	sk_filter
 EXPORT_SYMBOL vmlinux 0x2e3685a1	simple_transaction_get
 EXPORT_SYMBOL vmlinux 0x2e594f28	tcp_rcv_established
 EXPORT_SYMBOL vmlinux 0x2e5b4161	inode_newsize_ok
@@ -6859,6 +6858,7 @@ EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
 EXPORT_SYMBOL vmlinux 0x41690bae	mach_pseries
 EXPORT_SYMBOL vmlinux 0x417d3368	rtnl_set_sk_err
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
+EXPORT_SYMBOL vmlinux 0x418ea67d	tcp_filter
 EXPORT_SYMBOL vmlinux 0x41c30c76	netif_carrier_on
 EXPORT_SYMBOL vmlinux 0x41c42043	blk_queue_free_tags
 EXPORT_SYMBOL vmlinux 0x41c6141b	__skb_warn_lro_forwarding
@@ -8227,6 +8227,7 @@ EXPORT_SYMBOL vmlinux 0x93fca811	__get_free_pages
 EXPORT_SYMBOL vmlinux 0x940945f6	of_phy_find_device
 EXPORT_SYMBOL vmlinux 0x940d2647	generic_show_options
 EXPORT_SYMBOL vmlinux 0x94167d81	generic_pipe_buf_map
+EXPORT_SYMBOL vmlinux 0x94254f72	sk_filter_trim_cap
 EXPORT_SYMBOL vmlinux 0x943b2bed	set_blocksize
 EXPORT_SYMBOL vmlinux 0x943dc80f	csum_and_copy_to_user
 EXPORT_SYMBOL vmlinux 0x944491d7	set_groups
