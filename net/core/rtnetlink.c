@@ -1452,6 +1452,8 @@ static int do_set_master(struct net_device *dev, int ifindex)
 }
 
 #define DO_SETLINK_MODIFIED	0x01
+/* notify flag means notify + modified. */
+#define DO_SETLINK_NOTIFY	0x03
 static int do_setlink(const struct sk_buff *skb,
 		      struct net_device *dev, struct ifinfomsg *ifm,
 		      struct nlattr **tb, char *ifname, int status)
@@ -1503,7 +1505,7 @@ static int do_setlink(const struct sk_buff *skb,
 		if (err < 0)
 			goto errout;
 
-		status |= DO_SETLINK_MODIFIED;
+		status |= DO_SETLINK_NOTIFY;
 	}
 
 	if (tb[IFLA_ADDRESS]) {
@@ -1535,7 +1537,7 @@ static int do_setlink(const struct sk_buff *skb,
 
 	if (tb[IFLA_GROUP]) {
 		dev_set_group(dev, nla_get_u32(tb[IFLA_GROUP]));
-		status |= DO_SETLINK_MODIFIED;
+		status |= DO_SETLINK_NOTIFY;
 	}
 
 	/*
@@ -1555,7 +1557,7 @@ static int do_setlink(const struct sk_buff *skb,
 				    nla_len(tb[IFLA_IFALIAS]));
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		status |= DO_SETLINK_NOTIFY;
 	}
 
 	if (tb[IFLA_BROADCAST]) {
@@ -1587,7 +1589,7 @@ static int do_setlink(const struct sk_buff *skb,
 		unsigned long value = nla_get_u32(tb[IFLA_TXQLEN]);
 
 		if (dev->tx_queue_len ^ value)
-			status |= DO_SETLINK_MODIFIED;
+			status |= DO_SETLINK_NOTIFY;
 
 		dev->tx_queue_len = value;
 	}
@@ -1600,7 +1602,7 @@ static int do_setlink(const struct sk_buff *skb,
 
 		write_lock_bh(&dev_base_lock);
 		if (dev->link_mode ^ value)
-			status |= DO_SETLINK_MODIFIED;
+			status |= DO_SETLINK_NOTIFY;
 		dev->link_mode = value;
 		write_unlock_bh(&dev_base_lock);
 	}
@@ -1623,7 +1625,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = do_setvfinfo(dev, vfinfo);
 			if (err < 0)
 				goto errout;
-			status |= DO_SETLINK_MODIFIED;
+			status |= DO_SETLINK_NOTIFY;
 		}
 	}
 	err = 0;
@@ -1653,7 +1655,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = ops->ndo_set_vf_port(dev, vf, port);
 			if (err < 0)
 				goto errout;
-			status |= DO_SETLINK_MODIFIED;
+			status |= DO_SETLINK_NOTIFY;
 		}
 	}
 	err = 0;
@@ -1671,7 +1673,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = ops->ndo_set_vf_port(dev, PORT_SELF_VF, port);
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		status |= DO_SETLINK_NOTIFY;
 	}
 
 	if (tb[IFLA_AF_SPEC]) {
@@ -1688,15 +1690,20 @@ static int do_setlink(const struct sk_buff *skb,
 			if (err < 0)
 				goto errout;
 
-			status |= DO_SETLINK_MODIFIED;
+			status |= DO_SETLINK_NOTIFY;
 		}
 	}
 	err = 0;
 
 errout:
-	if (err < 0 && status & DO_SETLINK_MODIFIED)
-		net_warn_ratelimited("A link change request failed with some changes committed already. Interface %s may have been left with an inconsistent configuration, please check.\n",
-				     dev->name);
+	if (status & DO_SETLINK_MODIFIED) {
+		if (status & DO_SETLINK_NOTIFY)
+			netdev_state_change(dev);
+
+		if (err < 0)
+			net_warn_ratelimited("A link change request failed with some changes committed already. Interface %s may have been left with an inconsistent configuration, please check.\n",
+					     dev->name);
+	}
 
 	return err;
 }
@@ -1991,7 +1998,7 @@ replay:
 				err = ops->changelink(dev, tb, data);
 				if (err < 0)
 					return err;
-				status |= DO_SETLINK_MODIFIED;
+				status |= DO_SETLINK_NOTIFY;
 			}
 
 			if (linkinfo[IFLA_INFO_SLAVE_DATA]) {
@@ -2002,7 +2009,7 @@ replay:
 							      tb, slave_data);
 				if (err < 0)
 					return err;
-				status |= DO_SETLINK_MODIFIED;
+				status |= DO_SETLINK_NOTIFY;
 			}
 
 			return do_setlink(skb, dev, ifm, tb, ifname, status);
