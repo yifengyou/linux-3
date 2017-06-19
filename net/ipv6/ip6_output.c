@@ -1147,6 +1147,7 @@ int ip6_append_data(struct sock *sk, int getfrag(void *from, char *to,
 	int err;
 	int offset = 0;
 	__u8 tx_flags = 0;
+	unsigned int maxnonfragsize, headersize;
 
 	if (flags&MSG_PROBE)
 		return 0;
@@ -1230,17 +1231,17 @@ int ip6_append_data(struct sock *sk, int getfrag(void *from, char *to,
 	maxfraglen = ((mtu - fragheaderlen) & ~7) + fragheaderlen -
 		     sizeof(struct frag_hdr);
 
+
+	headersize = sizeof(struct ipv6hdr) +
+		     (opt ? opt->opt_flen + opt->opt_nflen : 0) +
+		     (dst_allfrag(&rt->dst) ?
+		      sizeof(struct frag_hdr) : 0) +
+		     rt->rt6i_nfheader_len;
+
+	maxnonfragsize = (np->pmtudisc >= IPV6_PMTUDISC_DO) ?
+			 mtu : sizeof(struct ipv6hdr) + IPV6_MAXPLEN;
+
 	if (mtu <= sizeof(struct ipv6hdr) + IPV6_MAXPLEN) {
-		unsigned int maxnonfragsize, headersize;
-
-		headersize = sizeof(struct ipv6hdr) +
-			     (opt ? opt->opt_flen + opt->opt_nflen : 0) +
-			     (dst_allfrag(&rt->dst) ?
-			      sizeof(struct frag_hdr) : 0) +
-			     rt->rt6i_nfheader_len;
-
-		maxnonfragsize = (np->pmtudisc >= IPV6_PMTUDISC_DO) ?
-				 mtu : sizeof(struct ipv6hdr) + IPV6_MAXPLEN;
 
 		/* dontfrag active */
 		if ((cork->length + length > mtu - headersize) && dontfrag &&
@@ -1282,7 +1283,7 @@ emsgsize:
 
 	skb = skb_peek_tail(&sk->sk_write_queue);
 	cork->length += length;
-	if ((((length + fragheaderlen) > mtu) ||
+	if ((((length + (skb ? skb->len : headersize)) > mtu) ||
 	     (skb && skb_is_gso(skb))) &&
 	    (sk->sk_protocol == IPPROTO_UDP) &&
 	    (rt->dst.dev->features & NETIF_F_UFO) && !dst_xfrm(&rt->dst) &&
