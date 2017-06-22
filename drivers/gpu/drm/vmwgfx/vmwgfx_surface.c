@@ -1178,7 +1178,7 @@ int vmw_gb_surface_define_ioctl(struct drm_device *dev, void *data,
 	uint32_t size;
 	struct vmw_master *vmaster = vmw_master(file_priv->master);
 	const struct svga3d_surface_desc *desc;
-	uint32_t backup_handle;
+	uint32_t backup_handle = 0;
 
 	if (req->mip_levels > DRM_VMW_MAX_MIP_LEVELS)
 		return -EINVAL;
@@ -1247,6 +1247,17 @@ int vmw_gb_surface_define_ioctl(struct drm_device *dev, void *data,
 	if (req->buffer_handle != SVGA3D_INVALID_ID) {
 		ret = vmw_user_dmabuf_lookup(tfile, req->buffer_handle,
 					     &res->backup);
+		if (ret == 0) {
+			if (res->backup->base.num_pages * PAGE_SIZE <
+			    res->backup_size) {
+				DRM_ERROR("Surface backup buffer is too small.\n");
+				vmw_dmabuf_unreference(&res->backup);
+				ret = -EINVAL;
+				goto out_unlock;
+			}
+		} else {
+			backup_handle = req->buffer_handle;
+		}
 	} else if (req->drm_surface_flags &
 		   drm_vmw_surface_flag_create_buffer)
 		ret = vmw_user_dmabuf_alloc(dev_priv, tfile,
