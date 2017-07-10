@@ -1451,10 +1451,9 @@ static int do_set_master(struct net_device *dev, int ifindex)
 	return 0;
 }
 
-#define DO_SETLINK_MODIFIED	0x01
 static int do_setlink(const struct sk_buff *skb,
 		      struct net_device *dev, struct ifinfomsg *ifm,
-		      struct nlattr **tb, char *ifname, int status)
+		      struct nlattr **tb, char *ifname, int modified)
 {
 	const struct net_device_ops *ops = dev->netdev_ops;
 	int err;
@@ -1474,7 +1473,7 @@ static int do_setlink(const struct sk_buff *skb,
 		put_net(net);
 		if (err)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_MAP]) {
@@ -1503,7 +1502,7 @@ static int do_setlink(const struct sk_buff *skb,
 		if (err < 0)
 			goto errout;
 
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_ADDRESS]) {
@@ -1523,19 +1522,19 @@ static int do_setlink(const struct sk_buff *skb,
 		kfree(sa);
 		if (err)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_MTU]) {
 		err = dev_set_mtu(dev, nla_get_u32(tb[IFLA_MTU]));
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_GROUP]) {
 		dev_set_group(dev, nla_get_u32(tb[IFLA_GROUP]));
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	/*
@@ -1547,7 +1546,7 @@ static int do_setlink(const struct sk_buff *skb,
 		err = dev_change_name(dev, ifname);
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_IFALIAS]) {
@@ -1555,7 +1554,7 @@ static int do_setlink(const struct sk_buff *skb,
 				    nla_len(tb[IFLA_IFALIAS]));
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_BROADCAST]) {
@@ -1573,21 +1572,21 @@ static int do_setlink(const struct sk_buff *skb,
 		err = do_set_master(dev, nla_get_u32(tb[IFLA_MASTER]));
 		if (err)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_CARRIER]) {
 		err = dev_change_carrier(dev, nla_get_u8(tb[IFLA_CARRIER]));
 		if (err)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_TXQLEN]) {
 		unsigned long value = nla_get_u32(tb[IFLA_TXQLEN]);
 
 		if (dev->tx_queue_len ^ value)
-			status |= DO_SETLINK_MODIFIED;
+			modified = 1;
 
 		dev->tx_queue_len = value;
 	}
@@ -1600,7 +1599,7 @@ static int do_setlink(const struct sk_buff *skb,
 
 		write_lock_bh(&dev_base_lock);
 		if (dev->link_mode ^ value)
-			status |= DO_SETLINK_MODIFIED;
+			modified = 1;
 		dev->link_mode = value;
 		write_unlock_bh(&dev_base_lock);
 	}
@@ -1623,7 +1622,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = do_setvfinfo(dev, vfinfo);
 			if (err < 0)
 				goto errout;
-			status |= DO_SETLINK_MODIFIED;
+			modified = 1;
 		}
 	}
 	err = 0;
@@ -1653,7 +1652,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = ops->ndo_set_vf_port(dev, vf, port);
 			if (err < 0)
 				goto errout;
-			status |= DO_SETLINK_MODIFIED;
+			modified = 1;
 		}
 	}
 	err = 0;
@@ -1671,7 +1670,7 @@ static int do_setlink(const struct sk_buff *skb,
 			err = ops->ndo_set_vf_port(dev, PORT_SELF_VF, port);
 		if (err < 0)
 			goto errout;
-		status |= DO_SETLINK_MODIFIED;
+		modified = 1;
 	}
 
 	if (tb[IFLA_AF_SPEC]) {
@@ -1688,13 +1687,13 @@ static int do_setlink(const struct sk_buff *skb,
 			if (err < 0)
 				goto errout;
 
-			status |= DO_SETLINK_MODIFIED;
+			modified = 1;
 		}
 	}
 	err = 0;
 
 errout:
-	if (err < 0 && status & DO_SETLINK_MODIFIED)
+	if (err < 0 && modified)
 		net_warn_ratelimited("A link change request failed with some changes committed already. Interface %s may have been left with an inconsistent configuration, please check.\n",
 				     dev->name);
 
@@ -1976,7 +1975,7 @@ replay:
 		}
 
 		if (dev) {
-			int status = 0;
+			int modified = 0;
 
 			if (nlh->nlmsg_flags & NLM_F_EXCL)
 				return -EEXIST;
@@ -1991,7 +1990,7 @@ replay:
 				err = ops->changelink(dev, tb, data);
 				if (err < 0)
 					return err;
-				status |= DO_SETLINK_MODIFIED;
+				modified = 1;
 			}
 
 			if (linkinfo[IFLA_INFO_SLAVE_DATA]) {
@@ -2002,10 +2001,10 @@ replay:
 							      tb, slave_data);
 				if (err < 0)
 					return err;
-				status |= DO_SETLINK_MODIFIED;
+				modified = 1;
 			}
 
-			return do_setlink(skb, dev, ifm, tb, ifname, status);
+			return do_setlink(skb, dev, ifm, tb, ifname, modified);
 		}
 
 		if (!(nlh->nlmsg_flags & NLM_F_CREATE)) {
