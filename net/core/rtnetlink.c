@@ -1595,12 +1595,8 @@ static int do_setlink(const struct sk_buff *skb,
 		set_operstate(dev, nla_get_u8(tb[IFLA_OPERSTATE]));
 
 	if (tb[IFLA_LINKMODE]) {
-		unsigned char value = nla_get_u8(tb[IFLA_LINKMODE]);
-
 		write_lock_bh(&dev_base_lock);
-		if (dev->link_mode ^ value)
-			modified = 1;
-		dev->link_mode = value;
+		dev->link_mode = nla_get_u8(tb[IFLA_LINKMODE]);
 		write_unlock_bh(&dev_base_lock);
 	}
 
