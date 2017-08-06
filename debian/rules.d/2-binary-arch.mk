@@ -81,11 +81,11 @@ install-%: checks-%
 	@echo Debug: $@ kernel_file $(kernel_file) kernfile $(kernfile) install_file $(install_file) instfile $(instfile)
 	dh_testdir
 	dh_testroot
-	dh_clean -k -p$(bin_pkg_name)-$*
-	dh_clean -k -p$(mods_pkg_name)-$*
-	dh_clean -k -p$(hdrs_pkg_name)-$*
+	dh_prep -p$(bin_pkg_name)-$*
+	dh_prep -p$(mods_pkg_name)-$*
+	dh_prep -p$(hdrs_pkg_name)-$*
 ifneq ($(skipdbg),true)
-	dh_clean -k -p$(dbg_pkg_name)-$*
+	dh_prep -p$(bin_pkg_name)-$*-dbgsym
 endif
 
 	# The main image
@@ -351,7 +351,7 @@ install-arch-headers:
 	@echo Debug: $@
 	dh_testdir
 	dh_testroot
-	dh_clean -k -plinux-libc-dev
+	dh_prep -plinux-libc-dev
 
 	rm -rf $(headers_tmp)
 	install -d $(headers_tmp) $(headers_dir)/usr/include/
