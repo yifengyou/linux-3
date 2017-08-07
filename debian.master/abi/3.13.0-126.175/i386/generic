@@ -8288,6 +8288,7 @@ EXPORT_SYMBOL vmlinux 0x8a221f3a	blk_integrity_is_initialized
 EXPORT_SYMBOL vmlinux 0x8a4778ec	tcf_exts_change
 EXPORT_SYMBOL vmlinux 0x8a490c90	rfkill_set_sw_state
 EXPORT_SYMBOL vmlinux 0x8a51d565	quota_send_warning
+EXPORT_SYMBOL vmlinux 0x8a59bab5	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x8a5b3814	tty_hung_up_p
 EXPORT_SYMBOL vmlinux 0x8a7a2b96	iw_handler_get_spy
 EXPORT_SYMBOL vmlinux 0x8a7d1c31	high_memory

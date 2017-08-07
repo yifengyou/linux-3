@@ -9678,6 +9678,7 @@ EXPORT_SYMBOL vmlinux 0xe69a9df4	hdmi_spd_infoframe_pack
 EXPORT_SYMBOL vmlinux 0xe6ab72a6	ipmi_set_my_LUN
 EXPORT_SYMBOL vmlinux 0xe6b6997c	init_task
 EXPORT_SYMBOL vmlinux 0xe6bb2ff4	generic_file_fsync
+EXPORT_SYMBOL vmlinux 0xe6d9cbd1	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0xe6e3b875	down_write
 EXPORT_SYMBOL vmlinux 0xe6ebcfda	__scsi_put_command
 EXPORT_SYMBOL vmlinux 0xe6fb675c	node_to_cpumask_map

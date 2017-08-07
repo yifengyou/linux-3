@@ -8872,6 +8872,7 @@ EXPORT_SYMBOL vmlinux 0xc4cd99bc	posix_acl_from_xattr
 EXPORT_SYMBOL vmlinux 0xc4e2a2b5	__pskb_copy
 EXPORT_SYMBOL vmlinux 0xc4e8e1db	security_inode_getsecctx
 EXPORT_SYMBOL vmlinux 0xc4ef0efe	jbd2_journal_set_triggers
+EXPORT_SYMBOL vmlinux 0xc4fc033b	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0xc4fc49fa	scsi_track_queue_full
 EXPORT_SYMBOL vmlinux 0xc5011703	netdev_lower_get_next_private_rcu
 EXPORT_SYMBOL vmlinux 0xc52da066	omap_set_dma_dest_params

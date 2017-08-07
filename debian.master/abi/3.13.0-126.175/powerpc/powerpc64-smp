@@ -9032,6 +9032,7 @@ EXPORT_SYMBOL vmlinux 0xc2f9c045	timespec_to_jiffies
 EXPORT_SYMBOL vmlinux 0xc2fb9ee1	_lv1_shutdown_logical_partition
 EXPORT_SYMBOL vmlinux 0xc2ffc59a	sk_free
 EXPORT_SYMBOL vmlinux 0xc310b981	strnstr
+EXPORT_SYMBOL vmlinux 0xc354a136	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0xc3583268	phy_start
 EXPORT_SYMBOL vmlinux 0xc35b2b67	mmc_wait_for_app_cmd
 EXPORT_SYMBOL vmlinux 0xc368a79f	udp_lib_getsockopt

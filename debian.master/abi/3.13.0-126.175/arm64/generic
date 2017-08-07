@@ -6098,6 +6098,7 @@ EXPORT_SYMBOL vmlinux 0x33efa48a	netif_skb_dev_features
 EXPORT_SYMBOL vmlinux 0x33f6777e	pci_find_capability
 EXPORT_SYMBOL vmlinux 0x33fcf44a	__kfifo_out_r
 EXPORT_SYMBOL vmlinux 0x34090581	dmam_alloc_noncoherent
+EXPORT_SYMBOL vmlinux 0x340e7e9c	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x3416c2f5	tty_name
 EXPORT_SYMBOL vmlinux 0x34184afe	current_kernel_time
 EXPORT_SYMBOL vmlinux 0x3429e44c	sdev_enable_disk_events

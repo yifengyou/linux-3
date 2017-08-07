@@ -7882,6 +7882,7 @@ EXPORT_SYMBOL vmlinux 0x83238e38	write_one_page
 EXPORT_SYMBOL vmlinux 0x833c8faa	elevator_alloc
 EXPORT_SYMBOL vmlinux 0x83907bbe	from_kprojid
 EXPORT_SYMBOL vmlinux 0x83a476ce	bitmap_scnlistprintf
+EXPORT_SYMBOL vmlinux 0x83a81bb5	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x83ada6d8	__neigh_create
 EXPORT_SYMBOL vmlinux 0x83b4d443	dcache_readdir
 EXPORT_SYMBOL vmlinux 0x83c304a3	__splice_from_pipe

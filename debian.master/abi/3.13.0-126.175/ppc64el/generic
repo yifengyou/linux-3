@@ -5329,6 +5329,7 @@ EXPORT_SYMBOL vmlinux 0x6bdafb6c	pcie_get_minimum_link
 EXPORT_SYMBOL vmlinux 0x6bdcfd99	qdisc_class_hash_remove
 EXPORT_SYMBOL vmlinux 0x6be06e91	netdev_emerg
 EXPORT_SYMBOL vmlinux 0x6beb2078	param_set_copystring
+EXPORT_SYMBOL vmlinux 0x6bf65419	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x6c1dfdbd	__vlan_find_dev_deep
 EXPORT_SYMBOL vmlinux 0x6c2695d5	dma_async_device_unregister
 EXPORT_SYMBOL vmlinux 0x6c2ad517	d_instantiate

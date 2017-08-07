@@ -9672,6 +9672,7 @@ EXPORT_SYMBOL vmlinux 0xe69a9df4	hdmi_spd_infoframe_pack
 EXPORT_SYMBOL vmlinux 0xe6ab72a6	ipmi_set_my_LUN
 EXPORT_SYMBOL vmlinux 0xe6ad8209	fsnotify_alloc_group
 EXPORT_SYMBOL vmlinux 0xe6b05d44	fb_blank
+EXPORT_SYMBOL vmlinux 0xe6d9cbd1	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0xe6e3b875	down_write
 EXPORT_SYMBOL vmlinux 0xe6ebb229	mfd_add_devices
 EXPORT_SYMBOL vmlinux 0xe6fb675c	node_to_cpumask_map

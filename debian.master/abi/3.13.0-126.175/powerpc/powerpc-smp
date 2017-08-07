@@ -7661,6 +7661,7 @@ EXPORT_SYMBOL vmlinux 0x778d4494	revalidate_disk
 EXPORT_SYMBOL vmlinux 0x779a18af	kstrtoll
 EXPORT_SYMBOL vmlinux 0x77b851c4	cacheable_memzero
 EXPORT_SYMBOL vmlinux 0x77bc13a0	strim
+EXPORT_SYMBOL vmlinux 0x77c39770	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x77c8f073	dev_loopback_xmit
 EXPORT_SYMBOL vmlinux 0x77df0847	__set_personality
 EXPORT_SYMBOL vmlinux 0x77ecac9f	zlib_inflateEnd

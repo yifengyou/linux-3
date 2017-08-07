@@ -8271,6 +8271,7 @@ EXPORT_SYMBOL vmlinux 0x8a0d9063	loop_backing_file
 EXPORT_SYMBOL vmlinux 0x8a1ab4ee	timeval_to_jiffies
 EXPORT_SYMBOL vmlinux 0x8a490c90	rfkill_set_sw_state
 EXPORT_SYMBOL vmlinux 0x8a51d565	quota_send_warning
+EXPORT_SYMBOL vmlinux 0x8a59bab5	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x8a5b8e8d	abx500_mask_and_set_register_interruptible
 EXPORT_SYMBOL vmlinux 0x8a6de1e9	genphy_resume
 EXPORT_SYMBOL vmlinux 0x8a7a8b8e	uart_update_timeout

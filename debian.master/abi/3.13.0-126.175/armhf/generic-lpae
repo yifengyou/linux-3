@@ -4463,6 +4463,7 @@ EXPORT_SYMBOL vmlinux 0x0ea6d83e	mmc_unregister_driver
 EXPORT_SYMBOL vmlinux 0x0eaf451e	hdmi_vendor_infoframe_pack
 EXPORT_SYMBOL vmlinux 0x0ee4361c	jbd2_log_start_commit
 EXPORT_SYMBOL vmlinux 0x0eed8d66	ppp_output_wakeup
+EXPORT_SYMBOL vmlinux 0x0ef970b0	devm_ioremap_wc
 EXPORT_SYMBOL vmlinux 0x0efcbb1b	set_current_groups
 EXPORT_SYMBOL vmlinux 0x0eff1226	single_open_size
 EXPORT_SYMBOL vmlinux 0x0f0a02fa	xfrm_policy_walk
