@@ -293,9 +293,11 @@ load_b:
 			X = K;
 			continue;
 		case BPF_S_LD_MEM:
+			osb();
 			A = mem[K];
 			continue;
 		case BPF_S_LDX_MEM:
+			osb();
 			X = mem[K];
 			continue;
 		case BPF_S_MISC_TAX:
