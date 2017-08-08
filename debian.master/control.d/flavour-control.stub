@@ -27,9 +27,9 @@ Section: kernel
 Priority: optional
 Pre-Depends: dpkg (>= 1.10.24)
 Provides: linux-image, linux-image-3.0, fuse-module, =PROVIDES=
-Depends: ${misc:Depends}, ${shlibs:Depends}, initramfs-tools (>= 0.36ubuntu6), module-init-tools (>= 3.3-pre11-4ubuntu3)
+Depends: ${misc:Depends}, ${shlibs:Depends}, module-init-tools (>= 3.3-pre11-4ubuntu3)
 Conflicts: hotplug (<< 0.0.20040105-1)
-Recommends: BOOTLOADER
+Recommends: BOOTLOADER, initramfs-tools (>= 0.36ubuntu6)
 Suggests: fdutils, SRCPKGNAME-doc-PKGVER | SRCPKGNAME-source-PKGVER, SRCPKGNAME-tools, linux-headers-PKGVER-ABINUM-FLAVOUR
 Description: Linux kernel image for version PKGVER on DESC
  This package contains the Linux kernel image for version PKGVER on
