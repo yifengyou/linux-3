@@ -173,6 +173,10 @@ static int enable_media(struct tipc_bearer *tb_ptr)
 	dev = dev_get_by_name(&init_net, driver_name);
 	if (!dev)
 		return -ENODEV;
+	if (tipc_mtu_bad(dev, 0)) {
+		dev_put(dev);
+		return -EINVAL;
+	}
 
 	/* Create InfiniBand bearer for device */
 	ib_ptr->dev = dev;
@@ -251,8 +255,6 @@ static int recv_notification(struct notifier_block *nb, unsigned long evt,
 	if (!ib_ptr->bearer)
 		return NOTIFY_DONE;		/* bearer had been disabled */
 
-	ib_ptr->bearer->mtu = dev->mtu;
-
 	switch (evt) {
 	case NETDEV_CHANGE:
 		if (netif_carrier_ok(dev))
@@ -267,6 +269,11 @@ static int recv_notification(struct notifier_block *nb, unsigned long evt,
 		tipc_block_bearer(ib_ptr->bearer);
 		break;
 	case NETDEV_CHANGEMTU:
+		if (tipc_mtu_bad(dev, 0)) {
+			tipc_disable_bearer(ib_ptr->bearer->name);
+			break;
+		}
+		ib_ptr->bearer->mtu = dev->mtu;
 	case NETDEV_CHANGEADDR:
 		tipc_block_bearer(ib_ptr->bearer);
 		tipc_continue(ib_ptr->bearer);
