@@ -783,6 +783,15 @@ static void init_amd(struct cpuinfo_x86 *c)
 	if (cpu_has_amd_erratum(c, amd_erratum_400))
 		set_cpu_bug(c, X86_BUG_AMD_APIC_C1E);
 
+	if (c->x86 == 0x17) {
+		/*
+		 * Fix erratum 1076: CPB feature bit not being set in CPUID.
+		 * It affects all up to and including B1.
+		 */
+		if (c->x86_model <= 1 && c->x86_mask <= 1)
+			set_cpu_cap(c, X86_FEATURE_CPB);
+	}
+
 	/* AMD speculative control support */
 	if (cpu_has(c, X86_FEATURE_SPEC_CTRL)) {
 		pr_info_once("FEATURE SPEC_CTRL Present\n");
