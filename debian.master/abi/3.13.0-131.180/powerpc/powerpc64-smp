@@ -9560,6 +9560,7 @@ EXPORT_SYMBOL vmlinux 0xe31a4bd4	md_done_sync
 EXPORT_SYMBOL vmlinux 0xe33eeb6e	input_unregister_device
 EXPORT_SYMBOL vmlinux 0xe34948c4	fixed_size_llseek
 EXPORT_SYMBOL vmlinux 0xe35c5285	of_find_node_by_phandle
+EXPORT_SYMBOL vmlinux 0xe36b1013	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0xe36e3839	mb_cache_entry_alloc
 EXPORT_SYMBOL vmlinux 0xe37228c1	sock_no_setsockopt
 EXPORT_SYMBOL vmlinux 0xe38ccd38	__nla_reserve

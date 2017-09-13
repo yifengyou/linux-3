@@ -7737,6 +7737,7 @@ EXPORT_SYMBOL vmlinux 0x7f364344	tcp_v4_md5_lookup
 EXPORT_SYMBOL vmlinux 0x7f43a33f	devm_backlight_device_register
 EXPORT_SYMBOL vmlinux 0x7f4fb879	dm_get_mapinfo
 EXPORT_SYMBOL vmlinux 0x7f530555	block_is_partially_uptodate
+EXPORT_SYMBOL vmlinux 0x7f617b6c	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x7f63b31e	_memcpy_toio
 EXPORT_SYMBOL vmlinux 0x7f69bd1d	tty_unregister_device
 EXPORT_SYMBOL vmlinux 0x7f8da190	block_write_begin

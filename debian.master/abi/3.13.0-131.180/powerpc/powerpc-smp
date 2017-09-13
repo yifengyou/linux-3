@@ -9611,6 +9611,7 @@ EXPORT_SYMBOL vmlinux 0xf0fd4e8f	rwsem_down_read_failed
 EXPORT_SYMBOL vmlinux 0xf10ca3e7	lockref_get_or_lock
 EXPORT_SYMBOL vmlinux 0xf10de535	ioread8
 EXPORT_SYMBOL vmlinux 0xf11cd6ce	down_interruptible
+EXPORT_SYMBOL vmlinux 0xf120379a	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0xf120872a	dql_completed
 EXPORT_SYMBOL vmlinux 0xf120906a	agp_generic_alloc_user
 EXPORT_SYMBOL vmlinux 0xf13feb57	radix_tree_next_chunk

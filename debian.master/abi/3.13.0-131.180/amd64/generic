@@ -6112,6 +6112,7 @@ EXPORT_SYMBOL vmlinux 0x0f4cadd3	dev_activate
 EXPORT_SYMBOL vmlinux 0x0f5adeab	xfrm_policy_insert
 EXPORT_SYMBOL vmlinux 0x0f684706	skb_put
 EXPORT_SYMBOL vmlinux 0x0f6dc680	sock_no_getsockopt
+EXPORT_SYMBOL vmlinux 0x0f77c7b1	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x0f794f55	jbd2_journal_update_sb_errno
 EXPORT_SYMBOL vmlinux 0x0f7dab11	__skb_checksum
 EXPORT_SYMBOL vmlinux 0x0f806702	sock_create_kern

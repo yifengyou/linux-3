@@ -9677,6 +9677,7 @@ EXPORT_SYMBOL vmlinux 0xe1665ab5	truncate_pagecache
 EXPORT_SYMBOL vmlinux 0xe1761617	security_inet_conn_request
 EXPORT_SYMBOL vmlinux 0xe176ee34	d_make_root
 EXPORT_SYMBOL vmlinux 0xe1beeb62	xfrm_init_state
+EXPORT_SYMBOL vmlinux 0xe1c179d1	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0xe1e0702c	vga_switcheroo_register_client
 EXPORT_SYMBOL vmlinux 0xe1f10e6d	generic_splice_sendpage
 EXPORT_SYMBOL vmlinux 0xe200f872	secure_dccpv6_sequence_number

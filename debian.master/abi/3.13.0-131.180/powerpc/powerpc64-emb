@@ -8279,6 +8279,7 @@ EXPORT_SYMBOL vmlinux 0x9ba7089d	argv_split
 EXPORT_SYMBOL vmlinux 0x9bae4c7f	generic_pipe_buf_confirm
 EXPORT_SYMBOL vmlinux 0x9bba93f4	sock_get_timestampns
 EXPORT_SYMBOL vmlinux 0x9bd5bee2	phy_driver_unregister
+EXPORT_SYMBOL vmlinux 0x9be50f6e	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x9be7bde4	security_tun_dev_attach
 EXPORT_SYMBOL vmlinux 0x9c242d3b	clocksource_unregister
 EXPORT_SYMBOL vmlinux 0x9c38eac5	tcp_v4_conn_request

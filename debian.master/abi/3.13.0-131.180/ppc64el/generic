@@ -6443,6 +6443,7 @@ EXPORT_SYMBOL vmlinux 0xb2125ec5	__blk_run_queue
 EXPORT_SYMBOL vmlinux 0xb2458b43	phy_mac_interrupt
 EXPORT_SYMBOL vmlinux 0xb2682405	utf8_to_utf32
 EXPORT_SYMBOL vmlinux 0xb271edca	fsnotify_put_mark
+EXPORT_SYMBOL vmlinux 0xb29ec6bd	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0xb2be6e92	netdev_stats_to_stats64
 EXPORT_SYMBOL vmlinux 0xb2d04688	tcp_init_xmit_timers
 EXPORT_SYMBOL vmlinux 0xb2d311f8	crypto_sha256_update

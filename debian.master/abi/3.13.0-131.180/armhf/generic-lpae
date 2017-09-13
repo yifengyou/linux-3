@@ -6125,6 +6125,7 @@ EXPORT_SYMBOL vmlinux 0x7833deb2	pgprot_user
 EXPORT_SYMBOL vmlinux 0x783b3563	wake_up_atomic_t
 EXPORT_SYMBOL vmlinux 0x7865c074	clocksource_change_rating
 EXPORT_SYMBOL vmlinux 0x7880c781	dm_kcopyd_prepare_callback
+EXPORT_SYMBOL vmlinux 0x78940e0a	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x789affb1	frontswap_tmem_exclusive_gets
 EXPORT_SYMBOL vmlinux 0x78b51b30	free_buffer_head
 EXPORT_SYMBOL vmlinux 0x78c4cb5e	uart_match_port

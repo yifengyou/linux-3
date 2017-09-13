@@ -6860,6 +6860,7 @@ EXPORT_SYMBOL vmlinux 0x39bac5aa	wait_iff_congested
 EXPORT_SYMBOL vmlinux 0x39e50745	ndo_dflt_bridge_getlink
 EXPORT_SYMBOL vmlinux 0x3a013b7d	remove_wait_queue
 EXPORT_SYMBOL vmlinux 0x3a08475f	platform_thermal_notify
+EXPORT_SYMBOL vmlinux 0x3a2fdb82	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x3a32839e	intel_gtt_chipset_flush
 EXPORT_SYMBOL vmlinux 0x3a3a12c4	scsi_unblock_requests
 EXPORT_SYMBOL vmlinux 0x3a41f62e	poll_schedule_timeout

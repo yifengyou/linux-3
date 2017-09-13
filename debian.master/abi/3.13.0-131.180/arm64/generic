@@ -5762,6 +5762,7 @@ EXPORT_SYMBOL vmlinux 0x1f7d35b4	fib_default_rule_add
 EXPORT_SYMBOL vmlinux 0x1f7da002	sock_common_setsockopt
 EXPORT_SYMBOL vmlinux 0x1f7de3d3	cdev_alloc
 EXPORT_SYMBOL vmlinux 0x1f843d42	security_inode_readlink
+EXPORT_SYMBOL vmlinux 0x1fa3df5a	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x1fba2033	generic_write_checks
 EXPORT_SYMBOL vmlinux 0x1fbd16da	ip_tos2prio
 EXPORT_SYMBOL vmlinux 0x1fcf4d4b	_raw_read_unlock_bh

@@ -8129,6 +8129,7 @@ EXPORT_SYMBOL vmlinux 0x876dafc3	ec_write
 EXPORT_SYMBOL vmlinux 0x8779a34f	param_ops_byte
 EXPORT_SYMBOL vmlinux 0x878ab3ce	sysctl_tcp_adv_win_scale
 EXPORT_SYMBOL vmlinux 0x87aaddf8	wrmsr_safe_regs_on_cpu
+EXPORT_SYMBOL vmlinux 0x87c36e94	posix_acl_update_mode
 EXPORT_SYMBOL vmlinux 0x87c58a96	smp_call_function_many
 EXPORT_SYMBOL vmlinux 0x87dc469a	mempool_create_node
 EXPORT_SYMBOL vmlinux 0x87ed0ace	scsicam_bios_param
