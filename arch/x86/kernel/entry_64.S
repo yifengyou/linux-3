@@ -60,6 +60,7 @@
 #include <asm/smap.h>
 #include <asm/pgtable_types.h>
 #include <asm/kaiser.h>
+#include <asm/spec_ctrl.h>
 #include <linux/err.h>
 
 /* Avoid __ASSEMBLER__'ifying <linux/audit.h> just for this.  */
@@ -506,6 +507,7 @@ ENDPROC(native_usergs_sysret64)
 	je 1f
 	SWAPGS
 	SWITCH_KERNEL_CR3
+	ENABLE_IBRS
 	/*
 	 * irq_count is used to check if a CPU is already on an interrupt stack
 	 * or not. While this is essentially redundant with preempt_count it is
@@ -579,6 +581,7 @@ ENTRY(save_paranoid)
 	movq	%rax, %cr3
 2:
 #endif
+	ENABLE_IBRS
 	ret
 	CFI_ENDPROC
 END(save_paranoid)
@@ -672,7 +675,6 @@ ENTRY(system_call)
 	 * for the guest and jump here on syscall.
 	 */
 GLOBAL(system_call_after_swapgs)
-
 	movq	%rsp,PER_CPU_VAR(old_rsp)
 	movq	PER_CPU_VAR(kernel_stack),%rsp
 	/*
@@ -684,6 +686,9 @@ GLOBAL(system_call_after_swapgs)
 	movq  %rax,ORIG_RAX-ARGOFFSET(%rsp)
 	movq  %rcx,RIP-ARGOFFSET(%rsp)
 	CFI_REL_OFFSET rip,RIP-ARGOFFSET
+
+	ENABLE_IBRS	/* Hoping Xen calls in with right CR3 */
+
 	testl $_TIF_WORK_SYSCALL_ENTRY,TI_flags+THREAD_INFO(%rsp,RIP-ARGOFFSET)
 	jnz tracesys
 system_call_fastpath:
@@ -715,6 +720,7 @@ sysret_check:
 	/*
 	 * sysretq will re-enable interrupts:
 	 */
+	DISABLE_IBRS
 	TRACE_IRQS_ON
 	movq RIP-ARGOFFSET(%rsp),%rcx
 	CFI_REGISTER	rip,rcx
@@ -1111,6 +1117,7 @@ retint_swapgs:		/* return to user-space */
 	 * switch CR3 in NMIs.  Normal interrupts are OK because
 	 * they are off here.
 	 */
+	DISABLE_IBRS
 	SWITCH_USER_CR3
 	SWAPGS
 	jmp restore_args
@@ -1638,6 +1645,7 @@ paranoid_kernel:
 	/* No ALTERNATIVE for X86_FEATURE_KAISER: paranoid_entry sets %ebx */
 	testl	$2, %ebx			/* SWITCH_USER_CR3 needed? */
 	jz	paranoid_exit_no_switch
+	DISABLE_IBRS
 	SWITCH_USER_CR3
 paranoid_exit_no_switch:
 #endif
@@ -1708,6 +1716,7 @@ ENTRY(error_entry)
 	 * the kernel CR3 here.
 	 */
 	SWITCH_KERNEL_CR3
+	ENABLE_IBRS_CLOBBER
 	xorl %ebx,%ebx
 	testl $3,CS+8(%rsp)
 	je error_kernelspace
