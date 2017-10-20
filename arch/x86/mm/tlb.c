@@ -13,6 +13,7 @@
 #include <asm/cache.h>
 #include <asm/apic.h>
 #include <asm/uv/uv.h>
+#include <asm/microcode.h>
 #include <asm/kaiser.h>
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct tlb_state, cpu_tlbstate)
@@ -98,6 +99,9 @@ void switch_mm_irqs_off(struct mm_struct *prev, struct mm_struct *next,
 			struct task_struct *tsk)
 {
 	unsigned cpu = smp_processor_id();
+
+	if (boot_cpu_has(X86_FEATURE_SPEC_CTRL))
+		native_wrmsrl(MSR_IA32_PRED_CMD, FEATURE_SET_IBPB);
 
 	if (likely(prev != next)) {
 		this_cpu_write(cpu_tlbstate.state, TLBSTATE_OK);
