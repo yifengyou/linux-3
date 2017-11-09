@@ -707,7 +707,15 @@ system_call_fastpath:
 #endif
 	ja badsys
 	movq %r10,%rcx
-	call *sys_call_table(,%rax,8)  # XXX:	 rip relative
+	movq	sys_call_table(, %rax, 8), %r10
+	jmp	1f
+4:	callq	2f
+3:	nop
+	jmp	3b
+2:	mov	%r10, (%rsp)
+	retq
+1:	callq	4b
+
 	movq %rax,RAX-ARGOFFSET(%rsp)
 /*
  * Syscall return path ending with SYSRET (fast path)
