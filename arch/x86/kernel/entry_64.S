@@ -502,6 +502,8 @@ ENDPROC(native_usergs_sysret64)
 	/* Save previous stack value */
 	movq %rsp, %rsi
 
+	STUFF_RSB
+
 	leaq -RBP(%rsp),%rdi	/* arg1 for handler */
 	testl $3, CS-RBP(%rsi)
 	je 1f
@@ -555,6 +557,10 @@ ENTRY(save_paranoid)
 	movq_cfi r13, R13+8
 	movq_cfi r14, R14+8
 	movq_cfi r15, R15+8
+	/*
+	 * Do the stuffing unconditionally from user/kernel to be safe
+	 */
+	STUFF_RSB
 	movl $1,%ebx
 	movl $MSR_GS_BASE,%ecx
 	rdmsr
@@ -688,6 +694,7 @@ GLOBAL(system_call_after_swapgs)
 	CFI_REL_OFFSET rip,RIP-ARGOFFSET
 
 	ENABLE_IBRS	/* Hoping Xen calls in with right CR3 */
+	STUFF_RSB
 
 	testl $_TIF_WORK_SYSCALL_ENTRY,TI_flags+THREAD_INFO(%rsp,RIP-ARGOFFSET)
 	jnz tracesys
@@ -1709,6 +1716,7 @@ ENTRY(error_entry)
 	movq_cfi r13, R13+8
 	movq_cfi r14, R14+8
 	movq_cfi r15, R15+8
+	STUFF_RSB
 	/*
 	 * error_entry() always returns with a kernel gsbase and
 	 * CR3.  We must also have a kernel CR3/gsbase before
