@@ -55,6 +55,10 @@ static unsigned char shutdown_timeout = 5;
 module_param(shutdown_timeout, byte, 0644);
 MODULE_PARM_DESC(shutdown_timeout, "timeout in seconds for controller shutdown");
 
+unsigned char io_timeout = 30;
+module_param(io_timeout, byte, 0644);
+MODULE_PARM_DESC(io_timeout, "timeout in seconds for I/O");
+
 static int nvme_major;
 module_param(nvme_major, int, 0);
 
