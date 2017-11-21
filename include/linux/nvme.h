@@ -66,7 +66,7 @@ enum {
 
 #define NVME_VS(major, minor)	(major << 16 | minor)
 
-extern unsigned char io_timeout;
+extern unsigned int io_timeout;
 #define NVME_IO_TIMEOUT	(io_timeout * HZ)
 
 /*
