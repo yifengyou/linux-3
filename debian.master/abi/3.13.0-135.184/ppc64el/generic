@@ -4730,6 +4730,7 @@ EXPORT_SYMBOL vmlinux 0x46762b76	tty_port_close
 EXPORT_SYMBOL vmlinux 0x4694c727	agp_generic_enable
 EXPORT_SYMBOL vmlinux 0x46998f16	task_tgid_nr_ns
 EXPORT_SYMBOL vmlinux 0x46b2edb0	tcp_hashinfo
+EXPORT_SYMBOL vmlinux 0x46c47fb6	__node_distance
 EXPORT_SYMBOL vmlinux 0x46cfd79c	cancel_dirty_page
 EXPORT_SYMBOL vmlinux 0x46d12956	wait_for_completion_interruptible_timeout
 EXPORT_SYMBOL vmlinux 0x46feb099	dm_read_arg

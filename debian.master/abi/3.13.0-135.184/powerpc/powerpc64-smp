@@ -6924,6 +6924,7 @@ EXPORT_SYMBOL vmlinux 0x46a0e601	dget_parent
 EXPORT_SYMBOL vmlinux 0x46afd532	on_each_cpu_mask
 EXPORT_SYMBOL vmlinux 0x46b4f296	pci_find_capability
 EXPORT_SYMBOL vmlinux 0x46bcd46e	pcie_port_service_register
+EXPORT_SYMBOL vmlinux 0x46c47fb6	__node_distance
 EXPORT_SYMBOL vmlinux 0x46cfb590	dquot_writeback_dquots
 EXPORT_SYMBOL vmlinux 0x46d12956	wait_for_completion_interruptible_timeout
 EXPORT_SYMBOL vmlinux 0x46feb099	dm_read_arg
