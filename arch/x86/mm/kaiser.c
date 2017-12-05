@@ -24,6 +24,7 @@ extern struct mm_struct init_mm;
 #include <asm/pgalloc.h>
 #include <asm/desc.h>
 #include <asm/cmdline.h>
+#include <asm/kvmclock.h>
 
 int kaiser_enabled __read_mostly = 1;
 EXPORT_SYMBOL(kaiser_enabled);	/* for inlined TLB flush functions */
@@ -372,7 +373,8 @@ void __init kaiser_init(void)
 				  vsyscall_pgprot);
 
 #ifdef CONFIG_PARAVIRT_CLOCK
-	for (idx = 0; idx <= (PVCLOCK_FIXMAP_END-PVCLOCK_FIXMAP_BEGIN); idx++) {
+	for (idx = 0; kvm_clock.archdata.vclock_mode == VCLOCK_PVCLOCK &&
+		     idx <= (PVCLOCK_FIXMAP_END-PVCLOCK_FIXMAP_BEGIN); idx++) {
 		kaiser_add_user_map_early((void *)__fix_to_virt(PVCLOCK_FIXMAP_BEGIN + idx),
 					  PAGE_SIZE,
 					  __PAGE_KERNEL_VVAR | _PAGE_GLOBAL);
