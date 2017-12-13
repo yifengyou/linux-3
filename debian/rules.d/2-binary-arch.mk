@@ -395,6 +395,7 @@ endif
 binary-%: pkgimg = $(bin_pkg_name)-$*
 binary-%: pkgimg_mods = $(mods_pkg_name)-$*
 binary-%: pkgimg_ex = $(mods_extra_pkg_name)-$*
+binary-%: pkgdir_ex = $(CURDIR)/debian/$(mods_extra_pkg_name)-$*
 binary-%: pkghdr = $(hdrs_pkg_name)-$*
 binary-%: dbgpkg = $(bin_pkg_name)-$*-dbgsym
 binary-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
@@ -427,6 +428,14 @@ binary-%: install-%
 	dh_builddeb -p$(pkgimg_mods)
 
 ifeq ($(do_extras_package),true)
+  ifeq ($(ship_extras_package),false)
+	# If $(ship_extras_package) is explicitly set to false, then do not
+	# construct the linux-image-extra package; instead just log all of the
+	# "extra" modules which were pointlessly built yet won't be shipped.
+	find $(pkgdir_ex) -name '*.ko' | sort \
+		| sed 's|^$(pkgdir_ex)/|NOT-SHIPPED |' \
+		| tee -a $(target_flavour).not-shipped.log;
+  else
 	if [ -f $(DEBIAN)/control.d/$(target_flavour).inclusion-list ] ; then \
 		dh_installchangelogs -p$(pkgimg_ex); \
 		dh_installdocs -p$(pkgimg_ex); \
@@ -438,6 +447,7 @@ ifeq ($(do_extras_package),true)
 		dh_md5sums -p$(pkgimg_ex); \
 		dh_builddeb -p$(pkgimg_ex) -- -Zbzip2 -z9; \
 	fi
+  endif
 endif
 
 	dh_installchangelogs -p$(pkghdr)
