@@ -12,6 +12,9 @@
 #include <linux/ftrace.h>
 #include <xen/xen.h>
 
+#undef pr_fmt
+#define pr_fmt(fmt)     "Kernel/User page tables isolation: " fmt
+
 extern struct mm_struct init_mm;
 
 #include <asm/kaiser.h>
@@ -300,7 +303,7 @@ enable:
 	return;
 
 disable:
-	pr_info("Kernel/User page tables isolation: disabled\n");
+	pr_info("disabled\n");
 
 silent_disable:
 	kaiser_enabled = 0;
@@ -375,6 +378,8 @@ void __init kaiser_init(void)
 					  __PAGE_KERNEL_VVAR | _PAGE_GLOBAL);
 	}
 #endif
+
+	pr_info("enabled\n");
 }
 
 /* Add a mapping to the shadow mapping, and synchronize the mappings */
