@@ -18,6 +18,8 @@
 #include <asm/smp.h>
 #include <asm/pmc.h>
 #include <asm/firmware.h>
+#include <asm/ppc_asm.h>
+#include <asm/setup.h>
 
 #include "cacheinfo.h"
 
@@ -179,6 +181,44 @@ SYSFS_PMCSETUP(purr, SPRN_PURR);
 SYSFS_PMCSETUP(spurr, SPRN_SPURR);
 SYSFS_PMCSETUP(dscr, SPRN_DSCR);
 SYSFS_PMCSETUP(pir, SPRN_PIR);
+
+#ifdef CONFIG_PPC_BOOK3S_64
+extern bool rfi_flush;
+static ssize_t show_rfi_flush(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	return sprintf(buf, "%d\n", rfi_flush ? 1 : 0);
+}
+
+static ssize_t __used store_rfi_flush(struct device *dev,
+		struct device_attribute *attr, const char *buf,
+		size_t count)
+{
+	int val;
+	int ret = 0;
+
+	ret = sscanf(buf, "%d", &val);
+	if (ret != 1)
+		return -EINVAL;
+
+	if (val == 1)
+		rfi_flush_enable(true);
+	else if (val == 0)
+		rfi_flush_enable(false);
+	else
+		return -EINVAL;
+
+	return count;
+}
+
+static DEVICE_ATTR(rfi_flush, 0600,
+		show_rfi_flush, store_rfi_flush);
+
+static void sysfs_create_rfi_flush(void)
+{
+	device_create_file(cpu_subsys.dev_root, &dev_attr_rfi_flush);
+}
+#endif /* CONFIG_PPC_BOOK3S_64 */
 
 /*
   Lets only enable read for phyp resources and
@@ -683,6 +723,9 @@ static int __init topology_init(void)
 	}
 #ifdef CONFIG_PPC64
 	sysfs_create_dscr_default();
+#ifdef CONFIG_PPC_BOOK3S
+	sysfs_create_rfi_flush();
+#endif
 #endif /* CONFIG_PPC64 */
 
 	return 0;

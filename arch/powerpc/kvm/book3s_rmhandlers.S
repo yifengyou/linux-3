@@ -137,7 +137,7 @@ kvmppc_handler_skip_ins:
 	GET_SCRATCH0(r13)
 
 	/* And get back into the code */
-	RFI
+	RFI_TO_GUEST
 #endif
 
 /*
@@ -160,7 +160,7 @@ _GLOBAL(kvmppc_entry_trampoline)
 	ori	r5, r5, MSR_EE
 	mtsrr0	r7
 	mtsrr1	r6
-	RFI
+	RFI_TO_KERNEL
 
 #if defined(CONFIG_PPC_BOOK3S_32)
 #define STACK_LR	INT_FRAME_SIZE+4
