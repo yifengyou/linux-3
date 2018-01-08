@@ -147,7 +147,7 @@ no_dcbz32_on:
 	PPC_LL	r9, SVCPU_R9(r3)
 	PPC_LL	r3, (SVCPU_R3)(r3)
 
-	RFI
+	RFI_TO_GUEST
 kvmppc_handler_trampoline_enter_end:
 
 
@@ -371,5 +371,5 @@ END_FTR_SECTION_IFSET(CPU_FTR_HVMODE)
 	cmpwi	r12, BOOK3S_INTERRUPT_PERFMON
 	beqa	BOOK3S_INTERRUPT_PERFMON
 
-	RFI
+	RFI_TO_KERNEL
 kvmppc_handler_trampoline_exit_end:
