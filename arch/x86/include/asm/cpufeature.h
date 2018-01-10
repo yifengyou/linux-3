@@ -8,7 +8,7 @@
 #include <asm/required-features.h>
 #endif
 
-#define NCAPINTS	10	/* N 32-bit words worth of info */
+#define NCAPINTS	14	/* N 32-bit words worth of info */
 #define NBUGINTS	1	/* N 32-bit bug flags */
 
 /*
@@ -229,6 +229,9 @@
 #define X86_FEATURE_AVX512PF	(9*32+26) /* AVX-512 Prefetch */
 #define X86_FEATURE_AVX512ER	(9*32+27) /* AVX-512 Exponential and Reciprocal */
 #define X86_FEATURE_AVX512CD	(9*32+28) /* AVX-512 Conflict Detection */
+
+/* AMD-defined CPU features, CPUID level 0x80000008 (ebx), word 13 */
+#define X86_FEATURE_IBPB	(13*32+12) /* Indirect Branch Prediction Barrier */
 
 /*
  * BUG word(s)
