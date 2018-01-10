@@ -317,6 +317,9 @@ void post_mobility_fixup(void)
 		return;
 	}
 
+	/* Possibly switch to a new RFI flush type */
+	pseries_setup_rfi_flush();
+
 	return;
 }
 
