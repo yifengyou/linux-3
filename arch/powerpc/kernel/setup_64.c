@@ -778,16 +778,16 @@ static bool init_fallback_flush(void)
 	u64 l1d_size;
 	int cpu;
 
-	if (l1d_flush_fallback_area)
-		return true;
-
 	/*
-	 * Once the slab allocator is up it's too late to allocate the fallback
-	 * flush area, so return an error. This could happen if we migrated from
-	 * a patched machine to an unpatched machine.
+	 * On distros using bootmem, l1d_flush_fallback area is always allocated
+	 * (in BSS) and valid, so skip the checks for l1d_flush_fallback_area and
+	 * slab_is_available().
+	 *
+	 * Possibly it's not even needed to do any of the rest of this function
+	 *  _again_ (can anything set below can changed after LPM/other system?),
+	 * but keep it simple and don't try to different first from future calls,
+	 * just run it again in that case.
 	 */
-	if (slab_is_available())
-		return false;
 
 	l1d_size = ppc64_caches.dsize;
 
