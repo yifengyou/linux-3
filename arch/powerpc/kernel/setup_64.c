@@ -729,7 +729,8 @@ EXPORT_SYMBOL(ppc_pci_io);
 
 #ifdef CONFIG_PPC_BOOK3S_64
 static enum l1d_flush_type enabled_flush_types;
-static void *l1d_flush_fallback_area;
+#define MAX_L1D_SIZE (64 * 1024)
+static char l1d_flush_fallback_area[2 * MAX_L1D_SIZE] __page_aligned_bss;
 static bool no_rfi_flush;
 bool rfi_flush;
 
@@ -792,12 +793,16 @@ static bool init_fallback_flush(void)
 	limit = min(safe_stack_limit(), ppc64_rma_size);
 
 	/*
-	 * Align to L1d size, and size it at 2x L1d size, to catch possible
-	 * hardware prefetch runoff. We don't have a recipe for load patterns to
-	 * reliably avoid the prefetcher.
+	 * We allocate 2x L1d size for the dummy area, to
+	 * catch possible hardware prefetch runoff.
+	 *
+	 * We can't use memblock_alloc here because bootmem has
+	 * been initialized, and the bootmem APIs don't work well
+	 * with an upper limit we need, so we allocate it statically
+	 * from BSS. The biggest L1d supported by this kernel is
+	 * 64kB (POWER8), so 128kB is reserved above.
 	 */
-	l1d_flush_fallback_area = __va(memblock_alloc_base(l1d_size * 2, l1d_size, limit));
-	memset(l1d_flush_fallback_area, 0, l1d_size * 2);
+	WARN_ON(l1d_size > MAX_L1D_SIZE);
 
 	for_each_possible_cpu(cpu) {
 		/*
