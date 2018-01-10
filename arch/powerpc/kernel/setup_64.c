@@ -775,7 +775,7 @@ void rfi_flush_enable(bool enable)
 
 static bool init_fallback_flush(void)
 {
-	u64 l1d_size, limit;
+	u64 l1d_size;
 	int cpu;
 
 	if (l1d_flush_fallback_area)
@@ -790,7 +790,6 @@ static bool init_fallback_flush(void)
 		return false;
 
 	l1d_size = ppc64_caches.dsize;
-	limit = min(safe_stack_limit(), ppc64_rma_size);
 
 	/*
 	 * We allocate 2x L1d size for the dummy area, to
