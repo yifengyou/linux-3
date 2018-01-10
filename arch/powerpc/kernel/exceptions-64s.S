@@ -676,7 +676,7 @@ rfi_flush_fallback:
 	DCBT_STOP_ALL_STREAM_IDS(r11) /* Stop prefetch streams */
 
 	/* order ld/st prior to dcbt stop all streams with flushing */
-	hwsync
+	sync
 1:	li	r8,0
 	.rept	8 /* 8-way set associative */
 	ldx	r11,r10,r8
@@ -719,7 +719,7 @@ hrfi_flush_fallback:
 	DCBT_STOP_ALL_STREAM_IDS(r11) /* Stop prefetch streams */
 
 	/* order ld/st prior to dcbt stop all streams with flushing */
-	hwsync
+	sync
 1:	li	r8,0
 	.rept	8 /* 8-way set associative */
 	ldx	r11,r10,r8
