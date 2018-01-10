@@ -194,6 +194,7 @@ static ssize_t __used store_rfi_flush(struct device *dev,
 		struct device_attribute *attr, const char *buf,
 		size_t count)
 {
+	bool enable;
 	int val;
 	int ret = 0;
 
@@ -202,11 +203,15 @@ static ssize_t __used store_rfi_flush(struct device *dev,
 		return -EINVAL;
 
 	if (val == 1)
-		rfi_flush_enable(true);
+		enable = true;
 	else if (val == 0)
-		rfi_flush_enable(false);
+		enable = false;
 	else
 		return -EINVAL;
+
+	/* Only do anything if we're changing state */
+	if (enable != rfi_flush)
+		rfi_flush_enable(enable);
 
 	return count;
 }
