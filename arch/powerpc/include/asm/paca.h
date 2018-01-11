@@ -153,8 +153,6 @@ struct paca_struct {
 	struct opal_machine_check_event *opal_mc_evt;
 #endif
 #ifdef CONFIG_PPC_BOOK3S_64
-	void *rfi_flush_fallback_area;
-
 	/* Exclusive emergency stack pointer for machine check exception. */
 	void *mc_emergency_sp;
 	/*
@@ -189,6 +187,7 @@ struct paca_struct {
 	 * other paca data leaking into the L1d
 	 */
 	u64 exrfi[13] __aligned(0x80);
+	void *rfi_flush_fallback_area;
 	u64 l1d_flush_congruence;
 	u64 l1d_flush_sets;
 #endif
