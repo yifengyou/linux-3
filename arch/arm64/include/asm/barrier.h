@@ -30,6 +30,7 @@
 #define mb()		dsb()
 #define rmb()		asm volatile("dsb ld" : : : "memory")
 #define wmb()		asm volatile("dsb st" : : : "memory")
+#define gmb()		do { } while (0)
 
 #ifndef CONFIG_SMP
 #define smp_mb()	barrier()
