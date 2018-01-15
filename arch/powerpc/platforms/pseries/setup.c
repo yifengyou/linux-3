@@ -468,7 +468,7 @@ static long pseries_little_endian_exceptions(void)
 }
 #endif
 
-void pSeries_setup_rfi_flush(void)
+void pseries_setup_rfi_flush(void)
 {
 	unsigned long character, behaviour, rc;
 	enum l1d_flush_type types;
