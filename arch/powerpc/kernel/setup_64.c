@@ -804,7 +804,7 @@ static bool init_fallback_flush(void)
 	WARN_ON(l1d_size > MAX_L1D_SIZE);
 
 	for_each_possible_cpu(cpu) {
-		paca[cpu].l1d_flush_size = lid_size;
+		paca[cpu].l1d_flush_size = l1d_size;
 	}
 
 	return true;
