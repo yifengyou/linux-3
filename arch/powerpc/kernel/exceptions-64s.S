@@ -703,7 +703,7 @@ hrfi_flush_fallback:
 	mfctr	r9
 	ld	r10,PACA_RFI_FLUSH_FALLBACK_AREA(r13)
 	ld	r11,PACA_L1D_FLUSH_SIZE(r13)
-	srdi	r11,r11,11	/* 128 byte lines, unrolled 8x */
+	srdi	r11,r11,(7 + 3)	/* 128 byte lines, unrolled 8x */
 	mtctr	r11
 	DCBT_STOP_ALL_STREAM_IDS(r11) /* Stop prefetch streams */
 

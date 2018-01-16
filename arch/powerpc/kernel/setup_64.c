@@ -730,7 +730,7 @@ EXPORT_SYMBOL(ppc_pci_io);
 #ifdef CONFIG_PPC_BOOK3S_64
 static enum l1d_flush_type enabled_flush_types;
 #define MAX_L1D_SIZE (64 * 1024)
-//static char l1d_flush_fallback_area[2 * MAX_L1D_SIZE] __page_aligned_bss;
+static char l1d_flush_fallback_area[2 * MAX_L1D_SIZE] __page_aligned_bss;
 static bool no_rfi_flush;
 bool rfi_flush;
 
@@ -804,6 +804,7 @@ static bool init_fallback_flush(void)
 	WARN_ON(l1d_size > MAX_L1D_SIZE);
 
 	for_each_possible_cpu(cpu) {
+		paca[cpu].rfi_flush_fallback_area = l1d_flush_fallback_area;
 		paca[cpu].l1d_flush_size = l1d_size;
 	}
 
