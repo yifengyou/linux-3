@@ -3709,6 +3709,7 @@ EXPORT_SYMBOL vmlinux 0x05b91506	unregister_cdrom
 EXPORT_SYMBOL vmlinux 0x05f6b70b	unregister_netdev
 EXPORT_SYMBOL vmlinux 0x05f9edb5	blk_free_tags
 EXPORT_SYMBOL vmlinux 0x060733fe	serio_rescan
+EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x061fa39e	jbd2_log_wait_commit
 EXPORT_SYMBOL vmlinux 0x0628c1af	__cleancache_invalidate_page
@@ -4646,6 +4647,7 @@ EXPORT_SYMBOL vmlinux 0x41229ef4	netdev_refcnt_read
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x414f9221	d_move
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
+EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x416bd71b	pci_setup_cardbus
 EXPORT_SYMBOL vmlinux 0x416f25b6	cancel_delayed_work
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -6924,6 +6926,7 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1262886	rtas_data_buf
 EXPORT_SYMBOL vmlinux 0xd13267fd	mac_find_mode
 EXPORT_SYMBOL vmlinux 0xd16048e7	napi_gro_frags
+EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd190fede	devm_backlight_device_register
 EXPORT_SYMBOL vmlinux 0xd1ffd079	file_open_root
@@ -10781,6 +10784,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x081825b8	pci_dev_run_wake
 EXPORT_SYMBOL_GPL vmlinux 0x08272c46	pci_cfg_access_unlock
 EXPORT_SYMBOL_GPL vmlinux 0x0851eeb4	rio_release_inb_mbox
 EXPORT_SYMBOL_GPL vmlinux 0x086291b5	usb_put_intf
+EXPORT_SYMBOL_GPL vmlinux 0x086b449a	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0x088bfa7e	cancel_work_sync
 EXPORT_SYMBOL_GPL vmlinux 0x08bc0870	compat_put_timespec
 EXPORT_SYMBOL_GPL vmlinux 0x08f5e014	powercap_unregister_zone

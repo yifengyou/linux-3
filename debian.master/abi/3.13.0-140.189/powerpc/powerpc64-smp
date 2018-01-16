@@ -5879,6 +5879,7 @@ EXPORT_SYMBOL vmlinux 0x05a514a1	_insl_ns
 EXPORT_SYMBOL vmlinux 0x05d59746	mmc_gpio_free_ro
 EXPORT_SYMBOL vmlinux 0x05eccd93	security_path_rmdir
 EXPORT_SYMBOL vmlinux 0x05fab0e6	generic_delete_inode
+EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x06142b6f	register_qdisc
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x062f0e2b	__dev_get_by_index
@@ -6824,6 +6825,7 @@ EXPORT_SYMBOL vmlinux 0x41485e99	proc_remove
 EXPORT_SYMBOL vmlinux 0x4153c6b0	netif_carrier_off
 EXPORT_SYMBOL vmlinux 0x41592f22	kernel_sendmsg
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
+EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x417be65a	inet6_ioctl
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
 EXPORT_SYMBOL vmlinux 0x41b27f6b	tcp_prequeue
@@ -9254,6 +9256,7 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1262886	rtas_data_buf
 EXPORT_SYMBOL vmlinux 0xd13a1e9c	noop_qdisc
 EXPORT_SYMBOL vmlinux 0xd14a1795	tcp_gro_complete
+EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd161dda6	clear_bdi_congested
 EXPORT_SYMBOL vmlinux 0xd16be99c	generic_removexattr
 EXPORT_SYMBOL vmlinux 0xd17b572a	xfrm_lookup_route
@@ -16870,6 +16873,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xf57af6ec	tps65912_reg_write
 EXPORT_SYMBOL_GPL vmlinux 0xf5a691cd	invalidate_bh_lrus
 EXPORT_SYMBOL_GPL vmlinux 0xf5b18326	extcon_dev_unregister
 EXPORT_SYMBOL_GPL vmlinux 0xf5bcf1b2	__cookie_v4_check
+EXPORT_SYMBOL_GPL vmlinux 0xf5d18c67	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xf5dba310	stmpe_block_read
 EXPORT_SYMBOL_GPL vmlinux 0xf5e2f63f	crypto_alg_lookup
 EXPORT_SYMBOL_GPL vmlinux 0xf5fef4e3	wm5110_spi_regmap

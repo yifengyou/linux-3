@@ -6300,6 +6300,7 @@ EXPORT_SYMBOL vmlinux 0x41182cc0	pgprot_default
 EXPORT_SYMBOL vmlinux 0x412ed8a3	sock_update_memcg
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x415182d2	find_get_pages_tag
+EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x416e0b6f	seq_pad
 EXPORT_SYMBOL vmlinux 0x41705755	genphy_read_status
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -6406,6 +6407,7 @@ EXPORT_SYMBOL vmlinux 0x48bdad3b	vfs_unlink
 EXPORT_SYMBOL vmlinux 0x48bfef0a	tcp_read_sock
 EXPORT_SYMBOL vmlinux 0x48c6db53	of_get_child_by_name
 EXPORT_SYMBOL vmlinux 0x48cef9de	pneigh_enqueue
+EXPORT_SYMBOL vmlinux 0x48da7d6c	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x48dd8c70	tcf_hash_release
 EXPORT_SYMBOL vmlinux 0x48feef03	frontswap_register_ops
 EXPORT_SYMBOL vmlinux 0x49045426	icmp_err_convert
@@ -8490,6 +8492,7 @@ EXPORT_SYMBOL vmlinux 0xd0fb7cd4	__tasklet_hi_schedule_first
 EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1399a78	blk_fetch_request
 EXPORT_SYMBOL vmlinux 0xd140b89a	blk_alloc_queue_node
+EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd1922e32	amba_device_unregister
 EXPORT_SYMBOL vmlinux 0xd19e9c1c	mfd_add_devices
@@ -15315,6 +15318,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xfed33e25	regulator_bulk_disable
 EXPORT_SYMBOL_GPL vmlinux 0xfeeba082	balloon_mapping_alloc
 EXPORT_SYMBOL_GPL vmlinux 0xfef8a166	trace_current_buffer_lock_reserve
 EXPORT_SYMBOL_GPL vmlinux 0xff05fa13	vring_interrupt
+EXPORT_SYMBOL_GPL vmlinux 0xff4310ec	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xff50e536	subsys_find_device_by_id
 EXPORT_SYMBOL_GPL vmlinux 0xff59ea43	__mnt_drop_write
 EXPORT_SYMBOL_GPL vmlinux 0xff5a8cfe	cn_del_callback

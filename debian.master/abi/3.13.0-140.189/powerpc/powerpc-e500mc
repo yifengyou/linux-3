@@ -5897,6 +5897,7 @@ EXPORT_SYMBOL vmlinux 0x05c7c35e	qman_get_null_cb
 EXPORT_SYMBOL vmlinux 0x05cc6c9a	phy_ethtool_set_eee
 EXPORT_SYMBOL vmlinux 0x05dfe4b1	mmc_can_reset
 EXPORT_SYMBOL vmlinux 0x05e1e837	put_io_context
+EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x062fd7ab	mmc_start_req
 EXPORT_SYMBOL vmlinux 0x0634100a	bitmap_parselist_user
@@ -6836,6 +6837,7 @@ EXPORT_SYMBOL vmlinux 0x4122ae50	dev_addr_init
 EXPORT_SYMBOL vmlinux 0x41298900	d_instantiate_unique
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
+EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x4168619e	bman_pool_max
 EXPORT_SYMBOL vmlinux 0x417bff14	generic_file_remap_pages
 EXPORT_SYMBOL vmlinux 0x417ff7b6	mach_c293_pcie
@@ -9187,6 +9189,7 @@ EXPORT_SYMBOL vmlinux 0xd10c3452	idr_init
 EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd138719c	qman_recovery_exit
 EXPORT_SYMBOL vmlinux 0xd13ed9fb	blk_queue_segment_boundary
+EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd16944aa	__put_cred
 EXPORT_SYMBOL vmlinux 0xd16bc804	blk_queue_dma_pad
 EXPORT_SYMBOL vmlinux 0xd17fb0c4	dev_uc_del
@@ -14164,6 +14167,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x2bb30468	irq_remove_generic_chip
 EXPORT_SYMBOL_GPL vmlinux 0x2bb338d5	sdio_align_size
 EXPORT_SYMBOL_GPL vmlinux 0x2bc149bf	perf_pmu_migrate_context
 EXPORT_SYMBOL_GPL vmlinux 0x2bda141b	sysfs_put
+EXPORT_SYMBOL_GPL vmlinux 0x2beb9292	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0x2bf05b5d	crypto_shash_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x2bf9c978	rio_unregister_scan
 EXPORT_SYMBOL_GPL vmlinux 0x2bfaef4e	clk_gate_ops

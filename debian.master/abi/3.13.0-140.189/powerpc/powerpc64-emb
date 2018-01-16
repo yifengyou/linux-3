@@ -5889,6 +5889,7 @@ EXPORT_SYMBOL vmlinux 0x05c5158e	filemap_page_mkwrite
 EXPORT_SYMBOL vmlinux 0x05d39d55	cdev_init
 EXPORT_SYMBOL vmlinux 0x05f0c337	dev_addr_flush
 EXPORT_SYMBOL vmlinux 0x06076359	jbd2_journal_stop
+EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x061ec7ee	giveup_fpu
 EXPORT_SYMBOL vmlinux 0x061fd44d	register_netdevice
@@ -6847,6 +6848,7 @@ EXPORT_SYMBOL vmlinux 0x4145cf9e	file_update_time
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x41593c4d	sg_miter_stop
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
+EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x4168619e	bman_pool_max
 EXPORT_SYMBOL vmlinux 0x41790955	dquot_quota_off
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -9163,6 +9165,7 @@ EXPORT_SYMBOL vmlinux 0xd12960c8	dma_async_tx_descriptor_init
 EXPORT_SYMBOL vmlinux 0xd138719c	qman_recovery_exit
 EXPORT_SYMBOL vmlinux 0xd155d482	pm860x_set_bits
 EXPORT_SYMBOL vmlinux 0xd15a795c	pci_dev_driver
+EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd1ab292b	blk_make_request
 EXPORT_SYMBOL vmlinux 0xd1bd29cc	proc_mkdir_mode
@@ -14052,6 +14055,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x20f777e8	anon_transport_class_register
 EXPORT_SYMBOL_GPL vmlinux 0x21024c39	blk_end_request_err
 EXPORT_SYMBOL_GPL vmlinux 0x211dd93a	ata_host_register
 EXPORT_SYMBOL_GPL vmlinux 0x216f83ec	spi_master_suspend
+EXPORT_SYMBOL_GPL vmlinux 0x21cf31b8	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0x21d36a03	kvm_hypercall
 EXPORT_SYMBOL_GPL vmlinux 0x21d83a44	ata_wait_register
 EXPORT_SYMBOL_GPL vmlinux 0x21ef45bf	thermal_zone_unbind_cooling_device
