@@ -408,6 +408,13 @@ retpoline_auto:
 	spectre_v2_enabled = mode;
 	pr_info("%s\n", spectre_v2_strings[mode]);
 
+	/* Initialize Indirect Branch Prediction Barrier if supported */
+	if (boot_cpu_has(X86_FEATURE_SPEC_CTRL) ||
+	    boot_cpu_has(X86_FEATURE_AMD_PRED_CMD)) {
+		setup_force_cpu_cap(X86_FEATURE_IBPB);
+		pr_info("Enabling Indirect Branch Prediction Barrier\n");
+	}
+
 	pr_info("Speculation control IBPB %s IBRS %s",
 	        ibpb_supported ? "supported" : "not-supported",
 	        ibrs_supported ? "supported" : "not-supported");
@@ -839,7 +846,8 @@ static ssize_t cpu_show_common(struct device *dev, struct device_attribute *attr
 		return sprintf(buf, "Mitigation: __user pointer sanitization\n");
 
 	case X86_BUG_SPECTRE_V2:
-		return sprintf(buf, "%s%s\n", spectre_v2_strings[spectre_v2_enabled], ibpb_inuse ? ", IBPB (Intel v4)" : "");
+		return sprintf(buf, "%s%s\n", spectre_v2_strings[spectre_v2_enabled],
+			       ibpb_inuse ? ", IBPB (Intel v4)" : "");
 
 	case X86_BUG_SPEC_STORE_BYPASS:
 		return sprintf(buf, "%s\n", ssb_strings[ssb_mode]);

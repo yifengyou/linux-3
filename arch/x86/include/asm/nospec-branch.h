@@ -6,6 +6,7 @@
 #include <asm/alternative.h>
 #include <asm/alternative-asm.h>
 #include <asm/cpufeature.h>
+#include <asm/msr-index.h>
 
 /*
  * Fill the CPU return stack buffer.
@@ -219,6 +220,12 @@ void alternative_msr_write(unsigned int msr, u64 val, unsigned int feature)
 		    "d" ((u32)(val >> 32)),
 		    [feature] "i" (feature)
 		: "memory");
+}
+
+static inline void indirect_branch_prediction_barrier(void)
+{
+	alternative_msr_write(MSR_IA32_PRED_CMD, PRED_CMD_IBPB,
+			      X86_FEATURE_IBPB);
 }
 
 /* The Intel SPEC CTRL MSR base value cache */
