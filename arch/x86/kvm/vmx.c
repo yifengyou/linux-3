@@ -8719,12 +8719,7 @@ static int __init vmx_init(void)
 	for (i = 0; i < max_shadow_read_only_fields; i++)
 		clear_bit(shadow_read_only_fields[i], vmx_vmread_bitmap);
 
-	/*
-	 * Allow direct access to the PC debug port (it is often used for I/O
-	 * delays, but the vmexits simply slow things down).
-	 */
 	memset(vmx_io_bitmap_a, 0xff, PAGE_SIZE);
-	clear_bit(0x80, vmx_io_bitmap_a);
 
 	memset(vmx_io_bitmap_b, 0xff, PAGE_SIZE);
 
