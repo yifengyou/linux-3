@@ -225,7 +225,7 @@ void alternative_msr_write(unsigned int msr, u64 val, unsigned int feature)
 static inline void indirect_branch_prediction_barrier(void)
 {
 	alternative_msr_write(MSR_IA32_PRED_CMD, PRED_CMD_IBPB,
-			      X86_FEATURE_IBPB);
+			      X86_FEATURE_USE_IBPB);
 }
 
 /* The Intel SPEC CTRL MSR base value cache */

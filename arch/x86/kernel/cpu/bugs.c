@@ -409,9 +409,8 @@ retpoline_auto:
 	pr_info("%s\n", spectre_v2_strings[mode]);
 
 	/* Initialize Indirect Branch Prediction Barrier if supported */
-	if (boot_cpu_has(X86_FEATURE_SPEC_CTRL) ||
-	    boot_cpu_has(X86_FEATURE_AMD_PRED_CMD)) {
-		setup_force_cpu_cap(X86_FEATURE_IBPB);
+	if (boot_cpu_has(X86_FEATURE_IBPB)) {
+		setup_force_cpu_cap(X86_FEATURE_USE_IBPB);
 		pr_info("Enabling Indirect Branch Prediction Barrier\n");
 	}
 
