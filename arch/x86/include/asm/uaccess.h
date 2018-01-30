@@ -8,6 +8,7 @@
 #include <linux/thread_info.h>
 #include <linux/string.h>
 #include <asm/asm.h>
+#include <asm/barrier.h>
 #include <asm/page.h>
 #include <asm/smap.h>
 
@@ -127,6 +128,11 @@ extern int __get_user_bad(void);
 
 #define __uaccess_begin() stac()
 #define __uaccess_end()   clac()
+#define __uaccess_begin_nospec()	\
+({					\
+	stac();				\
+	barrier_nospec();		\
+})
 
 /*
  * This is a type: either unsigned long, if the argument fits into
@@ -455,6 +461,10 @@ struct __large_struct { unsigned long buf[100]; };
 	current_thread_info()->uaccess_err = 0;				\
 	__uaccess_begin();						\
 	barrier();
+
+#define uaccess_try_nospec do {						\
+	current_thread_info()->uaccess_err = 0;				\
+	__uaccess_begin_nospec();					\
 
 #define uaccess_catch(err)						\
 	__uaccess_end();						\
