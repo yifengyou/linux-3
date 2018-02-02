@@ -2643,8 +2643,8 @@ isdn_net_newslave(char *parm)
 	char newname[10];
 
 	if (p) {
-		/* Slave-Name MUST not be empty */
-		if (!strlen(p + 1))
+		/* Slave-Name MUST not be empty or overflow 'newname' */
+		if (!strlen(p + 1) || strlen(p + 1) >= sizeof(newname))
 			return NULL;
 		strcpy(newname, p + 1);
 		*p = 0;
