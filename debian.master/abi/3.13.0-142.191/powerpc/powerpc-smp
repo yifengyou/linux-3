@@ -16409,6 +16409,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xf6a6bea1	da9052_regmap_config
 EXPORT_SYMBOL_GPL vmlinux 0xf6d33492	wm8350_block_read
 EXPORT_SYMBOL_GPL vmlinux 0xf6e874f5	ata_timing_merge
 EXPORT_SYMBOL_GPL vmlinux 0xf6e9da1b	sysfs_add_file_to_group
+EXPORT_SYMBOL_GPL vmlinux 0xf714e708	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0xf72238fc	aead_geniv_free
 EXPORT_SYMBOL_GPL vmlinux 0xf7574590	crypto_destroy_tfm
 EXPORT_SYMBOL_GPL vmlinux 0xf7812241	crypto_unregister_template

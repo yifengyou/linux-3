@@ -14008,6 +14008,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1d58ae14	lpddr2_jedec_timings
 EXPORT_SYMBOL_GPL vmlinux 0x1d58ee07	spi_finalize_current_transfer
 EXPORT_SYMBOL_GPL vmlinux 0x1d77b0f8	unix_socket_table
 EXPORT_SYMBOL_GPL vmlinux 0x1d945368	usb_string
+EXPORT_SYMBOL_GPL vmlinux 0x1da22738	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x1da6f265	d_materialise_unique
 EXPORT_SYMBOL_GPL vmlinux 0x1db0b6ef	led_classdev_resume
 EXPORT_SYMBOL_GPL vmlinux 0x1db652e9	synchronize_srcu

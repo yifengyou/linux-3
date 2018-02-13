@@ -15587,6 +15587,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xac9fc1d8	iommu_domain_window_disable
 EXPORT_SYMBOL_GPL vmlinux 0xacb0a69a	tpm_show_caps
 EXPORT_SYMBOL_GPL vmlinux 0xacba757f	fat_time_unix2fat
 EXPORT_SYMBOL_GPL vmlinux 0xace5c0fc	usb_bus_list
+EXPORT_SYMBOL_GPL vmlinux 0xace95054	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0xaceb0c10	usb_init_urb
 EXPORT_SYMBOL_GPL vmlinux 0xad195979	usb_hcd_poll_rh_status
 EXPORT_SYMBOL_GPL vmlinux 0xad26a732	sysfs_create_group

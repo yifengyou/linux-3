@@ -13247,6 +13247,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x47884890	system_power_efficient_wq
 EXPORT_SYMBOL_GPL vmlinux 0x479312ab	blkg_rwstat_recursive_sum
 EXPORT_SYMBOL_GPL vmlinux 0x479d0229	md_rdev_clear
 EXPORT_SYMBOL_GPL vmlinux 0x479e9f66	blk_execute_rq_nowait
+EXPORT_SYMBOL_GPL vmlinux 0x47a018ab	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x47a81cff	blk_rq_err_bytes
 EXPORT_SYMBOL_GPL vmlinux 0x47afbfca	devm_phy_put
 EXPORT_SYMBOL_GPL vmlinux 0x47c896dd	ipv4_sk_redirect

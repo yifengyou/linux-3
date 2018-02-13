@@ -17210,6 +17210,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xe998c7bf	inet_csk_addr2sockaddr
 EXPORT_SYMBOL_GPL vmlinux 0xe9ce931a	kvm_para_available
 EXPORT_SYMBOL_GPL vmlinux 0xe9d1b7cf	irq_to_pcap
 EXPORT_SYMBOL_GPL vmlinux 0xe9dcf7f3	clk_register_divider
+EXPORT_SYMBOL_GPL vmlinux 0xe9eb2a73	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0xe9f6f8c4	virtqueue_enable_cb_delayed
 EXPORT_SYMBOL_GPL vmlinux 0xea01f60e	pci_check_and_mask_intx
 EXPORT_SYMBOL_GPL vmlinux 0xea124bd1	gcd

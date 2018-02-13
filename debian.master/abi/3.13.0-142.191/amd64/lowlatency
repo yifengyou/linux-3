@@ -16318,6 +16318,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xa4dfebfb	netlink_alloc_skb
 EXPORT_SYMBOL_GPL vmlinux 0xa54f04b0	__scsi_get_command
 EXPORT_SYMBOL_GPL vmlinux 0xa56ca855	tracepoint_iter_stop
 EXPORT_SYMBOL_GPL vmlinux 0xa596b9c9	each_symbol_section
+EXPORT_SYMBOL_GPL vmlinux 0xa5a253c9	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0xa5b3eb6e	ata_acpi_stm
 EXPORT_SYMBOL_GPL vmlinux 0xa5c8782a	inet_csk_reqsk_queue_prune
 EXPORT_SYMBOL_GPL vmlinux 0xa5d8a843	__rio_local_write_config_8

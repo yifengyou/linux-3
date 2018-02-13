@@ -3805,6 +3805,7 @@ EXPORT_SYMBOL vmlinux 0x0ce57426	devfreq_resume_device
 EXPORT_SYMBOL vmlinux 0x0ce900af	blk_finish_plug
 EXPORT_SYMBOL vmlinux 0x0cea022a	input_set_keycode
 EXPORT_SYMBOL vmlinux 0x0cf81ac6	pci_enable_msi_range
+EXPORT_SYMBOL vmlinux 0x0cfc02ef	paca
 EXPORT_SYMBOL vmlinux 0x0d0c9560	inet_sock_destruct
 EXPORT_SYMBOL vmlinux 0x0d163a3c	tcp_poll
 EXPORT_SYMBOL vmlinux 0x0d4f9aba	blkdev_get_by_path
@@ -5160,7 +5161,6 @@ EXPORT_SYMBOL vmlinux 0x619cee99	xfrm_register_mode
 EXPORT_SYMBOL vmlinux 0x61af8721	balance_dirty_pages_ratelimited
 EXPORT_SYMBOL vmlinux 0x61b7b126	simple_strtoull
 EXPORT_SYMBOL vmlinux 0x61c243fc	mod_timer_pending
-EXPORT_SYMBOL vmlinux 0x61e13b2f	paca
 EXPORT_SYMBOL vmlinux 0x61eef2c9	_insb
 EXPORT_SYMBOL vmlinux 0x61f8d029	blk_mq_free_queue
 EXPORT_SYMBOL vmlinux 0x61f9ed47	writeback_in_progress
@@ -10802,6 +10802,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x09abd27b	pwm_get_chip_data
 EXPORT_SYMBOL_GPL vmlinux 0x0a046186	rtc_read_time
 EXPORT_SYMBOL_GPL vmlinux 0x0a0ed2b8	rtnl_af_register
 EXPORT_SYMBOL_GPL vmlinux 0x0a19ef4d	unregister_ftrace_function
+EXPORT_SYMBOL_GPL vmlinux 0x0a30e6ad	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x0a51ae5b	virq_to_hw
 EXPORT_SYMBOL_GPL vmlinux 0x0a6c97b6	bus_remove_file
 EXPORT_SYMBOL_GPL vmlinux 0x0a6dfad5	task_active_pid_ns

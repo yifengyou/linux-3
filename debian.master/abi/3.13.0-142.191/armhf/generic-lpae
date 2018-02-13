@@ -14116,4 +14116,5 @@ EXPORT_SYMBOL_GPL vmlinux 0xff6b3c86	vfs_setxattr
 EXPORT_SYMBOL_GPL vmlinux 0xff703f3c	cgroup_taskset_cur_css
 EXPORT_SYMBOL_GPL vmlinux 0xffa598e4	list_lru_add
 EXPORT_SYMBOL_GPL vmlinux 0xffb506b2	ata_sff_wait_ready
+EXPORT_SYMBOL_GPL vmlinux 0xffc55691	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0xffcbac67	da9052_disable_irq

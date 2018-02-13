@@ -6907,7 +6907,6 @@ EXPORT_SYMBOL vmlinux 0x4662458e	ipmi_smi_add_proc_entry
 EXPORT_SYMBOL vmlinux 0x466ad283	read_cache_pages
 EXPORT_SYMBOL vmlinux 0x466c14a7	__delay
 EXPORT_SYMBOL vmlinux 0x46885b3b	setattr_copy
-EXPORT_SYMBOL vmlinux 0x46996699	paca
 EXPORT_SYMBOL vmlinux 0x46a0e601	dget_parent
 EXPORT_SYMBOL vmlinux 0x46afd532	on_each_cpu_mask
 EXPORT_SYMBOL vmlinux 0x46b4f296	pci_find_capability
@@ -7728,6 +7727,7 @@ EXPORT_SYMBOL vmlinux 0x7647726c	handle_sysrq
 EXPORT_SYMBOL vmlinux 0x764bd77c	request_resource
 EXPORT_SYMBOL vmlinux 0x764e2224	_lv1_disconnect_irq_plug_ext
 EXPORT_SYMBOL vmlinux 0x765ff474	crc_t10dif_generic
+EXPORT_SYMBOL vmlinux 0x76689ca6	paca
 EXPORT_SYMBOL vmlinux 0x7676f168	pm860x_bulk_read
 EXPORT_SYMBOL vmlinux 0x767e0b63	bdi_register_dev
 EXPORT_SYMBOL vmlinux 0x76b0a1be	nla_put
@@ -15502,6 +15502,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x810fe777	pwm_set_polarity
 EXPORT_SYMBOL_GPL vmlinux 0x8114b8d6	md_is_badblock
 EXPORT_SYMBOL_GPL vmlinux 0x811c0b2d	bus_register_notifier
 EXPORT_SYMBOL_GPL vmlinux 0x811dc334	usb_unregister_notify
+EXPORT_SYMBOL_GPL vmlinux 0x8131aa05	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x8140842a	gpiod_get_value
 EXPORT_SYMBOL_GPL vmlinux 0x8149ea54	ata_timing_find_mode
 EXPORT_SYMBOL_GPL vmlinux 0x814e1020	crypto_register_shash

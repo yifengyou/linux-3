@@ -15543,6 +15543,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x9fb2ec74	arizona_clk32k_enable
 EXPORT_SYMBOL_GPL vmlinux 0x9fc48630	rtc_read_time
 EXPORT_SYMBOL_GPL vmlinux 0x9fce80db	fb_notifier_call_chain
 EXPORT_SYMBOL_GPL vmlinux 0x9fd4743c	devm_regmap_field_free
+EXPORT_SYMBOL_GPL vmlinux 0x9fe3d12c	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x9fe939e1	mpi_powm
 EXPORT_SYMBOL_GPL vmlinux 0x9fedb268	__i2c_board_lock
 EXPORT_SYMBOL_GPL vmlinux 0x9ff005c2	i2c_unlock_adapter

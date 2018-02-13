@@ -14387,6 +14387,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x07e06a2a	pm_generic_suspend_noirq
 EXPORT_SYMBOL_GPL vmlinux 0x07e531c0	raw_unhash_sk
 EXPORT_SYMBOL_GPL vmlinux 0x07f300c3	smp_call_function_any
 EXPORT_SYMBOL_GPL vmlinux 0x07fc478e	acpi_dev_resource_interrupt
+EXPORT_SYMBOL_GPL vmlinux 0x0817b370	shash_no_setkey
 EXPORT_SYMBOL_GPL vmlinux 0x082928f0	device_create_file
 EXPORT_SYMBOL_GPL vmlinux 0x083fca09	pm_generic_restore_noirq
 EXPORT_SYMBOL_GPL vmlinux 0x084a2fd6	da9052_adc_manual_read
