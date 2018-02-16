@@ -69,8 +69,7 @@ static inline unsigned long array_index_mask_nospec(unsigned long index,
 	BUILD_BUG_ON(sizeof(_i) > sizeof(long));			\
 	BUILD_BUG_ON(sizeof(_s) > sizeof(long));			\
 									\
-	_i &= _mask;							\
-	_i;								\
+	(typeof(_i)) (_i & _mask);					\
 })
 
 /* Speculation control prctl */
