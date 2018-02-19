@@ -228,6 +228,24 @@ static inline void indirect_branch_prediction_barrier(void)
 			      X86_FEATURE_USE_IBPB);
 }
 
+/*
+ * With retpoline, we must use IBRS to restrict branch prediction
+ * before calling into firmware.
+ */
+static inline void firmware_restrict_branch_speculation_start(void)
+{
+	preempt_disable();
+	alternative_msr_write(MSR_IA32_SPEC_CTRL, SPEC_CTRL_IBRS,
+			      X86_FEATURE_USE_IBRS_FW);
+}
+
+static inline void firmware_restrict_branch_speculation_end(void)
+{
+	alternative_msr_write(MSR_IA32_SPEC_CTRL, 0,
+			      X86_FEATURE_USE_IBRS_FW);
+	preempt_enable();
+}
+
 /* The Intel SPEC CTRL MSR base value cache */
 extern u64 x86_spec_ctrl_base;
 
