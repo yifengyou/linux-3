@@ -333,13 +333,6 @@ static ssize_t reload_store(struct device *dev,
 		if (ibpb_inuse)
 			sysctl_ibpb_enabled = 1;
 		mutex_unlock(&spec_ctrl_mutex);
-	} else if (boot_cpu_has(X86_FEATURE_IBPB)) {
-		printk_once(KERN_INFO "FEATURE IBPB Present\n");
-		mutex_lock(&spec_ctrl_mutex);
-		set_ibpb_supported();
-		if (ibpb_inuse)
-			sysctl_ibpb_enabled = 1;
-		mutex_unlock(&spec_ctrl_mutex);
 	}
 
 	mutex_unlock(&microcode_mutex);
