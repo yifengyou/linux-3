@@ -396,8 +396,7 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 			// TSC_ADJUST is emulated
 			entry->ebx |= F(TSC_ADJUST);
 			entry->edx &= kvm_cpuid_7_0_edx_x86_features;
-			/* CR_EDX == 2 */
-			entry->edx &= get_scattered_cpuid_leaf(7, 0, 2);
+			entry->edx &= get_scattered_cpuid_leaf(7, 0, 3);
 		} else {
 			entry->ebx = 0;
 			entry->edx = 0;
