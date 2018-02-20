@@ -125,10 +125,10 @@ ENTRY(ia32_sysenter_target)
 	CFI_REGISTER	rsp,rbp
 	SWAPGS_UNSAFE_STACK
 	SWITCH_KERNEL_CR3_NO_STACK
-	movq	PER_CPU_VAR(kernel_stack), %rsp
-	addq	$(KERNEL_STACK_OFFSET),%rsp
 	ENABLE_IBRS
 	STUFF_RSB
+	movq	PER_CPU_VAR(kernel_stack), %rsp
+	addq	$(KERNEL_STACK_OFFSET),%rsp
 	/*
 	 * No need to follow this irqs on/off section: the syscall
 	 * disabled irqs, here we enable it straight after entry:
@@ -305,11 +305,11 @@ ENTRY(ia32_cstar_target)
 	/*CFI_REGISTER	rflags,r11*/
 	SWAPGS_UNSAFE_STACK
 	SWITCH_KERNEL_CR3_NO_STACK
+	ENABLE_IBRS
+	STUFF_RSB
 	movl	%esp,%r8d
 	CFI_REGISTER	rsp,r8
 	movq	PER_CPU_VAR(kernel_stack),%rsp
-	ENABLE_IBRS
-	STUFF_RSB
 	/*
 	 * No need to follow this irqs on/off section: the syscall
 	 * disabled irqs and here we enable it straight after entry:
