@@ -37,6 +37,8 @@
 
 #define set_mb(var, value)	do { var = value; mb(); } while (0)
 
+#define osb()   asm volatile("ori 31,31,0")
+
 #ifdef CONFIG_SMP
 
 #ifdef __SUBARCH_HAS_LWSYNC
