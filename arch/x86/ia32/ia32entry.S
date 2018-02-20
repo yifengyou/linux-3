@@ -17,7 +17,6 @@
 #include <asm/smap.h>
 #include <asm/pgtable_types.h>
 #include <asm/kaiser.h>
-#include <asm/spec_ctrl.h>
 #include <linux/linkage.h>
 #include <linux/err.h>
 
@@ -125,7 +124,6 @@ ENTRY(ia32_sysenter_target)
 	CFI_REGISTER	rsp,rbp
 	SWAPGS_UNSAFE_STACK
 	SWITCH_KERNEL_CR3_NO_STACK
-	ENABLE_IBRS
 	movq	PER_CPU_VAR(kernel_stack), %rsp
 	addq	$(KERNEL_STACK_OFFSET),%rsp
 	/*
@@ -197,7 +195,6 @@ sysexit_from_sys_call:
 	popq_cfi %rcx				/* User %esp */
 	CFI_REGISTER rsp,rcx
 	TRACE_IRQS_ON
-	DISABLE_IBRS
 	SWITCH_USER_CR3
 	ENABLE_INTERRUPTS_SYSEXIT32
 
@@ -304,7 +301,6 @@ ENTRY(ia32_cstar_target)
 	/*CFI_REGISTER	rflags,r11*/
 	SWAPGS_UNSAFE_STACK
 	SWITCH_KERNEL_CR3_NO_STACK
-	ENABLE_IBRS
 	movl	%esp,%r8d
 	CFI_REGISTER	rsp,r8
 	movq	PER_CPU_VAR(kernel_stack),%rsp
@@ -359,7 +355,6 @@ sysretl_from_sys_call:
 	xorq	%r9,%r9
 	xorq	%r8,%r8
 	TRACE_IRQS_ON
-	DISABLE_IBRS
 	SWITCH_USER_CR3
 	movl RSP-ARGOFFSET(%rsp),%esp
 	CFI_RESTORE rsp
@@ -436,7 +431,6 @@ ENTRY(ia32_syscall)
 	ASM_CLAC			/* Do this early to minimize exposure */
 	SWAPGS
 	SWITCH_KERNEL_CR3_NO_STACK
-	ENABLE_IBRS
 	/*
 	 * No need to follow this irqs on/off section: the syscall
 	 * disabled irqs and here we enable it straight after entry:
