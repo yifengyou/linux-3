@@ -29,7 +29,6 @@
 #include <asm/debugreg.h>
 #include <asm/nmi.h>
 #include <asm/tlbflush.h>
-#include <asm/microcode.h>
 
 /*
  * per-CPU TSS segments. Threads are completely 'soft' on Linux,
@@ -436,19 +435,11 @@ static void mwait_idle(void)
 			mb();
 		}
 
-		if (boot_cpu_has(X86_FEATURE_SPEC_CTRL))
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, 0);
 		__monitor((void *)&current_thread_info()->flags, 0, 0);
-		if (!need_resched()) {
+		if (!need_resched())
 			__sti_mwait(0, 0);
-			if (boot_cpu_has(X86_FEATURE_SPEC_CTRL))
-				native_wrmsrl(MSR_IA32_SPEC_CTRL, FEATURE_ENABLE_IBRS);
-		} else {
-			if (boot_cpu_has(X86_FEATURE_SPEC_CTRL))
-				native_wrmsrl(MSR_IA32_SPEC_CTRL, FEATURE_ENABLE_IBRS);
+		else
 			local_irq_enable();
-		}
-
 	} else
 		local_irq_enable();
 	__current_clr_polling();
