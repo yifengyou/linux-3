@@ -1,7 +1,7 @@
 # The following targets are for the maintainer only! do not run if you don't
 # know what they do.
 
-.PHONY: printenv updateconfigs printchanges insertchanges startnewrelease diffupstream help updateportsconfigs editportsconfigs
+.PHONY: printenv updateconfigs printchanges insertchanges startnewrelease diffupstream help updateportsconfigs editportsconfigs finalchecks
 
 help:
 	@echo "These are the targets in addition to the normal $(DEBIAN) ones:"
@@ -106,8 +106,11 @@ printchanges:
 	git log "$$baseCommit"..HEAD | \
 	$(DROOT)/scripts/misc/git-ubuntu-log $(ubuntu_log_opts)
 
-insertchanges:
+insertchanges: finalchecks
 	@perl -w -f $(DROOT)/scripts/misc/insert-changes.pl $(DROOT) $(DEBIAN) 
+
+finalchecks:
+	$(DROOT)/scripts/misc/final-checks "$(DEBIAN)" "$(prev_fullver)"
 
 diffupstream:
 	@git diff-tree -p refs/remotes/linux-2.6/master..HEAD $(shell ls | grep -vE '^(ubuntu|$(DEBIAN)|\.git.*)')
