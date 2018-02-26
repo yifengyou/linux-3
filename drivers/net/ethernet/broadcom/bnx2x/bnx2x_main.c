@@ -12111,6 +12111,26 @@ static int bnx2x_get_phys_port_id(struct net_device *netdev,
 	return 0;
 }
 
+static bool bnx2x_gso_check(struct sk_buff *skb, struct net_device *dev)
+{
+	/*
+	 * A skb with gso_size + header length > 9700 will cause a
+	 * firmware panic. Drop GSO support.
+	 *
+	 * Eventually the upper layer should not pass these packets down.
+	 *
+	 * For speed, if the gso_size is <= 9000, assume there will
+	 * not be 700 bytes of headers and pass it through. Only do a
+	 * full (slow) validation if the gso_size is > 9000.
+	 */
+	if (unlikely(skb_is_gso(skb) &&
+		     (skb_shinfo(skb)->gso_size > 9000) &&
+		     !skb_gso_validate_mac_len(skb, 9700)))
+		return false;
+
+	return true;
+}
+
 static const struct net_device_ops bnx2x_netdev_ops = {
 	.ndo_open		= bnx2x_open,
 	.ndo_stop		= bnx2x_close,
@@ -12141,6 +12161,7 @@ static const struct net_device_ops bnx2x_netdev_ops = {
 	.ndo_busy_poll		= bnx2x_low_latency_recv,
 #endif
 	.ndo_get_phys_port_id	= bnx2x_get_phys_port_id,
+	.ndo_gso_check		= bnx2x_gso_check,
 };
 
 static int bnx2x_set_coherency_mask(struct bnx2x *bp)
