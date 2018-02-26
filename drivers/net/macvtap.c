@@ -292,7 +292,7 @@ static int macvtap_forward(struct net_device *dev, struct sk_buff *skb)
 	 */
 	if (q->flags & IFF_VNET_HDR)
 		features |= vlan->tap_features;
-	if (netif_needs_gso(skb, features)) {
+	if (netif_needs_gso(dev, skb, features)) {
 		struct sk_buff *segs = __skb_gso_segment(skb, features, false);
 
 		if (IS_ERR(segs))

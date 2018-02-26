@@ -2575,7 +2575,7 @@ int dev_hard_start_xmit(struct sk_buff *skb, struct net_device *dev,
 		if (skb->encapsulation)
 			features &= dev->hw_enc_features;
 
-		if (netif_needs_gso(skb, features)) {
+		if (netif_needs_gso(dev, skb, features)) {
 			if (unlikely(dev_gso_segment(skb, features)))
 				goto out_kfree_skb;
 			if (skb->next)
