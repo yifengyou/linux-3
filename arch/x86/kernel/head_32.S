@@ -22,6 +22,7 @@
 #include <asm/cpufeature.h>
 #include <asm/percpu.h>
 #include <asm/nops.h>
+#include <asm/nospec-branch.h>
 
 /* Physical address */
 #define pa(X) ((X) - __PAGE_OFFSET)
@@ -249,6 +250,7 @@ page_pde_offset = (__PAGE_OFFSET >> 20);
 
 	movl pa(subarch_entries)(,%eax,4), %eax
 	subl $__PAGE_OFFSET, %eax
+	ANNOTATE_RETPOLINE_SAFE
 	jmp *%eax
 
 bad_subarch:
@@ -403,6 +405,7 @@ enable_paging:
 	movl setup_once_ref,%eax
 	andl %eax,%eax
 	jz 1f				# Did we do this already?
+	ANNOTATE_RETPOLINE_SAFE
 	call *%eax
 1:
 
