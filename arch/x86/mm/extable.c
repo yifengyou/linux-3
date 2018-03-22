@@ -17,7 +17,6 @@ ex_fixup_addr(const struct exception_table_entry *x)
 int fixup_exception(struct pt_regs *regs)
 {
 	const struct exception_table_entry *fixup;
-	unsigned long insn_ip;
 	unsigned long new_ip;
 
 #ifdef CONFIG_PNPBIOS
@@ -36,17 +35,9 @@ int fixup_exception(struct pt_regs *regs)
 
 	fixup = search_exception_tables(regs->ip);
 	if (fixup) {
-		insn_ip = ex_insn_addr(fixup);
 		new_ip = ex_fixup_addr(fixup);
 
-		/*
-		 * If the code and its fixup are "very far apart" then
-		 * they are infact tagged as uaccess'es.  Handle them
-		 * specially and fix the fixup address.  This relies on
-		 * the .fixup section being at higher addresses that the
-		 * original code.
-		 */
-		if (new_ip - insn_ip >= 0x7ffffff0) {
+		if (fixup->fixup - fixup->insn >= 0x7ffffff0 - 4) {
 			/* Special hack for uaccess_err */
 			current_thread_info()->uaccess_err = 1;
 			new_ip -= 0x7ffffff0;
@@ -62,16 +53,13 @@ int fixup_exception(struct pt_regs *regs)
 int __init early_fixup_exception(unsigned long *ip)
 {
 	const struct exception_table_entry *fixup;
-	unsigned long insn_ip;
 	unsigned long new_ip;
 
 	fixup = search_exception_tables(*ip);
 	if (fixup) {
-		insn_ip = ex_insn_addr(fixup);
 		new_ip = ex_fixup_addr(fixup);
 
-		/* See fixup_exception for details ... */
-		if (new_ip - insn_ip >= 0x7ffffff0) {
+		if (fixup->fixup - fixup->insn >= 0x7ffffff0 - 4) {
 			/* uaccess handling not supported during early boot */
 			return 0;
 		}
