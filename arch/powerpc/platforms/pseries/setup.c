@@ -471,6 +471,10 @@ static long pseries_little_endian_exceptions(void)
 
 static void init_cpu_char_feature_flags(struct h_cpu_char_result *result)
 {
+	/*
+	 * The features below are disabled by default, so we instead look to see
+	 * if firmware has *enabled* them, and set them if so.
+	 */
 	if (result->character & H_CPU_CHAR_SPEC_BAR_ORI31)
 		security_ftr_set(SEC_FTR_SPEC_BAR_ORI31);
 
@@ -509,6 +513,13 @@ void pseries_setup_rfi_flush(void)
 	enum l1d_flush_type types;
 	bool enable;
 	long rc;
+
+	/*
+	 * Set features to the defaults assumed by init_cpu_char_feature_flags()
+	 * so it can set/clear again any features that might have changed after
+	 * migration, and in case the hypercall fails and it is not even called.
+	 */
+	powerpc_security_features = SEC_FTR_DEFAULT;
 
 	rc = plpar_get_cpu_characteristics(&result);
 	if (rc == H_SUCCESS)
