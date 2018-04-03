@@ -90,10 +90,14 @@ clean: debian/control
 	# Install the copyright information.
 	cp $(DEBIAN)/copyright debian/copyright
 
+	# Install the retpoline extractor.
+	cp $(DROOT)/scripts/retpoline-extract-one scripts/ubuntu-retpoline-extract-one
+
 distclean: clean
 	rm -rf $(DROOT)/control $(DROOT)/control.stub $(DEBIAN)/control.stub \
 		$(DEBIAN)/d-i/kernel-versions debian/changelog \
-		debian/control debian/control.stub debian/copyright
+		debian/control debian/control.stub debian/copyright \
+		scripts/ubuntu-retpoline-extract-one
 
 # Builds the image, arch headers and debug packages
 include $(DROOT)/rules.d/2-binary-arch.mk
