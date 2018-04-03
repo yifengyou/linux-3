@@ -256,7 +256,7 @@ endif
 	rm -f $(hdrdir)/Makefile
 	rm -rf $(hdrdir)/include2 $(hdrdir)/source
 	# We do not need the retpoline information.
-	find $(hdrdir) -name \*.o.ur-\* | xargs rm
+	find $(hdrdir) -name \*.o.ur-\* | xargs rm -f
 	# Copy over the compilation version.
 	cp "$(builddir)/build-$*/include/generated/compile.h" \
 		"$(hdrdir)/include/generated/compile.h"
