@@ -202,8 +202,6 @@ int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
                  void __user *buffer, size_t *lenp, loff_t *ppos);
 int proc_dointvec_ibpb_ctrl(struct ctl_table *table, int write,
                  void __user *buffer, size_t *lenp, loff_t *ppos);
-int proc_dointvec_ibrs_dump(struct ctl_table *table, int write,
-                 void __user *buffer, size_t *lenp, loff_t *ppos);
 #endif
 
 #ifdef CONFIG_MAGIC_SYSRQ
@@ -242,7 +240,6 @@ extern struct ctl_table epoll_table[];
 int sysctl_legacy_va_layout;
 #endif
 
-u32 sysctl_ibrs_dump = 0;
 u32 sysctl_ibrs_enabled = 0;
 EXPORT_SYMBOL(sysctl_ibrs_enabled);
 u32 sysctl_ibpb_enabled = 0;
@@ -1179,15 +1176,6 @@ static struct ctl_table kern_table[] = {
 		.maxlen         = sizeof(unsigned int),
 		.mode           = 0644,
 		.proc_handler   = proc_dointvec_ibpb_ctrl,
-		.extra1         = &zero,
-		.extra2         = &one,
-	},
-	{
-		.procname       = "ibrs_dump",
-		.data           = &sysctl_ibrs_dump,
-		.maxlen         = sizeof(unsigned int),
-		.mode           = 0644,
-		.proc_handler   = proc_dointvec_ibrs_dump,
 		.extra1         = &zero,
 		.extra2         = &one,
 	},
@@ -2262,34 +2250,6 @@ int proc_dointvec_minmax(struct ctl_table *table, int write,
 }
 
 #ifdef CONFIG_X86
-int proc_dointvec_ibrs_dump(struct ctl_table *table, int write,
-	void __user *buffer, size_t *lenp, loff_t *ppos)
-{
-	int ret, orig_inuse;
-	unsigned int cpu;
-
-
-	ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-	printk("sysctl_ibrs_enabled = %u, sysctl_ibpb_enabled = %u\n", sysctl_ibrs_enabled, sysctl_ibpb_enabled);
-	printk("use_ibrs = %d, use_ibpb = %d\n", use_ibrs, use_ibpb);
-	mutex_lock(&spec_ctrl_mutex);
-	orig_inuse = use_ibrs;
-	/* temporary halt to ibrs usage to dump ibrs values */
-	clear_ibrs_inuse();
-	for_each_online_cpu(cpu) {
-	       u64 val;
-
-	       if (boot_cpu_has(X86_FEATURE_SPEC_CTRL))
-		       rdmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, &val);
-	       else
-		       val = 0;
-	       printk("read cpu %d ibrs val %lu\n", cpu, (unsigned long) val);
-	}
-	use_ibrs = orig_inuse;
-	mutex_unlock(&spec_ctrl_mutex);
-	return ret;
-}
-
 int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
 	void __user *buffer, size_t *lenp, loff_t *ppos)
 {
