@@ -222,10 +222,9 @@ static int ptrace_has_cap(struct user_namespace *ns, unsigned int mode)
 }
 
 /* Returns 0 on success, -errno on denial. */
-int ___ptrace_may_access(struct task_struct *cur, struct task_struct *task,
-			 unsigned int mode)
+static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
 {
-	const struct cred *cred = __task_cred(cur), *tcred;
+	const struct cred *cred = current_cred(), *tcred;
 	struct mm_struct *mm;
 
 	/* May we inspect the given task?
@@ -238,7 +237,7 @@ int ___ptrace_may_access(struct task_struct *cur, struct task_struct *task,
 	 */
 
 	/* Don't let security modules deny introspection */
-	if (same_thread_group(task, cur))
+	if (same_thread_group(task, current))
 		return 0;
 	rcu_read_lock();
 	tcred = __task_cred(task);
@@ -261,16 +260,7 @@ ok:
 	     !ptrace_has_cap(mm->user_ns, mode)))
 	    return -EPERM;
 
-	if (!(mode & PTRACE_MODE_NOACCESS_CHK))
-		return security_ptrace_access_check(task, mode);
-
-	return 0;
-}
-EXPORT_SYMBOL_GPL(___ptrace_may_access);
-
-static int __ptrace_may_access(struct task_struct *task, unsigned int mode)
-{
-	return ___ptrace_may_access(current, task, mode);
+	return security_ptrace_access_check(task, mode);
 }
 
 bool ptrace_may_access(struct task_struct *task, unsigned int mode)
