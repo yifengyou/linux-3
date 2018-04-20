@@ -300,7 +300,7 @@ static void __munlock_pagevec(struct pagevec *pvec, struct zone *zone)
 {
 	int i;
 	int nr = pagevec_count(pvec);
-	int delta_munlocked;
+	int delta_munlocked = -nr;
 	struct pagevec pvec_putback;
 	int pgrescued = 0;
 
@@ -330,6 +330,7 @@ static void __munlock_pagevec(struct pagevec *pvec, struct zone *zone)
 			}
 
 		} else {
+			delta_munlocked++;
 skip_munlock:
 			/*
 			 * We won't be munlocking this page in the next phase
@@ -341,7 +342,6 @@ skip_munlock:
 			pvec->pages[i] = NULL;
 		}
 	}
-	delta_munlocked = -nr + pagevec_count(&pvec_putback);
 	__mod_zone_page_state(zone, NR_MLOCK, delta_munlocked);
 	spin_unlock_irq(&zone->lru_lock);
 
