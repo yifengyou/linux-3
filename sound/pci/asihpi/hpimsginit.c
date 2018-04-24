@@ -23,6 +23,7 @@
 
 #include "hpi_internal.h"
 #include "hpimsginit.h"
+#include <linux/nospec.h>
 
 /* The actual message size for each object type */
 static u16 msg_size[HPI_OBJ_MAXINDEX + 1] = HPI_MESSAGE_SIZE_BY_OBJECT;
@@ -38,10 +39,12 @@ static void hpi_init_message(struct hpi_message *phm, u16 object,
 	u16 function)
 {
 	memset(phm, 0, sizeof(*phm));
-	if ((object > 0) && (object <= HPI_OBJ_MAXINDEX))
+	if ((object > 0) && (object <= HPI_OBJ_MAXINDEX)) {
+		object = array_index_nospec(object, HPI_OBJ_MAXINDEX + 1);
 		phm->size = msg_size[object];
-	else
+	} else {
 		phm->size = sizeof(*phm);
+	}
 
 	if (gwSSX2_bypass)
 		phm->type = HPI_TYPE_SSX2BYPASS_MESSAGE;
@@ -62,10 +65,12 @@ void hpi_init_response(struct hpi_response *phr, u16 object, u16 function,
 {
 	memset(phr, 0, sizeof(*phr));
 	phr->type = HPI_TYPE_RESPONSE;
-	if ((object > 0) && (object <= HPI_OBJ_MAXINDEX))
+	if ((object > 0) && (object <= HPI_OBJ_MAXINDEX)) {
+		object = array_index_nospec(object, HPI_OBJ_MAXINDEX + 1);
 		phr->size = res_size[object];
-	else
+	} else {
 		phr->size = sizeof(*phr);
+	}
 	phr->object = object;
 	phr->function = function;
 	phr->error = error;
