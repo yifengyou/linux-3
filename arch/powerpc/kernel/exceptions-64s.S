@@ -277,9 +277,17 @@ hardware_interrupt_hv:
 	. = 0x900
 	.globl decrementer_pSeries
 decrementer_pSeries:
-	_MASKABLE_EXCEPTION_PSERIES(0x900, decrementer, EXC_STD, SOFTEN_TEST_PR)
+	SET_SCRATCH0(r13)
+	EXCEPTION_PROLOG_0(PACA_EXGEN)
+	b	decrementer_pSeries_OOL
 
-	STD_EXCEPTION_HV(0x980, 0x982, hdecrementer)
+	. = 0x980
+	.globl hv_hdecrementer_trampoline
+hv_hdecrementer_trampoline:
+	HMT_MEDIUM
+	SET_SCRATCH0(r13)
+	EXCEPTION_PROLOG_0(PACA_EXGEN)
+	b	hdecrementer_hv
 
 	MASKABLE_EXCEPTION_PSERIES(0xa00, 0xa00, doorbell_super)
 	KVM_HANDLER_PR(PACA_EXGEN, EXC_STD, 0xa00)
@@ -297,7 +305,13 @@ system_call_pSeries:
 	std	r9,PACA_EXGEN+EX_R9(r13)
 	std	r10,PACA_EXGEN+EX_R10(r13)
 	mfcr	r9
+	INTERRUPT_TO_KERNEL
 	KVMTEST(0xc00)
+	GET_SCRATCH0(r13)
+#else
+	SET_SCRATCH0(r13)
+	GET_PACA(r13)
+	INTERRUPT_TO_KERNEL
 	GET_SCRATCH0(r13)
 #endif
 	SYSCALL_PSERIES_1
@@ -653,6 +667,20 @@ masked_##_H##interrupt:					\
 	MASKED_INTERRUPT()
 	MASKED_INTERRUPT(H)
 
+	.globl stf_barrier_fallback
+stf_barrier_fallback:
+	std	r9,PACA_EXRFI+EX_R9(r13)
+	std	r10,PACA_EXRFI+EX_R10(r13)
+	sync
+	ld	r9,PACA_EXRFI+EX_R9(r13)
+	ld	r10,PACA_EXRFI+EX_R10(r13)
+	ori	31,31,0
+	.rept 14
+	b	1f
+1:
+	.endr
+	blr
+
 	.globl rfi_flush_fallback
 rfi_flush_fallback:
 	SET_SCRATCH0(r13);
@@ -847,7 +875,11 @@ kvmppc_skip_Hinterrupt:
 
 	STD_EXCEPTION_COMMON_ASYNC(0x500, hardware_interrupt, do_IRQ)
 	STD_EXCEPTION_COMMON_ASYNC(0x900, decrementer, .timer_interrupt)
+.globl decrementer_pSeries_OOL
+decrementer_pSeries_OOL:
+	_MASKABLE_EXCEPTION_PSERIES_OOL(0x900, decrementer, EXC_STD, SOFTEN_TEST_PR)
 	STD_EXCEPTION_COMMON(0x980, hdecrementer, .hdec_interrupt)
+	STD_EXCEPTION_HV_OOL(0x982, hdecrementer)
 #ifdef CONFIG_PPC_DOORBELL
 	STD_EXCEPTION_COMMON_ASYNC(0xa00, doorbell_super, .doorbell_exception)
 #else

@@ -125,6 +125,7 @@ static void pnv_setup_rfi_flush(void)
 
 static void __init pnv_setup_arch(void)
 {
+	setup_stf_barrier();
 	pnv_setup_rfi_flush();
 
 	/* Initialize SMP */
