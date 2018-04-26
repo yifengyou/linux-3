@@ -288,39 +288,53 @@ retpoline_auto:
 #undef pr_fmt
 
 #ifdef CONFIG_SYSFS
-ssize_t cpu_show_meltdown(struct device *dev,
-			  struct device_attribute *attr, char *buf)
-{
-	if (!boot_cpu_has_bug(X86_BUG_CPU_MELTDOWN))
-		return sprintf(buf, "Not affected\n");
-	if (boot_cpu_has(X86_FEATURE_KAISER))
-		return sprintf(buf, "Mitigation: PTI\n");
-	return sprintf(buf, "Vulnerable\n");
-}
-
 #ifndef osb
-#define osb_is_enabled 	(0)
+#define osb_is_enabled	(0)
 #endif
 #ifndef osb_is_enabled
 #define osb_is_enabled	(1)
 #endif
+ssize_t cpu_show_common(struct device *dev, struct device_attribute *attr,
+			char *buf, unsigned int bug)
+{
+	if (!boot_cpu_has_bug(bug))
+		return sprintf(buf, "Not affected\n");
+
+	switch (bug) {
+	case X86_BUG_CPU_MELTDOWN:
+		if (boot_cpu_has(X86_FEATURE_KAISER))
+			return sprintf(buf, "Mitigation: PTI\n");
+		break;
+
+	case X86_BUG_SPECTRE_V1:
+		if (osb_is_enabled)
+			return sprintf(buf, "Mitigation: OSB (observable speculation barrier, Intel v6)\n");
+
+	case X86_BUG_SPECTRE_V2:
+		return sprintf(buf, "%s%s\n", spectre_v2_strings[spectre_v2_enabled], ibpb_inuse ? ", IBPB (Intel v4)" : "");
+
+	default:
+		break;
+	}
+
+	return sprintf(buf, "Vulnerable\n");
+}
+
+ssize_t cpu_show_meltdown(struct device *dev,
+			  struct device_attribute *attr, char *buf)
+{
+	return cpu_show_common(dev, attr, buf, X86_BUG_CPU_MELTDOWN);
+}
+
 ssize_t cpu_show_spectre_v1(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
-	if (!boot_cpu_has_bug(X86_BUG_SPECTRE_V1))
-		return sprintf(buf, "Not affected\n");
-	if (osb_is_enabled)
-		return sprintf(buf, "Mitigation: OSB (observable speculation barrier, Intel v6)\n");
-	return sprintf(buf, "Vulnerable\n");
+	return cpu_show_common(dev, attr, buf, X86_BUG_SPECTRE_V1);
 }
 
 ssize_t cpu_show_spectre_v2(struct device *dev,
 			    struct device_attribute *attr, char *buf)
 {
-	if (!boot_cpu_has_bug(X86_BUG_SPECTRE_V2))
-		return sprintf(buf, "Not affected\n");
-
-	return sprintf(buf, "%s%s\n", spectre_v2_strings[spectre_v2_enabled],
-		       ibpb_inuse ? ", IBPB (Intel v4)" : "");
+	return cpu_show_common(dev, attr, buf, X86_BUG_SPECTRE_V2);
 }
 #endif
