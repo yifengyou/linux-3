@@ -222,15 +222,16 @@ static inline void vmexit_fill_RSB(void)
 #endif
 }
 
-#define alternative_msr_write(_msr, _val, _feature)		\
-	asm volatile(ALTERNATIVE("",				\
-				 "movl %[msr], %%ecx\n\t"	\
-				 "movl %[val], %%eax\n\t"	\
-				 "movl $0, %%edx\n\t"		\
-				 "wrmsr",			\
-				 _feature)			\
-		     : : [msr] "i" (_msr), [val] "i" (_val)	\
-		     : "eax", "ecx", "edx", "memory")
+static __always_inline
+void alternative_msr_write(unsigned int msr, u64 val, unsigned int feature)
+{
+	asm volatile(ALTERNATIVE("", "wrmsr", %c[feature])
+		: : "c" (msr),
+		    "a" (val),
+		    "d" (val >> 32),
+		    [feature] "i" (feature)
+		: "memory");
+}
 
 #endif /* __ASSEMBLY__ */
 #endif /* __NOSPEC_BRANCH_H__ */
