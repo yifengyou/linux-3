@@ -16867,7 +16867,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xf58dae91	device_show_ulong
 EXPORT_SYMBOL_GPL vmlinux 0xf5a691cd	invalidate_bh_lrus
 EXPORT_SYMBOL_GPL vmlinux 0xf5b18326	extcon_dev_unregister
 EXPORT_SYMBOL_GPL vmlinux 0xf5bcf1b2	__cookie_v4_check
-EXPORT_SYMBOL_GPL vmlinux 0xf5d18c67	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xf5dba310	stmpe_block_read
 EXPORT_SYMBOL_GPL vmlinux 0xf5e2f63f	crypto_alg_lookup
 EXPORT_SYMBOL_GPL vmlinux 0xf5e65699	tcp_reno_cong_avoid

@@ -14059,7 +14059,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x21024c39	blk_end_request_err
 EXPORT_SYMBOL_GPL vmlinux 0x211c8243	__inet_lookup_listener
 EXPORT_SYMBOL_GPL vmlinux 0x211dd93a	ata_host_register
 EXPORT_SYMBOL_GPL vmlinux 0x216f83ec	spi_master_suspend
-EXPORT_SYMBOL_GPL vmlinux 0x21cf31b8	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0x21d36a03	kvm_hypercall
 EXPORT_SYMBOL_GPL vmlinux 0x21d83a44	ata_wait_register
 EXPORT_SYMBOL_GPL vmlinux 0x21e196b4	device_store_bool

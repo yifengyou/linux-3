@@ -10790,7 +10790,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x081825b8	pci_dev_run_wake
 EXPORT_SYMBOL_GPL vmlinux 0x08272c46	pci_cfg_access_unlock
 EXPORT_SYMBOL_GPL vmlinux 0x0851eeb4	rio_release_inb_mbox
 EXPORT_SYMBOL_GPL vmlinux 0x086291b5	usb_put_intf
-EXPORT_SYMBOL_GPL vmlinux 0x086b449a	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0x088bfa7e	cancel_work_sync
 EXPORT_SYMBOL_GPL vmlinux 0x08bc0870	compat_put_timespec
 EXPORT_SYMBOL_GPL vmlinux 0x08f5e014	powercap_unregister_zone

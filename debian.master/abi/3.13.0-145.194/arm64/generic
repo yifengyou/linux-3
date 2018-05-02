@@ -15320,7 +15320,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xfed33e25	regulator_bulk_disable
 EXPORT_SYMBOL_GPL vmlinux 0xfeeba082	balloon_mapping_alloc
 EXPORT_SYMBOL_GPL vmlinux 0xfef8a166	trace_current_buffer_lock_reserve
 EXPORT_SYMBOL_GPL vmlinux 0xff05fa13	vring_interrupt
-EXPORT_SYMBOL_GPL vmlinux 0xff4310ec	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xff50e536	subsys_find_device_by_id
 EXPORT_SYMBOL_GPL vmlinux 0xff59ea43	__mnt_drop_write
 EXPORT_SYMBOL_GPL vmlinux 0xff5a8cfe	cn_del_callback

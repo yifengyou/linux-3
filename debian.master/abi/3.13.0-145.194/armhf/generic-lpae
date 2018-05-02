@@ -13869,7 +13869,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xe9715525	crypto_alloc_instance
 EXPORT_SYMBOL_GPL vmlinux 0xe97e1958	__pm_runtime_disable
 EXPORT_SYMBOL_GPL vmlinux 0xe9864fff	usb_free_coherent
 EXPORT_SYMBOL_GPL vmlinux 0xe9c90e3b	ata_scsi_ioctl
-EXPORT_SYMBOL_GPL vmlinux 0xe9f7d9ef	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xea056b88	usb_alloc_coherent
 EXPORT_SYMBOL_GPL vmlinux 0xea124bd1	gcd
 EXPORT_SYMBOL_GPL vmlinux 0xea1bb291	bL_switcher_get_enabled

@@ -16242,7 +16242,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xe721de9e	register_kretprobe
 EXPORT_SYMBOL_GPL vmlinux 0xe72d71ce	pci_reset_slot
 EXPORT_SYMBOL_GPL vmlinux 0xe73f6134	tc3589x_reg_write
 EXPORT_SYMBOL_GPL vmlinux 0xe740410f	tty_standard_install
-EXPORT_SYMBOL_GPL vmlinux 0xe743deb7	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xe754a47f	arizona_request_irq
 EXPORT_SYMBOL_GPL vmlinux 0xe75ec810	unix_outq_len
 EXPORT_SYMBOL_GPL vmlinux 0xe769232e	sprint_symbol_no_offset

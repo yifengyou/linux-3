@@ -15518,7 +15518,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xa612439a	snd_soc_dai_set_pll
 EXPORT_SYMBOL_GPL vmlinux 0xa61b1477	tracepoint_iter_start
 EXPORT_SYMBOL_GPL vmlinux 0xa625110d	kmsg_dump_rewind
 EXPORT_SYMBOL_GPL vmlinux 0xa658dc41	sysfs_remove_link
-EXPORT_SYMBOL_GPL vmlinux 0xa6679c58	___ptrace_may_access
 EXPORT_SYMBOL_GPL vmlinux 0xa6a0a273	max77693_write_reg
 EXPORT_SYMBOL_GPL vmlinux 0xa6b21ef2	dpm_suspend_end
 EXPORT_SYMBOL_GPL vmlinux 0xa6e1a69d	kick_all_cpus_sync
