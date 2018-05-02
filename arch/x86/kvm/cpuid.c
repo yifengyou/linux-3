@@ -323,7 +323,7 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 
 	/* cpuid 0x80000008.0.ebx */
 	const u32 kvm_cpuid_80000008_0_ebx_x86_features =
-		F(IBPB);
+		F(AMD_IBPB);
 
 	/* all calls to cpuid_count() should be made on the same cpu */
 	get_cpu();
@@ -520,6 +520,8 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 		if (!g_phys_as)
 			g_phys_as = phys_as;
 		entry->eax = g_phys_as | (virt_as << 8);
+		if (boot_cpu_has(X86_FEATURE_AMD_IBPB))
+			entry->ebx |= F(AMD_IBPB);
 		entry->ebx &= kvm_cpuid_80000008_0_ebx_x86_features;
 		cpuid_mask(&entry->ebx, 13);
 		entry->edx = 0;

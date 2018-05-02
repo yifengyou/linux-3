@@ -192,6 +192,7 @@
 #define X86_FEATURE_SSBD	( 7*32+22) /* Speculative Store Bypass Disable */
 #define X86_FEATURE_SPEC_STORE_BYPASS_DISABLE ( 7*32+23 ) /* Disable Speculative Store Bypass. */
 #define X86_FEATURE_AMD_SSBD	( 7*32+24) /* AMD SSBD implementation */
+#define X86_FEATURE_IBPB	( 7*32+25) /* Indirect Branch Prediction Barrier */
 
 #define X86_FEATURE_RETPOLINE	( 7*32+29) /* Generic Retpoline mitigation for Spectre variant 2 */
 #define X86_FEATURE_RETPOLINE_AMD ( 7*32+30) /* AMD Retpoline mitigation for Spectre variant 2 */
@@ -237,7 +238,7 @@
 #define X86_FEATURE_AVX512CD	(9*32+28) /* AVX-512 Conflict Detection */
 
 /* AMD-defined CPU features, CPUID level 0x80000008 (ebx), word 13 */
-#define X86_FEATURE_IBPB	(13*32+12) /* Indirect Branch Prediction Barrier */
+#define X86_FEATURE_AMD_IBPB	(13*32+12) /* Indirect Branch Prediction Barrier */
 
 /*
  * BUG word(s)
