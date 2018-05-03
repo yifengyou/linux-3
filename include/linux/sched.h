@@ -1778,6 +1778,9 @@ static inline void memalloc_noio_restore(unsigned int flags)
 /* Per-process atomic flags. */
 #define PFA_NO_NEW_PRIVS 0x00000001	/* May not gain new privileges. */
 
+#define PFA_SPEC_SSB_DISABLE		3	/* Speculative Store Bypass disabled */
+#define PFA_SPEC_SSB_FORCE_DISABLE	4	/* Speculative Store Bypass force disabled*/
+
 static inline bool task_no_new_privs(struct task_struct *p)
 {
 	return test_bit(PFA_NO_NEW_PRIVS, &p->atomic_flags);
@@ -1786,6 +1789,31 @@ static inline bool task_no_new_privs(struct task_struct *p)
 static inline void task_set_no_new_privs(struct task_struct *p)
 {
 	set_bit(PFA_NO_NEW_PRIVS, &p->atomic_flags);
+}
+
+static inline bool task_spec_ssb_disable(struct task_struct *p)
+{
+	return test_bit(PFA_SPEC_SSB_DISABLE, &p->atomic_flags);
+}
+
+static inline void task_set_spec_ssb_disable(struct task_struct *p)
+{
+	set_bit(PFA_SPEC_SSB_DISABLE, &p->atomic_flags);
+}
+
+static inline void task_clear_spec_ssb_disable(struct task_struct *p)
+{
+	clear_bit(PFA_SPEC_SSB_DISABLE, &p->atomic_flags);
+}
+
+static inline bool task_spec_ssb_force_disable(struct task_struct *p)
+{
+	return test_bit(PFA_SPEC_SSB_FORCE_DISABLE, &p->atomic_flags);
+}
+
+static inline void task_set_spec_ssb_force_disable(struct task_struct *p)
+{
+	set_bit(PFA_SPEC_SSB_FORCE_DISABLE, &p->atomic_flags);
 }
 
 /*
