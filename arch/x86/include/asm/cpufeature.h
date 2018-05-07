@@ -188,6 +188,7 @@
 #define X86_FEATURE_PROC_FEEDBACK (7*32+ 9) /* AMD ProcFeedbackInterface */
 #define X86_FEATURE_INVPCID_SINGLE (7*32+10) /* Effectively INVPCID && CR4.PCIDE=1 */
 #define X86_FEATURE_SPEC_CTRL	( 7*32+19) /* Control Speculation Control */
+#define X86_FEATURE_ARCH_CAPABILITIES ( 7*32+21) /* IA32_ARCH_CAPABILITIES MSR (Intel) */
 
 #define X86_FEATURE_RETPOLINE	( 7*32+29) /* Generic Retpoline mitigation for Spectre variant 2 */
 #define X86_FEATURE_RETPOLINE_AMD ( 7*32+30) /* AMD Retpoline mitigation for Spectre variant 2 */
