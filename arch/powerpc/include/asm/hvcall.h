@@ -430,6 +430,13 @@ extern long pseries_big_endian_exceptions(void);
 
 #endif /* CONFIG_PPC_PSERIES */
 
+#include <linux/types.h>
+
+struct h_cpu_char_result {
+	u64 character;
+	u64 behaviour;
+};
+
 #endif /* __ASSEMBLY__ */
 #endif /* __KERNEL__ */
 #endif /* _ASM_POWERPC_HVCALL_H */
