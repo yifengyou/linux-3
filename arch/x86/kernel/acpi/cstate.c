@@ -14,6 +14,7 @@
 #include <acpi/processor.h>
 #include <asm/acpi.h>
 #include <asm/mwait.h>
+#include <asm/spec-ctrl.h>
 #include <asm/special_insns.h>
 
 /*
@@ -167,7 +168,7 @@ void mwait_idle_with_hints(unsigned long ax, unsigned long cx)
 			clflush((void *)&current_thread_info()->flags);
 
 		if (ibrs_inuse)
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, 0);
+			native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default());
 
 		__monitor((void *)&current_thread_info()->flags, 0, 0);
 		smp_mb();
@@ -175,7 +176,7 @@ void mwait_idle_with_hints(unsigned long ax, unsigned long cx)
 			__mwait(ax, cx);
 
 		if (ibrs_inuse)
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, FEATURE_ENABLE_IBRS);
+			native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default() | SPEC_CTRL_IBRS);
 	}
 }
 

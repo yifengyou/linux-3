@@ -75,6 +75,7 @@
 #include <asm/nmi.h>
 #include <asm/stacktrace.h>
 #include <asm/io.h>
+#include <asm/spec-ctrl.h>
 #endif
 #ifdef CONFIG_SPARC
 #include <asm/setup.h>
@@ -2265,14 +2266,14 @@ int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
 		set_ibrs_disabled();
 		if (ibrs_supported) {
 			for_each_online_cpu(cpu)
-				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, 0x0);
+				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default());
 		}
 	} else if (sysctl_ibrs_enabled == 2) {
 		/* always set IBRS on, even in user space */
 		clear_ibrs_disabled();
 		if (ibrs_supported) {
 			for_each_online_cpu(cpu)
-				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, FEATURE_ENABLE_IBRS);
+				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default() | SPEC_CTRL_IBRS);
 		} else {
 			sysctl_ibrs_enabled = 0;
 		}
