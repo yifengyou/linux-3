@@ -79,6 +79,7 @@
 #include <asm/misc.h>
 #include <asm/spec-ctrl.h>
 #include <asm/microcode.h>
+#include <asm/spec-ctrl.h>
 
 /* State of each CPU */
 DEFINE_PER_CPU(int, cpu_state) = { 0 };
@@ -243,6 +244,8 @@ static void notrace start_secondary(void *unused)
 	 * Check TSC synchronization with the BP:
 	 */
 	check_tsc_sync_target();
+
+	speculative_store_bypass_ht_init();
 
 	/*
 	 * Enable the espfix hack for this CPU
@@ -1157,6 +1160,8 @@ void __init native_smp_prepare_cpus(unsigned int max_cpus)
 		uv_system_init();
 
 	set_mtrr_aps_delayed_init();
+
+	speculative_store_bypass_ht_init();
 out:
 	preempt_enable();
 }
