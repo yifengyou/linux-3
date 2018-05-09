@@ -7238,7 +7238,7 @@ static void __noclone vmx_vcpu_run(struct kvm_vcpu *vcpu)
 	atomic_switch_perf_msrs(vmx);
 
 	/* SMB: Ignore ibrs_inuse but rely on vcpu value */
-	x86_spec_ctrl_set_guest(vcpu->arch.spec_ctrl);
+	x86_spec_ctrl_set_guest(vcpu->arch.spec_ctrl, 0);
 
 	debugctlmsr = get_debugctlmsr();
 
@@ -7362,7 +7362,7 @@ static void __noclone vmx_vcpu_run(struct kvm_vcpu *vcpu)
 #endif
 	      );
 
-	x86_spec_ctrl_restore_host(vcpu->arch.spec_ctrl);
+	x86_spec_ctrl_restore_host(vcpu->arch.spec_ctrl, 0);
 
 	/* Eliminate branch target predictions from guest mode */
 	vmexit_fill_RSB();
