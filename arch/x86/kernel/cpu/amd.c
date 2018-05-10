@@ -801,6 +801,7 @@ static void init_amd(struct cpuinfo_x86 *c)
 			sysctl_ibrs_enabled = 1;
 		if (ibpb_inuse)
 			sysctl_ibpb_enabled = 1;
+		set_cpu_cap(c, X86_FEATURE_MSR_SPEC_CTRL);
 	} else if (cpu_has(c, X86_FEATURE_AMD_IBPB)) {
 		pr_info_once("FEATURE SPEC_CTRL Not Present\n");
 		pr_info_once("FEATURE IBPB Present\n");
