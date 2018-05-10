@@ -784,6 +784,7 @@ static void init_amd(struct cpuinfo_x86 *c)
 		set_cpu_bug(c, X86_BUG_AMD_APIC_C1E);
 
 	if (c->x86 == 0x17) {
+		set_cpu_cap(c, X86_FEATURE_ZEN);
 		/*
 		 * Fix erratum 1076: CPB feature bit not being set in CPUID.
 		 * It affects all up to and including B1.
