@@ -77,7 +77,7 @@ install-%: dtb_files = $(dtb_files_$*)
 install-%: MODHASHALGO=sha512
 install-%: MODSECKEY=$(builddir)/build-$*/signing_key.priv
 install-%: MODPUBKEY=$(builddir)/build-$*/signing_key.x509
-install-%: checks-%
+install-%: $(stampdir)/stamp-build-%
 	@echo Debug: $@ kernel_file $(kernel_file) kernfile $(kernfile) install_file $(install_file) instfile $(instfile)
 	dh_testdir
 	dh_testroot
@@ -340,6 +340,24 @@ ifeq ($(do_tools_hyperv),true)
 endif
 endif
 
+	# Build the final ABI information.
+	install -d $(abidir)
+	sed -e 's/^\(.\+\)[[:space:]]\+\(.\+\)[[:space:]]\(.\+\)$$/\3 \2 \1/'	\
+		$(builddir)/build-$*/Module.symvers | sort > $(abidir)/$*
+
+	# Build the final ABI modules information.
+	find $(pkgdir_bin) $(pkgdir) $(pkgdir_ex) -name \*.ko | \
+		sed -e 's/.*\/\([^\/]*\)\.ko/\1/' | sort > $(abidir)/$*.modules
+
+	# Build the final ABI retpoline information.
+	if grep -q CONFIG_RETPOLINE=y $(builddir)/build-$*/.config; then \
+		echo "# retpoline v1.0" >$(abidir)/$*.retpoline; \
+		$(SHELL) $(DROOT)/scripts/retpoline-extract $(builddir)/build-$* $(CURDIR) | \
+			sort >>$(abidir)/$*.retpoline; \
+	else \
+		echo "# RETPOLINE NOT ENABLED" >$(abidir)/$*.retpoline; \
+	fi
+
 headers_tmp := $(CURDIR)/debian/tmp-headers
 headers_dir := $(CURDIR)/debian/linux-libc-dev
 
@@ -417,7 +435,7 @@ binary-%: dbgpkgdir = $(CURDIR)/debian/$(bin_pkg_name)-$*-dbgsym
 binary-%: pkgtools = $(tools_flavour_pkg_name)-$*
 binary-%: pkgcloud = $(cloud_flavour_pkg_name)-$*
 binary-%: target_flavour = $*
-binary-%: install-%
+binary-%: checks-%
 	@echo Debug: $@
 	dh_testdir
 	dh_testroot
