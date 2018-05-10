@@ -7066,6 +7066,17 @@ static void vmx_handle_external_intr(struct kvm_vcpu *vcpu)
 		local_irq_enable();
 }
 
+static bool vmx_has_emulated_msr(int index)
+{
+	switch (index) {
+	case MSR_AMD64_VIRT_SPEC_CTRL:
+		/* This is AMD only.  */
+		return false;
+	default:
+		return true;
+	}
+}
+
 static void vmx_recover_nmi_blocking(struct vcpu_vmx *vmx)
 {
 	u32 exit_intr_info;
@@ -8587,6 +8598,7 @@ static struct kvm_x86_ops vmx_x86_ops = {
 	.hardware_enable = hardware_enable,
 	.hardware_disable = hardware_disable,
 	.cpu_has_accelerated_tpr = report_flexpriority,
+	.has_emulated_msr = vmx_has_emulated_msr,
 
 	.vcpu_create = vmx_create_vcpu,
 	.vcpu_free = vmx_free_vcpu,
