@@ -67,9 +67,6 @@ static inline void vmexit_fill_RSB(void)
 extern u64 x86_amd_ls_cfg_base;
 extern u64 x86_amd_ls_cfg_ssbd_mask;
 
-/* The Intel SPEC CTRL MSR base value cache */
-extern u64 x86_spec_ctrl_base;
-
 static inline u64 ssbd_tif_to_spec_ctrl(u64 tifn)
 {
 	BUILD_BUG_ON(TIF_SSBD < SPEC_CTRL_SSBD_SHIFT);

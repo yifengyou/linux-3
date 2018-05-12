@@ -1467,14 +1467,14 @@ void native_play_dead(void)
 	tboot_shutdown(TB_SHUTDOWN_WFS);
 
 	if (ibrs_inuse)
-		native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default());
+		native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base);
 
 	mwait_play_dead();	/* Only returns on failure */
 	if (cpuidle_play_dead())
 		hlt_play_dead();
 
 	if (ibrs_inuse)
-		native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_get_default() | SPEC_CTRL_IBRS);
+		native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base | SPEC_CTRL_IBRS);
 }
 
 #else /* ... !CONFIG_HOTPLUG_CPU */
