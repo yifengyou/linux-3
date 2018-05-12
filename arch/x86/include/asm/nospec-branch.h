@@ -202,8 +202,6 @@ enum spectre_v2_mitigation {
 extern char __indirect_thunk_start[];
 extern char __indirect_thunk_end[];
 
-extern void x86_spec_ctrl_set(u64);
-
 /* The Speculative Store Bypass disable variants */
 enum ssb_mitigation {
 	SPEC_STORE_BYPASS_NONE,
