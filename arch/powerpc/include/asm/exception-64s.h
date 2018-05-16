@@ -298,6 +298,10 @@ END_FTR_SECTION_NESTED(ftr,ftr,943)
 	EXCEPTION_PROLOG_1(area, extra, vec);				\
 	EXCEPTION_PROLOG_PSERIES_1(label, h);
 
+#define EXCEPTION_PROLOG_PSERIES_OOL(area, label, h, extra, vec)	\
+	EXCEPTION_PROLOG_1(area, extra, vec);				\
+	EXCEPTION_PROLOG_PSERIES_1(label, h);
+
 #define __KVMTEST(n)							\
 	lbz	r10,HSTATE_IN_GUEST(r13);			\
 	cmpwi	r10,0;							\

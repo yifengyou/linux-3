@@ -186,8 +186,8 @@ BEGIN_FTR_SECTION
 	b	data_access_check_stab
 data_access_not_stab:
 END_MMU_FTR_SECTION_IFCLR(MMU_FTR_SLB)
-	EXCEPTION_PROLOG_PSERIES(PACA_EXGEN, data_access_common, EXC_STD,
-				 KVMTEST, 0x300)
+	EXCEPTION_PROLOG_0(PACA_EXGEN)
+	b data_access_pSeries_OOL
 
 	. = 0x380
 	.globl data_access_slb_pSeries
@@ -508,6 +508,9 @@ machine_check_pSeries_0:
 	KVM_HANDLER_SKIP(PACA_EXMC, EXC_STD, 0x200)
 
 	/* moved from 0x300 */
+data_access_pSeries_OOL:
+	EXCEPTION_PROLOG_PSERIES_OOL(PACA_EXGEN, data_access_common, EXC_STD,
+				     KVMTEST, 0x300)
 data_access_check_stab:
 	GET_PACA(r13)
 	std	r9,PACA_EXSLB+EX_R9(r13)
