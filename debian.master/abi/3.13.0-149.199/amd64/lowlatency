@@ -14581,6 +14581,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1c87a811	__round_jiffies_up
 EXPORT_SYMBOL_GPL vmlinux 0x1cad3cc6	sk_clear_memalloc
 EXPORT_SYMBOL_GPL vmlinux 0x1cb23bad	regulator_can_change_voltage
 EXPORT_SYMBOL_GPL vmlinux 0x1cb7186e	__pm_runtime_use_autosuspend
+EXPORT_SYMBOL_GPL vmlinux 0x1cc001d4	x86_spec_ctrl_restore_host
 EXPORT_SYMBOL_GPL vmlinux 0x1cdb2147	zs_malloc
 EXPORT_SYMBOL_GPL vmlinux 0x1cfd95c1	wakeup_source_register
 EXPORT_SYMBOL_GPL vmlinux 0x1d0fe56c	fixed_phy_set_link_update
@@ -15754,6 +15755,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x79c72c01	tcp_unregister_congestion_control
 EXPORT_SYMBOL_GPL vmlinux 0x79e69460	intel_iommu_gfx_mapped
 EXPORT_SYMBOL_GPL vmlinux 0x79ea99b0	tcp_done
 EXPORT_SYMBOL_GPL vmlinux 0x79f21743	pingv6_ops
+EXPORT_SYMBOL_GPL vmlinux 0x7a13246e	x86_spec_ctrl_get_default
 EXPORT_SYMBOL_GPL vmlinux 0x7a16034c	rio_map_inb_region
 EXPORT_SYMBOL_GPL vmlinux 0x7a2e4b44	ezx_pcap_set_bits
 EXPORT_SYMBOL_GPL vmlinux 0x7a319404	clk_register_fixed_rate
@@ -16097,6 +16099,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x9450c561	input_ff_event
 EXPORT_SYMBOL_GPL vmlinux 0x9454c675	acpi_kobj
 EXPORT_SYMBOL_GPL vmlinux 0x949f7342	__alloc_percpu
 EXPORT_SYMBOL_GPL vmlinux 0x94a68723	ata_scsi_slave_destroy
+EXPORT_SYMBOL_GPL vmlinux 0x94b625d2	x86_spec_ctrl_set_guest
 EXPORT_SYMBOL_GPL vmlinux 0x94b993be	__rio_local_write_config_32
 EXPORT_SYMBOL_GPL vmlinux 0x94c2ba70	irq_domain_xlate_onecell
 EXPORT_SYMBOL_GPL vmlinux 0x94c318be	apei_exec_collect_resources
@@ -17513,6 +17516,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xfd3966bd	ata_acpi_gtm_xfermask
 EXPORT_SYMBOL_GPL vmlinux 0xfd51b281	gnttab_end_foreign_access_ref
 EXPORT_SYMBOL_GPL vmlinux 0xfd7243c7	erst_disable
 EXPORT_SYMBOL_GPL vmlinux 0xfd98f68a	irq_alloc_domain_generic_chips
+EXPORT_SYMBOL_GPL vmlinux 0xfdb4caac	x86_spec_ctrl_set
 EXPORT_SYMBOL_GPL vmlinux 0xfdcfc2c8	bus_register
 EXPORT_SYMBOL_GPL vmlinux 0xfddf6f24	ata_dev_next
 EXPORT_SYMBOL_GPL vmlinux 0xfe048f89	wm8350_set_bits

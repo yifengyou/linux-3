@@ -14647,6 +14647,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1c80d27d	btree_geo128
 EXPORT_SYMBOL_GPL vmlinux 0x1c83f2be	usb_unlink_urb
 EXPORT_SYMBOL_GPL vmlinux 0x1c87a811	__round_jiffies_up
 EXPORT_SYMBOL_GPL vmlinux 0x1cbbabb0	usb_scuttle_anchored_urbs
+EXPORT_SYMBOL_GPL vmlinux 0x1cc001d4	x86_spec_ctrl_restore_host
 EXPORT_SYMBOL_GPL vmlinux 0x1ce98df1	atomic_notifier_call_chain
 EXPORT_SYMBOL_GPL vmlinux 0x1cee1b00	xen_swiotlb_map_page
 EXPORT_SYMBOL_GPL vmlinux 0x1cf37d59	key_set_timeout
@@ -15903,6 +15904,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x79c1fd52	tty_wakeup
 EXPORT_SYMBOL_GPL vmlinux 0x79c74cf5	irq_alloc_generic_chip
 EXPORT_SYMBOL_GPL vmlinux 0x79e69460	intel_iommu_gfx_mapped
 EXPORT_SYMBOL_GPL vmlinux 0x7a075be8	register_ftrace_function
+EXPORT_SYMBOL_GPL vmlinux 0x7a13246e	x86_spec_ctrl_get_default
 EXPORT_SYMBOL_GPL vmlinux 0x7a3088b3	sata_sff_hardreset
 EXPORT_SYMBOL_GPL vmlinux 0x7a319404	clk_register_fixed_rate
 EXPORT_SYMBOL_GPL vmlinux 0x7a4c1438	pv_info
@@ -16214,6 +16216,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x946ca9dc	list_lru_walk_node
 EXPORT_SYMBOL_GPL vmlinux 0x949f2a2c	cpufreq_cpu_get
 EXPORT_SYMBOL_GPL vmlinux 0x94a68723	ata_scsi_slave_destroy
 EXPORT_SYMBOL_GPL vmlinux 0x94abb745	sprint_oid
+EXPORT_SYMBOL_GPL vmlinux 0x94b625d2	x86_spec_ctrl_set_guest
 EXPORT_SYMBOL_GPL vmlinux 0x94b696c4	sock_diag_register_inet_compat
 EXPORT_SYMBOL_GPL vmlinux 0x94c318be	apei_exec_collect_resources
 EXPORT_SYMBOL_GPL vmlinux 0x94ca8109	sysfs_add_link_to_group
@@ -17562,6 +17565,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xfd51b281	gnttab_end_foreign_access_ref
 EXPORT_SYMBOL_GPL vmlinux 0xfd5ae47b	m2p_add_override
 EXPORT_SYMBOL_GPL vmlinux 0xfd7243c7	erst_disable
 EXPORT_SYMBOL_GPL vmlinux 0xfd7ad930	fuse_dev_release
+EXPORT_SYMBOL_GPL vmlinux 0xfdb4caac	x86_spec_ctrl_set
 EXPORT_SYMBOL_GPL vmlinux 0xfdbd19a2	ip6_redirect
 EXPORT_SYMBOL_GPL vmlinux 0xfdcc1080	irq_set_default_host
 EXPORT_SYMBOL_GPL vmlinux 0xfde62d79	attribute_container_classdev_to_container

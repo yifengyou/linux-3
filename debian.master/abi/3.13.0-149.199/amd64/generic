@@ -14577,6 +14577,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1c80d27d	btree_geo128
 EXPORT_SYMBOL_GPL vmlinux 0x1c86cb49	sock_gen_put
 EXPORT_SYMBOL_GPL vmlinux 0x1c87a811	__round_jiffies_up
 EXPORT_SYMBOL_GPL vmlinux 0x1cbc9608	usb_match_one_id
+EXPORT_SYMBOL_GPL vmlinux 0x1cc001d4	x86_spec_ctrl_restore_host
 EXPORT_SYMBOL_GPL vmlinux 0x1cd8b509	acpi_pci_check_ejectable
 EXPORT_SYMBOL_GPL vmlinux 0x1cdb2147	zs_malloc
 EXPORT_SYMBOL_GPL vmlinux 0x1ce79cb2	ping_rcv
@@ -15816,6 +15817,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x796c2d48	dm_get_md
 EXPORT_SYMBOL_GPL vmlinux 0x7991fd8d	crash_vmclear_loaded_vmcss
 EXPORT_SYMBOL_GPL vmlinux 0x799cc695	usb_unpoison_anchored_urbs
 EXPORT_SYMBOL_GPL vmlinux 0x79e69460	intel_iommu_gfx_mapped
+EXPORT_SYMBOL_GPL vmlinux 0x7a13246e	x86_spec_ctrl_get_default
 EXPORT_SYMBOL_GPL vmlinux 0x7a16034c	rio_map_inb_region
 EXPORT_SYMBOL_GPL vmlinux 0x7a2e4b44	ezx_pcap_set_bits
 EXPORT_SYMBOL_GPL vmlinux 0x7a319404	clk_register_fixed_rate
@@ -16139,6 +16141,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x949e25de	crypto_shash_finup
 EXPORT_SYMBOL_GPL vmlinux 0x949f7342	__alloc_percpu
 EXPORT_SYMBOL_GPL vmlinux 0x94a68723	ata_scsi_slave_destroy
 EXPORT_SYMBOL_GPL vmlinux 0x94ad9af0	sdio_f0_readb
+EXPORT_SYMBOL_GPL vmlinux 0x94b625d2	x86_spec_ctrl_set_guest
 EXPORT_SYMBOL_GPL vmlinux 0x94b8a096	usb_clear_halt
 EXPORT_SYMBOL_GPL vmlinux 0x94b993be	__rio_local_write_config_32
 EXPORT_SYMBOL_GPL vmlinux 0x94c2ba70	irq_domain_xlate_onecell
@@ -17501,6 +17504,7 @@ EXPORT_SYMBOL_GPL vmlinux 0xfce7c448	pm_generic_freeze_late
 EXPORT_SYMBOL_GPL vmlinux 0xfd51b281	gnttab_end_foreign_access_ref
 EXPORT_SYMBOL_GPL vmlinux 0xfd678075	sk_unattached_filter_create
 EXPORT_SYMBOL_GPL vmlinux 0xfd7243c7	erst_disable
+EXPORT_SYMBOL_GPL vmlinux 0xfdb4caac	x86_spec_ctrl_set
 EXPORT_SYMBOL_GPL vmlinux 0xfdcfc2c8	bus_register
 EXPORT_SYMBOL_GPL vmlinux 0xfdec3d48	shash_free_instance
 EXPORT_SYMBOL_GPL vmlinux 0xfe0039a5	__pm_runtime_resume
