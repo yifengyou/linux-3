@@ -250,7 +250,7 @@ void x86_spec_ctrl_restore_host(u64 guest_spec_ctrl, u64 guest_virt_spec_ctrl)
 }
 EXPORT_SYMBOL_GPL(x86_spec_ctrl_restore_host);
 
-static void x86_amd_ssbd_enable(void)
+static void x86_amd_ssb_disable(void)
 {
 	u64 msrval = x86_amd_ls_cfg_base | x86_amd_ls_cfg_ssbd_mask;
 
@@ -519,7 +519,7 @@ static enum ssb_mitigation __init __ssb_select_mitigation(void)
 			x86_spec_ctrl_set(SPEC_CTRL_SSBD);
 			break;
 		case X86_VENDOR_AMD:
-			x86_amd_ssbd_enable();
+			x86_amd_ssb_disable();
 			break;
 		}
 	}
@@ -631,7 +631,7 @@ void x86_spec_ctrl_setup_ap(void)
 		x86_spec_ctrl_set(x86_spec_ctrl_base & ~x86_spec_ctrl_mask);
 
 	if (ssb_mode == SPEC_STORE_BYPASS_DISABLE)
-		x86_amd_ssbd_enable();
+		x86_amd_ssb_disable();
 }
 
 #ifdef CONFIG_SYSFS
