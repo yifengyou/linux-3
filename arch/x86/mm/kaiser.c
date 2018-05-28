@@ -274,7 +274,6 @@ static void __init kaiser_init_all_pgds(void)
 
 void __init kaiser_check_boottime_disable(void)
 {
-	bool enable = true;
 	char arg[5];
 	int ret;
 
@@ -297,13 +296,11 @@ void __init kaiser_check_boottime_disable(void)
 		goto disable;
 
 skip:
-	if (boot_cpu_data.x86_vendor == X86_VENDOR_AMD)
+	if (!boot_cpu_has_bug(X86_BUG_CPU_MELTDOWN))
 		goto disable;
 
 enable:
-	if (enable)
-		setup_force_cpu_cap(X86_FEATURE_KAISER);
-
+	setup_force_cpu_cap(X86_FEATURE_KAISER);
 	return;
 
 disable:
