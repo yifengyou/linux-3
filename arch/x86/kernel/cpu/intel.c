@@ -519,6 +519,10 @@ static void init_intel(struct cpuinfo_x86 *c)
 			printk(KERN_INFO "FEATURE SPEC_CTRL Not Present\n");
 		}
 	}
+
+	if (cpu_has(c, X86_FEATURE_SPEC_CTRL_SSBD) ||
+	    cpu_has(c, X86_FEATURE_VIRT_SSBD))
+		set_cpu_cap(c, X86_FEATURE_SSBD);
 }
 
 #ifdef CONFIG_X86_32
