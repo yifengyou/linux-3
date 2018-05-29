@@ -130,12 +130,14 @@ extern const struct cpumask *cpu_coregroup_mask(int cpu);
 extern unsigned int __max_logical_packages;
 #define topology_max_packages()			(__max_logical_packages)
 int topology_update_package_map(unsigned int apicid, unsigned int cpu);
-extern int topology_phys_to_logical_pkg(unsigned int pkg);
+int topology_phys_to_logical_pkg(unsigned int pkg);
+bool topology_is_primary_thread(unsigned int cpu);
 #else
 #define topology_max_packages()			(1)
 static inline int
 topology_update_package_map(unsigned int apicid, unsigned int cpu) { return 0; }
 static inline int topology_phys_to_logical_pkg(unsigned int pkg) { return 0; }
+static inline bool topology_is_primary_thread(unsigned int cpu) { return true; }
 #endif
 
 static inline void arch_fix_phys_package_id(int num, u32 slot)
