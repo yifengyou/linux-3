@@ -11,6 +11,7 @@
 #include <linux/vmalloc.h>
 #include <scsi/scsi_tcq.h>
 #include <linux/utsname.h>
+#include <linux/nospec.h>
 
 
 /* QLAFX00 specific Mailbox implementation functions */
@@ -2397,7 +2398,7 @@ qlafx00_status_entry(scsi_qla_host_t *vha, struct rsp_que *rsp, void *pkt)
 
 	/* Validate handle. */
 	if (handle < req->num_outstanding_cmds) {
-		osb();
+		handle = array_index_nospec(handle, req->num_outstanding_cmds); /* needed? */
 		sp = req->outstanding_cmds[handle];
 	} else {
 		sp = NULL;
@@ -2755,7 +2756,7 @@ qlafx00_multistatus_entry(struct scsi_qla_host *vha,
 
 		/* Validate handle. */
 		if (handle < req->num_outstanding_cmds) {
-			osb();
+			handle = array_index_nospec(handle, req->num_outstanding_cmds); /* needed? */
 			sp = req->outstanding_cmds[handle];
 		} else {
 			sp = NULL;

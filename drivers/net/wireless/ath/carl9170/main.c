@@ -42,6 +42,7 @@
 #include <linux/module.h>
 #include <linux/etherdevice.h>
 #include <linux/random.h>
+#include <linux/nospec.h>
 #include <net/mac80211.h>
 #include <net/cfg80211.h>
 #include "hw.h"
@@ -1390,7 +1391,7 @@ static int carl9170_op_conf_tx(struct ieee80211_hw *hw,
 
 	mutex_lock(&ar->mutex);
 	if (queue < ar->hw->queues) {
-		osb();
+		queue = array_index_nospec(queue, ar->hw->queues); /* needed? */
 		memcpy(&ar->edcf[ar9170_qmap[queue]], param, sizeof(*param));
 		ret = carl9170_set_qos(ar);
 	} else {

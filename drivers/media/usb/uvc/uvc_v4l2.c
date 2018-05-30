@@ -23,6 +23,7 @@
 #include <linux/mm.h>
 #include <linux/wait.h>
 #include <linux/atomic.h>
+#include <linux/nospec.h>
 
 #include <media/v4l2-common.h>
 #include <media/v4l2-ctrls.h>
@@ -726,7 +727,7 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 			}
 			pin = iterm->id;
 		} else if (index < selector->bNrInPins) {
-			osb();
+			index = array_index_nospec(index, selector->bNrInPins); /* needed? */
 			pin = selector->baSourceID[index];
 			list_for_each_entry(iterm, &chain->entities, chain) {
 				if (!UVC_ENTITY_IS_ITERM(iterm))
@@ -787,7 +788,7 @@ static long uvc_v4l2_do_ioctl(struct file *file, unsigned int cmd, void *arg)
 
 		if (input == 0 || input > chain->selector->bNrInPins)
 			return -EINVAL;
-		osb();
+		input = array_index_nospec(input, chain->selector->bNrInPins); /* needed? */
 
 		return uvc_query_ctrl(chain->dev, UVC_SET_CUR,
 			chain->selector->id, chain->dev->intfnum,
