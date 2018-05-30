@@ -37,7 +37,8 @@
 
 #define set_mb(var, value)	do { var = value; mb(); } while (0)
 
-#define osb()   asm volatile("ori 31,31,0")
+/* Prevent speculative execution past this barrier. */
+#define barrier_nospec()	asm volatile("ori 31,31,0")
 
 #ifdef CONFIG_SMP
 

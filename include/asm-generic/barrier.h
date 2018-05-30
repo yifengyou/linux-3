@@ -61,16 +61,5 @@ do {									\
 	___p1;								\
 })
 
-/* Observable speculation barrier: ensures that any user
- * observable speculation doesn't cross the boundary.
- * Any user observable speculative activity on this CPU
- * thread before this point either completes, reaches a
- * state it can no longer cause observable activity, or
- * is aborted before instructions after the barrier execute.
- */
-#ifndef osb
-#define osb()	do { } while (0)
-#endif
-
 #endif /* !__ASSEMBLY__ */
 #endif /* __ASM_GENERIC_BARRIER_H */

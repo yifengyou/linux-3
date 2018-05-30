@@ -39,6 +39,7 @@
 #include <linux/ratelimit.h>
 #include <linux/seccomp.h>
 #include <linux/if_vlan.h>
+#include <linux/nospec.h>
 
 /* No hurry in this branch
  *
@@ -293,11 +294,11 @@ load_b:
 			X = K;
 			continue;
 		case BPF_S_LD_MEM:
-			osb();
+			barrier_nospec();
 			A = mem[K];
 			continue;
 		case BPF_S_LDX_MEM:
-			osb();
+			barrier_nospec();
 			X = mem[K];
 			continue;
 		case BPF_S_MISC_TAX:

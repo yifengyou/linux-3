@@ -181,6 +181,4 @@ static __always_inline void rdtsc_barrier(void)
 	barrier_nospec();
 }
 
-#define osb() alternative("", "lfence", X86_FEATURE_LFENCE_RDTSC)
-
 #endif /* _ASM_X86_BARRIER_H */
