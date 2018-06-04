@@ -138,6 +138,8 @@ static void do_suspend(void)
 		goto out_resume;
 	}
 
+	xen_arch_suspend();
+
 	si.cancelled = 1;
 
 	if (xen_hvm_domain()) {
@@ -163,11 +165,12 @@ static void do_suspend(void)
 		si.cancelled = 1;
 	}
 
+	xen_arch_resume();
+
 out_resume:
-	if (!si.cancelled) {
-		xen_arch_resume();
+	if (!si.cancelled)
 		xs_resume();
-	} else
+	else
 		xs_suspend_cancel();
 
 	dpm_resume_end(si.cancelled ? PMSG_THAW : PMSG_RESTORE);
