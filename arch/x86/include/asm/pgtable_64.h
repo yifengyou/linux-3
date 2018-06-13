@@ -225,6 +225,7 @@ extern void cleanup_highmap(void);
 extern void init_extra_mapping_uc(unsigned long phys, unsigned long size);
 extern void init_extra_mapping_wb(unsigned long phys, unsigned long size);
 
-#endif /* !__ASSEMBLY__ */
+#include <asm/pgtable-invert.h>
 
+#endif /* !__ASSEMBLY__ */
 #endif /* _ASM_X86_PGTABLE_64_H */
