@@ -192,6 +192,7 @@
 #define X86_FEATURE_LS_CFG_SSBD	( 7*32+24) /* AMD SSBD implementation via LS_CFG MSR */
 #define X86_FEATURE_IBPB	( 7*32+25) /* Indirect Branch Prediction Barrier */
 #define X86_FEATURE_MSR_SPEC_CTRL ( 7*32+26) /* "" MSR SPEC_CTRL is implemented */
+#define X86_FEATURE_L1TF_PTEINV	( 7*32+27) /* "" L1TF workaround PTE inversion */
 #define X86_FEATURE_ZEN		( 7*32+28) /* "" CPU is AMD family 0x17 (Zen) */
 #define X86_FEATURE_RETPOLINE	( 7*32+29) /* Generic Retpoline mitigation for Spectre variant 2 */
 #define X86_FEATURE_RETPOLINE_AMD ( 7*32+30) /* AMD Retpoline mitigation for Spectre variant 2 */
@@ -260,6 +261,7 @@
 #define X86_BUG_SPECTRE_V1	X86_BUG(15) /* CPU is affected by Spectre variant 1 attack with conditional branches */
 #define X86_BUG_SPECTRE_V2	X86_BUG(16) /* CPU is affected by Spectre variant 2 attack with indirect branches */
 #define X86_BUG_SPEC_STORE_BYPASS X86_BUG(17) /* CPU is affected by speculative store bypass attack */
+#define X86_BUG_L1TF		X86_BUG(18) /* CPU is affected by L1 Terminal Fault */
 
 #if defined(__KERNEL__) && !defined(__ASSEMBLY__)
 
