@@ -6878,6 +6878,7 @@ EXPORT_SYMBOL vmlinux 0xd0980b3f	tty_lock_pair
 EXPORT_SYMBOL vmlinux 0xd09a76a3	i8042_remove_filter
 EXPORT_SYMBOL vmlinux 0xd0a7bbaf	find_get_page
 EXPORT_SYMBOL vmlinux 0xd0a91bab	skip_spaces
+EXPORT_SYMBOL vmlinux 0xd0cd9d1a	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0xd0de1326	prepare_creds
 EXPORT_SYMBOL vmlinux 0xd0ee38b8	schedule_timeout_uninterruptible
 EXPORT_SYMBOL vmlinux 0xd0ef409f	ide_dma_off

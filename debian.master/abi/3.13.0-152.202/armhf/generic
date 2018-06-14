@@ -9409,6 +9409,7 @@ EXPORT_SYMBOL vmlinux 0xe33ce2bc	snd_ctl_remove_id
 EXPORT_SYMBOL vmlinux 0xe353368b	sk_page_frag_refill
 EXPORT_SYMBOL vmlinux 0xe359ffbe	elv_abort_queue
 EXPORT_SYMBOL vmlinux 0xe35c5285	of_find_node_by_phandle
+EXPORT_SYMBOL vmlinux 0xe3750197	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0xe37d10ae	omap_dispc_unregister_isr
 EXPORT_SYMBOL vmlinux 0xe3907e10	pagecache_write_end
 EXPORT_SYMBOL vmlinux 0xe3a3b151	mmc_wait_for_app_cmd

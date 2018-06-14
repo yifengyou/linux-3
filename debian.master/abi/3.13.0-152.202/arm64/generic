@@ -7384,6 +7384,7 @@ EXPORT_SYMBOL vmlinux 0x8646fa50	gen_pool_set_algo
 EXPORT_SYMBOL vmlinux 0x865029ac	__hw_addr_sync
 EXPORT_SYMBOL vmlinux 0x86530917	netlink_ack
 EXPORT_SYMBOL vmlinux 0x868acba5	get_options
+EXPORT_SYMBOL vmlinux 0x86b7d743	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x86d6e72f	contig_page_data
 EXPORT_SYMBOL vmlinux 0x86ea4d38	complete_all
 EXPORT_SYMBOL vmlinux 0x86f4e76f	input_inject_event

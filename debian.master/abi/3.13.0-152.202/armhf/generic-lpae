@@ -7655,6 +7655,7 @@ EXPORT_SYMBOL vmlinux 0xdaab5a26	genl_unregister_family
 EXPORT_SYMBOL vmlinux 0xdaafc807	tcp_sockets_allocated
 EXPORT_SYMBOL vmlinux 0xdad557e3	drop_super
 EXPORT_SYMBOL vmlinux 0xdad7e3c9	dev_mc_sync
+EXPORT_SYMBOL vmlinux 0xdaff5939	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0xdb0be897	tty_port_alloc_xmit_buf
 EXPORT_SYMBOL vmlinux 0xdb1c9a58	snd_device_new
 EXPORT_SYMBOL vmlinux 0xdb3e95f4	vlan_vids_add_by_dev

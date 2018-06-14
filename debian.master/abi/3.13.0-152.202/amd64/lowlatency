@@ -8269,6 +8269,7 @@ EXPORT_SYMBOL vmlinux 0x8f3b5744	update_region
 EXPORT_SYMBOL vmlinux 0x8f52ee48	pcie_capability_clear_and_set_word
 EXPORT_SYMBOL vmlinux 0x8f6bd661	skb_queue_tail
 EXPORT_SYMBOL vmlinux 0x8f89c036	input_inject_event
+EXPORT_SYMBOL vmlinux 0x8f93cecc	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x8f9c199c	__get_user_2
 EXPORT_SYMBOL vmlinux 0x8fbcdaf8	scsi_device_resume
 EXPORT_SYMBOL vmlinux 0x8fc763b6	mb_cache_entry_find_first

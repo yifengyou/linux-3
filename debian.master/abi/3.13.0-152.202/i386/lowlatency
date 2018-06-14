@@ -7670,6 +7670,7 @@ EXPORT_SYMBOL vmlinux 0x64d3f080	elv_register_queue
 EXPORT_SYMBOL vmlinux 0x64eae7ad	set_memory_array_wb
 EXPORT_SYMBOL vmlinux 0x6513a3fa	fb_get_color_depth
 EXPORT_SYMBOL vmlinux 0x651a4139	test_taint
+EXPORT_SYMBOL vmlinux 0x6526324d	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x6528ed9d	scsi_cmd_ioctl
 EXPORT_SYMBOL vmlinux 0x652e6bce	pci_assign_resource
 EXPORT_SYMBOL vmlinux 0x6531d6be	xfrm4_rcv

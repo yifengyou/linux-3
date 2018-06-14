@@ -6128,6 +6128,7 @@ EXPORT_SYMBOL vmlinux 0x09bd9f74	pci_disable_link_state
 EXPORT_SYMBOL vmlinux 0x09c55cec	schedule_timeout_interruptible
 EXPORT_SYMBOL vmlinux 0x09c8eb55	font_vga_8x16
 EXPORT_SYMBOL vmlinux 0x09d44df9	in_lock_functions
+EXPORT_SYMBOL vmlinux 0x09d5e4fd	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x09e74e56	pcim_iomap_regions
 EXPORT_SYMBOL vmlinux 0x0a14e8a2	dentry_update_name_case
 EXPORT_SYMBOL vmlinux 0x0a2487e0	unblock_all_signals

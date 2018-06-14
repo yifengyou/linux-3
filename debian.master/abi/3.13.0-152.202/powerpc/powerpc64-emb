@@ -7605,6 +7605,7 @@ EXPORT_SYMBOL vmlinux 0x70b827f8	scsi_set_medium_removal
 EXPORT_SYMBOL vmlinux 0x70bc17d7	inode_wait
 EXPORT_SYMBOL vmlinux 0x70d053fd	try_to_del_timer_sync
 EXPORT_SYMBOL vmlinux 0x70dd238a	padata_set_cpumasks
+EXPORT_SYMBOL vmlinux 0x70e1d8c9	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x70f31c43	gen10g_read_status
 EXPORT_SYMBOL vmlinux 0x7118f078	scsi_free_command
 EXPORT_SYMBOL vmlinux 0x711fe6a8	gen10g_restart_aneg

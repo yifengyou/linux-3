@@ -6092,6 +6092,7 @@ EXPORT_SYMBOL vmlinux 0x124f5a32	find_get_pages_tag
 EXPORT_SYMBOL vmlinux 0x125dec19	rawv6_mh_filter_register
 EXPORT_SYMBOL vmlinux 0x1275dfa4	inode_init_once
 EXPORT_SYMBOL vmlinux 0x127e21da	inet6_del_offload
+EXPORT_SYMBOL vmlinux 0x12970fe3	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0x129f8686	fb_set_var
 EXPORT_SYMBOL vmlinux 0x12a38747	usleep_range
 EXPORT_SYMBOL vmlinux 0x12bfd65a	__xfrm_decode_session

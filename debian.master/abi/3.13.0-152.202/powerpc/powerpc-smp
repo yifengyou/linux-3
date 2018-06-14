@@ -8601,6 +8601,7 @@ EXPORT_SYMBOL vmlinux 0xafbf5d0c	seq_pad
 EXPORT_SYMBOL vmlinux 0xafd68c33	flex_array_free
 EXPORT_SYMBOL vmlinux 0xafdcb091	prepare_binprm
 EXPORT_SYMBOL vmlinux 0xafec63da	pm860x_set_bits
+EXPORT_SYMBOL vmlinux 0xaff94a86	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0xafff3d1d	mempool_alloc
 EXPORT_SYMBOL vmlinux 0xb011f1ca	d_genocide
 EXPORT_SYMBOL vmlinux 0xb01bd603	__ip4_datagram_connect

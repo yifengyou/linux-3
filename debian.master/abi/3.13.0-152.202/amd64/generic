@@ -10042,6 +10042,7 @@ EXPORT_SYMBOL vmlinux 0xfb94103e	__clzdi2
 EXPORT_SYMBOL vmlinux 0xfbaaf01e	console_lock
 EXPORT_SYMBOL vmlinux 0xfbf5fa82	dcb_ieee_delapp
 EXPORT_SYMBOL vmlinux 0xfc02b7ad	sysctl_tcp_wmem
+EXPORT_SYMBOL vmlinux 0xfc3212e4	netdev_upper_get_next_dev_rcu
 EXPORT_SYMBOL vmlinux 0xfc39e32f	ioport_unmap
 EXPORT_SYMBOL vmlinux 0xfc44538a	inet_recvmsg
 EXPORT_SYMBOL vmlinux 0xfc57085e	mmc_set_blocklen
