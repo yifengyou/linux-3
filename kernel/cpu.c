@@ -161,6 +161,7 @@ static DECLARE_BITMAP(cpu_bootonce_bits, CONFIG_NR_CPUS) __read_mostly;
 const struct cpumask *const cpu_bootonce_mask = to_cpumask(cpu_bootonce_bits);
 
 enum cpuhp_smt_control cpu_smt_control __read_mostly = CPU_SMT_ENABLED;
+EXPORT_SYMBOL_GPL(cpu_smt_control);
 
 static int __init smt_cmdline_disable(char *str)
 {
