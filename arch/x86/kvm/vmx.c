@@ -1484,9 +1484,20 @@ static void clear_atomic_switch_msr_special(unsigned long entry,
 	vmcs_clear_bits(VM_EXIT_CONTROLS, exit);
 }
 
+static int find_msr(struct vmx_msrs *m, int msr)
+{
+	unsigned int i;
+
+	for (i = 0; i < m->nr; ++i) {
+		if (m->val[i].index == msr)
+			return i;
+	}
+	return -ENOENT;
+}
+
 static void clear_atomic_switch_msr(struct vcpu_vmx *vmx, unsigned msr)
 {
-	unsigned i;
+	int i;
 	struct msr_autoload *m = &vmx->msr_autoload;
 
 	switch (msr) {
@@ -1506,11 +1517,8 @@ static void clear_atomic_switch_msr(struct vcpu_vmx *vmx, unsigned msr)
 		}
 		break;
 	}
-	for (i = 0; i < m->guest.nr; ++i)
-		if (m->guest.val[i].index == msr)
-			break;
-
-	if (i == m->guest.nr)
+	i = find_msr(&m->guest, msr);
+	if (i < 0)
 		return;
 	--m->guest.nr;
 	--m->host.nr;
@@ -1533,7 +1541,7 @@ static void add_atomic_switch_msr_special(unsigned long entry,
 static void add_atomic_switch_msr(struct vcpu_vmx *vmx, unsigned msr,
 				  u64 guest_val, u64 host_val)
 {
-	unsigned i;
+	int i;
 	struct msr_autoload *m = &vmx->msr_autoload;
 
 	switch (msr) {
@@ -1567,16 +1575,13 @@ static void add_atomic_switch_msr(struct vcpu_vmx *vmx, unsigned msr,
 		wrmsrl(MSR_IA32_PEBS_ENABLE, 0);
 	}
 
-	for (i = 0; i < m->guest.nr; ++i)
-		if (m->guest.val[i].index == msr)
-			break;
-
+	i = find_msr(&m->guest, msr);
 	if (i == NR_AUTOLOAD_MSRS) {
 		printk_once(KERN_WARNING "Not enough msr switch entries. "
 				"Can't add msr %x\n", msr);
 		return;
-	} else if (i == m->guest.nr) {
-		++m->guest.nr;
+	} else if (i < 0) {
+		i = m->guest.nr++;
 		++m->host.nr;
 		vmcs_write32(VM_ENTRY_MSR_LOAD_COUNT, m->guest.nr);
 		vmcs_write32(VM_EXIT_MSR_LOAD_COUNT, m->host.nr);
