@@ -1315,7 +1315,7 @@ static void svm_free_vcpu(struct kvm_vcpu *vcpu)
 	 * block speculative execution.
 	 */
 	if (ibpb_inuse)
-		wrmsrl(MSR_IA32_PRED_CMD, FEATURE_SET_IBPB);
+		wrmsrl(MSR_IA32_PRED_CMD, PRED_CMD_IBPB);
 }
 
 static void svm_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
@@ -1348,7 +1348,7 @@ static void svm_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 	if (sd->current_vmcb != svm->vmcb) {
 		sd->current_vmcb = svm->vmcb;
 		if (ibpb_inuse)
-			wrmsrl(MSR_IA32_PRED_CMD, FEATURE_SET_IBPB);
+			wrmsrl(MSR_IA32_PRED_CMD, PRED_CMD_IBPB);
 	}
 }
 

@@ -17,7 +17,7 @@
 	pushq %rdx;				\
 	movl $MSR_IA32_SPEC_CTRL, %ecx;		\
 	movl $0, %edx;				\
-	movl $FEATURE_ENABLE_IBRS, %eax;	\
+	movl $SPEC_CTRL_IBRS, %eax;		\
 	wrmsr;					\
 	popq %rdx;				\
 	popq %rcx;				\
@@ -25,7 +25,7 @@
 #define __ASM_ENABLE_IBRS_CLOBBER		\
 	movl $MSR_IA32_SPEC_CTRL, %ecx;		\
 	movl $0, %edx;				\
-	movl $FEATURE_ENABLE_IBRS, %eax;	\
+	movl $SPEC_CTRL_IBRS, %eax;		\
 	wrmsr;
 #define __ASM_DISABLE_IBRS			\
 	pushq %rax;				\
