@@ -588,7 +588,8 @@ void __init smp_init(void)
 		if (num_online_cpus() >= setup_max_cpus)
 			break;
 		if (!cpu_online(cpu))
-			cpu_up(cpu);
+			if (cpu_up(cpu) == -ECANCELED)
+				cpu_down(cpu);
 	}
 
 	/* Any cleanup work */
