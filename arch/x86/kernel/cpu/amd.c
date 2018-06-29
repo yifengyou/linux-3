@@ -860,11 +860,6 @@ static void init_amd(struct cpuinfo_x86 *c)
 		}
 	}
 
-	if (cpu_has(c, X86_FEATURE_SPEC_CTRL_SSBD) ||
-	    cpu_has(c, X86_FEATURE_VIRT_SSBD)) {
-		set_cpu_cap(c, X86_FEATURE_SSBD);
-	}
-
 	rdmsr_safe(MSR_AMD64_PATCH_LEVEL, &c->microcode, &dummy);
 }
 
