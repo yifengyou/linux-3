@@ -210,4 +210,14 @@ static __always_inline void static_branch_disable(struct static_key *key)
 		static_key_slow_dec(key);
 }
 
+/*
+ * juergh: Helper #defines to (hopefully) prevent mistakes when using the
+ * convoluted static key API. The current API only allows for the two
+ * combinations below which execute without taking an uncoditional branch.
+ * Note, that a new API was introduced later with commit 11276d5306b8
+ * ("locking/static_keys: Add a new static_key interface").
+ */
+#define static_branch_unlikely_init_false(key)	static_key_false(key)
+#define static_branch_likely_init_true(key)	static_key_true(key)
+
 #endif	/* _LINUX_JUMP_LABEL_H */
