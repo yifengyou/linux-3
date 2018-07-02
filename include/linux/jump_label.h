@@ -192,4 +192,22 @@ static inline bool static_key_enabled(struct static_key *key)
 	return (atomic_read(&key->enabled) > 0);
 }
 
+#define DEFINE_STATIC_KEY_TRUE(name)   \
+	struct static_key name = STATIC_KEY_INIT_TRUE
+
+#define DEFINE_STATIC_KEY_FALSE(name)	\
+	struct static_key name = STATIC_KEY_INIT_FALSE
+
+static __always_inline void static_branch_enable(struct static_key *key)
+{
+	if (!static_key_enabled(key))
+		static_key_slow_inc(key);
+}
+
+static __always_inline void static_branch_disable(struct static_key *key)
+{
+	if (static_key_enabled(key))
+		static_key_slow_dec(key);
+}
+
 #endif	/* _LINUX_JUMP_LABEL_H */
