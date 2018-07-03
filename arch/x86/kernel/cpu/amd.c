@@ -820,43 +820,24 @@ static void init_amd(struct cpuinfo_x86 *c)
 			set_cpu_cap(c, X86_FEATURE_CPB);
 	}
 
-	/* AMD speculative control support */
-	if (cpu_has(c, X86_FEATURE_SPEC_CTRL)) {
-		pr_info_once("FEATURE SPEC_CTRL Present\n");
-		set_ibrs_supported();
-		set_ibpb_supported();
-		if (ibrs_inuse)
-			sysctl_ibrs_enabled = 1;
-		if (ibpb_inuse)
-			sysctl_ibpb_enabled = 1;
-		set_cpu_cap(c, X86_FEATURE_MSR_SPEC_CTRL);
-	} else if (cpu_has(c, X86_FEATURE_AMD_IBPB)) {
-		pr_info_once("FEATURE SPEC_CTRL Not Present\n");
-		pr_info_once("FEATURE IBPB Present\n");
-		set_ibpb_supported();
-		if (ibpb_inuse)
-			sysctl_ibpb_enabled = 1;
-	} else {
-		pr_info_once("FEATURE SPEC_CTRL Not Present\n");
-		pr_info_once("FEATURE IBPB Not Present\n");
-		/*
-		 * On AMD processors that do not support the speculative
-		 * control features, IBPB type support can be achieved by
-		 * disabling indirect branch predictor support.
-		 */
-		if (!ibpb_disabled) {
-			u64 val;
+	/*
+	 * On AMD family 0x10, 0x12 and 0x16 processors that do not support the
+	 * speculative control features, IBPB type support can be achieved by
+	 * disabling indirect branch predictor support.
+	 */
+	if (!ibpb_disabled && !cpu_has(c, X86_FEATURE_SPEC_CTRL) &&
+	    !cpu_has(c, X86_FEATURE_IBPB)) {
+		u64 val;
 
-			switch (c->x86) {
-			case 0x10:
-			case 0x12:
-			case 0x16:
-				pr_info_once("Disabling indirect branch predictor support\n");
-				rdmsrl(MSR_F15H_IC_CFG, val);
-				val |= MSR_F15H_IC_CFG_DIS_IND;
-				wrmsrl(MSR_F15H_IC_CFG, val);
-				break;
-			}
+		switch (c->x86) {
+		case 0x10:
+		case 0x12:
+		case 0x16:
+			pr_info_once("AMD: Disabling Indirect Branch Predictor\n");
+			rdmsrl(MSR_F15H_IC_CFG, val);
+			val |= MSR_F15H_IC_CFG_DIS_IND;
+			wrmsrl(MSR_F15H_IC_CFG, val);
+			break;
 		}
 	}
 
