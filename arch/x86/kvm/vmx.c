@@ -1915,7 +1915,7 @@ static void vmx_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 		per_cpu(current_vmcs, cpu) = vmx->loaded_vmcs->vmcs;
 		vmcs_load(vmx->loaded_vmcs->vmcs);
 		if (ibpb_inuse)
-			native_wrmsrl(MSR_IA32_PRED_CMD, PRED_CMD_IBPB);
+			indirect_branch_prediction_barrier();
 	}
 
 	if (vmx->loaded_vmcs->cpu != cpu) {
