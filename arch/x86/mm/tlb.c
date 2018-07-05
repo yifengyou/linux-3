@@ -152,8 +152,7 @@ void switch_mm_irqs_off(struct mm_struct *prev, struct mm_struct *next,
 		 * non-dumpable process.
 		 */
 		if (tsk && tsk->mm &&
-		    get_dumpable(tsk->mm) != SUID_DUMP_USER &&
-		    ibpb_inuse)
+		    get_dumpable(tsk->mm) != SUID_DUMP_USER)
 			indirect_branch_prediction_barrier();
 
 		/* Load the LDT, if the LDT is different: */

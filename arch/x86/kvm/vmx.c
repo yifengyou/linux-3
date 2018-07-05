@@ -1914,8 +1914,7 @@ static void vmx_vcpu_load(struct kvm_vcpu *vcpu, int cpu)
 	if (per_cpu(current_vmcs, cpu) != vmx->loaded_vmcs->vmcs) {
 		per_cpu(current_vmcs, cpu) = vmx->loaded_vmcs->vmcs;
 		vmcs_load(vmx->loaded_vmcs->vmcs);
-		if (ibpb_inuse)
-			indirect_branch_prediction_barrier();
+		indirect_branch_prediction_barrier();
 	}
 
 	if (vmx->loaded_vmcs->cpu != cpu) {

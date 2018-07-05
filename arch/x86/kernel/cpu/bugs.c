@@ -32,6 +32,16 @@
 static double __initdata x = 4195835.0;
 static double __initdata y = 3145727.0;
 
+unsigned int noibpb = 0;
+
+static int __init noibpb_handler(char *str)
+{
+	noibpb = 1;
+	return 0;
+}
+
+early_param("noibpb", noibpb_handler);
+
 /*
  * This used to check for exceptions..
  * However, it turns out that to support that,
@@ -411,11 +421,16 @@ retpoline_auto:
 	/* Initialize Indirect Branch Prediction Barrier if supported */
 	if (boot_cpu_has(X86_FEATURE_IBPB)) {
 		setup_force_cpu_cap(X86_FEATURE_USE_IBPB);
-		pr_info("Enabling Indirect Branch Prediction Barrier\n");
 
-		set_ibpb_supported();
-		if (ibpb_inuse)
-			sysctl_ibpb_enabled = 1;
+		/*
+		 * Enable IBPB support if it's not turned off on the
+		 * commandline.
+		 */
+		if (!noibpb)
+			ibpb_enable();
+
+		pr_info("%s Indirect Branch Prediction Barrier\n",
+			ibpb_enabled ? "Enabling" : "Disabling");
 	}
 
 	/*
@@ -431,8 +446,7 @@ retpoline_auto:
 			sysctl_ibrs_enabled = 1;
 	}
 
-	pr_info("Speculation control IBPB %s IBRS %s",
-	        ibpb_supported ? "supported" : "not-supported",
+	pr_info("Speculation control IBRS %s",
 	        ibrs_supported ? "supported" : "not-supported");
 
 	/*
@@ -863,7 +877,7 @@ static ssize_t cpu_show_common(struct device *dev, struct device_attribute *attr
 
 	case X86_BUG_SPECTRE_V2:
 		return sprintf(buf, "%s%s%s\n", spectre_v2_strings[spectre_v2_enabled],
-			       ibpb_inuse ? ", IBPB (Intel v4)" : "",
+			       ibpb_enabled && boot_cpu_has(X86_FEATURE_USE_IBPB) ? ", IBPB" : "",
 			       boot_cpu_has(X86_FEATURE_USE_IBRS_FW) ? ", IBRS_FW" : "");
 
 	case X86_BUG_SPEC_STORE_BYPASS:

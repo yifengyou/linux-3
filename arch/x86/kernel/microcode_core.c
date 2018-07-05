@@ -323,18 +323,6 @@ static ssize_t reload_store(struct device *dev,
 	if (!ret)
 		perf_check_microcode();
 
-	/* Initialize Indirect Branch Prediction Barrier if supported */
-	if (boot_cpu_has(X86_FEATURE_IBPB)) {
-		setup_force_cpu_cap(X86_FEATURE_USE_IBPB);
-		pr_info("Enabling Indirect Branch Prediction Barrier\n");
-
-		mutex_lock(&spec_ctrl_mutex);
-		set_ibpb_supported();
-		if (ibpb_inuse)
-			sysctl_ibpb_enabled = 1;
-		mutex_unlock(&spec_ctrl_mutex);
-	}
-
 	/* Initialize Indirect Branch Restricted Speculation if supported */
 	if (boot_cpu_has(X86_FEATURE_IBRS)) {
 		pr_info("Enabling Indirect Branch Restricted Speculation\n");

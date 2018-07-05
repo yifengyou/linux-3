@@ -201,8 +201,47 @@ static int proc_dostring_coredump(struct ctl_table *table, int write,
 #ifdef CONFIG_X86
 int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
                  void __user *buffer, size_t *lenp, loff_t *ppos);
-int proc_dointvec_ibpb_ctrl(struct ctl_table *table, int write,
-                 void __user *buffer, size_t *lenp, loff_t *ppos);
+
+unsigned int ibpb_enabled = 0;
+EXPORT_SYMBOL(ibpb_enabled);
+
+static unsigned int __ibpb_enabled = 0;   /* procfs shadow variable */
+
+static void set_ibpb_enabled(unsigned int val)
+{
+	mutex_lock(&spec_ctrl_mutex);
+
+	/* Only enable IBPB if the CPU supports it */
+	if (val && boot_cpu_has(X86_FEATURE_USE_IBPB))
+		ibpb_enabled = 1;
+	else
+		ibpb_enabled = 0;
+
+	/* Update the shadow variable */
+	__ibpb_enabled = ibpb_enabled;
+
+	mutex_unlock(&spec_ctrl_mutex);
+}
+
+inline void ibpb_enable(void)
+{
+	set_ibpb_enabled(1);
+}
+EXPORT_SYMBOL(ibpb_enable);
+
+static int ibpb_enabled_handler(struct ctl_table *table, int write,
+				void __user *buffer, size_t *lenp,
+				loff_t *ppos)
+{
+	int error;
+
+	error = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
+	if (error)
+		return error;
+
+	set_ibpb_enabled(__ibpb_enabled);
+	return 0;
+}
 #endif
 
 #ifdef CONFIG_MAGIC_SYSRQ
@@ -243,8 +282,6 @@ int sysctl_legacy_va_layout;
 
 u32 sysctl_ibrs_enabled = 0;
 EXPORT_SYMBOL(sysctl_ibrs_enabled);
-u32 sysctl_ibpb_enabled = 0;
-EXPORT_SYMBOL(sysctl_ibpb_enabled);
 
 /* The default sysctl tables: */
 
@@ -1172,13 +1209,13 @@ static struct ctl_table kern_table[] = {
 		.extra2         = &two,
 	},
 	{
-		.procname       = "ibpb_enabled",
-		.data           = &sysctl_ibpb_enabled,
-		.maxlen         = sizeof(unsigned int),
-		.mode           = 0644,
-		.proc_handler   = proc_dointvec_ibpb_ctrl,
-		.extra1         = &zero,
-		.extra2         = &one,
+		.procname	= "ibpb_enabled",
+		.data		= &__ibpb_enabled,
+		.maxlen		= sizeof(unsigned int),
+		.mode		= 0644,
+		.proc_handler   = ibpb_enabled_handler,
+		.extra1		= &zero,
+		.extra2		= &one,
 	},
 #endif
 	{ }
@@ -2258,8 +2295,8 @@ int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
 	unsigned int cpu;
 
 	ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-	pr_debug("sysctl_ibrs_enabled = %u, sysctl_ibpb_enabled = %u\n", sysctl_ibrs_enabled, sysctl_ibpb_enabled);
-	pr_debug("before:use_ibrs = %d, use_ibpb = %d\n", use_ibrs, use_ibpb);
+	pr_debug("sysctl_ibrs_enabled = %u\n", sysctl_ibrs_enabled);
+	pr_debug("before:use_ibrs = %d\n", use_ibrs);
 	mutex_lock(&spec_ctrl_mutex);
 	if (sysctl_ibrs_enabled == 0) {
 		/* always set IBRS off */
@@ -2285,29 +2322,7 @@ int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
 			sysctl_ibrs_enabled = 0;
 	}
 	mutex_unlock(&spec_ctrl_mutex);
-	pr_debug("after:use_ibrs = %d, use_ibpb = %d\n", use_ibrs, use_ibpb);
-	return ret;
-}
-
-int proc_dointvec_ibpb_ctrl(struct ctl_table *table, int write,
-	void __user *buffer, size_t *lenp, loff_t *ppos)
-{
-	int ret;
-
-	ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-	pr_debug("sysctl_ibrs_enabled = %u, sysctl_ibpb_enabled = %u\n", sysctl_ibrs_enabled, sysctl_ibpb_enabled);
-	pr_debug("before:use_ibrs = %d, use_ibpb = %d\n", use_ibrs, use_ibpb);
-	mutex_lock(&spec_ctrl_mutex);
-	if (sysctl_ibpb_enabled == 0)
-		set_ibpb_disabled();
-	else if (sysctl_ibpb_enabled == 1) {
-		clear_ibpb_disabled();
-		if (!ibpb_inuse)
-			/* platform don't support ibpb */
-			sysctl_ibpb_enabled = 0;
-	}
-	mutex_unlock(&spec_ctrl_mutex);
-	pr_debug("after:use_ibrs = %d, use_ibpb = %d\n", use_ibrs, use_ibpb);
+	pr_debug("after:use_ibrs = %d\n", use_ibrs);
 	return ret;
 }
 #endif

@@ -9,7 +9,6 @@
 #ifdef __ASSEMBLY__
 
 .extern use_ibrs
-.extern use_ibpb
 
 #define __ASM_ENABLE_IBRS			\
 	pushq %rax;				\

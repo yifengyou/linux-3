@@ -96,48 +96,6 @@ static inline void clear_ibrs_disabled(void)
 	set_ibrs_inuse();
 }
 #define ibrs_inuse 		(check_ibrs_inuse())
-
-/* indicate usage of IBPB to control execution speculation */
-extern int use_ibpb;
-extern u32 sysctl_ibpb_enabled;
-#define ibpb_supported		(use_ibpb & 0x2)
-#define ibpb_disabled		(use_ibpb & 0x4)
-static inline void set_ibpb_inuse(void)
-{
-	if (ibpb_supported)
-		use_ibpb |= 0x1;
-}
-static inline void clear_ibpb_inuse(void)
-{
-	use_ibpb &= ~0x1;
-}
-static inline int check_ibpb_inuse(void)
-{
-	if (use_ibpb & 0x1)
-		return 1;
-	else
-		/* rmb to prevent wrong speculation for security */
-		rmb();
-	return 0;
-}
-static inline void set_ibpb_supported(void)
-{
-	use_ibpb |= 0x2;
-	if (!ibpb_disabled)
-		set_ibpb_inuse();
-}
-static inline void set_ibpb_disabled(void)
-{
-	use_ibpb |= 0x4;
-	if (check_ibpb_inuse())
-		clear_ibpb_inuse();
-}
-static inline void clear_ibpb_disabled(void)
-{
-	use_ibpb &= ~0x4;
-	set_ibpb_inuse();
-}
-#define ibpb_inuse		(check_ibpb_inuse())
 #endif
 
 #ifdef CONFIG_SMP

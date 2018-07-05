@@ -477,15 +477,6 @@ EXPORT_SYMBOL(setup_max_cpus);
 
 int use_ibrs;
 EXPORT_SYMBOL(use_ibrs);
-
-/*
- * use IBRS
- * bit 0 = indicate if ibpb is currently in use
- * bit 1 = indicate if system supports ibpb
- * bit 2 = indicate if admin disables ibpb
-*/
-int use_ibpb;
-EXPORT_SYMBOL(use_ibpb);
 #endif
 
 /* mutex to serialize IBRS & IBPB control changes */
@@ -524,15 +515,6 @@ static int __init noibrs(char *str)
 }
 
 early_param("noibrs", noibrs);
-
-static int __init noibpb(char *str)
-{
-	set_ibpb_disabled();
-
-	return 0;
-}
-
-early_param("noibpb", noibpb);
 #endif
 
 
