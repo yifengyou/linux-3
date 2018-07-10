@@ -399,12 +399,13 @@ out_release:
 	return err;
 }
 
-static int cpu_down_maps_locked(unsigned int cpu)
+int cpu_down_maps_locked(unsigned int cpu)
 {
 	if (cpu_hotplug_disabled)
 		return -EBUSY;
 	return _cpu_down(cpu, 0);
 }
+EXPORT_SYMBOL(cpu_down_maps_locked);
 
 int __ref cpu_down(unsigned int cpu)
 {
@@ -466,20 +467,6 @@ static int _cpu_up(unsigned int cpu, int tasks_frozen)
 
 	/* Now call notifier in preparation. */
 	cpu_notify(CPU_ONLINE | mod, hcpu);
-
-	/*
-	 * SMT soft disabling on X86 requires to bring the CPU out of the
-	 * BIOS 'wait for SIPI' state in order to set the CR4.MCE bit.  The
-	 * CPU marked itself as booted_once in cpu_notify_starting() so the
-	 * cpu_smt_allowed() check will now return false if this is not the
-	 * primary sibling.
-	 */
-	if (!cpu_smt_allowed(cpu)) {
-		printk(KERN_WARNING "nosmt: CPU%d will be offlined again\n",
-		       cpu);
-		ret = -ECANCELED;
-		goto out;
-	}
 
 out_notify:
 	if (ret != 0)

@@ -588,9 +588,26 @@ void __init smp_init(void)
 		if (num_online_cpus() >= setup_max_cpus)
 			break;
 		if (!cpu_online(cpu))
-			if (cpu_up(cpu) == -ECANCELED)
-				cpu_down(cpu);
+			cpu_up(cpu);
 	}
+
+#ifdef CONFIG_HOTPLUG_SMT
+	/* Handle nosmt[=force] here */
+	if (cpu_smt_control == CPU_SMT_DISABLED ||
+	    cpu_smt_control == CPU_SMT_FORCE_DISABLED) {
+		int ret;
+
+		cpu_maps_update_begin();
+		for_each_online_cpu(cpu) {
+			if (topology_is_primary_thread(cpu))
+				continue;
+			ret = cpu_down_maps_locked(cpu);
+			if (ret)
+				break;
+		}
+		cpu_maps_update_done();
+	}
+#endif
 
 	/* Any cleanup work */
 	smp_announce();
