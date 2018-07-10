@@ -224,9 +224,13 @@ void alternative_msr_write(unsigned int msr, u64 val, unsigned int feature)
 
 static inline void indirect_branch_prediction_barrier(void)
 {
-	alternative_msr_write(MSR_IA32_PRED_CMD, PRED_CMD_IBPB,
-			      X86_FEATURE_USE_IBPB);
+	u64 val = PRED_CMD_IBPB;
+
+	alternative_msr_write(MSR_IA32_PRED_CMD, val, X86_FEATURE_USE_IBPB);
 }
+
+/* The Intel SPEC CTRL MSR base value cache */
+extern u64 x86_spec_ctrl_base;
 
 /*
  * With retpoline, we must use IBRS to restrict branch prediction
@@ -236,20 +240,21 @@ static inline void indirect_branch_prediction_barrier(void)
  */
 #define firmware_restrict_branch_speculation_start()			\
 do {									\
+	u64 val = x86_spec_ctrl_base | SPEC_CTRL_IBRS;			\
+									\
 	preempt_disable();						\
-	alternative_msr_write(MSR_IA32_SPEC_CTRL, SPEC_CTRL_IBRS,	\
+	alternative_msr_write(MSR_IA32_SPEC_CTRL, val,			\
 			      X86_FEATURE_USE_IBRS_FW);			\
 } while (0)
 
 #define firmware_restrict_branch_speculation_end()			\
 do {									\
-	alternative_msr_write(MSR_IA32_SPEC_CTRL, 0,			\
+	u64 val = x86_spec_ctrl_base;					\
+									\
+	alternative_msr_write(MSR_IA32_SPEC_CTRL, val,			\
 			      X86_FEATURE_USE_IBRS_FW);			\
 	preempt_enable();						\
 } while (0)
-
-/* The Intel SPEC CTRL MSR base value cache */
-extern u64 x86_spec_ctrl_base;
 
 #endif /* __ASSEMBLY__ */
 #endif /* _ASM_X86_NOSPEC_BRANCH_H_ */
