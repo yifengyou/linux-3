@@ -616,7 +616,10 @@ static void snd_usb_audio_disconnect(struct usb_device *dev,
 		}
 		/* release mixer resources */
 		list_for_each(p, &chip->mixer_list) {
-			snd_usb_mixer_disconnect(p);
+			struct usb_mixer_interface *mixer;
+
+			mixer = list_entry(p, struct usb_mixer_interface, list);
+			snd_usb_mixer_disconnect(mixer);
 		}
 	}
 
