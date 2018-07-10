@@ -2514,16 +2514,18 @@ static int packet_do_bind(struct sock *sk, struct net_device *dev, __be16 protoc
 {
 	struct packet_sock *po = pkt_sk(sk);
 
-	if (po->fanout) {
-		if (dev)
-			dev_put(dev);
-
-		return -EINVAL;
-	}
-
 	lock_sock(sk);
 
 	spin_lock(&po->bind_lock);
+
+	if (po->fanout) {
+		spin_unlock(&po->bind_lock);
+		release_sock(sk);
+		if (dev)
+			dev_put(dev);
+		return -EINVAL;
+	}
+
 	unregister_prot_hook(sk, true);
 
 	po->num = protocol;
