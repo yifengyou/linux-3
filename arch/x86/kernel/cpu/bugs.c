@@ -42,6 +42,16 @@ static int __init noibpb_handler(char *str)
 
 early_param("noibpb", noibpb_handler);
 
+unsigned int noibrs = 0;
+
+static int __init noibrs_handler(char *str)
+{
+	noibrs = 1;
+	return 0;
+}
+
+early_param("noibrs", noibrs_handler);
+
 /*
  * This used to check for exceptions..
  * However, it turns out that to support that,
@@ -441,13 +451,17 @@ retpoline_auto:
 		setup_force_cpu_cap(X86_FEATURE_USE_IBRS_FW);
 		pr_info("Enabling Restricted Speculation for firmware calls\n");
 
-		set_ibrs_supported();
-		if (ibrs_inuse)
-			sysctl_ibrs_enabled = 1;
-	}
+		/*
+		 * Enable IBRS support if it's not turned off on the
+		 * commandline and we don't have full retpoline mode
+		 */
+		if (!noibrs && mode != SPECTRE_V2_RETPOLINE_AMD &&
+		    mode != SPECTRE_V2_RETPOLINE_GENERIC)
+			ibrs_enable();
 
-	pr_info("Speculation control IBRS %s",
-	        ibrs_supported ? "supported" : "not-supported");
+		pr_info("%s Indirect Banch Restricted Speculation\n",
+			ibrs_enabled ? "Enabling" : "Disabling");
+	}
 
 	/*
 	 * If spectre v2 protection has been enabled, unconditionally fill
@@ -459,21 +473,6 @@ retpoline_auto:
 	 */
 	setup_force_cpu_cap(X86_FEATURE_RSB_CTXSW);
 	pr_info("Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch\n");
-
-	/*
-	 * If we have a full retpoline mode and then disable IBPB in kernel mode
-	 * we do not require both.
-	 */
-	if (mode == SPECTRE_V2_RETPOLINE_AMD ||
-	    mode == SPECTRE_V2_RETPOLINE_GENERIC)
-	{
-		if (ibrs_supported) {
-			pr_info("Retpoline compiled kernel.  Defaulting IBRS to disabled");
-			set_ibrs_disabled();
-			if (!ibrs_inuse)
-				sysctl_ibrs_enabled = 0;
-		}
-	}
 }
 
 #undef pr_fmt

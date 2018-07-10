@@ -167,16 +167,14 @@ void mwait_idle_with_hints(unsigned long ax, unsigned long cx)
 		if (this_cpu_has(X86_FEATURE_CLFLUSH_MONITOR))
 			clflush((void *)&current_thread_info()->flags);
 
-		if (ibrs_inuse)
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base);
+		restricted_branch_speculation_off();
 
 		__monitor((void *)&current_thread_info()->flags, 0, 0);
 		smp_mb();
 		if (!need_resched())
 			__mwait(ax, cx);
 
-		if (ibrs_inuse)
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base | SPEC_CTRL_IBRS);
+		restricted_branch_speculation_on();
 	}
 }
 

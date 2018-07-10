@@ -199,8 +199,8 @@ static int proc_dostring_coredump(struct ctl_table *table, int write,
 #endif
 
 #ifdef CONFIG_X86
-int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
-                 void __user *buffer, size_t *lenp, loff_t *ppos);
+/* Mutex to serialize IBPB and IBRS runtime control changes */
+DEFINE_MUTEX(spec_ctrl_mutex);
 
 unsigned int ibpb_enabled = 0;
 EXPORT_SYMBOL(ibpb_enabled);
@@ -242,6 +242,64 @@ static int ibpb_enabled_handler(struct ctl_table *table, int write,
 	set_ibpb_enabled(__ibpb_enabled);
 	return 0;
 }
+
+unsigned int ibrs_enabled = 0;
+EXPORT_SYMBOL(ibrs_enabled);
+
+static unsigned int __ibrs_enabled = 0;   /* procfs shadow variable */
+
+static void set_ibrs_enabled(unsigned int val)
+{
+	unsigned int cpu;
+
+	mutex_lock(&spec_ctrl_mutex);
+
+	/* Only enable/disable IBRS if the CPU supports it */
+	if (boot_cpu_has(X86_FEATURE_USE_IBRS_FW)) {
+		ibrs_enabled = val;
+		if (ibrs_enabled == 0) {
+			/* Always disable IBRS */
+			u64 val = x86_spec_ctrl_base;
+
+			for_each_online_cpu(cpu)
+				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, val);
+		} else if (ibrs_enabled == 2) {
+			/* Always enable IBRS, even in user space */
+			u64 val = x86_spec_ctrl_base | SPEC_CTRL_IBRS;
+
+			for_each_online_cpu(cpu)
+				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, val);
+		}
+	} else {
+		ibrs_enabled = 0;
+	}
+
+	/* Update the shadow variable */
+	__ibrs_enabled = ibrs_enabled;
+
+	mutex_unlock(&spec_ctrl_mutex);
+}
+
+inline void ibrs_enable(void)
+{
+	set_ibrs_enabled(1);
+}
+EXPORT_SYMBOL(ibrs_enable);
+
+static int ibrs_enabled_handler(struct ctl_table *table, int write,
+				void __user *buffer, size_t *lenp,
+				loff_t *ppos)
+{
+	int error;
+	unsigned int cpu;
+
+	error = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
+	if (error)
+		return error;
+
+	set_ibrs_enabled(__ibrs_enabled);
+	return 0;
+}
 #endif
 
 #ifdef CONFIG_MAGIC_SYSRQ
@@ -279,9 +337,6 @@ extern struct ctl_table epoll_table[];
 #ifdef HAVE_ARCH_PICK_MMAP_LAYOUT
 int sysctl_legacy_va_layout;
 #endif
-
-u32 sysctl_ibrs_enabled = 0;
-EXPORT_SYMBOL(sysctl_ibrs_enabled);
 
 /* The default sysctl tables: */
 
@@ -1201,10 +1256,10 @@ static struct ctl_table kern_table[] = {
 #ifdef CONFIG_X86
 	{
 		.procname       = "ibrs_enabled",
-		.data           = &sysctl_ibrs_enabled,
+		.data           = &__ibrs_enabled,
 		.maxlen         = sizeof(unsigned int),
 		.mode           = 0644,
-		.proc_handler   = proc_dointvec_ibrs_ctrl,
+		.proc_handler   = ibrs_enabled_handler,
 		.extra1         = &zero,
 		.extra2         = &two,
 	},
@@ -2286,47 +2341,6 @@ int proc_dointvec_minmax(struct ctl_table *table, int write,
 	return do_proc_dointvec(table, write, buffer, lenp, ppos,
 				do_proc_dointvec_minmax_conv, &param);
 }
-
-#ifdef CONFIG_X86
-int proc_dointvec_ibrs_ctrl(struct ctl_table *table, int write,
-	void __user *buffer, size_t *lenp, loff_t *ppos)
-{
-	int ret;
-	unsigned int cpu;
-
-	ret = proc_dointvec_minmax(table, write, buffer, lenp, ppos);
-	pr_debug("sysctl_ibrs_enabled = %u\n", sysctl_ibrs_enabled);
-	pr_debug("before:use_ibrs = %d\n", use_ibrs);
-	mutex_lock(&spec_ctrl_mutex);
-	if (sysctl_ibrs_enabled == 0) {
-		/* always set IBRS off */
-		set_ibrs_disabled();
-		if (ibrs_supported) {
-			for_each_online_cpu(cpu)
-				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base);
-		}
-	} else if (sysctl_ibrs_enabled == 2) {
-		/* always set IBRS on, even in user space */
-		clear_ibrs_disabled();
-		if (ibrs_supported) {
-			for_each_online_cpu(cpu)
-				wrmsrl_on_cpu(cpu, MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base | SPEC_CTRL_IBRS);
-		} else {
-			sysctl_ibrs_enabled = 0;
-		}
-	} else if (sysctl_ibrs_enabled == 1) {
-		/* use IBRS in kernel */
-		clear_ibrs_disabled();
-		if (!ibrs_inuse)
-			/* platform don't support ibrs */
-			sysctl_ibrs_enabled = 0;
-	}
-	mutex_unlock(&spec_ctrl_mutex);
-	pr_debug("after:use_ibrs = %d\n", use_ibrs);
-	return ret;
-}
-#endif
-
 
 static void validate_coredump_safety(void)
 {

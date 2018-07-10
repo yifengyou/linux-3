@@ -467,22 +467,6 @@ EXPORT_SYMBOL(smp_call_function);
 unsigned int setup_max_cpus = NR_CPUS;
 EXPORT_SYMBOL(setup_max_cpus);
 
-#ifdef CONFIG_X86
-/*
- * use IBRS
- * bit 0 = indicate if ibrs is currently in use
- * bit 1 = indicate if system supports ibrs
- * bit 2 = indicate if admin disables ibrs
-*/
-
-int use_ibrs;
-EXPORT_SYMBOL(use_ibrs);
-#endif
-
-/* mutex to serialize IBRS & IBPB control changes */
-DEFINE_MUTEX(spec_ctrl_mutex);
-EXPORT_SYMBOL(spec_ctrl_mutex);
-
 /*
  * Setup routine for controlling SMP activation
  *
@@ -505,18 +489,6 @@ static int __init nosmp(char *str)
 }
 
 early_param("nosmp", nosmp);
-
-#ifdef CONFIG_X86
-static int __init noibrs(char *str)
-{
-	set_ibrs_disabled();
-
-	return 0;
-}
-
-early_param("noibrs", noibrs);
-#endif
-
 
 /* this is hard limit */
 static int __init nrcpus(char *str)

@@ -190,9 +190,11 @@
 # define THUNK_TARGET(addr) [thunk_target] "rm" (addr)
 #endif
 
-/* The IBPB runtime control knob */
+/* The IBPB and IBRS runtime control knobs */
 extern unsigned int ibpb_enabled;
 void ibpb_enable(void);
+extern unsigned int ibrs_enabled;
+void ibrs_enable(void);
 
 /* The Spectre V2 mitigation variants */
 enum spectre_v2_mitigation {
@@ -260,6 +262,22 @@ do {									\
 	alternative_msr_write(MSR_IA32_SPEC_CTRL, val,			\
 			      X86_FEATURE_USE_IBRS_FW);			\
 	preempt_enable();						\
+} while (0)
+
+#define restricted_branch_speculation_on()				\
+do {									\
+	u64 val = x86_spec_ctrl_base | SPEC_CTRL_IBRS;			\
+									\
+	if (ibrs_enabled)						\
+		native_wrmsrl(MSR_IA32_SPEC_CTRL, val);			\
+} while (0)
+
+#define restricted_branch_speculation_off()				\
+do {									\
+	u64 val = x86_spec_ctrl_base;					\
+									\
+	if (ibrs_enabled)						\
+		native_wrmsrl(MSR_IA32_SPEC_CTRL, val);			\
 } while (0)
 
 #endif /* __ASSEMBLY__ */

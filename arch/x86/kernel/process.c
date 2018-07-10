@@ -583,16 +583,15 @@ static void mwait_idle(void)
 			mb();
 		}
 
-		if (ibrs_inuse)
-			native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base);
+		restricted_branch_speculation_off();
+
 		__monitor((void *)&current_thread_info()->flags, 0, 0);
+
 		if (!need_resched()) {
 			__sti_mwait(0, 0);
-			if (ibrs_inuse)
-				native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base | SPEC_CTRL_IBRS);
+			restricted_branch_speculation_on();
 		} else {
-			if (ibrs_inuse)
-				native_wrmsrl(MSR_IA32_SPEC_CTRL, x86_spec_ctrl_base | SPEC_CTRL_IBRS);
+			restricted_branch_speculation_on();
 			local_irq_enable();
 		}
 

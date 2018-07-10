@@ -322,18 +322,6 @@ static ssize_t reload_store(struct device *dev,
 	}
 	if (!ret)
 		perf_check_microcode();
-
-	/* Initialize Indirect Branch Restricted Speculation if supported */
-	if (boot_cpu_has(X86_FEATURE_IBRS)) {
-		pr_info("Enabling Indirect Branch Restricted Speculation\n");
-
-		mutex_lock(&spec_ctrl_mutex);
-		set_ibrs_supported();
-		if (ibrs_inuse)
-			sysctl_ibrs_enabled = 1;
-		mutex_unlock(&spec_ctrl_mutex);
-	}
-
 	mutex_unlock(&microcode_mutex);
 	put_online_cpus();
 

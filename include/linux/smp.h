@@ -53,51 +53,6 @@ void on_each_cpu_cond(bool (*cond_func)(int cpu, void *info),
 void __smp_call_function_single(int cpuid, struct call_single_data *data,
 				int wait);
 
-#ifdef CONFIG_X86
-/* indicate usage of IBRS to control execution speculation */
-extern int use_ibrs;
-extern u32 sysctl_ibrs_enabled;
-extern struct mutex spec_ctrl_mutex;
-#define ibrs_supported		(use_ibrs & 0x2)
-#define ibrs_disabled		(use_ibrs & 0x4)
-static inline void set_ibrs_inuse(void)
-{
-	if (ibrs_supported)
-		use_ibrs |= 0x1;
-}
-static inline void clear_ibrs_inuse(void)
-{
-	use_ibrs &= ~0x1;
-}
-static inline int check_ibrs_inuse(void)
-{
-	if (use_ibrs & 0x1)
-		return 1;
-	else
-		/* rmb to prevent wrong speculation for security */
-		rmb();
-	return 0;
-}
-static inline void set_ibrs_supported(void)
-{
-	use_ibrs |= 0x2;
-	if (!ibrs_disabled)
-		set_ibrs_inuse();
-}
-static inline void set_ibrs_disabled(void)
-{
-	use_ibrs |= 0x4;
-	if (check_ibrs_inuse())
-		clear_ibrs_inuse();
-}
-static inline void clear_ibrs_disabled(void)
-{
-	use_ibrs &= ~0x4;
-	set_ibrs_inuse();
-}
-#define ibrs_inuse 		(check_ibrs_inuse())
-#endif
-
 #ifdef CONFIG_SMP
 
 #include <linux/preempt.h>
