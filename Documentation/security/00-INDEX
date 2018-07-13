@@ -24,3 +24,7 @@ tomoyo.txt
 	- documentation on the TOMOYO Linux Security Module.
 IMA-templates.txt
 	- documentation on the template management mechanism for IMA.
+l1tf.txt
+	- Describes CPU vulnerabilities and provides an overview of the
+          possible mitigations along with guidiance for selecting miti-
+          gations if they are configurable at compile, boot or run time.
