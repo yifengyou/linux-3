@@ -8864,6 +8864,11 @@ static int __init vmx_setup_l1d_flush(void)
 	if (!boot_cpu_has_bug(X86_BUG_L1TF))
 		return 0;
 
+	if (!enable_ept) {
+		l1tf_vmx_mitigation = VMENTER_L1D_FLUSH_EPT_DISABLED;
+		return 0;
+	}
+
 	l1tf_vmx_mitigation = vmentry_l1d_flush;
 
 	if (vmentry_l1d_flush == VMENTER_L1D_FLUSH_NEVER)
@@ -8889,6 +8894,28 @@ static void vmx_cleanup_l1d_flush(void)
 	/* Restore state so sysfs ignores VMX */
 	l1tf_vmx_mitigation = VMENTER_L1D_FLUSH_AUTO;
 }
+
+static void vmx_exit(void)
+{
+	free_page((unsigned long)vmx_msr_bitmap_legacy_x2apic);
+	free_page((unsigned long)vmx_msr_bitmap_longmode_x2apic);
+	free_page((unsigned long)vmx_msr_bitmap_legacy);
+	free_page((unsigned long)vmx_msr_bitmap_longmode);
+	free_page((unsigned long)vmx_io_bitmap_b);
+	free_page((unsigned long)vmx_io_bitmap_a);
+	free_page((unsigned long)vmx_vmwrite_bitmap);
+	free_page((unsigned long)vmx_vmread_bitmap);
+
+#ifdef CONFIG_KEXEC
+	rcu_assign_pointer(crash_vmclear_loaded_vmcss, NULL);
+	synchronize_rcu();
+#endif
+
+	kvm_exit();
+
+	vmx_cleanup_l1d_flush();
+}
+module_exit(vmx_exit);
 
 static int __init vmx_init(void)
 {
@@ -8954,14 +8981,17 @@ static int __init vmx_init(void)
 
 	set_bit(0, vmx_vpid_bitmap); /* 0 is reserved for host */
 
-	r = vmx_setup_l1d_flush();
+	r = kvm_init(&vmx_x86_ops, sizeof(struct vcpu_vmx),
+		     __alignof__(struct vcpu_vmx), THIS_MODULE);
 	if (r)
 		goto out7;
 
-	r = kvm_init(&vmx_x86_ops, sizeof(struct vcpu_vmx),
-		     __alignof__(struct vcpu_vmx), THIS_MODULE);
+	/*
+	 * Must be called after kvm_init() so enable_ept is properly set up
+	 */
+	r = vmx_setup_l1d_flush();
 	if (r) {
-		vmx_cleanup_l1d_flush();
+		vmx_exit();
 		goto out7;
 	}
 
@@ -9032,26 +9062,4 @@ out:
 	return r;
 }
 
-static void __exit vmx_exit(void)
-{
-	free_page((unsigned long)vmx_msr_bitmap_legacy_x2apic);
-	free_page((unsigned long)vmx_msr_bitmap_longmode_x2apic);
-	free_page((unsigned long)vmx_msr_bitmap_legacy);
-	free_page((unsigned long)vmx_msr_bitmap_longmode);
-	free_page((unsigned long)vmx_io_bitmap_b);
-	free_page((unsigned long)vmx_io_bitmap_a);
-	free_page((unsigned long)vmx_vmwrite_bitmap);
-	free_page((unsigned long)vmx_vmread_bitmap);
-
-#ifdef CONFIG_KEXEC
-	rcu_assign_pointer(crash_vmclear_loaded_vmcss, NULL);
-	synchronize_rcu();
-#endif
-
-	kvm_exit();
-
-	vmx_cleanup_l1d_flush();
-}
-
 module_init(vmx_init)
-module_exit(vmx_exit)
