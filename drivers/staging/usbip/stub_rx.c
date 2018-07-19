@@ -357,16 +357,15 @@ static int get_pipe(struct stub_device *sdev, struct usbip_header *pdu)
 	int epnum = pdu->base.ep;
 	int dir = pdu->base.direction;
 
+	if (epnum < 0 || epnum > 15)
+		goto err_ret;
+
 	if (dir == USBIP_DIR_IN)
 		ep = udev->ep_in[epnum & 0x7f];
 	else
 		ep = udev->ep_out[epnum & 0x7f];
-	if (!ep) {
-		dev_err(&sdev->interface->dev, "no such endpoint?, %d\n",
-			epnum);
-		BUG();
-	}
-
+	if (!ep)
+		goto err_ret;
 	epd = &ep->desc;
 
 	if (usb_endpoint_xfer_control(epd)) {
@@ -418,8 +417,9 @@ static int get_pipe(struct stub_device *sdev, struct usbip_header *pdu)
 			return usb_rcvisocpipe(udev, epnum);
 	}
 
+err_ret:
 	/* NOT REACHED */
-	dev_err(&sdev->interface->dev, "CMD_SUBMIT: invalid epnum %d\n", epnum);
+	dev_err(&sdev->udev->dev, "CMD_SUBMIT: invalid epnum %d\n", epnum);
 	return 0;
 }
 
@@ -485,6 +485,9 @@ static void stub_recv_cmd_submit(struct stub_device *sdev,
 	struct usbip_device *ud = &sdev->ud;
 	struct usb_device *udev = sdev->udev;
 	int pipe = get_pipe(sdev, pdu);
+
+	if (pipe == -1)
+		return;
 
 	priv = stub_priv_alloc(sdev, pdu);
 	if (!priv)
