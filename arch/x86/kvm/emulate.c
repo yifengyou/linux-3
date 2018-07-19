@@ -809,6 +809,20 @@ static int do_insn_fetch(struct x86_emulate_ctxt *ctxt,
 		goto done;						\
 })
 
+static int segmented_write_std(struct x86_emulate_ctxt *ctxt,
+			       struct segmented_address addr,
+			       void *data,
+			       unsigned int size)
+{
+	int rc;
+	ulong linear;
+
+	rc = linearize(ctxt, addr, size, true, &linear);
+	if (rc != X86EMUL_CONTINUE)
+		return rc;
+	return ctxt->ops->write_std(ctxt, linear, data, size, &ctxt->exception);
+}
+
 /*
  * Given the 'reg' portion of a ModRM byte, and a register block, return a
  * pointer into the block that addresses the relevant register.
@@ -3244,8 +3258,8 @@ static int emulate_store_desc_ptr(struct x86_emulate_ctxt *ctxt,
 	}
 	/* Disable writeback. */
 	ctxt->dst.type = OP_NONE;
-	return segmented_write(ctxt, ctxt->dst.addr.mem,
-			       &desc_ptr, 2 + ctxt->op_bytes);
+	return segmented_write_std(ctxt, ctxt->dst.addr.mem,
+				   &desc_ptr, 2 + ctxt->op_bytes);
 }
 
 static int em_sgdt(struct x86_emulate_ctxt *ctxt)
