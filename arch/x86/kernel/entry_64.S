@@ -61,8 +61,8 @@
 #include <asm/pgtable_types.h>
 #include <asm/kaiser.h>
 #include <asm/spec_ctrl.h>
-#include <linux/err.h>
 #include <asm/nospec-branch.h>
+#include <linux/err.h>
 
 /* Avoid __ASSEMBLER__'ifying <linux/audit.h> just for this.  */
 #include <linux/elf-em.h>
@@ -711,9 +711,9 @@ system_call_fastpath:
 	sbb	%rcx, %rcx			/* array_index_mask_nospec() */
 	and	%rcx, %rax
 	movq %r10,%rcx
-#ifdef RETPOLINE
-	movq    sys_call_table(, %rax, 8), %rax
-	call    __x86_indirect_thunk_rax
+#ifdef CONFIG_RETPOLINE
+	movq	sys_call_table(, %rax, 8), %rax
+	call	__x86_indirect_thunk_rax
 #else
 	call *sys_call_table(,%rax,8)  # XXX:	 rip relative
 #endif
@@ -846,9 +846,9 @@ tracesys:
 	sbb	%rcx, %rcx			/* array_index_mask_nospec() */
 	and	%rcx, %rax
 	movq %r10,%rcx	/* fixup for C */
-#ifdef RETPOLINE
-	movq    sys_call_table(, %rax, 8), %rax
-	call    __x86_indirect_thunk_rax
+#ifdef CONFIG_RETPOLINE
+	movq	sys_call_table(, %rax, 8), %rax
+	call	__x86_indirect_thunk_rax
 #else
 	call *sys_call_table(,%rax,8)
 #endif
