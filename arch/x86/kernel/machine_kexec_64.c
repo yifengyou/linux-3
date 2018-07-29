@@ -21,6 +21,7 @@
 #include <asm/tlbflush.h>
 #include <asm/mmu_context.h>
 #include <asm/debugreg.h>
+#include <asm/hw_irq.h>
 
 static void free_transition_pgtable(struct kimage *image)
 {

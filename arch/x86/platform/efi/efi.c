@@ -54,6 +54,7 @@
 #include <asm/x86_init.h>
 #include <asm/rtc.h>
 #include <asm/uv/uv.h>
+#include <asm/sections.h>
 
 #define EFI_DEBUG
 

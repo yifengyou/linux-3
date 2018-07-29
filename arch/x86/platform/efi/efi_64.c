@@ -30,6 +30,7 @@
 #include <linux/slab.h>
 
 #include <asm/setup.h>
+#include <asm/sections.h>
 #include <asm/page.h>
 #include <asm/e820.h>
 #include <asm/pgtable.h>

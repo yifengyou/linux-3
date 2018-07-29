@@ -11,6 +11,7 @@
 #include <linux/memblock.h>
 #include <linux/cpuidle.h>
 #include <linux/cpufreq.h>
+#include <linux/irq.h>
 
 #include <asm/elf.h>
 #include <asm/vdso.h>

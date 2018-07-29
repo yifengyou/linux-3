@@ -25,6 +25,7 @@
 #include <asm/desc.h>
 #include <asm/cacheflush.h>
 #include <asm/debugreg.h>
+#include <asm/hw_irq.h>
 
 static void set_idt(void *newidt, __u16 limit)
 {

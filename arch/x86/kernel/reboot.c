@@ -23,6 +23,7 @@
 #include <asm/cpu.h>
 #include <asm/nmi.h>
 #include <asm/smp.h>
+#include <asm/hw_irq.h>
 
 #include <linux/ctype.h>
 #include <linux/mc146818rtc.h>

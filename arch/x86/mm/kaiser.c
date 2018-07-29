@@ -23,6 +23,7 @@ extern struct mm_struct init_mm;
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>
 #include <asm/desc.h>
+#include <asm/sections.h>
 #include <asm/cmdline.h>
 #include <asm/kvmclock.h>
 
