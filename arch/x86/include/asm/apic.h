@@ -12,6 +12,7 @@
 #include <asm/fixmap.h>
 #include <asm/mpspec.h>
 #include <asm/msr.h>
+#include <asm/hardirq.h>
 #include <asm/idle.h>
 
 #define ARCH_APICTIMER_STOPS_ON_C3	1
@@ -701,6 +702,7 @@ extern void irq_exit(void);
 static inline void entering_irq(void)
 {
 	irq_enter();
+	kvm_set_cpu_l1tf_flush_l1d();
 	exit_idle();
 }
 
