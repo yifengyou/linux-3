@@ -23,11 +23,6 @@
 #include "mmu.h"
 #include "trace.h"
 
-/* These are scattered features in cpufeatures.h. */
-#define KVM_CPUID_BIT_SPEC_CTRL		26
-#define KVM_CPUID_BIT_SPEC_CTRL_SSBD	31
-#define KF(x) bit(KVM_CPUID_BIT_##x)
-
 static u32 xstate_required_size(u64 xstate_bv)
 {
 	int feature_bit = 0;
@@ -319,7 +314,7 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 
 	/* cpuid 7.0.edx*/
 	const u32 kvm_cpuid_7_0_edx_x86_features =
-		KF(SPEC_CTRL) | KF(SPEC_CTRL_SSBD);
+		F(SPEC_CTRL) | F(SPEC_CTRL_SSBD);
 
 	/* cpuid 0x80000008.0.ebx */
 	const u32 kvm_cpuid_80000008_0_ebx_x86_features =
@@ -397,8 +392,7 @@ static inline int __do_cpuid_ent(struct kvm_cpuid_entry2 *entry, u32 function,
 			// TSC_ADJUST is emulated
 			entry->ebx |= F(TSC_ADJUST);
 			entry->edx &= kvm_cpuid_7_0_edx_x86_features;
-			/* CR_EDX == 2 */
-			entry->edx &= get_scattered_cpuid_leaf(7, 0, 2);
+			cpuid_mask(&entry->edx, 18);
 		} else {
 			entry->ebx = 0;
 			entry->edx = 0;
