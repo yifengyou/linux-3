@@ -313,6 +313,7 @@ void fscache_object_init(struct fscache_object *object,
 	object->store_limit_l = 0;
 	object->cache = cache;
 	object->cookie = cookie;
+	atomic_inc(&cookie->usage);
 	object->parent = NULL;
 
 	object->oob_event_mask = 0;
