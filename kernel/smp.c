@@ -609,6 +609,8 @@ void __init smp_init(void)
 	}
 #endif
 
+	/* Final decision about SMT support */
+	cpu_smt_check_topology();
 	/* Any cleanup work */
 	smp_announce();
 	smp_cpus_done(setup_max_cpus);
