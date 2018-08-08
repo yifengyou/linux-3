@@ -346,6 +346,12 @@ endif
 	find $(pkgdir_bin) $(pkgdir) $(pkgdir_ex) -name \*.ko | \
 		sed -e 's/.*\/\([^\/]*\)\.ko/\1/' | sort > $(abidir)/$*.modules
 
+	# Build the final ABI firmware information.
+	find $(pkgdir_bin) $(pkgdir) $(pkgdir_ex) -name \*.ko | \
+	while read ko; do \
+		/sbin/modinfo $$ko | grep ^firmware || true; \
+	done | sort -u >$(abidir)/$*.fwinfo
+
 	# Build the final ABI retpoline information.
 	if grep -q CONFIG_RETPOLINE=y $(builddir)/build-$*/.config; then \
 		echo "# retpoline v1.0" >$(abidir)/$*.retpoline; \
@@ -363,6 +369,8 @@ endif
 		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/abi
 	install -m644 $(abidir)/$*.modules \
 		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/modules
+	install -m644 $(abidir)/$*.fwinfo \
+		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/fwinfo
 	install -m644 $(abidir)/$*.retpoline \
 		$(pkgdir_bldinfo)/usr/lib/linux/$(abi_release)-$*/retpoline
 
