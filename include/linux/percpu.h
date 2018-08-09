@@ -6,6 +6,7 @@
 #include <linux/cpumask.h>
 #include <linux/pfn.h>
 #include <linux/init.h>
+#include <linux/percpu-ubuntu.h>
 
 #include <asm/percpu.h>
 
@@ -170,22 +171,6 @@ extern phys_addr_t per_cpu_ptr_to_phys(void *addr);
  * are called for different scalar sizes of the objects handled.
  */
 
-extern void __bad_size_call_parameter(void);
-
-#define __pcpu_size_call_return(stem, variable)				\
-({	typeof(variable) pscr_ret__;					\
-	__verify_pcpu_ptr(&(variable));					\
-	switch(sizeof(variable)) {					\
-	case 1: pscr_ret__ = stem##1(variable);break;			\
-	case 2: pscr_ret__ = stem##2(variable);break;			\
-	case 4: pscr_ret__ = stem##4(variable);break;			\
-	case 8: pscr_ret__ = stem##8(variable);break;			\
-	default:							\
-		__bad_size_call_parameter();break;			\
-	}								\
-	pscr_ret__;							\
-})
-
 #define __pcpu_size_call_return2(stem, variable, ...)			\
 ({									\
 	typeof(variable) pscr2_ret__;					\
@@ -227,19 +212,6 @@ extern void __bad_size_call_parameter(void);
 	}								\
 	pdcrb_ret__;							\
 })
-
-#define __pcpu_size_call(stem, variable, ...)				\
-do {									\
-	__verify_pcpu_ptr(&(variable));					\
-	switch(sizeof(variable)) {					\
-		case 1: stem##1(variable, __VA_ARGS__);break;		\
-		case 2: stem##2(variable, __VA_ARGS__);break;		\
-		case 4: stem##4(variable, __VA_ARGS__);break;		\
-		case 8: stem##8(variable, __VA_ARGS__);break;		\
-		default: 						\
-			__bad_size_call_parameter();break;		\
-	}								\
-} while (0)
 
 /*
  * Optimized manipulation for memory allocated through the per cpu
@@ -516,43 +488,6 @@ do {									\
  * or an interrupt occurred and the same percpu variable was modified from
  * the interrupt context.
  */
-#ifndef __this_cpu_read
-# ifndef __this_cpu_read_1
-#  define __this_cpu_read_1(pcp)	(*__this_cpu_ptr(&(pcp)))
-# endif
-# ifndef __this_cpu_read_2
-#  define __this_cpu_read_2(pcp)	(*__this_cpu_ptr(&(pcp)))
-# endif
-# ifndef __this_cpu_read_4
-#  define __this_cpu_read_4(pcp)	(*__this_cpu_ptr(&(pcp)))
-# endif
-# ifndef __this_cpu_read_8
-#  define __this_cpu_read_8(pcp)	(*__this_cpu_ptr(&(pcp)))
-# endif
-# define __this_cpu_read(pcp)	__pcpu_size_call_return(__this_cpu_read_, (pcp))
-#endif
-
-#define __this_cpu_generic_to_op(pcp, val, op)				\
-do {									\
-	*__this_cpu_ptr(&(pcp)) op val;					\
-} while (0)
-
-#ifndef __this_cpu_write
-# ifndef __this_cpu_write_1
-#  define __this_cpu_write_1(pcp, val)	__this_cpu_generic_to_op((pcp), (val), =)
-# endif
-# ifndef __this_cpu_write_2
-#  define __this_cpu_write_2(pcp, val)	__this_cpu_generic_to_op((pcp), (val), =)
-# endif
-# ifndef __this_cpu_write_4
-#  define __this_cpu_write_4(pcp, val)	__this_cpu_generic_to_op((pcp), (val), =)
-# endif
-# ifndef __this_cpu_write_8
-#  define __this_cpu_write_8(pcp, val)	__this_cpu_generic_to_op((pcp), (val), =)
-# endif
-# define __this_cpu_write(pcp, val)	__pcpu_size_call(__this_cpu_write_, (pcp), (val))
-#endif
-
 #ifndef __this_cpu_add
 # ifndef __this_cpu_add_1
 #  define __this_cpu_add_1(pcp, val)	__this_cpu_generic_to_op((pcp), (val), +=)

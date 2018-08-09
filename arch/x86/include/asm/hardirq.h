@@ -2,7 +2,7 @@
 #define _ASM_X86_HARDIRQ_H
 
 #include <linux/threads.h>
-#include <linux/percpu.h>
+#include "linux/percpu-ubuntu.h"
 
 typedef struct {
 	u16	     __softirq_pending;
