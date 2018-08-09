@@ -310,6 +310,14 @@ static inline pmd_t pmd_mkwrite(pmd_t pmd)
 	return pmd_set_flags(pmd, _PAGE_RW);
 }
 
+/* Only used by arch/x86/mm/pageattr.c: populate_pmd() */
+static inline pud_t pud_mkhuge(pud_t pud)
+{
+	pudval_t v = native_pud_val(pud);
+
+	return __pud(v | _PAGE_PSE);
+}
+
 static inline int pte_soft_dirty(pte_t pte)
 {
 	return pte_flags(pte) & _PAGE_SOFT_DIRTY;
@@ -373,6 +381,14 @@ static inline pmd_t pfn_pmd(unsigned long page_nr, pgprot_t pgprot)
 	pfn ^= protnone_mask(pgprot_val(pgprot));
 	pfn &= PHYSICAL_PMD_PAGE_MASK;
 	return __pmd(pfn | massage_pgprot(pgprot));
+}
+
+static inline pud_t pfn_pud(unsigned long page_nr, pgprot_t pgprot)
+{
+	phys_addr_t pfn = (phys_addr_t)page_nr << PAGE_SHIFT;
+	pfn ^= protnone_mask(pgprot_val(pgprot));
+	pfn &= PHYSICAL_PUD_PAGE_MASK;
+	return __pud(pfn | massage_pgprot(pgprot));
 }
 
 static inline pmd_t pmd_mknotpresent(pmd_t pmd)
