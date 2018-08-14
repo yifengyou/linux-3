@@ -8436,6 +8436,7 @@ EXPORT_SYMBOL vmlinux 0xcf351cff	ip6_dst_hoplimit
 EXPORT_SYMBOL vmlinux 0xcf56dcbb	inet_sk_rebuild_header
 EXPORT_SYMBOL vmlinux 0xcf750922	i2c_smbus_xfer
 EXPORT_SYMBOL vmlinux 0xcf9f8398	console_stop
+EXPORT_SYMBOL vmlinux 0xcfa77c08	cpu_down_maps_locked
 EXPORT_SYMBOL vmlinux 0xcfbf386a	dev_uc_add_excl
 EXPORT_SYMBOL vmlinux 0xcfd40500	ipv6_chk_custom_prefix
 EXPORT_SYMBOL vmlinux 0xcfe2b57d	scsi_scan_target

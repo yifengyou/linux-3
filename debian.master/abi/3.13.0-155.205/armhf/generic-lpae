@@ -7468,6 +7468,7 @@ EXPORT_SYMBOL vmlinux 0xcf4e4063	__brelse
 EXPORT_SYMBOL vmlinux 0xcf54af0a	__sb_start_write
 EXPORT_SYMBOL vmlinux 0xcf88625f	mempool_create_node
 EXPORT_SYMBOL vmlinux 0xcfa22ec2	input_handler_for_each_handle
+EXPORT_SYMBOL vmlinux 0xcfa77c08	cpu_down_maps_locked
 EXPORT_SYMBOL vmlinux 0xcfda0ed7	skb_copy
 EXPORT_SYMBOL vmlinux 0xcfe16d5b	fsnotify_put_mark
 EXPORT_SYMBOL vmlinux 0xcff6b676	_raw_spin_trylock_bh

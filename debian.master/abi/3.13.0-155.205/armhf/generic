@@ -9083,6 +9083,7 @@ EXPORT_SYMBOL vmlinux 0xcf7505e3	scsi_scan_host
 EXPORT_SYMBOL vmlinux 0xcf88625f	mempool_create_node
 EXPORT_SYMBOL vmlinux 0xcf8b9202	sk_send_sigurg
 EXPORT_SYMBOL vmlinux 0xcf92fbaf	neigh_table_clear
+EXPORT_SYMBOL vmlinux 0xcfa77c08	cpu_down_maps_locked
 EXPORT_SYMBOL vmlinux 0xcfa8a963	pci_clear_master
 EXPORT_SYMBOL vmlinux 0xcfaaba9e	phy_ethtool_sset
 EXPORT_SYMBOL vmlinux 0xcff6b676	_raw_spin_trylock_bh

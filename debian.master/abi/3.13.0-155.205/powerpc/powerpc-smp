@@ -9086,6 +9086,7 @@ EXPORT_SYMBOL vmlinux 0xcf471db9	inode_newsize_ok
 EXPORT_SYMBOL vmlinux 0xcf8158cd	save_mount_options
 EXPORT_SYMBOL vmlinux 0xcf88db3b	block_write_full_page
 EXPORT_SYMBOL vmlinux 0xcf901187	__scsi_iterate_devices
+EXPORT_SYMBOL vmlinux 0xcfa77c08	cpu_down_maps_locked
 EXPORT_SYMBOL vmlinux 0xcfb7e1a9	nosteal_pipe_buf_ops
 EXPORT_SYMBOL vmlinux 0xcff1c76d	ppp_unregister_compressor
 EXPORT_SYMBOL vmlinux 0xd0181f4f	__bitmap_xor

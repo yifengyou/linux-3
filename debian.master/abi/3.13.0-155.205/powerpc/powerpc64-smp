@@ -9249,6 +9249,7 @@ EXPORT_SYMBOL vmlinux 0xcf6bab1e	filemap_fdatawait_range
 EXPORT_SYMBOL vmlinux 0xcf8c421e	fb_find_mode
 EXPORT_SYMBOL vmlinux 0xcf90c70c	sock_queue_err_skb
 EXPORT_SYMBOL vmlinux 0xcfa4e141	register_filesystem
+EXPORT_SYMBOL vmlinux 0xcfa77c08	cpu_down_maps_locked
 EXPORT_SYMBOL vmlinux 0xcfb2cc61	generic_file_llseek_size
 EXPORT_SYMBOL vmlinux 0xcfb7d5a0	cpu_sibling_map
 EXPORT_SYMBOL vmlinux 0xcfe19b63	scsi_report_device_reset
