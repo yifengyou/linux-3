@@ -153,10 +153,16 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
 		return err;
 
 	/* Can we represent this offset inside this architecture's pte's? */
+#ifdef L1TF_PTE_FILE_MAX_BITS
+	if (L1TF_PTE_FILE_MAX_BITS < BITS_PER_LONG &&
+	    (pgoff + (size >> PAGE_SHIFT) >= (1UL << L1TF_PTE_FILE_MAX_BITS)))
+		return err;
+#else
 #if PTE_FILE_MAX_BITS < BITS_PER_LONG
 	if (pgoff + (size >> PAGE_SHIFT) >= (1UL << PTE_FILE_MAX_BITS))
 		return err;
 #endif
+#endif /* L1TF_PTE_FILE_MAX_BITS */
 
 	/* We need down_write() to change vma->vm_flags. */
 	down_read(&mm->mmap_sem);
