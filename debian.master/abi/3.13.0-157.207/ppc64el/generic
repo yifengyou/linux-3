@@ -7440,6 +7440,7 @@ EXPORT_SYMBOL vmlinux 0xf353a698	register_module_notifier
 EXPORT_SYMBOL vmlinux 0xf3606bc0	inet6_del_protocol
 EXPORT_SYMBOL vmlinux 0xf3792544	ppp_register_channel
 EXPORT_SYMBOL vmlinux 0xf389fe60	__hw_addr_init
+EXPORT_SYMBOL vmlinux 0xf38b62cb	sock_efree
 EXPORT_SYMBOL vmlinux 0xf3916987	global_cursor_default
 EXPORT_SYMBOL vmlinux 0xf396cd21	tcp_parse_md5sig_option
 EXPORT_SYMBOL vmlinux 0xf3977858	agp_bind_memory

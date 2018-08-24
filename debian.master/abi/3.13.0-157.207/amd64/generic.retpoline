@@ -1,0 +1,4 @@
+arch/x86/platform/efi/efi_stub_64.S .text efi_call callq *%rdi
+arch/x86/platform/efi/efi_stub_64.S .text efi_enter32 callq *%rdi
+arch/x86/platform/efi/efi_thunk_64.S .text efi64_thunk callq *%rbx
+drivers/watchdog/hpwdt.c .text asminline_call callq *%r12
