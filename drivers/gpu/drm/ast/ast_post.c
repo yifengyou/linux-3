@@ -365,10 +365,12 @@ void ast_post_gpu(struct drm_device *dev)
 	ast_open_key(ast);
 	ast_set_def_ext_reg(dev);
 
-	if (ast->chip == AST2300)
-		ast_init_dram_2300(dev);
-	else
-		ast_init_dram_reg(dev);
+	if (ast->DisableP2A == false) {
+		if (ast->chip == AST2300)
+			ast_init_dram_2300(dev);
+		else
+			ast_init_dram_reg(dev);
+	}
 }
 
 /* AST 2300 DRAM settings */

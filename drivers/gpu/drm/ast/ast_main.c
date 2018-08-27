@@ -66,6 +66,7 @@ uint8_t ast_get_index_reg_mask(struct ast_private *ast,
 static int ast_detect_chip(struct drm_device *dev)
 {
 	struct ast_private *ast = dev->dev_private;
+	uint32_t data;
 	ast_open_key(ast);
 
 	if (dev->pdev->device == PCI_CHIP_AST1180) {
@@ -76,7 +77,6 @@ static int ast_detect_chip(struct drm_device *dev)
 			ast->chip = AST2300;
 			DRM_INFO("AST 2300 detected\n");
 		} else if (dev->pdev->revision >= 0x10) {
-			uint32_t data;
 			ast_write32(ast, 0xf004, 0x1e6e0000);
 			ast_write32(ast, 0xf000, 0x1);
 
@@ -105,6 +105,13 @@ static int ast_detect_chip(struct drm_device *dev)
 			DRM_INFO("AST 2000 detected\n");
 		}
 	}
+
+	/* Check P2A Access */
+	ast->DisableP2A = true;
+	data = ast_read32(ast, 0xf004);
+	if (data != 0xFFFFFFFF)
+		ast->DisableP2A = false;
+
 	return 0;
 }
 
@@ -114,79 +121,78 @@ static int ast_get_dram_info(struct drm_device *dev)
 	uint32_t data, data2;
 	uint32_t denum, num, div, ref_pll;
 
-	ast_write32(ast, 0xf004, 0x1e6e0000);
-	ast_write32(ast, 0xf000, 0x1);
-
-
-	ast_write32(ast, 0x10000, 0xfc600309);
-
-	do {
-		;
-	} while (ast_read32(ast, 0x10000) != 0x01);
-	data = ast_read32(ast, 0x10004);
-
-	if (data & 0x40)
+	if (ast->DisableP2A) {
 		ast->dram_bus_width = 16;
-	else
-		ast->dram_bus_width = 32;
+		ast->dram_type = AST_DRAM_1Gx16;
+		ast->mclk = 396;
+	} else {
+		ast_write32(ast, 0xf004, 0x1e6e0000);
+		ast_write32(ast, 0xf000, 0x1);
+		data = ast_read32(ast, 0x10004);
 
-	if (ast->chip == AST2300) {
-		switch (data & 0x03) {
-		case 0:
-			ast->dram_type = AST_DRAM_512Mx16;
-			break;
-		default:
-		case 1:
-			ast->dram_type = AST_DRAM_1Gx16;
+		if (data & 0x40)
+			ast->dram_bus_width = 16;
+		else
+			ast->dram_bus_width = 32;
+
+		if (ast->chip == AST2300) {
+			switch (data & 0x03) {
+			case 0:
+				ast->dram_type = AST_DRAM_512Mx16;
+				break;
+			default:
+			case 1:
+				ast->dram_type = AST_DRAM_1Gx16;
+				break;
+			case 2:
+				ast->dram_type = AST_DRAM_2Gx16;
+				break;
+			case 3:
+				ast->dram_type = AST_DRAM_4Gx16;
+				break;
+			}
+		} else {
+			switch (data & 0x0c) {
+			case 0:
+			case 4:
+				ast->dram_type = AST_DRAM_512Mx16;
+				break;
+			case 8:
+				if (data & 0x40)
+					ast->dram_type = AST_DRAM_1Gx16;
+				else
+					ast->dram_type = AST_DRAM_512Mx32;
+				break;
+			case 0xc:
+				ast->dram_type = AST_DRAM_1Gx32;
+				break;
+			}
+		}
+
+		data = ast_read32(ast, 0x10120);
+		data2 = ast_read32(ast, 0x10170);
+		if (data2 & 0x2000)
+			ref_pll = 14318;
+		else
+			ref_pll = 12000;
+
+		denum = data & 0x1f;
+		num = (data & 0x3fe0) >> 5;
+		data = (data & 0xc000) >> 14;
+		switch (data) {
+		case 3:
+			div = 0x4;
 			break;
 		case 2:
-			ast->dram_type = AST_DRAM_2Gx16;
+		case 1:
+			div = 0x2;
 			break;
-		case 3:
-			ast->dram_type = AST_DRAM_4Gx16;
-			break;
-		}
-	} else {
-		switch (data & 0x0c) {
-		case 0:
-		case 4:
-			ast->dram_type = AST_DRAM_512Mx16;
-			break;
-		case 8:
-			if (data & 0x40)
-				ast->dram_type = AST_DRAM_1Gx16;
-			else
-				ast->dram_type = AST_DRAM_512Mx32;
-			break;
-		case 0xc:
-			ast->dram_type = AST_DRAM_1Gx32;
+		default:
+			div = 0x1;
 			break;
 		}
+		ast->mclk = ref_pll * (num + 2) / (denum + 2) * (div * 1000);
 	}
-
-	data = ast_read32(ast, 0x10120);
-	data2 = ast_read32(ast, 0x10170);
-	if (data2 & 0x2000)
-		ref_pll = 14318;
-	else
-		ref_pll = 12000;
-
-	denum = data & 0x1f;
-	num = (data & 0x3fe0) >> 5;
-	data = (data & 0xc000) >> 14;
-	switch (data) {
-	case 3:
-		div = 0x4;
-		break;
-	case 2:
-	case 1:
-		div = 0x2;
-		break;
-	default:
-		div = 0x1;
-		break;
-	}
-	ast->mclk = ref_pll * (num + 2) / (denum + 2) * (div * 1000);
 	return 0;
 }
 
