@@ -187,6 +187,7 @@
 #define X86_FEATURE_HW_PSTATE	(7*32+ 8) /* AMD HW-PState */
 #define X86_FEATURE_PROC_FEEDBACK (7*32+ 9) /* AMD ProcFeedbackInterface */
 #define X86_FEATURE_INVPCID_SINGLE (7*32+10) /* Effectively INVPCID && CR4.PCIDE=1 */
+#define X86_FEATURE_RSB_CTXSW	( 7*32+21) /* Fill RSB on context switches */
 #define X86_FEATURE_SSBD	( 7*32+22) /* Speculative Store Bypass Disable */
 #define X86_FEATURE_SPEC_STORE_BYPASS_DISABLE ( 7*32+23 ) /* Disable Speculative Store Bypass. */
 #define X86_FEATURE_LS_CFG_SSBD	( 7*32+24) /* AMD SSBD implementation via LS_CFG MSR */
