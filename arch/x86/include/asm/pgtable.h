@@ -500,6 +500,67 @@ static inline int pte_present(pte_t a)
 			       _PAGE_NUMA);
 }
 
+#ifdef CONFIG_NUMA_BALANCING
+/*
+ * The following is copied from include/asm-generic/pgtable.h and modified to
+ * invert the PFN part of the PTE.
+ */
+
+/*
+ * pte/pmd_mknuma sets the _PAGE_ACCESSED bitflag automatically
+ * because they're called by the NUMA hinting minor page fault. If we
+ * wouldn't set the _PAGE_ACCESSED bitflag here, the TLB miss handler
+ * would be forced to set it later while filling the TLB after we
+ * return to userland. That would trigger a second write to memory
+ * that we optimize away by setting _PAGE_ACCESSED here.
+ */
+
+#define pte_mknonnuma pte_mknonnuma
+static inline pte_t pte_mknonnuma(pte_t pte)
+{
+	pteval_t val = pte_val(pte), oldval = val;
+
+	val &= ~_PAGE_NUMA;
+	val |= (_PAGE_PRESENT|_PAGE_ACCESSED);
+	val = flip_protnone_guard(oldval, val, PTE_PFN_MASK);
+	return __pte(val);
+}
+
+#define pmd_mknonnuma pmd_mknonnuma
+static inline pmd_t pmd_mknonnuma(pmd_t pmd)
+{
+	pmdval_t val = pmd_val(pmd), oldval = val;
+
+	val &= ~_PAGE_NUMA;
+	val |= (_PAGE_PRESENT|_PAGE_ACCESSED);
+	val = flip_protnone_guard(oldval, val, PHYSICAL_PMD_PAGE_MASK);
+	return __pmd(val);
+}
+
+#define pte_mknuma pte_mknuma
+static inline pte_t pte_mknuma(pte_t pte)
+{
+	pteval_t val = pte_val(pte), oldval = val;
+
+	val &= ~_PAGE_PRESENT;
+	val |= _PAGE_NUMA;
+	val = flip_protnone_guard(oldval, val, PTE_PFN_MASK);
+	return __pte(val);
+}
+
+#define pmd_mknuma pmd_mknuma
+static inline pmd_t pmd_mknuma(pmd_t pmd)
+{
+	pmdval_t val = pmd_val(pmd), oldval = val;
+
+	val &= ~_PAGE_PRESENT;
+	val |= _PAGE_NUMA;
+	val = flip_protnone_guard(oldval, val, PHYSICAL_PMD_PAGE_MASK);
+	return __pmd(val);
+}
+
+#endif /* CONFIG_NUMA_BALANCING */
+
 #define pte_accessible pte_accessible
 static inline bool pte_accessible(struct mm_struct *mm, pte_t a)
 {
