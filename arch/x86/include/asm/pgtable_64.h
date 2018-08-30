@@ -179,19 +179,28 @@ static inline int pgd_large(pgd_t pgd) { return 0; }
 #define pte_offset_map(dir, address) pte_offset_kernel((dir), (address))
 #define pte_unmap(pte) ((void)(pte))/* NOP */
 
+#if _PAGE_BIT_FILE > _PAGE_BIT_PROTNONE
+#error "Unsupported PTE bit arrangement"
+#endif
+
 /*
  * Encode and de-code a swap entry
  *
+ * |     ...            | 11| 10|  9|8|7|6|5| 4| 3|2|1|0| <- bit number
+ * |     ...            |SW3|SW2|SW1|G|L|D|A|CD|WT|U|W|P| <- bit names
+ * | TYPE (59-63) | ~OFFSET (9-58)  |0|X|X|X| X| X|X|X|0| <- swp entry
+ *
+ * G (8) is aliased and used as a PROT_NONE indicator for
+ * !present ptes.  We need to start storing swap entries above
+ * there.  We also need to avoid using A and D because of an
+ * erratum where they can be incorrectly set by hardware on
+ * non-present PTEs.
+ *
  * The offset is inverted by a binary not operation to make the high
  * physical bits set.
-*/
-#if _PAGE_BIT_FILE < _PAGE_BIT_PROTNONE
+ */
 #define SWP_TYPE_BITS		(_PAGE_BIT_FILE - _PAGE_BIT_PRESENT - 1)
 #define SWP_OFFSET_FIRST_BIT	(_PAGE_BIT_PROTNONE + 1)
-#else
-#define SWP_TYPE_BITS		(_PAGE_BIT_PROTNONE - _PAGE_BIT_PRESENT - 1)
-#define SWP_OFFSET_FIRST_BIT	(_PAGE_BIT_FILE + 1)
-#endif
 
 /* We always extract/encode the offset by shifting it all the way up, and then down again */
 #define SWP_OFFSET_SHIFT	(SWP_OFFSET_FIRST_BIT+SWP_TYPE_BITS)
