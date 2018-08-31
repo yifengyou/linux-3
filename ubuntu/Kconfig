@@ -18,5 +18,9 @@ source "ubuntu/i915/Kconfig"
 ##
 ##
 ##
+source "ubuntu/i40e/Kconfig"
+##
+##
+##
 
 endmenu

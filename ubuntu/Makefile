@@ -20,6 +20,10 @@ obj-$(CONFIG_DRM_I915_BDW)	+= i915/
 ##
 ##
 ##
+obj-$(CONFIG_I40E_BPO)	+= i40e/
+##
+##
+##
 ##
 ##
 ##
