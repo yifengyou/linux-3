@@ -30,9 +30,9 @@
 
 ccflags-y := -DXENIAL_BPO
 
-obj-$(CONFIG_I40E) += i40e.o
+obj-$(CONFIG_I40E_BPO) += i40e_bpo.o
 
-i40e-objs := i40e_main.o \
+i40e_bpo-objs := i40e_main.o \
 	i40e_ethtool.o	\
 	i40e_adminq.o	\
 	i40e_common.o	\
@@ -45,7 +45,7 @@ i40e-objs := i40e_main.o \
 	i40e_ptp.o	\
 	i40e_virtchnl_pf.o
 
-i40e-$(CONFIG_I40E_DCB) += i40e_dcb.o i40e_dcb_nl.o
-i40e-$(CONFIG_I40E_FCOE) += i40e_fcoe.o
+i40e_bpo-$(CONFIG_I40E_BPO_DCB) += i40e_dcb.o i40e_dcb_nl.o
+i40e_bpo-$(CONFIG_I40E_BPO_FCOE) += i40e_fcoe.o
 
-i40e-y += kcompat.o
+i40e_bpo-y += kcompat.o

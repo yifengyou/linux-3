@@ -38,9 +38,9 @@
 #include <net/geneve.h>
 #endif
 
-const char i40e_driver_name[] = "i40e";
+const char i40e_driver_name[] = "i40e_bpo";
 static const char i40e_driver_string[] =
-			"Intel(R) Ethernet Connection XL710 Network Driver";
+		"Intel(R) Ethernet Connection XL710 Network Driver (bpo)";
 
 #define DRV_KERN "-k"
 
