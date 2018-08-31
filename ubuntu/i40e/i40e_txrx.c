@@ -1445,7 +1445,9 @@ static inline void i40e_rx_checksum(struct i40e_vsi *vsi,
 		     (rx_ptype <= I40E_RX_PTYPE_GRENAT6_MACVLAN_IPV6_ICMP_PAY4);
 
 	skb->ip_summed = CHECKSUM_UNNECESSARY;
+#ifndef XENIAL_BPO
 	skb->csum_level = ipv4_tunnel || ipv6_tunnel;
+#endif /* XENIAL_BPO */
 
 	return;
 
@@ -2826,6 +2828,7 @@ static inline void i40e_tx_map(struct i40e_ring *tx_ring, struct sk_buff *skb,
 	 * pending and interrupts were disabled the service task will
 	 * trigger a force WB.
 	 */
+#ifndef XENIAL_BPO
 	if (skb->xmit_more  &&
 	    !netif_xmit_stopped(netdev_get_tx_queue(tx_ring->netdev,
 						    tx_ring->queue_index))) {
@@ -2839,10 +2842,13 @@ static inline void i40e_tx_map(struct i40e_ring *tx_ring, struct sk_buff *skb,
 		   (desc_count < WB_STRIDE)) {
 		tx_ring->packet_stride++;
 	} else {
+#endif /* XENIAL_BPO */
 		tx_ring->packet_stride = 0;
 		tx_ring->flags &= ~I40E_TXR_FLAGS_LAST_XMIT_MORE_SET;
 		do_rs = true;
+#ifndef XENIAL_BPO
 	}
+#endif /* XENIAL_BPO */
 	if (do_rs)
 		tx_ring->packet_stride = 0;
 

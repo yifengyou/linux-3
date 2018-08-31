@@ -53,6 +53,7 @@
 #include <linux/clocksource.h>
 #include <linux/net_tstamp.h>
 #include <linux/ptp_clock_kernel.h>
+#include "kcompat.h"
 #include "i40e_type.h"
 #include "i40e_prototype.h"
 #ifdef I40E_FCOE

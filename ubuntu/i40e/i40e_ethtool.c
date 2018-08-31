@@ -2636,6 +2636,7 @@ static int i40e_set_channels(struct net_device *dev,
 		return -EINVAL;
 }
 
+#ifndef XENIAL_BPO
 /**
  * i40e_get_rxfh_key_size - get the RSS hash key size
  * @netdev: network interface device structure
@@ -2735,6 +2736,7 @@ static int i40e_set_rxfh(struct net_device *netdev, const u32 *indir,
 	return i40e_config_rss(vsi, seed, vsi->rss_lut_user,
 			       I40E_HLUT_ARRAY_SIZE);
 }
+#endif /* XENIAL_BPO */
 
 /**
  * i40e_get_priv_flags - report device private flags
@@ -2867,10 +2869,12 @@ static const struct ethtool_ops i40e_ethtool_ops = {
 	.get_ethtool_stats	= i40e_get_ethtool_stats,
 	.get_coalesce		= i40e_get_coalesce,
 	.set_coalesce		= i40e_set_coalesce,
+#ifndef XENIAL_BPO
 	.get_rxfh_key_size	= i40e_get_rxfh_key_size,
 	.get_rxfh_indir_size	= i40e_get_rxfh_indir_size,
 	.get_rxfh		= i40e_get_rxfh,
 	.set_rxfh		= i40e_set_rxfh,
+#endif /* XENIAL_BPO */
 	.get_channels		= i40e_get_channels,
 	.set_channels		= i40e_set_channels,
 	.get_ts_info		= i40e_get_ts_info,

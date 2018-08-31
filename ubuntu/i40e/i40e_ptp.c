@@ -612,8 +612,13 @@ static long i40e_ptp_create_clock(struct i40e_pf *pf)
 	pf->ptp_caps.pps = 0;
 	pf->ptp_caps.adjfreq = i40e_ptp_adjfreq;
 	pf->ptp_caps.adjtime = i40e_ptp_adjtime;
+#ifdef XENIAL_BPO
+	pf->ptp_caps.gettime = i40e_ptp_gettime;
+	pf->ptp_caps.settime = i40e_ptp_settime;
+#else
 	pf->ptp_caps.gettime64 = i40e_ptp_gettime;
 	pf->ptp_caps.settime64 = i40e_ptp_settime;
+#endif /* XENIAL_BPO */
 	pf->ptp_caps.enable = i40e_ptp_feature_enable;
 
 	/* Attempt to register the clock before enabling the hardware. */

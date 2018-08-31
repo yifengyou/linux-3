@@ -2277,8 +2277,12 @@ error_pvid:
  *
  * configure VF Tx rate
  **/
+#ifdef XENIAL_BPO
+int i40e_ndo_set_vf_bw(struct net_device *netdev, int vf_id, int max_tx_rate)
+#else
 int i40e_ndo_set_vf_bw(struct net_device *netdev, int vf_id, int min_tx_rate,
 		       int max_tx_rate)
+#endif /* XENIAL_BPO */
 {
 	struct i40e_netdev_priv *np = netdev_priv(netdev);
 	struct i40e_pf *pf = np->vsi->back;
@@ -2294,11 +2298,13 @@ int i40e_ndo_set_vf_bw(struct net_device *netdev, int vf_id, int min_tx_rate,
 		goto error;
 	}
 
+#ifndef XENIAL_BPO
 	if (min_tx_rate) {
 		dev_err(&pf->pdev->dev, "Invalid min tx rate (%d) (greater than 0) specified for VF %d.\n",
 			min_tx_rate, vf_id);
 		return -EINVAL;
 	}
+#endif /* XENIAL_BPO */
 
 	vf = &(pf->vf[vf_id]);
 	vsi = pf->vsi[vf->lan_vsi_idx];
@@ -2391,8 +2397,12 @@ int i40e_ndo_get_vf_config(struct net_device *netdev,
 
 	ether_addr_copy(ivi->mac, vf->default_lan_addr.addr);
 
+#ifdef XENIAL_BPO
+	ivi->tx_rate = vf->tx_rate;
+#else
 	ivi->max_tx_rate = vf->tx_rate;
 	ivi->min_tx_rate = 0;
+#endif /* XENIAL_BPO */
 	ivi->vlan = le16_to_cpu(vsi->info.pvid) & I40E_VLAN_MASK;
 	ivi->qos = (le16_to_cpu(vsi->info.pvid) & I40E_PRIORITY_MASK) >>
 		   I40E_VLAN_PRIORITY_SHIFT;

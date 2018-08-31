@@ -4570,6 +4570,7 @@ static u8 i40e_dcb_get_enabled_tc(struct i40e_dcbx_config *dcbcfg)
 	return enabled_tc;
 }
 
+#ifndef XENIAL_BPO
 /**
  * i40e_pf_get_num_tc - Get enabled traffic classes for PF
  * @pf: PF being queried
@@ -4605,6 +4606,7 @@ static u8 i40e_pf_get_num_tc(struct i40e_pf *pf)
 	}
 	return num_tc;
 }
+#endif /* XENIAL_BPO */
 
 /**
  * i40e_pf_get_default_tc - Get bitmap for first enabled TC
@@ -5276,6 +5278,7 @@ void i40e_down(struct i40e_vsi *vsi)
 	}
 }
 
+#ifndef XENIAL_BPO
 /**
  * i40e_setup_tc - configure multiple traffic classes
  * @netdev: net device to configure
@@ -5346,6 +5349,7 @@ static int __i40e_setup_tc(struct net_device *netdev, u32 handle, __be16 proto,
 		return -EINVAL;
 	return i40e_setup_tc(netdev, tc->tc);
 }
+#endif /* XENIAL_BPO */
 
 /**
  * i40e_open - Called when a network interface is made active
@@ -8829,10 +8833,16 @@ static int i40e_get_phys_port_id(struct net_device *netdev,
  * @addr: the MAC address entry being added
  * @flags: instructions from stack about fdb operation
  */
+#ifdef XENIAL_BPO
+static int i40e_ndo_fdb_add(struct ndmsg *ndm, struct nlattr *tb[],
+			    struct net_device *dev,
+			    const unsigned char *addr, u16 flags)
+#else
 static int i40e_ndo_fdb_add(struct ndmsg *ndm, struct nlattr *tb[],
 			    struct net_device *dev,
 			    const unsigned char *addr, u16 vid,
 			    u16 flags)
+#endif /* XENIAL_BPO */
 {
 	struct i40e_netdev_priv *np = netdev_priv(dev);
 	struct i40e_pf *pf = np->vsi->back;
@@ -8841,10 +8851,12 @@ static int i40e_ndo_fdb_add(struct ndmsg *ndm, struct nlattr *tb[],
 	if (!(pf->flags & I40E_FLAG_SRIOV_ENABLED))
 		return -EOPNOTSUPP;
 
+#ifndef XENIAL_BPO
 	if (vid) {
 		pr_info("%s: vlans aren't supported yet for dev_uc|mc_add()\n", dev->name);
 		return -EINVAL;
 	}
+#endif /* XENIAL_BPO */
 
 	/* Hardware does not support aging addresses so if a
 	 * ndm_state is given only allow permanent addresses
@@ -8880,9 +8892,14 @@ static int i40e_ndo_fdb_add(struct ndmsg *ndm, struct nlattr *tb[],
  * allow rebuild of the components with required hardware
  * bridge mode enabled.
  **/
+#ifdef XENIAL_BPO
+static int i40e_ndo_bridge_setlink(struct net_device *dev,
+				   struct nlmsghdr *nlh)
+#else
 static int i40e_ndo_bridge_setlink(struct net_device *dev,
 				   struct nlmsghdr *nlh,
 				   u16 flags)
+#endif /* XENIAL_BPO */
 {
 	struct i40e_netdev_priv *np = netdev_priv(dev);
 	struct i40e_vsi *vsi = np->vsi;
@@ -8954,10 +8971,16 @@ static int i40e_ndo_bridge_setlink(struct net_device *dev,
  * Return the mode in which the hardware bridge is operating in
  * i.e VEB or VEPA.
  **/
+#ifdef XENIAL_BPO
+static int i40e_ndo_bridge_getlink(struct sk_buff *skb, u32 pid, u32 seq,
+				   struct net_device *dev,
+				   u32 __always_unused filter_mask)
+#else
 static int i40e_ndo_bridge_getlink(struct sk_buff *skb, u32 pid, u32 seq,
 				   struct net_device *dev,
 				   u32 __always_unused filter_mask,
 				   int nlflags)
+#endif /* XENIAL_BPO */
 {
 	struct i40e_netdev_priv *np = netdev_priv(dev);
 	struct i40e_vsi *vsi = np->vsi;
@@ -8978,10 +9001,15 @@ static int i40e_ndo_bridge_getlink(struct sk_buff *skb, u32 pid, u32 seq,
 	if (!veb)
 		return 0;
 
+#ifdef XENIAL_BPO
+	return ndo_dflt_bridge_getlink(skb, pid, seq, dev, veb->bridge_mode);
+#else
 	return ndo_dflt_bridge_getlink(skb, pid, seq, dev, veb->bridge_mode,
 				       0, 0, nlflags, filter_mask, NULL);
+#endif /* XENIAL_BPO */
 }
 
+#ifndef XENIAL_BPO
 /* Hardware supports L4 tunnel length of 128B (=2^7) which includes
  * inner mac plus all inner ethertypes.
  */
@@ -9003,6 +9031,7 @@ static netdev_features_t i40e_features_check(struct sk_buff *skb,
 
 	return features;
 }
+#endif /* XENIAL_BPO */
 
 static const struct net_device_ops i40e_netdev_ops = {
 	.ndo_open		= i40e_open,
@@ -9020,7 +9049,9 @@ static const struct net_device_ops i40e_netdev_ops = {
 #ifdef CONFIG_NET_POLL_CONTROLLER
 	.ndo_poll_controller	= i40e_netpoll,
 #endif
+#ifndef XENIAL_BPO
 	.ndo_setup_tc		= __i40e_setup_tc,
+#endif /* XENIAL_BPO */
 #ifdef I40E_FCOE
 	.ndo_fcoe_enable	= i40e_fcoe_enable,
 	.ndo_fcoe_disable	= i40e_fcoe_disable,
@@ -9028,7 +9059,11 @@ static const struct net_device_ops i40e_netdev_ops = {
 	.ndo_set_features	= i40e_set_features,
 	.ndo_set_vf_mac		= i40e_ndo_set_vf_mac,
 	.ndo_set_vf_vlan	= i40e_ndo_set_vf_port_vlan,
+#ifdef XENIAL_BPO
+	.ndo_set_vf_tx_rate	= i40e_ndo_set_vf_bw,
+#else
 	.ndo_set_vf_rate	= i40e_ndo_set_vf_bw,
+#endif /* XENIAL_BPO */
 	.ndo_get_vf_config	= i40e_ndo_get_vf_config,
 	.ndo_set_vf_link_state	= i40e_ndo_set_vf_link_state,
 	.ndo_set_vf_spoofchk	= i40e_ndo_set_vf_spoofchk,
@@ -9042,7 +9077,9 @@ static const struct net_device_ops i40e_netdev_ops = {
 #endif
 	.ndo_get_phys_port_id	= i40e_get_phys_port_id,
 	.ndo_fdb_add		= i40e_ndo_fdb_add,
+#ifndef XENIAL_BPO
 	.ndo_features_check	= i40e_features_check,
+#endif /* XENIAL_BPO */
 	.ndo_bridge_getlink	= i40e_ndo_bridge_getlink,
 	.ndo_bridge_setlink	= i40e_ndo_bridge_setlink,
 };
