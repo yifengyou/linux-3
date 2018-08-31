@@ -75,13 +75,17 @@ static int i40e_veb_get_bw_info(struct i40e_veb *veb);
  *   Class, Class Mask, private data (not used) }
  */
 static const struct pci_device_id i40e_pci_tbl[] = {
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_SFP_XL710), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QEMU), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_KX_B), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_KX_C), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_A), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_B), 0},
-	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_C), 0},
+/*
+ * Exclude the following devices that are supported by the in-kernel driver
+ *
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_SFP_XL710), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QEMU), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_KX_B), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_KX_C), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_A), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_B), 0},
+ *	{PCI_VDEVICE(INTEL, I40E_DEV_ID_QSFP_C), 0},
+ */
 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_10G_BASE_T), 0},
 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_10G_BASE_T4), 0},
 	{PCI_VDEVICE(INTEL, I40E_DEV_ID_20G_KR2), 0},
