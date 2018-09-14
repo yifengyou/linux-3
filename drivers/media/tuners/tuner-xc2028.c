@@ -718,6 +718,8 @@ static int load_scode(struct dvb_frontend *fe, unsigned int type,
 	return 0;
 }
 
+static int xc2028_sleep(struct dvb_frontend *fe);
+
 static int check_firmware(struct dvb_frontend *fe, unsigned int type,
 			  v4l2_std_id std, __u16 int_freq)
 {
@@ -890,7 +892,7 @@ read_not_reliable:
 	return 0;
 
 fail:
-	priv->state = XC2028_SLEEP;
+	priv->state = XC2028_NO_FIRMWARE;
 
 	memset(&priv->cur_fw, 0, sizeof(priv->cur_fw));
 	if (retry_count < 8) {
@@ -899,6 +901,9 @@ fail:
 		tuner_dbg("Retrying firmware load\n");
 		goto retry;
 	}
+
+	/* Firmware didn't load. Put the device to sleep */
+	xc2028_sleep(fe);
 
 	if (rc == -ENOENT)
 		rc = -EINVAL;
@@ -1285,6 +1290,10 @@ static int xc2028_sleep(struct dvb_frontend *fe)
 	if (no_poweroff || priv->ctrl.disable_power_mgmt)
 		return 0;
 
+	/* Device is already in sleep mode */
+	if (priv->state == XC2028_SLEEP)
+		return 0;
+
 	tuner_dbg("Putting xc2028/3028 into poweroff mode.\n");
 	if (debug > 1) {
 		tuner_dbg("Printing sleep stack trace:\n");
@@ -1298,7 +1307,8 @@ static int xc2028_sleep(struct dvb_frontend *fe)
 	else
 		rc = send_seq(priv, {0x80, XREG_POWER_DOWN, 0x00, 0x00});
 
-	priv->state = XC2028_SLEEP;
+	if (rc >= 0)
+		priv->state = XC2028_SLEEP;
 
 	mutex_unlock(&priv->lock);
 
@@ -1366,7 +1376,7 @@ static void load_firmware_cb(const struct firmware *fw,
 
 	if (rc < 0)
 		return;
-	priv->state = XC2028_SLEEP;
+	priv->state = XC2028_ACTIVE;
 }
 
 static int xc2028_set_config(struct dvb_frontend *fe, void *priv_cfg)
