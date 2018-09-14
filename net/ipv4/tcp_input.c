@@ -4636,8 +4636,9 @@ static void tcp_collapse_ofo_queue(struct sock *sk)
 			/* Start new segment */
 			start = TCP_SKB_CB(skb)->seq;
 			end = TCP_SKB_CB(skb)->end_seq;
-			range_truesize += skb->truesize;
+			range_truesize = skb->truesize;
 		} else {
+			range_truesize += skb->truesize;
 			if (before(TCP_SKB_CB(skb)->seq, start))
 				start = TCP_SKB_CB(skb)->seq;
 			if (after(TCP_SKB_CB(skb)->end_seq, end))
