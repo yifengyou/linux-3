@@ -1445,6 +1445,7 @@ i2o_scsi
 i3000_edac
 i3200_edac
 i40e
+i40e_bpo
 i40evf
 i5000_edac
 i5100_edac
@@ -1454,6 +1455,7 @@ i6300esb
 i7300_edac
 i740fb
 i7core_edac
+i810
 i810fb
 i82092
 i82365

@@ -1411,6 +1411,7 @@ i2o_scsi
 i3000_edac
 i3200_edac
 i40e
+i40e_bpo
 i40evf
 i5000_edac
 i5100_edac
