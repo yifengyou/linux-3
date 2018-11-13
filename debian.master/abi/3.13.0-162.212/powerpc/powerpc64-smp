@@ -5900,7 +5900,6 @@ EXPORT_SYMBOL vmlinux 0x05eccd93	security_path_rmdir
 EXPORT_SYMBOL vmlinux 0x05f1d207	inet_select_addr
 EXPORT_SYMBOL vmlinux 0x05fab0e6	generic_delete_inode
 EXPORT_SYMBOL vmlinux 0x0602f0e6	phy_print_status
-EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x0634100a	bitmap_parselist_user
 EXPORT_SYMBOL vmlinux 0x064104a0	inet_put_port
@@ -6828,7 +6827,6 @@ EXPORT_SYMBOL vmlinux 0x41361807	_lv1_get_logical_ppe_id
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x41485e99	proc_remove
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x41637e7b	__nlmsg_put
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
 EXPORT_SYMBOL vmlinux 0x41b22d55	netlink_net_capable
@@ -9286,7 +9284,6 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd11e7aa0	__dev_remove_offload
 EXPORT_SYMBOL vmlinux 0xd1262886	rtas_data_buf
 EXPORT_SYMBOL vmlinux 0xd131905e	ppp_register_net_channel
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd161dda6	clear_bdi_congested
 EXPORT_SYMBOL vmlinux 0xd16be99c	generic_removexattr
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough

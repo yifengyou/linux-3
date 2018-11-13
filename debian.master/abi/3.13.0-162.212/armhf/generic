@@ -6682,7 +6682,6 @@ EXPORT_SYMBOL vmlinux 0x4143d439	of_phy_attach
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x414bab51	pci_get_domain_bus_and_slot
 EXPORT_SYMBOL vmlinux 0x41502ee4	clear_inode
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
 EXPORT_SYMBOL vmlinux 0x418bc23e	fget
 EXPORT_SYMBOL vmlinux 0x41c2a752	save_mount_options
@@ -8606,7 +8605,6 @@ EXPORT_SYMBOL vmlinux 0xb23370a4	dma_declare_coherent_memory
 EXPORT_SYMBOL vmlinux 0xb23cfc40	of_find_backlight_by_node
 EXPORT_SYMBOL vmlinux 0xb2434d75	tcf_hash_release
 EXPORT_SYMBOL vmlinux 0xb2682405	utf8_to_utf32
-EXPORT_SYMBOL vmlinux 0xb26ab730	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0xb28403ea	pps_lookup_dev
 EXPORT_SYMBOL vmlinux 0xb2866983	consume_skb
 EXPORT_SYMBOL vmlinux 0xb28db5fc	alloc_buffer_head
@@ -9110,7 +9108,6 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd136e57e	blk_run_queue_async
 EXPORT_SYMBOL vmlinux 0xd145d8c1	simple_transaction_get
 EXPORT_SYMBOL vmlinux 0xd1485691	sk_dst_check
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd196c9be	kstrtos16_from_user
 EXPORT_SYMBOL vmlinux 0xd19ce6a8	pm860x_set_bits

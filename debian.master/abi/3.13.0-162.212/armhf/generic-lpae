@@ -5248,7 +5248,6 @@ EXPORT_SYMBOL vmlinux 0x41557246	bdi_destroy
 EXPORT_SYMBOL vmlinux 0x41578bd8	ioc_lookup_icq
 EXPORT_SYMBOL vmlinux 0x415b283c	register_cdrom
 EXPORT_SYMBOL vmlinux 0x415bab40	qdisc_tree_decrease_qlen
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x416967c3	ata_link_printk
 EXPORT_SYMBOL vmlinux 0x41702ccf	cdrom_check_events
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -7031,7 +7030,6 @@ EXPORT_SYMBOL vmlinux 0xb2347c0c	do_splice_direct
 EXPORT_SYMBOL vmlinux 0xb2434d75	tcf_hash_release
 EXPORT_SYMBOL vmlinux 0xb24c057a	swiotlb_map_sg
 EXPORT_SYMBOL vmlinux 0xb2682405	utf8_to_utf32
-EXPORT_SYMBOL vmlinux 0xb26ab730	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0xb27242ad	proc_mkdir_mode
 EXPORT_SYMBOL vmlinux 0xb2823471	cdev_del
 EXPORT_SYMBOL vmlinux 0xb2a1483a	tcp_init_sock
@@ -7498,7 +7496,6 @@ EXPORT_SYMBOL vmlinux 0xd100acbd	_raw_write_lock
 EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1409000	dquot_operations
 EXPORT_SYMBOL vmlinux 0xd14cfc7d	delete_from_page_cache
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd164647d	__ps2_command
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd196c9be	kstrtos16_from_user

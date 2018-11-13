@@ -3700,7 +3700,6 @@ EXPORT_SYMBOL vmlinux 0x05b91506	unregister_cdrom
 EXPORT_SYMBOL vmlinux 0x05d6f111	netlink_capable
 EXPORT_SYMBOL vmlinux 0x05f9edb5	blk_free_tags
 EXPORT_SYMBOL vmlinux 0x060733fe	serio_rescan
-EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x061f1e0a	netif_device_attach
 EXPORT_SYMBOL vmlinux 0x061fa39e	jbd2_log_wait_commit
@@ -4639,7 +4638,6 @@ EXPORT_SYMBOL vmlinux 0x412adb8d	gnet_stats_start_copy
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x414f9221	d_move
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x416bd71b	pci_setup_cardbus
 EXPORT_SYMBOL vmlinux 0x416f25b6	cancel_delayed_work
 EXPORT_SYMBOL vmlinux 0x417809bb	tcp_md5_do_add
@@ -6892,7 +6890,6 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1262886	rtas_data_buf
 EXPORT_SYMBOL vmlinux 0xd13267fd	mac_find_mode
 EXPORT_SYMBOL vmlinux 0xd159f752	km_policy_expired
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd190fede	devm_backlight_device_register
 EXPORT_SYMBOL vmlinux 0xd1d2a3e0	skb_page_frag_refill

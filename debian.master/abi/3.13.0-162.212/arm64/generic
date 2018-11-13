@@ -6314,7 +6314,6 @@ EXPORT_SYMBOL vmlinux 0x41173172	sock_update_classid
 EXPORT_SYMBOL vmlinux 0x41182cc0	pgprot_default
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x415182d2	find_get_pages_tag
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x416e0b6f	seq_pad
 EXPORT_SYMBOL vmlinux 0x41827748	tcp_simple_retransmit
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -6419,7 +6418,6 @@ EXPORT_SYMBOL vmlinux 0x4859b8bb	rtc_year_days
 EXPORT_SYMBOL vmlinux 0x485feaab	dquot_disable
 EXPORT_SYMBOL vmlinux 0x48bdad3b	vfs_unlink
 EXPORT_SYMBOL vmlinux 0x48c6db53	of_get_child_by_name
-EXPORT_SYMBOL vmlinux 0x48da7d6c	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x48dd8c70	tcf_hash_release
 EXPORT_SYMBOL vmlinux 0x48feef03	frontswap_register_ops
 EXPORT_SYMBOL vmlinux 0x49045426	icmp_err_convert
@@ -8469,7 +8467,6 @@ EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd13598a0	inet_sock_destruct
 EXPORT_SYMBOL vmlinux 0xd1399a78	blk_fetch_request
 EXPORT_SYMBOL vmlinux 0xd140b89a	blk_alloc_queue_node
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd18b6f23	udp_lib_getsockopt
 EXPORT_SYMBOL vmlinux 0xd1922e32	amba_device_unregister

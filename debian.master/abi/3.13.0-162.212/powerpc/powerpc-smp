@@ -5885,7 +5885,6 @@ EXPORT_SYMBOL vmlinux 0x05a514a1	_insl_ns
 EXPORT_SYMBOL vmlinux 0x05ca19a0	pci_prepare_to_sleep
 EXPORT_SYMBOL vmlinux 0x05f14def	netpoll_parse_options
 EXPORT_SYMBOL vmlinux 0x060e184b	rawv6_mh_filter_register
-EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x06125b76	misc_deregister
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x0620c572	pci_release_regions
@@ -6809,7 +6808,6 @@ EXPORT_SYMBOL vmlinux 0x412551ce	dev_mc_del
 EXPORT_SYMBOL vmlinux 0x4133a43f	phy_attach_direct
 EXPORT_SYMBOL vmlinux 0x41368324	mmc_add_host
 EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
 EXPORT_SYMBOL vmlinux 0x41a1eef5	tty_port_open
 EXPORT_SYMBOL vmlinux 0x41bf19b1	no_llseek
@@ -9111,7 +9109,6 @@ EXPORT_SYMBOL vmlinux 0xd0fef3b2	agp_free_key
 EXPORT_SYMBOL vmlinux 0xd10c3452	idr_init
 EXPORT_SYMBOL vmlinux 0xd11c0dc1	__kernel_param_unlock
 EXPORT_SYMBOL vmlinux 0xd1262886	rtas_data_buf
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd16944aa	__put_cred
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd182c171	wait_for_key_construction

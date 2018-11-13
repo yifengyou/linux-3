@@ -5886,7 +5886,6 @@ EXPORT_SYMBOL vmlinux 0x05c5158e	filemap_page_mkwrite
 EXPORT_SYMBOL vmlinux 0x05d39d55	cdev_init
 EXPORT_SYMBOL vmlinux 0x05e13353	sock_diag_put_filterinfo
 EXPORT_SYMBOL vmlinux 0x06076359	jbd2_journal_stop
-EXPORT_SYMBOL vmlinux 0x061132fe	spec_ctrl_mutex
 EXPORT_SYMBOL vmlinux 0x061651be	strcat
 EXPORT_SYMBOL vmlinux 0x061ec7ee	giveup_fpu
 EXPORT_SYMBOL vmlinux 0x062d13b5	ipv6_chk_addr
@@ -6835,7 +6834,6 @@ EXPORT_SYMBOL vmlinux 0x41482d8b	strndup_user
 EXPORT_SYMBOL vmlinux 0x414dc1a5	skb_queue_purge
 EXPORT_SYMBOL vmlinux 0x41593c4d	sg_miter_stop
 EXPORT_SYMBOL vmlinux 0x4159c38f	ioremap_wc
-EXPORT_SYMBOL vmlinux 0x41609a7a	sysctl_ibpb_enabled
 EXPORT_SYMBOL vmlinux 0x4168619e	bman_pool_max
 EXPORT_SYMBOL vmlinux 0x41790955	dquot_quota_off
 EXPORT_SYMBOL vmlinux 0x4188d439	neigh_rand_reach_time
@@ -9182,7 +9180,6 @@ EXPORT_SYMBOL vmlinux 0xd12960c8	dma_async_tx_descriptor_init
 EXPORT_SYMBOL vmlinux 0xd138719c	qman_recovery_exit
 EXPORT_SYMBOL vmlinux 0xd155d482	pm860x_set_bits
 EXPORT_SYMBOL vmlinux 0xd15a795c	pci_dev_driver
-EXPORT_SYMBOL vmlinux 0xd160c96d	sysctl_ibrs_enabled
 EXPORT_SYMBOL vmlinux 0xd1772de0	tcp_shutdown
 EXPORT_SYMBOL vmlinux 0xd1816f32	frontswap_writethrough
 EXPORT_SYMBOL vmlinux 0xd1ab292b	blk_make_request
