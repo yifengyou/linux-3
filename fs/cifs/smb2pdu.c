@@ -560,6 +560,7 @@ SMB2_sess_setup(const unsigned int xid, struct cifs_ses *ses,
 	 */
 	kfree(ses->auth_key.response);
 	ses->auth_key.response = NULL;
+	ses->auth_key.len = 0;
 
 	/*
 	 * If memory allocation is successful, caller of this function
@@ -722,6 +723,7 @@ ssetup_exit:
 			rc = server->ops->generate_signingkey(ses);
 			kfree(ses->auth_key.response);
 			ses->auth_key.response = NULL;
+			ses->auth_key.len = 0;
 			if (rc) {
 				cifs_dbg(FYI,
 					"SMB3 session key generation failed\n");
@@ -746,6 +748,7 @@ keygen_exit:
 	if (!server->sign) {
 		kfree(ses->auth_key.response);
 		ses->auth_key.response = NULL;
+		ses->auth_key.len = 0;
 	}
 	kfree(ses->ntlmssp);
 
