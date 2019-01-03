@@ -2686,6 +2686,7 @@ static int process_recorded_refs(struct send_ctx *sctx)
 	u64 ow_gen;
 	int did_overwrite = 0;
 	int is_orphan = 0;
+	u64 last_dir_ino_rm = 0;
 
 verbose_printk("btrfs: process_recorded_refs %llu\n", sctx->cur_ino);
 
@@ -2941,7 +2942,8 @@ verbose_printk("btrfs: process_recorded_refs %llu\n", sctx->cur_ino);
 			ret = send_utimes(sctx, cur->dir, cur->dir_gen);
 			if (ret < 0)
 				goto out;
-		} else if (ret == inode_state_did_delete) {
+		} else if (ret == inode_state_did_delete &&
+			   cur->dir != last_dir_ino_rm) {
 			ret = can_rmdir(sctx, cur->dir, sctx->cur_ino);
 			if (ret < 0)
 				goto out;
@@ -2953,6 +2955,7 @@ verbose_printk("btrfs: process_recorded_refs %llu\n", sctx->cur_ino);
 				ret = send_rmdir(sctx, valid_path);
 				if (ret < 0)
 					goto out;
+				last_dir_ino_rm = cur->dir;
 			}
 		}
 	}
