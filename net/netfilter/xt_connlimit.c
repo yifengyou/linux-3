@@ -100,7 +100,7 @@ find_or_evict(struct net *net, struct xt_connlimit_conn *conn)
 	const struct nf_conntrack_tuple_hash *found;
 	unsigned long a, b;
 	int cpu = raw_smp_processor_id();
-	__s32 age;
+	u32 age;
 
 	found = nf_conntrack_find_get(net, NF_CT_DEFAULT_ZONE, &conn->tuple);
 	if (found)
