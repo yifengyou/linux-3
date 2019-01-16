@@ -2438,10 +2438,10 @@ EXPORT_SYMBOL drivers/pps/pps_core 0x22fa6796	pps_register_source
 EXPORT_SYMBOL drivers/pps/pps_core 0x5ca0bf3b	pps_lookup_dev
 EXPORT_SYMBOL drivers/pps/pps_core 0x7715d62f	pps_unregister_source
 EXPORT_SYMBOL drivers/pps/pps_core 0xdbfbc04a	pps_event
-EXPORT_SYMBOL drivers/ptp/ptp 0x1e7d65dc	ptp_clock_event
-EXPORT_SYMBOL drivers/ptp/ptp 0x6ac2128c	ptp_clock_unregister
-EXPORT_SYMBOL drivers/ptp/ptp 0x7910478e	ptp_clock_index
-EXPORT_SYMBOL drivers/ptp/ptp 0x8373fae7	ptp_clock_register
+EXPORT_SYMBOL drivers/ptp/ptp 0x394177d9	ptp_clock_event
+EXPORT_SYMBOL drivers/ptp/ptp 0xcee5a5ab	ptp_clock_unregister
+EXPORT_SYMBOL drivers/ptp/ptp 0xdd37f0a9	ptp_clock_index
+EXPORT_SYMBOL drivers/ptp/ptp 0xee421084	ptp_clock_register
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x325c7502	pch_ch_control_read
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x5c6e1345	pch_ch_event_write
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x60f584ee	pch_rx_snap_read
@@ -14489,7 +14489,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x0ed9302e	percpu_ref_init
 EXPORT_SYMBOL_GPL vmlinux 0x0ef06974	spi_populate_ppr_msg
 EXPORT_SYMBOL_GPL vmlinux 0x0f18d4e1	irq_remove_generic_chip
 EXPORT_SYMBOL_GPL vmlinux 0x0f2d7d87	mce_unregister_decode_chain
-EXPORT_SYMBOL_GPL vmlinux 0x0f2e9c69	posix_timers_register_clock
 EXPORT_SYMBOL_GPL vmlinux 0x0f5659dc	cpufreq_cooling_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x0f56df3b	debugfs_create_dir
 EXPORT_SYMBOL_GPL vmlinux 0x0f751aea	input_event_from_user
@@ -14915,7 +14914,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x2ebe3135	cpu_is_hotpluggable
 EXPORT_SYMBOL_GPL vmlinux 0x2ec65c93	cgroup_attach_task_all
 EXPORT_SYMBOL_GPL vmlinux 0x2ee05faf	cpufreq_generic_frequency_table_verify
 EXPORT_SYMBOL_GPL vmlinux 0x2efd3dda	wm8350_reg_unlock
-EXPORT_SYMBOL_GPL vmlinux 0x2eff827d	posix_clock_register
 EXPORT_SYMBOL_GPL vmlinux 0x2f018103	apply_to_page_range
 EXPORT_SYMBOL_GPL vmlinux 0x2f0d9053	usb_otg_state_string
 EXPORT_SYMBOL_GPL vmlinux 0x2f3d3a5f	pci_num_vf
@@ -15170,6 +15168,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x4087152f	pci_sriov_get_totalvfs
 EXPORT_SYMBOL_GPL vmlinux 0x409b66fa	dev_pm_qos_update_request
 EXPORT_SYMBOL_GPL vmlinux 0x40a7f5d8	class_interface_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x40a97f7d	tpm_calc_ordinal_duration
+EXPORT_SYMBOL_GPL vmlinux 0x40af0035	posix_timers_register_clock
 EXPORT_SYMBOL_GPL vmlinux 0x40af0dec	ata_xfer_mode2mask
 EXPORT_SYMBOL_GPL vmlinux 0x40af174f	da903x_read
 EXPORT_SYMBOL_GPL vmlinux 0x40d1af89	usb_root_hub_lost_power
@@ -16044,6 +16043,8 @@ EXPORT_SYMBOL_GPL vmlinux 0x833ccbae	hypervisor_kobj
 EXPORT_SYMBOL_GPL vmlinux 0x834616bb	sdev_evt_alloc
 EXPORT_SYMBOL_GPL vmlinux 0x838b13e7	ring_buffer_free
 EXPORT_SYMBOL_GPL vmlinux 0x83a5ae2e	__tracepoint_rpm_resume
+EXPORT_SYMBOL_GPL vmlinux 0x83aa3ef6	posix_clock_register
+EXPORT_SYMBOL_GPL vmlinux 0x83c34d68	posix_timer_event
 EXPORT_SYMBOL_GPL vmlinux 0x83ebff97	ping_recvmsg
 EXPORT_SYMBOL_GPL vmlinux 0x8420bccd	cpuidle_disable_device
 EXPORT_SYMBOL_GPL vmlinux 0x843d70ef	acpi_is_root_bridge
@@ -16357,6 +16358,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x9d06688b	register_xenbus_watch
 EXPORT_SYMBOL_GPL vmlinux 0x9d0ca2a4	btree_merge
 EXPORT_SYMBOL_GPL vmlinux 0x9d0ecb53	tpm_show_owned
 EXPORT_SYMBOL_GPL vmlinux 0x9d106179	usb_get_descriptor
+EXPORT_SYMBOL_GPL vmlinux 0x9d10b42b	posix_clock_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x9d138533	percpu_ref_kill_and_confirm
 EXPORT_SYMBOL_GPL vmlinux 0x9d2cdc06	ata_link_online
 EXPORT_SYMBOL_GPL vmlinux 0x9d3850e1	gnttab_alloc_grant_references
@@ -16562,7 +16564,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xafa2b7b9	leds_list_lock
 EXPORT_SYMBOL_GPL vmlinux 0xafb3cb0c	disk_part_iter_init
 EXPORT_SYMBOL_GPL vmlinux 0xaff52928	rtc_read_time
 EXPORT_SYMBOL_GPL vmlinux 0xb02ac411	register_xenstore_notifier
-EXPORT_SYMBOL_GPL vmlinux 0xb03e6be8	posix_clock_unregister
 EXPORT_SYMBOL_GPL vmlinux 0xb0b85f47	ring_buffer_iter_reset
 EXPORT_SYMBOL_GPL vmlinux 0xb0d05c04	spi_alloc_master
 EXPORT_SYMBOL_GPL vmlinux 0xb0e0d8c3	regulator_set_bypass_regmap
@@ -16759,7 +16760,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xbe9d7b9e	tty_port_tty_wakeup
 EXPORT_SYMBOL_GPL vmlinux 0xbea5ff1e	static_key_initialized
 EXPORT_SYMBOL_GPL vmlinux 0xbeb79b5f	pci_store_saved_state
 EXPORT_SYMBOL_GPL vmlinux 0xbece1c54	irq_setup_generic_chip
-EXPORT_SYMBOL_GPL vmlinux 0xbede5428	posix_timer_event
 EXPORT_SYMBOL_GPL vmlinux 0xbf041102	register_vt_notifier
 EXPORT_SYMBOL_GPL vmlinux 0xbf075c26	platform_device_alloc
 EXPORT_SYMBOL_GPL vmlinux 0xbf5ab207	power_supply_register

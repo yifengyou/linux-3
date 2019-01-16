@@ -2413,10 +2413,10 @@ EXPORT_SYMBOL drivers/pps/pps_core 0x60ac5498	pps_lookup_dev
 EXPORT_SYMBOL drivers/pps/pps_core 0x8db8efc3	pps_register_source
 EXPORT_SYMBOL drivers/pps/pps_core 0x9946e98f	pps_unregister_source
 EXPORT_SYMBOL drivers/pps/pps_core 0xa5c48173	pps_event
-EXPORT_SYMBOL drivers/ptp/ptp 0x3479d0e8	ptp_clock_register
-EXPORT_SYMBOL drivers/ptp/ptp 0x49604fef	ptp_clock_index
-EXPORT_SYMBOL drivers/ptp/ptp 0x947e0748	ptp_clock_event
-EXPORT_SYMBOL drivers/ptp/ptp 0x9de4e6e7	ptp_clock_unregister
+EXPORT_SYMBOL drivers/ptp/ptp 0x39c351c0	ptp_clock_unregister
+EXPORT_SYMBOL drivers/ptp/ptp 0x59483a8b	ptp_clock_register
+EXPORT_SYMBOL drivers/ptp/ptp 0xb342154d	ptp_clock_event
+EXPORT_SYMBOL drivers/ptp/ptp 0xed47f8c8	ptp_clock_index
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x15f72b2a	pch_ch_control_write
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x218e9aba	pch_ch_control_read
 EXPORT_SYMBOL drivers/ptp/ptp_pch 0x42ded8b7	pch_ch_event_read
@@ -14557,6 +14557,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x1a082d69	max77693_update_reg
 EXPORT_SYMBOL_GPL vmlinux 0x1a323362	__ftrace_vbprintk
 EXPORT_SYMBOL_GPL vmlinux 0x1a3ec163	class_remove_file_ns
 EXPORT_SYMBOL_GPL vmlinux 0x1a5848e8	eventfd_fget
+EXPORT_SYMBOL_GPL vmlinux 0x1a6b5d4e	posix_timers_register_clock
 EXPORT_SYMBOL_GPL vmlinux 0x1a90d014	pm_generic_suspend
 EXPORT_SYMBOL_GPL vmlinux 0x1a9a6de9	ohci_setup
 EXPORT_SYMBOL_GPL vmlinux 0x1acd1d9d	sysfs_remove_link_from_group
@@ -14582,7 +14583,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x1c417cf2	file_ra_state_init
 EXPORT_SYMBOL_GPL vmlinux 0x1c445c68	pci_disable_rom
 EXPORT_SYMBOL_GPL vmlinux 0x1c455b6e	relay_open
 EXPORT_SYMBOL_GPL vmlinux 0x1c5b1f28	irq_free_descs
-EXPORT_SYMBOL_GPL vmlinux 0x1c68aab1	posix_timer_event
 EXPORT_SYMBOL_GPL vmlinux 0x1c80d27d	btree_geo128
 EXPORT_SYMBOL_GPL vmlinux 0x1c86cb49	sock_gen_put
 EXPORT_SYMBOL_GPL vmlinux 0x1c87a811	__round_jiffies_up
@@ -14717,6 +14717,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x2735ef9d	init_srcu_struct
 EXPORT_SYMBOL_GPL vmlinux 0x273d4014	iommu_map
 EXPORT_SYMBOL_GPL vmlinux 0x27623949	serial8250_clear_and_reinit_fifos
 EXPORT_SYMBOL_GPL vmlinux 0x279cb985	apei_exec_pre_map_gars
+EXPORT_SYMBOL_GPL vmlinux 0x27ac35cc	posix_clock_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x27c0c4be	eventfd_ctx_read
 EXPORT_SYMBOL_GPL vmlinux 0x27c1e63f	usb_amd_find_chipset_info
 EXPORT_SYMBOL_GPL vmlinux 0x27ddb33d	acpi_dev_resource_io
@@ -15073,6 +15074,7 @@ EXPORT_SYMBOL_GPL vmlinux 0x42811fd0	bsg_register_queue
 EXPORT_SYMBOL_GPL vmlinux 0x42825ce2	rcu_scheduler_active
 EXPORT_SYMBOL_GPL vmlinux 0x428b649b	dma_wait_for_async_tx
 EXPORT_SYMBOL_GPL vmlinux 0x429471ab	pinctrl_utils_reserve_map
+EXPORT_SYMBOL_GPL vmlinux 0x42aa6de8	posix_clock_register
 EXPORT_SYMBOL_GPL vmlinux 0x42c42da3	iommu_detach_device
 EXPORT_SYMBOL_GPL vmlinux 0x42d46972	pskb_put
 EXPORT_SYMBOL_GPL vmlinux 0x42ec2600	platform_device_alloc
@@ -15845,7 +15847,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x7afabf24	extcon_register_interest
 EXPORT_SYMBOL_GPL vmlinux 0x7b0f1ab3	ring_buffer_free_read_page
 EXPORT_SYMBOL_GPL vmlinux 0x7b1d544d	edac_handler_set
 EXPORT_SYMBOL_GPL vmlinux 0x7b292d19	static_key_slow_dec_deferred
-EXPORT_SYMBOL_GPL vmlinux 0x7b357e9b	posix_timers_register_clock
 EXPORT_SYMBOL_GPL vmlinux 0x7b81c48d	ima_file_check
 EXPORT_SYMBOL_GPL vmlinux 0x7b8a790a	spi_bus_lock
 EXPORT_SYMBOL_GPL vmlinux 0x7b90d1a9	bind_virq_to_irqhandler
@@ -16067,7 +16068,6 @@ EXPORT_SYMBOL_GPL vmlinux 0x8de38e26	usb_ifnum_to_if
 EXPORT_SYMBOL_GPL vmlinux 0x8dfd1d71	ehci_setup
 EXPORT_SYMBOL_GPL vmlinux 0x8e046c31	debugfs_create_x64
 EXPORT_SYMBOL_GPL vmlinux 0x8e169548	xen_swiotlb_map_page
-EXPORT_SYMBOL_GPL vmlinux 0x8e3dd229	posix_clock_unregister
 EXPORT_SYMBOL_GPL vmlinux 0x8e510503	nf_unregister_afinfo
 EXPORT_SYMBOL_GPL vmlinux 0x8e5dbcf5	scsi_autopm_put_device
 EXPORT_SYMBOL_GPL vmlinux 0x8e923250	pci_destroy_slot
@@ -17182,7 +17182,6 @@ EXPORT_SYMBOL_GPL vmlinux 0xe41bb122	xenbus_map_ring
 EXPORT_SYMBOL_GPL vmlinux 0xe4309905	syscore_resume
 EXPORT_SYMBOL_GPL vmlinux 0xe48e1ab7	usb_put_dev
 EXPORT_SYMBOL_GPL vmlinux 0xe48e62c4	usb_acpi_power_manageable
-EXPORT_SYMBOL_GPL vmlinux 0xe490e675	posix_clock_register
 EXPORT_SYMBOL_GPL vmlinux 0xe4b42339	usb_submit_urb
 EXPORT_SYMBOL_GPL vmlinux 0xe4c4b28f	gpiod_direction_output
 EXPORT_SYMBOL_GPL vmlinux 0xe4cf6035	transport_class_unregister
@@ -17532,4 +17531,5 @@ EXPORT_SYMBOL_GPL vmlinux 0xff9c03d9	pci_reset_function
 EXPORT_SYMBOL_GPL vmlinux 0xffa4645e	pm_runtime_forbid
 EXPORT_SYMBOL_GPL vmlinux 0xffb73d7d	key_set_timeout
 EXPORT_SYMBOL_GPL vmlinux 0xffd56c8e	sata_pmp_error_handler
+EXPORT_SYMBOL_GPL vmlinux 0xffddb1df	posix_timer_event
 EXPORT_SYMBOL_GPL vmlinux 0xffef2eb4	crypto_default_rng
