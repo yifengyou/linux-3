@@ -1,3 +1,4 @@
+# retpoline v1.0
 arch/x86/kernel/apm_32.c .text __apm_bios_call lcall *%cs:0x0
 arch/x86/kernel/apm_32.c .text __apm_bios_call_simple lcall *%cs:0x0
 arch/x86/pci/pcbios.c .text pci_bios_read lcall *(%esi)
