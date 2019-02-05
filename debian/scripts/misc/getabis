@@ -108,7 +108,7 @@ getall_set()
 		if [ -d tmp/boot ]; then
 			echo "  images..."
 			find tmp -name "*.ko" | while read f; do
-				modinfo $f | grep ^firmware >> $fwinfo
+				/sbin/modinfo $f | grep ^firmware >> $fwinfo
 			done
 			if [ -f tmp/boot/abi-* ]; then
 				mv tmp/boot/abi-* $abidir/$arch/$sub
