@@ -17,7 +17,7 @@ fi
 
 ver=$1
 revision=$2
-abi=$(echo $revision | sed -r -e 's/([^\+]*)\.[^\.]+(\+.*)?$/\1/')
+abi=$(echo $revision | sed -r -e 's/([^\+~]*)\.[^\.]+(~.*)?(\+.*)?$/\1/')
 
 verabi=$ver-$abi
 verfull=$ver-$revision
@@ -82,7 +82,7 @@ getall_set()
 					rc="$?"
 					# If this was not successful or a valid error
 					# return from the server all bets are off, bail.
-					[ "$rc" != 0 -a "$rc" != 8 ] && return 1
+					[ "$rc" != 0 -a "$rc" != 8 ] && return 2
 				fi
 				if [ -f $filename ]; then
 					echo -n "y"
@@ -108,7 +108,7 @@ getall_set()
 		if [ -d tmp/boot ]; then
 			echo "  images..."
 			find tmp -name "*.ko" | while read f; do
-				/sbin/modinfo $f | grep ^firmware >> $fwinfo
+				modinfo $f | grep ^firmware >> $fwinfo
 			done
 			if [ -f tmp/boot/abi-* ]; then
 				mv tmp/boot/abi-* $abidir/$arch/$sub
@@ -155,6 +155,12 @@ getall_set()
 		rm -rf tmp $filenames
 		echo "  done"
 	)
+	rc="$?"
+	if [ "$rc" = 2 ]; then
+		echo "ERROR: downloads are reporting network failures" 1>&2
+		exit 1
+	fi
+	return "$rc"
 }
 
 # MAIN
