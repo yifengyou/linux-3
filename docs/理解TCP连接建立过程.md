@@ -1,3 +1,12 @@
+<!-- MDTOC maxdepth:6 firsth1:1 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [理解TCP连接建立过程](#理解tcp连接建立过程)   
+   - [sys_listen](#sys_listen)   
+   - [sys_connect](#sys_connect)   
+   - [sys_accept](#sys_accept)   
+   - [tcp_syncookies参数](#tcp_syncookies参数)   
+
+<!-- /MDTOC -->
 # 理解TCP连接建立过程
 
 ![20220621_202316_69](image/20220621_202316_69.png)
@@ -726,6 +735,119 @@ EXPORT_SYMBOL(tcp_connect);
 						 * most likely due to retrans in 3WHS.
 						 */
 ```
+
+
+## sys_accept
+
+
+![20220622_102500_30](image/20220622_102500_30.png)
+
+
+![20220622_101907_24](image/20220622_101907_24.png)
+
+![20220622_102549_29](image/20220622_102549_29.png)
+
+```
+/*
+ * This will accept the next outstanding connection.
+ */
+struct sock *inet_csk_accept(struct sock *sk, int flags, int *err)
+{
+	struct inet_connection_sock *icsk = inet_csk(sk);
+	struct request_sock_queue *queue = &icsk->icsk_accept_queue;
+	struct sock *newsk;
+	struct request_sock *req;
+	int error;
+
+	lock_sock(sk);
+
+	/* We need to make sure that this socket is listening,
+	 * and that it has something pending.
+	 */
+	error = -EINVAL;
+	if (sk->sk_state != TCP_LISTEN)
+		goto out_err;
+
+	/* Find already established connection */
+	if (reqsk_queue_empty(queue)) {
+		long timeo = sock_rcvtimeo(sk, flags & O_NONBLOCK);
+
+		/* If this is a non blocking socket don't sleep */
+		error = -EAGAIN;
+		if (!timeo)
+			goto out_err;
+
+		error = inet_csk_wait_for_connect(sk, timeo);
+		if (error)
+			goto out_err;
+	}
+	req = reqsk_queue_remove(queue);
+	newsk = req->sk;
+
+	sk_acceptq_removed(sk);
+	if (sk->sk_protocol == IPPROTO_TCP && queue->fastopenq != NULL) {
+		spin_lock_bh(&queue->fastopenq->lock);
+		if (tcp_rsk(req)->listener) {
+			/* We are still waiting for the final ACK from 3WHS
+			 * so can't free req now. Instead, we set req->sk to
+			 * NULL to signify that the child socket is taken
+			 * so reqsk_fastopen_remove() will free the req
+			 * when 3WHS finishes (or is aborted).
+			 */
+			req->sk = NULL;
+			req = NULL;
+		}
+		spin_unlock_bh(&queue->fastopenq->lock);
+	}
+out:
+	release_sock(sk);
+	if (req)
+		__reqsk_free(req);
+	return newsk;
+out_err:
+	newsk = NULL;
+	req = NULL;
+	*err = error;
+	goto out;
+}
+EXPORT_SYMBOL(inet_csk_accept);
+```
+
+
+
+
+
+## tcp_syncookies参数
+
+![20220622_105905_42](image/20220622_105905_42.png)
+
+```
+tcp_syncookies - BOOLEAN
+	Only valid when the kernel was compiled with CONFIG_SYN_COOKIES
+	Send out syncookies when the syn backlog queue of a socket
+	overflows. This is to prevent against the common 'SYN flood attack'
+	Default: 1
+
+	Note, that syncookies is fallback facility.
+	It MUST NOT be used to help highly loaded servers to stand
+	against legal connection rate. If you see SYN flood warnings
+	in your logs, but investigation	shows that they occur
+	because of overload with legal connections, you should tune
+	another parameters until this warning disappear.
+	See: tcp_max_syn_backlog, tcp_synack_retries, tcp_abort_on_overflow.
+
+	syncookies seriously violate TCP protocol, do not allow
+	to use TCP extensions, can result in serious degradation
+	of some services (f.e. SMTP relaying), visible not by you,
+	but your clients and relays, contacting you. While you see
+	SYN flood warnings in logs not being really flooded, your server
+	is seriously misconfigured.
+
+```
+
+
+
+
 
 
 
