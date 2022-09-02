@@ -1,6 +1,6 @@
 # linux 3.10 学习笔记
 
-**请自觉遵守社区规范**
+![20220902_212040_23](image/20220902_212040_23.png) 
 
 ```
 Something I hope you know before go into the coding~
@@ -33,8 +33,11 @@ Bug report, questions and discussion are welcome, you can post an issue or pull 
 * <https://github.com/yanfeizhang/deep_linux_network_tests>
 * <https://github.com/yanfeizhang/coder-kung-fu>
 
-![20220620_210146_94](image/20220620_210146_94.png)
+![20220902_211807_53](image/20220902_211807_53.png)
 
+* <https://github.com/0xAX/linux-insides>
+* <http://0xax.gitbooks.io/linux-insides/content/index.html>
 
+![20220902_211820_93](image/20220902_211820_93.png)
 
 ---
