@@ -1,6 +1,9 @@
 # Summary
 
 * [Introduction](README.md)
+* [环境搭建](docs/环境搭建.md)
+    * [x86_64](docs/环境搭建/x86_64.md)
+    * [i386](docs/环境搭建/i386.md)
 * [读我](docs/README.md)
 * [勘误](docs/勘误.md)
 * [网络初始化](docs/网络初始化.md)

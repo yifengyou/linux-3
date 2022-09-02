@@ -1,6 +1,6 @@
 # linux 3.10 学习笔记
 
-![20220902_212040_23](image/20220902_212040_23.png) 
+![20220902_212040_23](image/20220902_212040_23.png)
 
 ```
 Something I hope you know before go into the coding~
@@ -10,6 +10,13 @@ Bug report, questions and discussion are welcome, you can post an issue or pull 
 
 
 # 目录
+
+
+* [环境搭建](docs/环境搭建.md)
+    * [x86_64](docs/环境搭建/x86_64.md)
+    * [i386](docs/环境搭建/i386.md)
+
+---
 
 * [读我](docs/README.md)
 * [勘误](docs/勘误.md)
@@ -23,7 +30,7 @@ Bug report, questions and discussion are welcome, you can post an issue or pull 
 * [网络性能优化建议](docs/网络性能优化建议.md)
 * [容器网络虚拟化](docs/容器网络虚拟化.md)
 
-
+---
 
 
 
