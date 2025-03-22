@@ -152,7 +152,7 @@ EOF
 	apt-get update && apt-get install -y vim tmux openssh-server net-tools build-essential lrzsz
 	sed -i '/^#PermitRootLogin/c\PermitRootLogin yes' /etc/ssh/sshd_config
 	sync
-	reboot -f
+	#reboot -f
 else
 	sync
 	dhclient
