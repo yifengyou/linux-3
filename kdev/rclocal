@@ -152,6 +152,7 @@ EOF
 	apt-get update && apt-get install -y vim tmux openssh-server net-tools build-essential lrzsz
 	sed -i '/^#PermitRootLogin/c\PermitRootLogin yes' /etc/ssh/sshd_config
 	sync
+	ln -svf /usr/src/linux-headers-3.13.11-kdev /kernel
 	#reboot -f
 else
 	sync
