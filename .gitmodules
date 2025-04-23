@@ -1,0 +1,8 @@
+[submodule "kdev.git"]
+	path = kdev.git
+	url = git@github.com:yifengyou/kdev.git
+	branch = master
+[submodule "ksrc.git"]
+	path = ksrc.git
+	url = git@github.com:yifengyou/ksrc.git
+	branch = master
